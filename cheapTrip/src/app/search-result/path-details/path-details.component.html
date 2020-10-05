@@ -1,0 +1,37 @@
+
+    <h3><span>{{startPoint | capitalLetter}}</span> <span class="material-icons">
+            arrow_right_alt
+        </span><span>{{endPoint | capitalLetter}}</span> </h3>
+<article *ngFor="let rout  of paths">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header [expandedHeight]="'110px'" [collapsedHeight]="'130px'">
+                <mat-panel-title>
+                    <ng-container *ngFor="let icon of rout.pathType.icon"> <span [innerHTML]="icon"></span></ng-container>   
+                </mat-panel-title>
+                <mat-panel-description>
+                    <div>
+                        <p><span>{{rout.pathType.type}}</span></p>
+                        <p><span>Price:&ensp;</span><span>{{rout.details.euro_price}}</span></p>
+                        <p><span>Duation:&ensp;</span><span>{{rout.details.duration_minutes}}</span></p>
+                    </div>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <section *ngFor="let path of rout.details.direct_paths">
+                <div>
+                    <p><span>{{path.from}}</span> -> {{path.to}}</p>
+                    <p> <span>By:&ensp;</span>{{path.transportation_type}}</p>
+                </div>
+                <div>
+                    <p><span>
+                            Price:
+                            &ensp;</span> {{path.euro_price}}</p>
+                    <span class="spacer"></span>
+                    <p><span>
+                            Duration:
+                        </span>{{path.duration_minutes }}</p>
+                </div>
+            </section>
+        </mat-expansion-panel>
+    </mat-accordion>
+</article>

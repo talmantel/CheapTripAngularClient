@@ -1,0 +1,8 @@
+
+  <app-select-direction
+   [points]="points" 
+   (changePoint)="onChangePoint($event)"
+   (selectedPoints) = "getRouts($event)"
+   [startPointAutoComplete] = "startPointAutoComplete"
+   [endPointAutoComplete] = "endPointAutoComplete"
+   ></app-select-direction>
