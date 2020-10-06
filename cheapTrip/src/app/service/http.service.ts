@@ -79,7 +79,7 @@ export interface IPath {
   pathType: { type: string; icon: SafeHtml[] };
   details: IDetails;
 }
-
+ //url = http://3.23.159.104:3333
 @Injectable({
   providedIn: 'root',
 })

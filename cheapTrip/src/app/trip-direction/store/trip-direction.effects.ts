@@ -1,7 +1,9 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { switchMap, catchError, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import {  of } from 'rxjs';
+import { environment } from '../../../environments/environment';
+
 
 import * as TripDirectionActions from './trip-direction.actions';
 import { IDetails, IPath, IPoint, IPoints } from '../trip-direction.model';
@@ -78,7 +80,7 @@ const PATHS = `{"mixed_routes":
 
 "flying_routes":{"direct_paths":[{"transportation_type":"Flight","euro_price":76.0,"duration_minutes":347,"from":"Bournemouth","to":"Alicante"},{"transportation_type":"Flight","euro_price":47.8124,"duration_minutes":361,"from":"Alicante","to":"Budapest"}],"euro_price":123.0,"duration_minutes":708},"ground_routes":{"direct_paths":[{"transportation_type":"Bus","euro_price":19.3951,"duration_minutes":3360,"from":"Bournemouth","to":"Bucharest"},{"transportation_type":"Bus","euro_price":12.5216,"duration_minutes":509,"from":"Bucharest","to":"Budapest"}],"euro_price":31.0,"duration_minutes":3869}}`;
 
-//const MY_URL = 'http://localhost:3000/api/';
+
 
 @Injectable()
 export class TripDirectionEffects {
@@ -89,14 +91,20 @@ export class TripDirectionEffects {
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     switchMap((request: { payload: IPoint }) => {
+      this.http.get(environment.url+'getLocations?type=' + '1' + '&search_name=' + encodeURIComponent('моск'));
+
+    //  'http://3.23.159.104:3333/getLocations?type=1&search_name=моск)
       return of(DIRECTIONS_AUTOCOMPLETE).pipe(
         map((res) => {
           const newAction =
             request.payload.type == 'startPoint'
               ? new TripDirectionActions.SetStartPointAutocomplete(res)
               : new TripDirectionActions.SetEndPointAutocomplete(res);
-
           return newAction;
+        }),
+        catchError(error => {
+          const errorMessage = "An unknown error occured!";
+          return of(new TripDirectionActions.AutoCompleteFail(error))
         })
       );
     })

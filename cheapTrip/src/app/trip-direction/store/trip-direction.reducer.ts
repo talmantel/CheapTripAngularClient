@@ -7,7 +7,8 @@ export interface State {
   startPointAutoComplete: string[];
   endPointAutoComplete: string[];
   routs: IPath[];
-  mode: Modes
+  mode: Modes;
+  errorMessage: string;
 }
 
 const DIRECTIONS_AUTOCOMPLETE = [
@@ -25,7 +26,8 @@ const initialState: State = {
   startPointAutoComplete: [],
   endPointAutoComplete: [],
   routs: [],
-  mode : Modes.SEARCH
+  mode : Modes.SEARCH,
+  errorMessage: ''
 };
 
 export function tripDirectionReducer(
@@ -83,6 +85,11 @@ export function tripDirectionReducer(
         mode: Modes.DELIVERY
       };
 
+      case TripDirectionActions.AUTOCOMPLETE_FAIL:
+        return {
+          ...state,
+         errorMessage: action.payload
+        };
     default:
       return state;
   }
