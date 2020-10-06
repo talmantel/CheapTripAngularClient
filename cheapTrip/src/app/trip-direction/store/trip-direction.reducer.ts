@@ -1,4 +1,4 @@
-import { IPath } from '../trip-direction.model';
+import { IPath, Modes } from '../trip-direction.model';
 import * as TripDirectionActions from './trip-direction.actions';
 
 export interface State {
@@ -7,6 +7,7 @@ export interface State {
   startPointAutoComplete: string[];
   endPointAutoComplete: string[];
   routs: IPath[];
+  mode: Modes
 }
 
 const DIRECTIONS_AUTOCOMPLETE = [
@@ -24,6 +25,7 @@ const initialState: State = {
   startPointAutoComplete: [],
   endPointAutoComplete: [],
   routs: [],
+  mode : Modes.SEARCH
 };
 
 export function tripDirectionReducer(
@@ -77,7 +79,8 @@ export function tripDirectionReducer(
       case TripDirectionActions.SET_ROUTS:
       return {
         ...state,
-        routs: [...action.payload]
+        routs: [...action.payload],
+        mode: Modes.DELIVERY
       };
 
     default:

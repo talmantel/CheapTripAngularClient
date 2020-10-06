@@ -9,17 +9,20 @@ import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CapitalLetterPipe } from './search-result/path-details/capitalFirstLetter.pipe';
+
 import { TripDirectionModule } from './trip-direction/trip-direction.module';
 import { TripDirectionEffects } from './trip-direction/store/trip-direction.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { SearchResultModule } from './search-result/search-result.module';
+import { TestComponent } from './test/test.component';
+import { NoPageComponent } from './no-page/no-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CapitalLetterPipe,
+    TestComponent,
+    NoPageComponent,
   ],
   imports: [
     BrowserModule,

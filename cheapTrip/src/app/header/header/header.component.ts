@@ -10,7 +10,10 @@ export class HeaderComponent implements OnInit {
  
   constructor(private route: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+console.log('hello world');
+  }
+
    toHomePage(){
      this.route.navigate(["/"]);
 

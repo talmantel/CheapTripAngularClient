@@ -122,10 +122,10 @@ export class TripDirectionEffects {
    setRouts$ = this.actions$.pipe(
      ofType(TripDirectionActions.SET_ROUTS),
      tap(() => {
-       console.log('navigate effect')
-       this.router.navigate(['path',{from: "jjjj", to: "jjj"}], 
-     { relativeTo: this.route })})
-  );
+       console.log('navigate effect', this.route);
+       this.router.navigate(['/search/myPath'],{ queryParams: { from: 'startPOint', to: "endPoint" }});
+      }
+  ));
 
   private transformObject(obj: object): IPath[] {
     let objArr: IPath[] = [];

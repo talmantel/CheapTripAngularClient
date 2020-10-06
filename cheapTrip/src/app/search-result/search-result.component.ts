@@ -45,6 +45,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.querySubscription = route.paramMap.subscribe((params: any) => {
       this.startPoint = params.params['from'];
       this.endPoint = params.params['to'];
+      console.log('params', params.params);
       this.pathsSubsciption = this.httpSrv
         .getPaths(this.startPoint, this.endPoint)
         .subscribe((res) =>   this.currentPaths = res);

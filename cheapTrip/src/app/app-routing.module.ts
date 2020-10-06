@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NoPageComponent } from './no-page/no-page.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/search', pathMatch: 'full' },
+  { path: 'test', component: NoPageComponent},
   {
     path: 'search',
     loadChildren: () =>

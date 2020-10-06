@@ -10,6 +10,11 @@ enum PointType {
   END = 'endPoint',
 }
 
+export enum Modes {
+  SEARCH,
+  DELIVERY,
+}
+
 export interface IPoint {
   name: string;
   type: 'startPoint' | 'endPoint';

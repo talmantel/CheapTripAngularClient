@@ -1,11 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IPoint, IPoints } from '../trip-direction.model';
-
-enum PointType {
-  From = 'from',
-  To = 'to',
-}
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
+import { IPoint, IPoints, Modes } from '../trip-direction.model';
 
 
 @Component({
@@ -17,6 +13,7 @@ export class SelectDirectionComponent implements OnInit {
   @Input() points: [string, string];
   @Input() startPointAutoComplete: string[];
   @Input() endPointAutoComplete: string[];
+  @Input() mode: Modes = Modes.SEARCH;
 
   @Output() changePoint = new EventEmitter<IPoint>();
   @Output() selectedPoints = new EventEmitter<IPoints>();
@@ -24,6 +21,7 @@ export class SelectDirectionComponent implements OnInit {
   startPoint: string;
   endPoint: string;
   directionForm: FormGroup;
+  modes = Modes;
 
   constructor() {}
 
