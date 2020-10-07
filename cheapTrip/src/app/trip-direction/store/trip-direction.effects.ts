@@ -53,7 +53,7 @@ PATHMAP.set('ground_routes', {
 });
 
 
-//3.23.159.104:2222
+
 @Injectable()
 export class TripDirectionEffects {
   constructor(
