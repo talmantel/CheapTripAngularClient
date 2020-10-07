@@ -6,25 +6,16 @@ import { environment } from '../../../environments/environment';
 
 import * as TripDirectionActions from './trip-direction.actions';
 import {
-  IAutocompletePoint,
   IDetails,
   IPath,
+  IPathPoint,
   IPoint,
-  IPoints,
 } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
-const DIRECTIONS_AUTOCOMPLETE = [
-  'Moscow',
-  'Tel-Aviv',
-  'London',
-  'Viena',
-  'San-Paolo',
-  'Krakow',
-  'Bansko',
-];
+
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -61,27 +52,6 @@ PATHMAP.set('ground_routes', {
   icon: [Icons.TRAIN, Icons.SUBWAY],
 });
 
-const PATHS = `{"mixed_routes":
-{"direct_paths":
-[
-  {
-    "transportation_type":"Bus",
-    "euro_price":19.3951,
-    "duration_minutes":3360,
-    "from":"Bournemouth",
-    "to":"Bucharest"},
-    {
-    "transportation_type":"Bus",
-    "euro_price":12.5216,
-    "duration_minutes":509,
-    "from":"Bucharest",
-    "to":"Budapest"}
-],
-"euro_price":31.0,
-"duration_minutes":3869
-},
-
-"flying_routes":{"direct_paths":[{"transportation_type":"Flight","euro_price":76.0,"duration_minutes":347,"from":"Bournemouth","to":"Alicante"},{"transportation_type":"Flight","euro_price":47.8124,"duration_minutes":361,"from":"Alicante","to":"Budapest"}],"euro_price":123.0,"duration_minutes":708},"ground_routes":{"direct_paths":[{"transportation_type":"Bus","euro_price":19.3951,"duration_minutes":3360,"from":"Bournemouth","to":"Bucharest"},{"transportation_type":"Bus","euro_price":12.5216,"duration_minutes":509,"from":"Bucharest","to":"Budapest"}],"euro_price":31.0,"duration_minutes":3869}}`;
 
 //3.23.159.104:2222
 @Injectable()
@@ -104,7 +74,7 @@ export class TripDirectionEffects {
         request.payload.type +
         '&search_name=' +
         encodeURIComponent(request.payload.name);
-      return this.http.get<IAutocompletePoint[]>(URL).pipe(
+      return this.http.get<IPathPoint[]>(URL).pipe(
         map((res) => {
           const newAction =
             request.payload.type == '1'
