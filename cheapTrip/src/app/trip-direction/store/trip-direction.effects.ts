@@ -1,16 +1,14 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { switchMap, catchError, map, tap } from 'rxjs/operators';
-import {  of } from 'rxjs';
+import { of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-
 
 import * as TripDirectionActions from './trip-direction.actions';
 import { IDetails, IPath, IPoint, IPoints } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-
 
 const DIRECTIONS_AUTOCOMPLETE = [
   'Moscow',
@@ -21,7 +19,6 @@ const DIRECTIONS_AUTOCOMPLETE = [
   'Krakow',
   'Bansko',
 ];
-
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -80,31 +77,41 @@ const PATHS = `{"mixed_routes":
 
 "flying_routes":{"direct_paths":[{"transportation_type":"Flight","euro_price":76.0,"duration_minutes":347,"from":"Bournemouth","to":"Alicante"},{"transportation_type":"Flight","euro_price":47.8124,"duration_minutes":361,"from":"Alicante","to":"Budapest"}],"euro_price":123.0,"duration_minutes":708},"ground_routes":{"direct_paths":[{"transportation_type":"Bus","euro_price":19.3951,"duration_minutes":3360,"from":"Bournemouth","to":"Bucharest"},{"transportation_type":"Bus","euro_price":12.5216,"duration_minutes":509,"from":"Bucharest","to":"Budapest"}],"euro_price":31.0,"duration_minutes":3869}}`;
 
-
-
+//3.23.159.104:2222
 @Injectable()
 export class TripDirectionEffects {
-  constructor(private actions$: Actions, private sanitizer: DomSanitizer,  private http: HttpClient,
-    private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private actions$: Actions,
+    private sanitizer: DomSanitizer,
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   @Effect()
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
-    switchMap((request: { payload: IPoint }) => {
-      this.http.get(environment.url+'getLocations?type=' + '1' + '&search_name=' + encodeURIComponent('моск'));
-
-    //  'http://3.23.159.104:3333/getLocations?type=1&search_name=моск)
+    switchMap((request: { payload: IPoint; type: string }) => {
+      console.log('autocom', request);
+      const URL =
+        environment.url +
+        'getLocations?type=' +
+        '1' +
+        '&search_name=' +
+        encodeURIComponent(request.payload.name);
+      //3.23.159.104:2222/getLocations?type=1&search_name=mosc
+      this.http.get(URL);
       return of(DIRECTIONS_AUTOCOMPLETE).pipe(
         map((res) => {
           const newAction =
-            request.payload.type == 'startPoint'
+            request.payload.type == '1'
               ? new TripDirectionActions.SetStartPointAutocomplete(res)
               : new TripDirectionActions.SetEndPointAutocomplete(res);
           return newAction;
         }),
-        catchError(error => {
-          const errorMessage = "An unknown error occured!";
-          return of(new TripDirectionActions.AutoCompleteFail(error))
+        catchError((error) => {
+          const errorMessage = 'An unknown error occured!';
+          return of(new TripDirectionActions.AutoCompleteFail(error));
         })
       );
     })
@@ -117,23 +124,29 @@ export class TripDirectionEffects {
       return of(PATHS).pipe(
         map((res) => {
           const result: IPath[] = this.transformObject(JSON.parse(res));
-         /* const queryParams = { from: request.payload.startPoint, to: request.payload.endPoint };
+          /* const queryParams = { from: request.payload.startPoint, to: request.payload.endPoint };
          this.router.navigate(['path', queryParams], { relativeTo: this.route });
          console.log('query params', queryParams); */
           return new TripDirectionActions.SetRouts(result);
+        }),
+        catchError((error) => {
+          const errorMessage = 'An unknown error occured!';
+          return of(new TripDirectionActions.AutoCompleteFail(error));
         })
       );
     })
   );
 
   @Effect({ dispatch: false })
-   setRouts$ = this.actions$.pipe(
-     ofType(TripDirectionActions.SET_ROUTS),
-     tap(() => {
-       console.log('navigate effect', this.route);
-       this.router.navigate(['/search/myPath'],{ queryParams: { from: 'startPOint', to: "endPoint" }});
-      }
-  ));
+  setRouts$ = this.actions$.pipe(
+    ofType(TripDirectionActions.SET_ROUTS),
+    tap(() => {
+      console.log('navigate effect', this.route);
+      this.router.navigate(['/search/myPath'], {
+        queryParams: { from: 'startPOint', to: 'endPoint' },
+      });
+    })
+  );
 
   private transformObject(obj: object): IPath[] {
     let objArr: IPath[] = [];
@@ -200,5 +213,17 @@ export class TripDirectionEffects {
       return newMap;
     });
     return newMap;
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    let message = '';
+    switch (err.status) {
+      case 201:
+        message = 'dfdfdf';
+        break;
+      case 400:
+        message = 'dfdfdf';
+        break;
+    }
   }
 }

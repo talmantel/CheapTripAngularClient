@@ -20,6 +20,7 @@ div.main {
     }
   }
 }
+
 @media screen and (max-width: 650px) and (orientation: landscape) {
   div.main {
     form {
@@ -90,6 +91,7 @@ div.main {
       width: 100%;
       height: auto;
       box-sizing: border-box;
+      margin: 0.5rem auto;
       div.formInfo {
         display: flex;
         flex-direction: row;
@@ -100,12 +102,11 @@ div.main {
         margin: auto;
         mat-form-field {
           background-color: rgb(219, 224, 223, 0.2);
-          width: 170px !important;
+          width: 180px !important;
           input {
-           padding-left: 1rem!important;
+            padding-left: 1rem !important;
           }
         }
-      
         span {
           position: absolute;
           border-radius: 50%;
@@ -117,12 +118,67 @@ div.main {
           box-sizing: border-box;
         }
       }
-
       div.actions {
+        margin-top: 0.5rem;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 481px) {
+  div.mainContainer, div.searchMode {
+    p {
+      box-sizing: border-box;
+      width: 70%;
+      margin: 2rem auto;
+      text-align: center;
+      font-size: 2rem;
+      line-height: 3rem;
+    }
+    form {
+      width: 100%;
+      div.formInfo {
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        width: 70%;
+        margin: auto;
+        box-sizing: border-box;
+        mat-form-field {
+          background-color: rgb(219, 224, 223, 0.2);
+          margin: 0 auto;
+          padding: 0.5rem;
+          border-radius: 5px;
+          box-sizing: border-box;
+          width: 95%;
+          margin: auto;
+        }
+        span {
+          width: 3rem;
+          align-self: center;
+          justify-self: baseline;
+          text-align: center;
+        }
+      }
+      div.actions {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+    }
+  }
+
+  div.deliveryMode {
+    p {
+      display: none;
+      
+    }
+    form{
+      margin: 2rem;
     }
   }
 }

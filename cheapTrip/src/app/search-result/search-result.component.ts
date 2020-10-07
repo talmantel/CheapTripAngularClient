@@ -1,11 +1,17 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ConstantPool } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { HttpService, IPath } from '../service/http.service';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
 
-export interface ITile {
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+
+import * as fromApp from '../store/app.reducer';
+import { IPath } from '../trip-direction/trip-direction.model';
+
+export interface IGrid {
   color: string;
   cols: number;
   rows: number;
@@ -17,55 +23,85 @@ export interface ITile {
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
-  currentPaths: IPath[];
-  length: number;
-  startPoint: string;
-  endPoint: string;
+  paths: IPath[];
+  getPathsSubscription: Subscription;
 
-  asideRows = 1;
-  asideColumns = 1;
-  mainRows = 1;
-  mainColumns = 3;
+  //for UIw
+  grids: IGrid[];
+  colsAmount = 7;
 
-  private querySubscription: Subscription;
-  private pathsSubsciption: Subscription;
+  matcher: MediaQueryList;
+
+  // reference шnformation: available resolutions
+  viewportSizes = [
+    Breakpoints.XSmall,
+    Breakpoints.Small,
+    Breakpoints.Medium,
+    Breakpoints.Large,
+    Breakpoints.XLarge,
+    Breakpoints.Web,
+    Breakpoints.WebLandscape,
+    Breakpoints.WebPortrait,
+    Breakpoints.Handset,
+    Breakpoints.HandsetLandscape,
+    Breakpoints.HandsetPortrait,
+    Breakpoints.Tablet,
+    Breakpoints.TabletLandscape,
+    Breakpoints.TabletPortrait,
+  ];
+
   constructor(
-    private httpSrv: HttpService,
     breakpointObserver: BreakpointObserver,
-    route: ActivatedRoute
+    private store: Store<fromApp.AppState>
   ) {
     breakpointObserver
       .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.activateHandsetLayout();
-        }
+      .subscribe((state: BreakpointState) => {
+      //  console.log('orientation state', state);
       });
 
-    this.querySubscription = route.paramMap.subscribe((params: any) => {
-      this.startPoint = params.params['from'];
-      this.endPoint = params.params['to'];
-      console.log('params', params.params);
-      this.pathsSubsciption = this.httpSrv
-        .getPaths(this.startPoint, this.endPoint)
-        .subscribe((res) =>   this.currentPaths = res);
-    });
-  }
-
-  private activateHandsetLayout() {
-    this.asideColumns = 4;
-    this.mainRows = 0;
-    this.mainColumns = 0;
+    breakpointObserver
+      .observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ])
+      .subscribe((state: BreakpointState) => {
+        this.grids = this.getGridsSize(breakpointObserver);
+      });
   }
 
   ngOnInit(): void {
-    console.log("I am search result ");
-    this.currentPaths = this.httpSrv.currentPaths;
-    this.activateHandsetLayout();
+    this.getPathsSubscription = this.store
+      .select('directions')
+      .subscribe((state) => {
+        this.paths = state.paths;
+      });
   }
 
   ngOnDestroy(): void {
-    this.querySubscription.unsubscribe();
-    this.pathsSubsciption.unsubscribe
+    this.getPathsSubscription.unsubscribe;
+  }
+
+  private getGridsSize(obs: BreakpointObserver): IGrid[] {
+    let sizeTab: IGrid[] = [];
+    if (obs.isMatched(Breakpoints.XSmall) || obs.isMatched(Breakpoints.Small)) {
+      sizeTab = [
+        { color: 'grey', cols: 7, rows: 1 },
+        { color: 'blue', cols: 0, rows: 1 },
+      ];
+    } else if (
+      obs.isMatched(Breakpoints.Medium) ||
+      obs.isMatched(Breakpoints.Large) ||
+      obs.isMatched(Breakpoints.XLarge)
+    ) {
+      sizeTab = [
+        { color: 'grey', cols: 2, rows: 1 },
+        { color: 'whitesmoke', cols: 5, rows: 1 },
+      ];
+    }
+    return sizeTab;
   }
 }

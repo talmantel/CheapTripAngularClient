@@ -17,7 +17,7 @@ export enum Modes {
 
 export interface IPoint {
   name: string;
-  type: 'startPoint' | 'endPoint';
+  type: '1' | '2';
 }
 
 export interface IRout {

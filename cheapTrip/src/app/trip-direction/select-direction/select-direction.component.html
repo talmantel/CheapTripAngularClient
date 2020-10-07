@@ -1,10 +1,11 @@
-<div [ngClass]="{'searchMode' : mode === modes.SEARCH, 
-'deliveryMode': mode === modes.DELIVERY}">
+<div [ngClass]="{'mainContainer searchMode': mode === modes.SEARCH,
+'mainContainer deliveryMode': mode === modes.DELIVERY}"> 
+<!-- <div class="mainContainer deliveryMode">-->
     <p color="primary">Discover the cheapest way to get anywhere by plane, train, bus and ride share altogether</p>
     <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
         <div class="formInfo">
             <mat-form-field class="full-width">
-            <input (input)="onChangePoint($event.target.value, 'startPoint')" type="text" placeholder="From"
+            <input (input)="onChangePoint($event.target.value, '1')" type="text" placeholder="From"
                 aria-label="Number" matInput formControlName="startPointControl" [matAutocomplete]="auto1">
             <mat-autocomplete #auto1="matAutocomplete" (optionSelected)='selectPoint($event.option.value, "start")'>
                 <mat-option *ngFor="let start of startPointAutoComplete" [value]="start">
@@ -16,7 +17,7 @@
                 sync_alt
             </span>
             <mat-form-field class="full-width">
-                <input (input)="onChangePoint($event.target.value, 'endPoint')" type="text" placeholder="To"
+                <input (input)="onChangePoint($event.target.value, '2')" type="text" placeholder="To"
                     aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
                 <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='selectPoint($event.option.value, "end")'>
                     <mat-option *ngFor="let end of endPointAutoComplete" [value]="end">

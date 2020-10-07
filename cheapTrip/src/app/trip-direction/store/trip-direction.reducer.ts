@@ -6,7 +6,7 @@ export interface State {
   endPoint: string;
   startPointAutoComplete: string[];
   endPointAutoComplete: string[];
-  routs: IPath[];
+  paths: IPath[];
   mode: Modes;
   errorMessage: string;
 }
@@ -25,7 +25,7 @@ const initialState: State = {
   endPoint: '',
   startPointAutoComplete: [],
   endPointAutoComplete: [],
-  routs: [],
+  paths: [],
   mode : Modes.SEARCH,
   errorMessage: ''
 };
@@ -81,7 +81,7 @@ export function tripDirectionReducer(
       case TripDirectionActions.SET_ROUTS:
       return {
         ...state,
-        routs: [...action.payload],
+        paths: [...action.payload],
         mode: Modes.DELIVERY
       };
 
