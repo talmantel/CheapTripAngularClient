@@ -4,8 +4,8 @@ import * as TripDirectionActions from './trip-direction.actions';
 export interface State {
   startPoint: string;
   endPoint: string;
-  startPointAutoComplete: string[];
-  endPointAutoComplete: string[];
+  startPointAutoComplete: Array<{id: number, name: string}>;
+  endPointAutoComplete: Array<{id: number, name: string}>;
   paths: IPath[];
   mode: Modes;
   errorMessage: string;

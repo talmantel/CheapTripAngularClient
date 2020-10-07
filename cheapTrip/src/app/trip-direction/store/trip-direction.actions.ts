@@ -41,17 +41,17 @@ export class GetAutocomplete implements Action {
 
 export class SetStartPointAutocomplete implements Action {
   readonly type = SET_START_POINT_AUTOCOMPLETE;
-  constructor(public payload: string[]) {}
+  constructor(public payload: Array< {id: number, name: string}>) {}
 }
 
 export class SetEndPointAutocomplete implements Action {
   readonly type = SET_END_POINT_AUTOCOMPLETE;
-  constructor(public payload: string[]) {}
+  constructor(public payload:  Array< {id: number, name: string}>) {}
 }
 
 export class GetRouts implements Action {
   readonly type = GET_ROUTS;
-  constructor(public payload: IPoints) {}
+  constructor(public payload: [number, number]) {}
 }
 
 export class SetRouts implements Action {

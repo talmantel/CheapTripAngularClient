@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
-import { IPoint, IPoints, Modes } from '../trip-direction.model';
-
+import {
+  IPathPoint,
+  IPoint,
+  IPoints,
+  Modes,
+} from '../trip-direction.model';
 
 @Component({
   selector: 'app-select-direction',
@@ -10,16 +14,16 @@ import { IPoint, IPoints, Modes } from '../trip-direction.model';
   styleUrls: ['./select-direction.component.scss'],
 })
 export class SelectDirectionComponent implements OnInit {
-  @Input() points: [string, string];
-  @Input() startPointAutoComplete: string[];
-  @Input() endPointAutoComplete: string[];
+  @Input() points: [IPathPoint, IPathPoint];
+  @Input() startPointAutoComplete: IPathPoint[];
+  @Input() endPointAutoComplete: IPathPoint[];
   @Input() mode: Modes = Modes.SEARCH;
 
   @Output() changePoint = new EventEmitter<IPoint>();
-  @Output() selectedPoints = new EventEmitter<IPoints>();
+  @Output() selectedPoints = new EventEmitter<[number, number]>();
 
-  startPoint: string;
-  endPoint: string;
+  startPoint: IPathPoint;
+  endPoint: IPathPoint;
   directionForm: FormGroup;
   modes = Modes;
 
@@ -28,34 +32,34 @@ export class SelectDirectionComponent implements OnInit {
   ngOnInit(): void {
     [this.startPoint, this.endPoint] = [...this.points];
     this.directionForm = new FormGroup({
-      startPointControl: new FormControl(this.startPoint, Validators.required),
-      endPointControl: new FormControl(this.endPoint, Validators.required),
+      startPointControl: new FormControl(this.startPoint.name, Validators.required),
+      endPointControl: new FormControl(this.endPoint.name, Validators.required),
     });
   }
 
   onChangePoint(str: string, type: any) {
-    const point: IPoint = {name:str, type: type}
+    const point: IPoint = { name: str, type: type };
     this.changePoint.emit(point);
   }
 
   changeDirection() {
+    console.log("on change",this.endPoint );
     [this.startPoint, this.endPoint] = [this.endPoint, this.startPoint];
-    this.directionForm.controls['endPointControl'].setValue(this.endPoint);
-    this.directionForm.controls['startPointControl'].setValue(this.startPoint);
+    this.directionForm.controls['endPointControl'].setValue(this.endPoint.name);
+    this.directionForm.controls['startPointControl'].setValue(this.startPoint.name);
   }
 
   onSubmit() {
-    const points: IPoints = { startPoint: this.startPoint,  endPoint: this.endPoint};
-    this.selectedPoints.emit(points);
-    //  const queryParams = { from: this.startPoint, to: this.endPoint };
-    // this.router.navigate(['path', queryParams], { relativeTo: this.route });
+    this.selectedPoints.emit([this.startPoint.id, this.endPoint.id]);
+ //   const queryParams = { from: this.startPoint.name, to: this.endPoint.name };
+  // this.router.navigate(['path', queryParams], { relativeTo: this.route });
   }
 
   selectPoint(point: string, type: string) {
-    if (type == 'start') {
-      this.startPoint = point;
+   if (type == 'start') {
+      this.startPoint = {name: point, id: this.startPointAutoComplete.filter(item => item.name == point)[0].id};
     } else {
-      this.endPoint = point;
-    }
+      this.endPoint = {name: point, id: this.endPointAutoComplete.filter(item => item.name == point)[0].id};;
+    } 
   }
 }

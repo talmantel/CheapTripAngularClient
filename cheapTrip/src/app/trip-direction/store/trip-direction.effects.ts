@@ -5,7 +5,13 @@ import { of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 import * as TripDirectionActions from './trip-direction.actions';
-import { IDetails, IPath, IPoint, IPoints } from '../trip-direction.model';
+import {
+  IAutocompletePoint,
+  IDetails,
+  IPath,
+  IPoint,
+  IPoints,
+} from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -92,16 +98,13 @@ export class TripDirectionEffects {
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     switchMap((request: { payload: IPoint; type: string }) => {
-      console.log('autocom', request);
       const URL =
         environment.url +
-        'getLocations?type=' +
-        '1' +
+        'CheapTrip/getLocations?type=' +
+        request.payload.type +
         '&search_name=' +
         encodeURIComponent(request.payload.name);
-      //3.23.159.104:2222/getLocations?type=1&search_name=mosc
-      this.http.get(URL);
-      return of(DIRECTIONS_AUTOCOMPLETE).pipe(
+      return this.http.get<IAutocompletePoint[]>(URL).pipe(
         map((res) => {
           const newAction =
             request.payload.type == '1'
@@ -120,14 +123,22 @@ export class TripDirectionEffects {
   @Effect()
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
-    switchMap((request: { payload: IPoints }) => {
-      return of(PATHS).pipe(
+    switchMap((request: { payload: [number, number] }) => {
+      const URL =
+        environment.url +
+        'CheapTrip/getRoute?format=json&from=' +
+        request.payload[0] +
+        '&to=' +
+        request.payload[1];
+      return this.http.get(URL).pipe(
         map((res) => {
-          const result: IPath[] = this.transformObject(JSON.parse(res));
-          /* const queryParams = { from: request.payload.startPoint, to: request.payload.endPoint };
-         this.router.navigate(['path', queryParams], { relativeTo: this.route });
-         console.log('query params', queryParams); */
-          return new TripDirectionActions.SetRouts(result);
+          const resultObj = this.transformObject(res);
+          const queryParams = { from: 'start', to: 'end' };
+          this.router.navigate(['path', queryParams], {
+            relativeTo: this.route,
+          });
+          console.log('actions', resultObj);
+          return new TripDirectionActions.SetRouts(resultObj);
         }),
         catchError((error) => {
           const errorMessage = 'An unknown error occured!';

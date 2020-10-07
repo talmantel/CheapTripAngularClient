@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../store/app.reducer';
 import * as TripDirectionActions from './store/trip-direction.actions';
-import { IPoint, IPoints, Modes } from './trip-direction.model';
+import { IPathPoint, IPoint, IPoints, Modes } from './trip-direction.model';
 
 @Component({
   selector: 'app-trip-direction',
@@ -14,8 +14,8 @@ export class TripDirectionComponent implements OnInit {
   startPoint: string;
   endPoint: string;
   points: [string, string];
-  startPointAutoComplete: string[];
-  endPointAutoComplete: string[];
+  startPointAutoComplete: IPathPoint[];
+  endPointAutoComplete: IPathPoint[];
   selectDirectionSubscription: Subscription;
   mode: Modes;
 
@@ -36,8 +36,8 @@ export class TripDirectionComponent implements OnInit {
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
-  getRouts(event: IPoints) {
+  getRouts(event: any) {
     console.log('parent submit', event);
-    this.store.dispatch(new TripDirectionActions.GetRouts(event));
+  this.store.dispatch(new TripDirectionActions.GetRouts(event));
   }
 }

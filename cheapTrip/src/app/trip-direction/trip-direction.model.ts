@@ -38,3 +38,8 @@ export interface IPath {
   pathType: { type: string; icon: SafeHtml[] };
   details: IDetails;
 }
+
+export interface IPathPoint {
+  id: number;
+  name: string;
+}
