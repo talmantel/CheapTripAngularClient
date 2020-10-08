@@ -22,5 +22,5 @@ jobs:
           dest: ${{ github.workspace }}/ROOT.war
       - uses: 'actions/upload-artifact@v2'
         with:
-          name: my-artifact
-          path: ${{ github.workspace }}
+          name: Deploy File Artifact
+          path: ${{ github.workspace }}/ROOT.war
