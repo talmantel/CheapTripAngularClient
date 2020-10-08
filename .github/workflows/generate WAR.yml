@@ -17,11 +17,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@dev
-      - name: Archive Dev
-        uses: thedoctor0/zip-release@master
+      - uses: papeloto/action-zip@v1
         with:
+          files: cheapTrip/dist/cheapTrip/ ${{ github.workspace }}/deployConf/
+          dest: ${{ github.workspace }}/ROOT.war
+    
           filename: 'ROOT.war'
           path: '/cheapTrip/dist/cheapTrip/'
           directory: '/cheapTrip/dist/cheapTrip/'
