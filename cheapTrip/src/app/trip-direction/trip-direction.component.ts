@@ -37,7 +37,10 @@ export class TripDirectionComponent implements OnInit {
   }
 
   getRouts(event: any) {
-    console.log('parent submit', event);
-  this.store.dispatch(new TripDirectionActions.GetRouts(event));
+    this.store.dispatch(new TripDirectionActions.GetRouts(event));
+  }
+
+  cleanData(_event: boolean) {
+    this.store.dispatch(new TripDirectionActions.CleanData());
   }
 }

@@ -4,8 +4,8 @@ import * as TripDirectionActions from './trip-direction.actions';
 export interface State {
   startPoint: string;
   endPoint: string;
-  startPointAutoComplete: Array<{id: number, name: string}>;
-  endPointAutoComplete: Array<{id: number, name: string}>;
+  startPointAutoComplete: Array<{ id: number; name: string }>;
+  endPointAutoComplete: Array<{ id: number; name: string }>;
   paths: IPath[];
   mode: Modes;
   errorMessage: string;
@@ -26,8 +26,8 @@ const initialState: State = {
   startPointAutoComplete: [],
   endPointAutoComplete: [],
   paths: [],
-  mode : Modes.SEARCH,
-  errorMessage: ''
+  mode: Modes.SEARCH,
+  errorMessage: '',
 };
 
 export function tripDirectionReducer(
@@ -78,18 +78,31 @@ export function tripDirectionReducer(
         ...state,
       };
 
-      case TripDirectionActions.SET_ROUTS:
+    case TripDirectionActions.SET_ROUTS:
       return {
         ...state,
         paths: [...action.payload],
-        mode: Modes.DELIVERY
+        mode: Modes.DELIVERY,
       };
 
-      case TripDirectionActions.AUTOCOMPLETE_FAIL:
-        return {
-          ...state,
-         errorMessage: action.payload
-        };
+    case TripDirectionActions.AUTOCOMPLETE_FAIL:
+      return {
+        ...state,
+        errorMessage: action.payload,
+      };
+
+    case TripDirectionActions.CLEAN_DATA:
+      return {
+        ...state,
+        startPoint: '',
+        endPoint: '',
+        startPointAutoComplete: [],
+        endPointAutoComplete: [],
+        paths: [],
+        mode: Modes.SEARCH,
+        errorMessage: '',
+      };
+
     default:
       return state;
   }

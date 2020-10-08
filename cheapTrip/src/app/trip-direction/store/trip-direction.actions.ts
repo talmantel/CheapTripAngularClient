@@ -13,6 +13,7 @@ export const SET_END_POINT_AUTOCOMPLETE =
 export const GET_ROUTS = '[TripDirection] Get Routs';
 export const SET_ROUTS = '[TripDirection] Set Routs';
 export const AUTOCOMPLETE_FAIL = '[TripDirection] Autocomplete Fail';
+export const CLEAN_DATA = '[TripDirection] Clean Data';
 
 export class SetStartPoint implements Action {
   readonly type = SET_START_POINT;
@@ -63,6 +64,11 @@ export class AutoCompleteFail implements Action {
   readonly type = AUTOCOMPLETE_FAIL;
   constructor(public payload: string) {}
 }
+
+export class CleanData implements Action {
+  readonly type = CLEAN_DATA;
+  constructor() {}
+} 
 export type TripDirectionActions =
   | GetEndPoint
   | GetStartPoint
@@ -73,4 +79,5 @@ export type TripDirectionActions =
   | SetStartPointAutocomplete
   | GetRouts
   | SetRouts
-  | AutoCompleteFail;
+  | AutoCompleteFail
+  | CleanData;

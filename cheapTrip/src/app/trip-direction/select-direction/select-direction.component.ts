@@ -1,12 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
-import {
-  IPathPoint,
-  IPoint,
-  IPoints,
-  Modes,
-} from '../trip-direction.model';
+import { IPathPoint, IPoint, IPoints, Modes } from '../trip-direction.model';
 
 @Component({
   selector: 'app-select-direction',
@@ -21,6 +16,7 @@ export class SelectDirectionComponent implements OnInit {
 
   @Output() changePoint = new EventEmitter<IPoint>();
   @Output() selectedPoints = new EventEmitter<[number, number]>();
+  @Output() cleanData = new EventEmitter<boolean>();
 
   startPoint: IPathPoint;
   endPoint: IPathPoint;
@@ -32,7 +28,10 @@ export class SelectDirectionComponent implements OnInit {
   ngOnInit(): void {
     [this.startPoint, this.endPoint] = [...this.points];
     this.directionForm = new FormGroup({
-      startPointControl: new FormControl(this.startPoint.name, Validators.required),
+      startPointControl: new FormControl(
+        this.startPoint.name,
+        Validators.required
+      ),
       endPointControl: new FormControl(this.endPoint.name, Validators.required),
     });
   }
@@ -43,23 +42,34 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   changeDirection() {
-    console.log("on change",this.endPoint );
     [this.startPoint, this.endPoint] = [this.endPoint, this.startPoint];
     this.directionForm.controls['endPointControl'].setValue(this.endPoint.name);
-    this.directionForm.controls['startPointControl'].setValue(this.startPoint.name);
+    this.directionForm.controls['startPointControl'].setValue(
+      this.startPoint.name
+    );
   }
 
   onSubmit() {
     this.selectedPoints.emit([this.startPoint.id, this.endPoint.id]);
- //   const queryParams = { from: this.startPoint.name, to: this.endPoint.name };
-  // this.router.navigate(['path', queryParams], { relativeTo: this.route });
   }
 
   selectPoint(point: string, type: string) {
-   if (type == 'start') {
-      this.startPoint = {name: point, id: this.startPointAutoComplete.filter(item => item.name == point)[0].id};
+    if (type == 'start') {
+      this.startPoint = {
+        name: point,
+        id: this.startPointAutoComplete.filter((item) => item.name == point)[0]
+          .id,
+      };
     } else {
-      this.endPoint = {name: point, id: this.endPointAutoComplete.filter(item => item.name == point)[0].id};;
-    } 
+      this.endPoint = {
+        name: point,
+        id: this.endPointAutoComplete.filter((item) => item.name == point)[0]
+          .id,
+      };
+    }
+  }
+
+  cleanForm() {
+    this.cleanData.emit(true);
   }
 }

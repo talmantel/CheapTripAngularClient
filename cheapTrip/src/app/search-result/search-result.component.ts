@@ -32,7 +32,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   matcher: MediaQueryList;
 
-  // reference шnformation: available resolutions
+  // reference information: available resolutions
   viewportSizes = [
     Breakpoints.XSmall,
     Breakpoints.Small,

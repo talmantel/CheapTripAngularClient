@@ -44,7 +44,7 @@ div.main {
     }
   }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 599px) {
   div.searchMode {
     p {
       box-sizing: border-box;
@@ -69,10 +69,11 @@ div.main {
           margin: auto;
         }
         span {
-          width: 3rem;
+          width: 1.5rem;
           align-self: center;
           justify-self: baseline;
           text-align: center;
+          transform: rotate(90deg);
         }
       }
       div.actions {
@@ -128,7 +129,7 @@ div.main {
   }
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 600px) {
   div.mainContainer, div.searchMode {
     p {
       box-sizing: border-box;
@@ -161,6 +162,7 @@ div.main {
           align-self: center;
           justify-self: baseline;
           text-align: center;
+         
         }
       }
       div.actions {
