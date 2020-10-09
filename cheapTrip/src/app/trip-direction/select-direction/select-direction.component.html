@@ -1,17 +1,17 @@
 <div [ngClass]="{'mainContainer searchMode': mode === modes.SEARCH,
-'mainContainer deliveryMode': mode === modes.DELIVERY}"> 
-<!-- <div class="mainContainer deliveryMode">-->
-    <p color="primary">Discover the cheapest way to get anywhere by plane, train, bus and ride share altogether</p>
+'mainContainer deliveryMode': mode === modes.DELIVERY}">
+    <p >Discover the cheapest way to get anywhere by plane, train, bus and ride share altogether</p>
+     
     <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
         <div class="formInfo">
             <mat-form-field class="full-width">
-            <input (input)="onChangePoint($event.target.value, '1')" type="text" placeholder="From"
-                aria-label="Number" matInput formControlName="startPointControl" [matAutocomplete]="auto1">
-            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)='selectPoint($event.option.value, "start")'>
-                <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name">
-                    {{start.name}}
-                </mat-option>
-            </mat-autocomplete>
+                <input (input)="onChangePoint($event.target.value, '1')" type="text" placeholder="From"
+                    aria-label="Number" matInput formControlName="startPointControl" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete" (optionSelected)='selectPoint($event.option.value, "start")'>
+                    <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name">
+                        {{start.name}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
             <span class="material-icons" (click)="changeDirection()">
                 sync_alt
@@ -26,8 +26,11 @@
                 </mat-autocomplete>
             </mat-form-field>
         </div>
-        <div class="actions"> <button mat-flat-button color="primary" type="submit">Let's go</button>
-            <button mat-flat-button color="accent" type="reset" (click)="cleanForm()">Clean form</button></div>
+        <div class="actions">
+            <button mat-flat-button color="accent" type="reset" (click)="cleanForm()">Clean form</button>
+            <button mat-flat-button color="primary" type="submit">Let's go</button>
+        </div>
+
 
     </form>
 </div>

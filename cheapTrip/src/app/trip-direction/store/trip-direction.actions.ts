@@ -57,7 +57,7 @@ export class GetRouts implements Action {
 
 export class SetRouts implements Action {
   readonly type = SET_ROUTS;
-  constructor(public payload: IPath[]) {}
+  constructor(public payload: {paths: IPath[], endPoints: {from: string, to: string }} ) {}
 }
 
 export class AutoCompleteFail implements Action {

@@ -17,8 +17,8 @@
             </mat-expansion-panel-header>
             <section *ngFor="let path of rout.details.direct_paths">
                 <div>
-                    <p><span>{{path.from}}</span> -> {{path.to}}</p>
-                    <p> <span>By:&ensp;</span>{{path.transportation_type}}</p>
+                    <p><b>{{path.from}} -> {{path.to}}</b></p>
+                    <p> By:&ensp;{{path.transportation_type}}</p>
                 </div>
                 <div>
                     <p><span>

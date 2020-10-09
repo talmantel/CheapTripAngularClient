@@ -3,14 +3,16 @@
   padding: 0;
 }
 
-div.main {
+div.mainContainer {
   width: 90%;
   margin: auto;
   height: auto;
+  background-color: darkred;
   p {
     text-align: center;
     position: relative;
     color: darkblue;
+    font-family: "Marck";
   }
   form {
     position: relative;
@@ -22,7 +24,7 @@ div.main {
 }
 
 @media screen and (max-width: 650px) and (orientation: landscape) {
-  div.main {
+  div.mainContainer {
     form {
       width: 100%;
       margin: auto;
@@ -138,7 +140,12 @@ div.main {
       text-align: center;
       font-size: 2rem;
       line-height: 3rem;
+      color: darkblue;
+      font-family: 'Lobster', cursive;
+     // font-family: 'Marck Script', cursive;
+     // font-family: 'Pattaya', sans-serif;
     }
+   
     form {
       width: 100%;
       div.formInfo {

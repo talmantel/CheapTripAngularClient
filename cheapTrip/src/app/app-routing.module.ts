@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NoPageComponent } from './no-page/no-page.component';
-import { TestComponent } from './test/test.component';
+import { SearchResultGuard } from './search-result/search-result.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/search', pathMatch: 'full' },
   {
     path: 'search',
+ //   canActivate: [SearchResultGuard],
     loadChildren: () =>
       import('./trip-direction/trip-direction.module').then(
         (m) => m.TripDirectionModule
-      )
+      ),
   },
-  { path:  "**", component: NoPageComponent}
+  { path: '**', component: NoPageComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [],
+
 })
 export class AppRoutingModule {}

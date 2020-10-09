@@ -15,7 +15,7 @@ export class SelectDirectionComponent implements OnInit {
   @Input() mode: Modes = Modes.SEARCH;
 
   @Output() changePoint = new EventEmitter<IPoint>();
-  @Output() selectedPoints = new EventEmitter<[number, number]>();
+  @Output() selectedPoints = new EventEmitter<IPathPoint[]>();
   @Output() cleanData = new EventEmitter<boolean>();
 
   startPoint: IPathPoint;
@@ -50,7 +50,9 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   onSubmit() {
-    this.selectedPoints.emit([this.startPoint.id, this.endPoint.id]);
+    this.selectedPoints.emit([
+      {id: this.startPoint.id, name: this.startPoint.name},
+      {id: this.endPoint.id, name: this.endPoint.name}]);
   }
 
   selectPoint(point: string, type: string) {

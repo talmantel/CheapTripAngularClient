@@ -5,17 +5,10 @@ import { of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 import * as TripDirectionActions from './trip-direction.actions';
-import {
-  IDetails,
-  IPath,
-  IPathPoint,
-  IPoint,
-} from '../trip-direction.model';
+import { IDetails, IPath, IPathPoint, IPoint } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-
-
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -51,8 +44,6 @@ PATHMAP.set('ground_routes', {
   type: 'Ground Trip',
   icon: [Icons.TRAIN, Icons.SUBWAY],
 });
-
-
 
 @Injectable()
 export class TripDirectionEffects {
@@ -93,22 +84,25 @@ export class TripDirectionEffects {
   @Effect()
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
-    switchMap((request: { payload: [number, number] }) => {
+    switchMap((request: { payload: IPathPoint[] }) => {
       const URL =
         environment.url +
         'CheapTrip/getRoute?format=json&from=' +
-        request.payload[0] +
+        request.payload[0].id +
         '&to=' +
-        request.payload[1];
+        request.payload[1].id;
       return this.http.get(URL).pipe(
         map((res) => {
           const resultObj = this.transformObject(res);
-          const queryParams = { from: 'start', to: 'end' };
+          const queryParams = {
+            from: request.payload[0].name,
+            to: request.payload[1].name,
+          };
           this.router.navigate(['path', queryParams], {
             relativeTo: this.route,
           });
-          console.log('actions', resultObj);
-          return new TripDirectionActions.SetRouts(resultObj);
+
+          return new TripDirectionActions.SetRouts({paths:resultObj, endPoints: queryParams});
         }),
         catchError((error) => {
           const errorMessage = 'An unknown error occured!';
@@ -121,10 +115,9 @@ export class TripDirectionEffects {
   @Effect({ dispatch: false })
   setRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.SET_ROUTS),
-    tap(() => {
-      console.log('navigate effect', this.route);
+    tap((res:{payload: {paths: any, endPoints: {from: string, to: string}}} )=> {
       this.router.navigate(['/search/myPath'], {
-        queryParams: { from: 'startPOint', to: 'endPoint' },
+        queryParams: res.payload.endPoints,
       });
     })
   );
