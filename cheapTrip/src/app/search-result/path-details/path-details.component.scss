@@ -1,0 +1,122 @@
+:host {
+  width: 100%;
+  position: relative;
+  height: auto;
+}
+/* article {
+  width: 95%;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  background-color: rgba(202, 199, 199, 0.479);
+  section {
+    border-bottom: 1px grey dashed;
+    padding: 0.5rem;
+    h4 {
+      color: blue;
+      font-weight: 800;
+    }
+    div {
+      display: flex;
+      justify-content: flex-start;
+      p {
+        span {
+          font-weight: 600;
+        }
+      }
+      span.spacer {
+        flex: 1 1 auto;
+      }
+    }
+  }
+  section:last-child {
+    border: none;
+  }
+  section.totalInfo {
+    box-shadow: 1px 1px 2px 3px rgba(128, 145, 230, 0.5);
+    background-color: whitesmoke;
+    border: none;
+   border-radius: 3px ;
+  }
+}
+ */
+h3 {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  color: blue;
+  height: 2em;
+  background-color: rgb(219, 224, 223, 0.2);
+  position: relative;
+  top: 6px;
+}
+
+p span.points{
+  font-style: oblique;
+  font-weight: bold;
+}
+p span.points:after {
+  content: " -> ";
+}
+
+
+p span.points:last-child:after {
+  content: "";
+}
+
+@media screen and (max-width: 650px) and (orientation: portrait) {
+  article {
+    width: 100%;
+
+    background-color: rgb(219, 224, 223, 0.2);
+    height: auto;
+    mat-accordion {
+      width: 100%;
+      height: inherit;
+      mat-expansion-panel {
+        padding: 0;
+        width: 100%;
+        mat-expansion-panel-header {
+          padding: 0;
+          align-items: stretch !important;
+          mat-panel-title {
+            background-color: rgb(206, 205, 205);
+            padding: 1em;
+            box-sizing: content-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            span {
+              margin: 0;
+              padding: 0;
+              span.material-icons {
+                color: blue;
+                margin: 0;
+              }
+            }
+          }
+          mat-panel-description {
+            font-weight: 400;
+            box-sizing: content-box;
+            width: 100%;
+            div {
+              margin: 0;
+              padding: 0;
+              p:first-child {
+                color: blue;
+                padding-top: 1em;
+              }
+            }
+          }
+        }
+        section {
+          margin-top: 1rem;
+          background-color: rgba(206, 205, 205, 0.884);
+          padding: 5px;
+          border-bottom: 1px solid grey;
+        }
+      }
+    }
+  }
+}
