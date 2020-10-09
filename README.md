@@ -55,3 +55,6 @@ Link to issues fixed in a specific pull request or commit by typing "Resolves: #
 For example "Resolves: #123"<br>
 For more details see https://docs.github.com/en/enterprise/2.16/user/github/managing-your-work-on-github/closing-issues-using-keywords
 
+You can also see open issues assigned to you here: https://github.com/talmantel/CheapTripAngularClient/issues/assigned/@me <br>
+And comment \ close etc.
+
