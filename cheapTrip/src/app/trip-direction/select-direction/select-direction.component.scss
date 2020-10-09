@@ -4,36 +4,33 @@
 }
 
 div.mainContainer {
-  width: 90%;
+  width: 95%;
   margin: auto;
   height: auto;
-  background-color: darkred;
+  form{
+    width: 100%;
+    margin: auto;
+    display: flex;
+  }
   p {
     text-align: center;
     position: relative;
-    color: darkblue;
-    font-family: "Marck";
-  }
-  form {
-    position: relative;
-    display: flex;
-    span {
-      position: relative;
-    }
+    font-family: "Lobster", cursive;
+    color: blue;
   }
 }
 
 @media screen and (max-width: 650px) and (orientation: landscape) {
   div.mainContainer {
+    p{
+      font-size: 0.6rem;
+    }
     form {
-      width: 100%;
-      margin: auto;
       flex-direction: row;
       align-items: center;
       justify-content: space-around;
       flex-wrap: wrap;
       box-sizing: border-box;
-
       mat-form-field {
         background-color: rgb(219, 224, 223, 0.2);
         width: 45%;
@@ -46,16 +43,20 @@ div.mainContainer {
     }
   }
 }
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 599px) and (orientation: portrait) {
   div.searchMode {
+
     p {
       box-sizing: border-box;
       width: 95%;
       margin: 2rem auto;
       text-align: center;
+      font-size: 1.5rem;
+      line-height: 150%;
     }
     form {
       width: 100%;
+      flex-direction: column;
       div.formInfo {
         height: auto;
         display: flex;
@@ -91,10 +92,9 @@ div.mainContainer {
       display: none;
     }
     form {
-      width: 100%;
-      height: auto;
       box-sizing: border-box;
       margin: 0.5rem auto;
+      flex-direction: row;
       div.formInfo {
         display: flex;
         flex-direction: row;
@@ -132,20 +132,17 @@ div.mainContainer {
 }
 
 @media screen and (min-width: 600px) {
-  div.mainContainer, div.searchMode {
+  div.mainContainer,
+  div.searchMode {
     p {
       box-sizing: border-box;
       width: 70%;
       margin: 2rem auto;
       text-align: center;
-      font-size: 2rem;
+      font-size: 1.5rem;
       line-height: 3rem;
-      color: darkblue;
-      font-family: 'Lobster', cursive;
-     // font-family: 'Marck Script', cursive;
-     // font-family: 'Pattaya', sans-serif;
     }
-   
+
     form {
       width: 100%;
       div.formInfo {
@@ -169,7 +166,6 @@ div.mainContainer {
           align-self: center;
           justify-self: baseline;
           text-align: center;
-         
         }
       }
       div.actions {
@@ -184,9 +180,8 @@ div.mainContainer {
   div.deliveryMode {
     p {
       display: none;
-      
     }
-    form{
+    form {
       margin: 2rem;
     }
   }

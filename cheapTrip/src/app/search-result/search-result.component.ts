@@ -57,7 +57,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     breakpointObserver
       .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
-      //  console.log('orientation state', state);
       });
 
     breakpointObserver
@@ -89,8 +88,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     let sizeTab: IGrid[] = [];
     if (obs.isMatched(Breakpoints.XSmall) || obs.isMatched(Breakpoints.Small)) {
       sizeTab = [
-        { color: 'grey', cols: 7, rows: 1 },
-        { color: 'blue', cols: 0, rows: 1 },
+        { color: 'grey', cols: 7, rows: 2 },
+        { color: 'blue', cols: 0, rows: 2 },
       ];
     } else if (
       obs.isMatched(Breakpoints.Medium) ||
@@ -98,8 +97,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       obs.isMatched(Breakpoints.XLarge)
     ) {
       sizeTab = [
-        { color: 'grey', cols: 2, rows: 1 },
-        { color: 'whitesmoke', cols: 5, rows: 1 },
+        { color: 'grey', cols: 2, rows: 2 },
+        { color: 'whitesmoke', cols: 5, rows: 2},
       ];
     }
     return sizeTab;

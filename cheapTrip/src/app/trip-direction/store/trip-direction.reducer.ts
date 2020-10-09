@@ -11,15 +11,6 @@ export interface ITripDirectionState {
   errorMessage: string;
 }
 
-const DIRECTIONS_AUTOCOMPLETE = [
-  'Moscow',
-  'Tel-Aviv',
-  'London',
-  'Viena',
-  'San-Paolo',
-  'Krakow',
-  'Bansko',
-];
 const initialState: ITripDirectionState = {
   startPoint: '',
   endPoint: '',
@@ -101,6 +92,15 @@ export function tripDirectionReducer(
         paths: [],
         mode: Modes.SEARCH,
         errorMessage: '',
+      };
+
+      case TripDirectionActions.SET_MODE:
+        console.log('reducer');
+      return {
+        ...state,
+        
+        mode: action.payload,
+       
       };
 
     default:

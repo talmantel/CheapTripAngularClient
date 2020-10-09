@@ -50,6 +50,20 @@ h3 {
   position: relative;
   top: 6px;
 }
+
+p span.points{
+  font-style: oblique;
+  font-weight: bold;
+}
+p span.points:after {
+  content: " -> ";
+}
+
+
+p span.points:last-child:after {
+  content: "";
+}
+
 @media screen and (max-width: 650px) and (orientation: portrait) {
   article {
     width: 100%;
@@ -74,11 +88,11 @@ h3 {
             justify-content: flex-start;
             align-items: flex-start;
             span {
-              margin:0;
-              padding:0;
+              margin: 0;
+              padding: 0;
               span.material-icons {
                 color: blue;
-                margin:0;
+                margin: 0;
               }
             }
           }

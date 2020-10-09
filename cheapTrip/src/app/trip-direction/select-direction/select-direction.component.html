@@ -1,7 +1,6 @@
 <div [ngClass]="{'mainContainer searchMode': mode === modes.SEARCH,
 'mainContainer deliveryMode': mode === modes.DELIVERY}">
-    <p >Discover the cheapest way to get anywhere by plane, train, bus and ride share altogether</p>
-     
+    <p >Discover the cheapest way to get anywhere by plane, train, bus and ride share altogether</p>    
     <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
         <div class="formInfo">
             <mat-form-field class="full-width">
@@ -27,10 +26,8 @@
             </mat-form-field>
         </div>
         <div class="actions">
-            <button mat-flat-button color="accent" type="reset" (click)="cleanForm()">Clean form</button>
+            <button mat-flat-button color="accent" type="reset" (click)="cleanForm()">Clear form</button>
             <button mat-flat-button color="primary" type="submit">Let's go</button>
         </div>
-
-
     </form>
 </div>

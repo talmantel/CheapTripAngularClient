@@ -32,6 +32,7 @@ export interface IDetails {
   euro_price: string;
   duration_minutes: string;
   direct_paths: IRout[];
+  points: Set<string>
 }
 
 export interface IPath {

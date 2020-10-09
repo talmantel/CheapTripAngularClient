@@ -29,6 +29,7 @@ export class TripDirectionComponent implements OnInit {
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
         this.mode = state.mode;
+    
       });
   }
 

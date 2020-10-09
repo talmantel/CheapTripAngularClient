@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store/src';
-import { IPath, IPoint, IPoints } from '../trip-direction.model';
+import { IPath, IPoint, IPoints, Modes } from '../trip-direction.model';
 
 export const SET_START_POINT = '[TripDirection] Set startPoint';
 export const SET_END_POINT = '[TripDirection] Set endartPoint';
@@ -14,6 +14,7 @@ export const GET_ROUTS = '[TripDirection] Get Routs';
 export const SET_ROUTS = '[TripDirection] Set Routs';
 export const AUTOCOMPLETE_FAIL = '[TripDirection] Autocomplete Fail';
 export const CLEAN_DATA = '[TripDirection] Clean Data';
+export const SET_MODE = '[TripDirection] Set Mode';
 
 export class SetStartPoint implements Action {
   readonly type = SET_START_POINT;
@@ -42,12 +43,12 @@ export class GetAutocomplete implements Action {
 
 export class SetStartPointAutocomplete implements Action {
   readonly type = SET_START_POINT_AUTOCOMPLETE;
-  constructor(public payload: Array< {id: number, name: string}>) {}
+  constructor(public payload: Array<{ id: number; name: string }>) {}
 }
 
 export class SetEndPointAutocomplete implements Action {
   readonly type = SET_END_POINT_AUTOCOMPLETE;
-  constructor(public payload:  Array< {id: number, name: string}>) {}
+  constructor(public payload: Array<{ id: number; name: string }>) {}
 }
 
 export class GetRouts implements Action {
@@ -57,7 +58,9 @@ export class GetRouts implements Action {
 
 export class SetRouts implements Action {
   readonly type = SET_ROUTS;
-  constructor(public payload: {paths: IPath[], endPoints: {from: string, to: string }} ) {}
+  constructor(
+    public payload: { paths: IPath[]; endPoints: { from: string; to: string } }
+  ) {}
 }
 
 export class AutoCompleteFail implements Action {
@@ -68,7 +71,12 @@ export class AutoCompleteFail implements Action {
 export class CleanData implements Action {
   readonly type = CLEAN_DATA;
   constructor() {}
-} 
+}
+export class SetMode implements Action {
+  readonly type = SET_MODE;
+  constructor(public payload: Modes) {}
+}
+
 export type TripDirectionActions =
   | GetEndPoint
   | GetStartPoint
@@ -80,4 +88,5 @@ export type TripDirectionActions =
   | GetRouts
   | SetRouts
   | AutoCompleteFail
-  | CleanData;
+  | CleanData
+  | SetMode;

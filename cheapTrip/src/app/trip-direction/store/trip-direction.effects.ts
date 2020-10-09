@@ -5,7 +5,13 @@ import { of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 import * as TripDirectionActions from './trip-direction.actions';
-import { IDetails, IPath, IPathPoint, IPoint } from '../trip-direction.model';
+import {
+  IDetails,
+  IPath,
+  IPathPoint,
+  IPoint,
+  IRout,
+} from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -93,7 +99,7 @@ export class TripDirectionEffects {
         request.payload[1].id;
       return this.http.get(URL).pipe(
         map((res) => {
-          const resultObj = this.transformObject(res);
+          const resultPathArr = this.transformObject(res);
           const queryParams = {
             from: request.payload[0].name,
             to: request.payload[1].name,
@@ -102,7 +108,10 @@ export class TripDirectionEffects {
             relativeTo: this.route,
           });
 
-          return new TripDirectionActions.SetRouts({paths:resultObj, endPoints: queryParams});
+          return new TripDirectionActions.SetRouts({
+            paths: resultPathArr,
+            endPoints: queryParams,
+          });
         }),
         catchError((error) => {
           const errorMessage = 'An unknown error occured!';
@@ -115,11 +124,15 @@ export class TripDirectionEffects {
   @Effect({ dispatch: false })
   setRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.SET_ROUTS),
-    tap((res:{payload: {paths: any, endPoints: {from: string, to: string}}} )=> {
-      this.router.navigate(['/search/myPath'], {
-        queryParams: res.payload.endPoints,
-      });
-    })
+    tap(
+      (res: {
+        payload: { paths: any; endPoints: { from: string; to: string } };
+      }) => {
+        this.router.navigate(['/search/myPath'], {
+          queryParams: res.payload.endPoints,
+        });
+      }
+    )
   );
 
   private transformObject(obj: object): IPath[] {
@@ -133,21 +146,25 @@ export class TripDirectionEffects {
       const newObj = { pathType: PATHMAP.get(i), details: transformedDetails };
       objArr.push(testObj);
     }
+
     return objArr;
   }
 
   private transformDetails(obj: IDetails): IDetails {
+    const points = this.getPoints(obj.direct_paths);
     const newPaths = obj.direct_paths.map((item) => {
       return {
         ...item,
-        duration_minutes: this.transformTime(+obj.duration_minutes),
-        euro_price: this.transformPrice(+obj.euro_price),
+        duration_minutes: this.transformTime(+item.duration_minutes),
+        euro_price: this.transformPrice(+item.euro_price),
       };
     });
+
     const newObj = {
       direct_paths: newPaths,
       euro_price: this.transformPrice(+obj.euro_price),
       duration_minutes: this.transformTime(+obj.duration_minutes),
+      points: points
     };
     return newObj;
   }
@@ -199,5 +216,11 @@ export class TripDirectionEffects {
         message = 'dfdfdf';
         break;
     }
+  }
+
+  private getPoints(paths: IRout[]): Set<string> { 
+    const transformedArr = paths.map((item) => [item.from, item.to]);
+    const result = new Set(transformedArr.reduce((a, b) => a.concat(b), [])); 
+    return result;
   }
 }
