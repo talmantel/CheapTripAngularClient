@@ -91,6 +91,7 @@ export class TripDirectionEffects {
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
     switchMap((request: { payload: IPathPoint[] }) => {
+      console.log('get routs');
       const URL =
         environment.url +
         'CheapTrip/getRoute?format=json&from=' +
@@ -98,7 +99,8 @@ export class TripDirectionEffects {
         '&to=' +
         request.payload[1].id;
       return this.http.get(URL).pipe(
-        map((res) => {
+        map(res => {
+          console.log('response', res);
           const resultPathArr = this.transformObject(res);
           const queryParams = {
             from: request.payload[0].name,
@@ -115,6 +117,7 @@ export class TripDirectionEffects {
         }),
         catchError((error) => {
           const errorMessage = 'An unknown error occured!';
+          console.log('error',error);
           return of(new TripDirectionActions.AutoCompleteFail(error));
         })
       );

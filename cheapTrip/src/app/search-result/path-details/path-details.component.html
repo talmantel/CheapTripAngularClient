@@ -1,18 +1,17 @@
 
-
 <article *ngFor="let rout  of paths">
     <mat-accordion>
         <mat-expansion-panel>
-            <mat-expansion-panel-header [expandedHeight]="'110px'" [collapsedHeight]="'130px'">
+            <mat-expansion-panel-header [expandedHeight]="'140px'" [collapsedHeight]="'150px'">
                 <mat-panel-title>
                     <ng-container *ngFor="let icon of rout.pathType.icon"> <span [innerHTML]="icon"></span></ng-container>   
                 </mat-panel-title>
                 <mat-panel-description>
                     <div>
-                        <p><span>{{rout.pathType.type}}</span></p>
+                        <p><span  class="type">{{rout.pathType.type}}</span></p>
                         <p><span class="points" *ngFor="let point of rout.details.points">{{point}}</span></p>
                         <p><span>Price:&ensp;</span><span>{{rout.details.euro_price}}</span></p>
-                        <p><span>Duation:&ensp;</span><span>{{rout.details.duration_minutes}}</span></p>
+                        <p><span>Duration:&ensp;</span><span>{{rout.details.duration_minutes}}</span></p>
                     </div>
                 </mat-panel-description>
             </mat-expansion-panel-header>

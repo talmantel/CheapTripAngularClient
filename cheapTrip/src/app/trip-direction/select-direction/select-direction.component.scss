@@ -1,51 +1,78 @@
+@import "../../../cheapTripStyles/styles.scss";
+
 * {
   margin: 0;
   padding: 0;
 }
 
 div.mainContainer {
-  width: 95%;
+  width: 100%;
   margin: auto;
   height: auto;
-  form{
+  form {
     width: 100%;
     margin: auto;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    div.formInfo {
+      width: 100%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      mat-form-field {
+        width: 45%;
+        @include borderRad(5px);
+        @include boxSizing(border-box);
+        border-left: 3px solid $base-dark;
+        padding: 5px;
+        input {
+          @include placeholder(red, 1rem, normal, cursive);
+        }
+      }
+      span {
+        color: $base-blue;
+      }
+    }
+    div.actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
   }
   p {
     text-align: center;
     position: relative;
     font-family: "Lobster", cursive;
-    color: blue;
+    color: $base-dark;
   }
 }
 
-@media screen and (max-width: 650px) and (orientation: landscape) {
+@media screen and (max-width: 641px) and (orientation: landscape) {
   div.mainContainer {
-    p{
-      font-size: 0.6rem;
+    p {
+      font-size: 1.5rem;
+      line-height: 150%;
+      margin-bottom: 2rem;
     }
     form {
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       justify-content: space-around;
       flex-wrap: wrap;
       box-sizing: border-box;
-      mat-form-field {
-        background-color: rgb(219, 224, 223, 0.2);
-        width: 45%;
-        border-radius: 5px;
-        box-sizing: border-box;
-      }
-      button {
-        margin: 1rem;
+      div.actions {
+        button {
+          margin: 1rem;
+        }
       }
     }
   }
 }
-@media screen and (max-width: 599px) and (orientation: portrait) {
+@media screen and (max-width: 640px) and (orientation: portrait) {
   div.searchMode {
-
     p {
       box-sizing: border-box;
       width: 95%;
@@ -59,15 +86,8 @@ div.mainContainer {
       flex-direction: column;
       div.formInfo {
         height: auto;
-        display: flex;
         flex-direction: column;
-        box-sizing: border-box;
         mat-form-field {
-          background-color: rgb(219, 224, 223, 0.2);
-          margin: 0 auto;
-          padding: 0.5rem;
-          border-radius: 5px;
-          box-sizing: border-box;
           width: 95%;
           margin: auto;
         }
@@ -93,45 +113,30 @@ div.mainContainer {
     }
     form {
       box-sizing: border-box;
-      margin: 0.5rem auto;
-      flex-direction: row;
+      flex-direction: column;
+
       div.formInfo {
-        display: flex;
-        flex-direction: row;
-        box-sizing: border-box;
-        justify-content: center;
-        position: relative;
         width: 100%;
-        margin: auto;
+        position: relative;
         mat-form-field {
-          background-color: rgb(219, 224, 223, 0.2);
-          width: 180px !important;
-          input {
-            padding-left: 1rem !important;
-          }
+          width: 170px !important;
+          position: relative;
         }
         span {
           position: absolute;
-          border-radius: 50%;
-          top: 1.5em;
+          top: 20px;
+          left: 165px;
           z-index: 10;
-          color: cornsilk;
-          background-color: blue;
-          padding: 0.5rem;
-          box-sizing: border-box;
+          color: $base-dark;
+        
+    
         }
-      }
-      div.actions {
-        margin-top: 0.5rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
       }
     }
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 641px) {
   div.mainContainer,
   div.searchMode {
     p {
@@ -139,12 +144,13 @@ div.mainContainer {
       width: 70%;
       margin: 2rem auto;
       text-align: center;
-      font-size: 1.5rem;
-      line-height: 3rem;
+      font-size: 2rem;
+      line-height: 150%;
     }
 
     form {
       width: 100%;
+      flex-direction: column;
       div.formInfo {
         height: auto;
         display: flex;
@@ -170,6 +176,7 @@ div.mainContainer {
       }
       div.actions {
         margin-top: 0.5rem;
+        width: 60%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;

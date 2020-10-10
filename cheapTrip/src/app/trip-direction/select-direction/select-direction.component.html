@@ -1,5 +1,5 @@
-<div [ngClass]="{'mainContainer searchMode': mode === modes.SEARCH,
-'mainContainer deliveryMode': mode === modes.DELIVERY}">
+<div class = "mainContainer" [ngClass]="{'searchMode': mode === modes.SEARCH,
+'deliveryMode': mode === modes.DELIVERY}">
     <p >Discover the cheapest way to get anywhere by plane, train, bus and ride share altogether</p>    
     <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
         <div class="formInfo">

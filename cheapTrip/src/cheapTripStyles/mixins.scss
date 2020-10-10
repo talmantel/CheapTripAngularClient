@@ -1,0 +1,53 @@
+@mixin borderRadius($topLeft, $topRight, $bottomLeft, $bottomRight) {
+  -webkit-border-radius: $topLeft $topRight $bottomLeft $bottomRight;
+  -moz-border-radius: $topLeft $topRight $bottomLeft $bottomRight;
+  -ms-border-radius: $topLeft $topRight $bottomLeft $bottomRight;
+  -o-border-radius: $topLeft $topRight $bottomLeft $bottomRight;
+  border-radius: $topLeft $topRight $bottomLeft $bottomRight;
+}
+
+@mixin borderRad($val) {
+  @include borderRadius($val, $val, $val, $val);
+}
+
+@mixin boxSizing($boxSizing) {
+  -moz-box-sizing: $boxSizing;
+  box-sizing: $boxSizing;
+}
+
+@mixin placeholder($color, $fontSize, $fontWeight, $fontStyle) {
+  &::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: $color;
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    font-style: $fontStyle;
+  }
+  &:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $color;
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    font-style: $fontStyle;
+  }
+  &::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $color;
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    font-style: $fontStyle;
+  }
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: $color;
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    font-style: $fontStyle;
+  }
+}
+
+@mixin boxShadow($hLength, $vLength, $blurR, $spreadR) {
+  -webkit-box-shadow: $hLength $vLength $blurR $spreadR rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: $hLength $vLength $blurR $spreadR rgba(0, 0, 0, 0.75);
+  box-shadow: $hLength $vLength $blurR $spreadR rgba(0, 0, 0, 0.75);
+}
