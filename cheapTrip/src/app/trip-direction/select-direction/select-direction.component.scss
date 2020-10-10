@@ -50,7 +50,7 @@ div.mainContainer {
   }
 }
 
-@media screen and (max-width: 641px) and (orientation: landscape) {
+/* @media screen and (max-width: 641px) and (orientation: landscape) {
   div.mainContainer {
     p {
       font-size: 1.5rem;
@@ -70,8 +70,8 @@ div.mainContainer {
       }
     }
   }
-}
-@media screen and (max-width: 640px) and (orientation: portrait) {
+} */
+@media screen and (max-width: 640px)  {
   div.searchMode {
     p {
       box-sizing: border-box;
