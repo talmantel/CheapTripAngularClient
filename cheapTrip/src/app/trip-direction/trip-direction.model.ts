@@ -32,11 +32,12 @@ export interface IDetails {
   euro_price: string;
   duration_minutes: string;
   direct_paths: IRout[];
-  points: Set<string>
+  points: Set<string>;
+  transport: SafeHtml[];
 }
 
 export interface IPath {
-  pathType: { type: string; icon: SafeHtml[] };
+  pathType: string;
   details: IDetails;
 }
 

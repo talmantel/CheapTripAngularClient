@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 
 import * as fromApp from '../store/app.reducer';
 import { IPath } from '../trip-direction/trip-direction.model';
+import { Location } from '@angular/common';
 
 export interface IGrid {
   color: string;
@@ -52,7 +53,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   constructor(
     breakpointObserver: BreakpointObserver,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private location: Location
   ) {
     breakpointObserver
       .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
@@ -73,6 +75,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('search result component on init');
     this.getPathsSubscription = this.store
       .select('directions')
       .subscribe((state) => {
@@ -102,5 +105,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       ];
     }
     return sizeTab;
+  }
+
+  goBack() {
+    // window.history.back();
+    this.location.back();
+
+    console.log( 'goBack()...' );
   }
 }
