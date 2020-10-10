@@ -35,6 +35,9 @@ enum Icons {
   ONFOOT = `<span class="material-icons">
   directions_walk
   </span>`,
+  CAR = `<span class="material-icons">
+  directions_car
+  </span>`,
 }
 const PATHMAP = new Map();
 
@@ -50,6 +53,12 @@ PATHMAP.set('ground_routes', {
   type: 'Ground Trip',
   icon: [Icons.TRAIN, Icons.SUBWAY],
 });
+
+const PATHMAPDETAILED = new Map();
+PATHMAPDETAILED.set('Bus', Icons.BUS);
+PATHMAPDETAILED.set('Flight', Icons.FLIGHT);
+PATHMAPDETAILED.set('Train', Icons.TRAIN);
+PATHMAPDETAILED.set('Ride Share', Icons.TRAIN);
 
 @Injectable()
 export class TripDirectionEffects {
@@ -99,8 +108,7 @@ export class TripDirectionEffects {
         '&to=' +
         request.payload[1].id;
       return this.http.get(URL).pipe(
-        map(res => {
-          console.log('response', res);
+        map((res) => {
           const resultPathArr = this.transformObject(res);
           const queryParams = {
             from: request.payload[0].name,
@@ -117,7 +125,7 @@ export class TripDirectionEffects {
         }),
         catchError((error) => {
           const errorMessage = 'An unknown error occured!';
-          console.log('error',error);
+          console.log('error', error);
           return of(new TripDirectionActions.AutoCompleteFail(error));
         })
       );
@@ -142,18 +150,17 @@ export class TripDirectionEffects {
     let objArr: IPath[] = [];
     for (let i in obj) {
       const transformedDetails = this.transformDetails(obj[i]);
-      const testObj = {
-        pathType: this.mapSanitazing().get(i),
+      const testObj: IPath = {
+        pathType: PATHMAP.get(i).type,
         details: transformedDetails,
       };
-      const newObj = { pathType: PATHMAP.get(i), details: transformedDetails };
       objArr.push(testObj);
     }
-
     return objArr;
   }
 
   private transformDetails(obj: IDetails): IDetails {
+    const transport = this.getTransport(obj.direct_paths);
     const points = this.getPoints(obj.direct_paths);
     const newPaths = obj.direct_paths.map((item) => {
       return {
@@ -163,11 +170,12 @@ export class TripDirectionEffects {
       };
     });
 
-    const newObj = {
+    const newObj: IDetails = {
       direct_paths: newPaths,
       euro_price: this.transformPrice(+obj.euro_price),
       duration_minutes: this.transformTime(+obj.duration_minutes),
-      points: points
+      points: points,
+      transport: transport,
     };
     return newObj;
   }
@@ -192,21 +200,23 @@ export class TripDirectionEffects {
     return euroStr + '' + centStr;
   }
 
-  private mapSanitazing(): Map<string, { type: string; icon: SafeHtml[] }> {
-    let newMap = new Map<string, { type: string; icon: SafeHtml[] }>();
-    PATHMAP.forEach((value, key, map) => {
-      const sanitizedArr = value.icon.map((icon) =>
-        this.sanitizer.bypassSecurityTrustHtml(icon)
-      );
-      const val = {
-        ...value,
-        icon: sanitizedArr,
-      };
-
-      newMap.set(key, val);
-      return newMap;
+  private mapSanitazingDetaled(): Map<string, SafeHtml> {
+    let newSanitisedMap = new Map<string, SafeHtml>();
+    PATHMAPDETAILED.forEach((value, key, _map) => {
+      newSanitisedMap.set(key, this.sanitizer.bypassSecurityTrustHtml(value));
     });
-    return newMap;
+    return newSanitisedMap;
+  }
+
+  private getTransport(paths: IRout[]): SafeHtml[] {
+    const sanitisedMap = this.mapSanitazingDetaled();
+    let result = [];
+    paths.map((item) => {
+      const smth = sanitisedMap.get(item.transportation_type);
+      result.push(smth);
+    });
+
+    return result;
   }
 
   private handleError(err: HttpErrorResponse) {
@@ -221,9 +231,9 @@ export class TripDirectionEffects {
     }
   }
 
-  private getPoints(paths: IRout[]): Set<string> { 
+  private getPoints(paths: IRout[]): Set<string> {
     const transformedArr = paths.map((item) => [item.from, item.to]);
-    const result = new Set(transformedArr.reduce((a, b) => a.concat(b), [])); 
+    const result = new Set(transformedArr.reduce((a, b) => a.concat(b), []));
     return result;
   }
 }

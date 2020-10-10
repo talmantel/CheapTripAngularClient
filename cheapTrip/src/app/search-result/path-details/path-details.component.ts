@@ -7,7 +7,7 @@ import { IPath } from '../../service/http.service';
   selector: 'app-path-details',
   templateUrl: './path-details.component.html',
   styleUrls: ['./path-details.component.scss'],
-encapsulation: ViewEncapsulation.None,
+//encapsulation: ViewEncapsulation.None,
 })
 export class PathDetailsComponent implements OnInit {
 @Input() paths: IPath[];

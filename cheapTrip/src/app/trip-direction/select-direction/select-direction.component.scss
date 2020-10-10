@@ -13,6 +13,7 @@ div.mainContainer {
     width: 100%;
     margin: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     div.formInfo {
@@ -32,14 +33,14 @@ div.mainContainer {
         }
       }
       span {
-        color: $base-blue;
+        color: $base-dark;
       }
     }
     div.actions {
       margin-top: 1rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
+      button {
+        margin: 0 2rem;
+      }
     }
   }
   p {
@@ -71,7 +72,7 @@ div.mainContainer {
     }
   }
 } */
-@media screen and (max-width: 640px)  {
+@media screen and (max-width: 640px) {
   div.searchMode {
     p {
       box-sizing: border-box;
@@ -83,7 +84,6 @@ div.mainContainer {
     }
     form {
       width: 100%;
-      flex-direction: column;
       div.formInfo {
         height: auto;
         flex-direction: column;
@@ -99,11 +99,6 @@ div.mainContainer {
           transform: rotate(90deg);
         }
       }
-      div.actions {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
     }
   }
 
@@ -112,24 +107,24 @@ div.mainContainer {
       display: none;
     }
     form {
-      box-sizing: border-box;
+    //  box-sizing: border-box;
       flex-direction: column;
 
       div.formInfo {
-        width: 100%;
+        width: 98%;
+        margin: auto;
         position: relative;
         mat-form-field {
           width: 170px !important;
           position: relative;
+          border-left: none;
         }
         span {
           position: absolute;
           top: 20px;
-          left: 165px;
+          left: 180px;
           z-index: 10;
           color: $base-dark;
-        
-    
         }
       }
     }
@@ -150,7 +145,7 @@ div.mainContainer {
 
     form {
       width: 100%;
-      flex-direction: column;
+    
       div.formInfo {
         height: auto;
         display: flex;
@@ -175,11 +170,8 @@ div.mainContainer {
         }
       }
       div.actions {
-        margin-top: 0.5rem;
-        width: 60%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+
+       
       }
     }
   }

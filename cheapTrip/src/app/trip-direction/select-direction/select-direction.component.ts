@@ -51,8 +51,9 @@ export class SelectDirectionComponent implements OnInit {
 
   onSubmit() {
     this.selectedPoints.emit([
-      {id: this.startPoint.id, name: this.startPoint.name},
-      {id: this.endPoint.id, name: this.endPoint.name}]);
+      { id: this.startPoint.id, name: this.startPoint.name },
+      { id: this.endPoint.id, name: this.endPoint.name },
+    ]);
   }
 
   selectPoint(point: string, type: string) {
@@ -73,5 +74,9 @@ export class SelectDirectionComponent implements OnInit {
 
   cleanForm() {
     this.cleanData.emit(true);
+  }
+
+  myMethod(any: any) {
+    console.log('jhjhj', any);
   }
 }

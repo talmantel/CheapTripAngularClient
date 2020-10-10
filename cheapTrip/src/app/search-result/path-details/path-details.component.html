@@ -1,35 +1,34 @@
-
-<article *ngFor="let rout  of paths">
+<section *ngFor="let rout  of paths">
     <mat-accordion>
         <mat-expansion-panel>
-            <mat-expansion-panel-header [expandedHeight]="'140px'" [collapsedHeight]="'150px'">
+            <mat-expansion-panel-header expandedHeight="*" collapsedHeight="*">
                 <mat-panel-title>
-                    <ng-container *ngFor="let icon of rout.pathType.icon"> <span [innerHTML]="icon"></span></ng-container>   
+                    <div class="icons">
+
+                        <ng-container *ngFor="let icon of rout.details.transport"> <span [innerHTML]="icon"></span>
+                        </ng-container>
+                    </div>
                 </mat-panel-title>
                 <mat-panel-description>
-                    <div>
-                        <p><span  class="type">{{rout.pathType.type}}</span></p>
+
+                    <div class="description">
                         <p><span class="points" *ngFor="let point of rout.details.points">{{point}}</span></p>
-                        <p><span>Price:&ensp;</span><span>{{rout.details.euro_price}}</span></p>
-                        <p><span>Duration:&ensp;</span><span>{{rout.details.duration_minutes}}</span></p>
+                        <p class="time"> <span class="material-icons">
+                                euro_symbol
+                            </span><span class="spacer"></span><span>{{rout.details.euro_price}}</span></p>
+                        <p class="time"><span class="material-icons">
+                                access_time
+                            </span><span class="spacer"></span><span>{{rout.details.duration_minutes}}</span></p>
                     </div>
                 </mat-panel-description>
             </mat-expansion-panel-header>
-            <section *ngFor="let path of rout.details.direct_paths">
-                <div>
-                    <p><b>{{path.from}} -> {{path.to}}</b></p>
-                    <p> By:&ensp;{{path.transportation_type}}</p>
-                </div>
-                <div>
-                    <p><span>
-                            Price:
-                            &ensp;</span> {{path.euro_price}}</p>
-                    <span class="spacer"></span>
-                    <p><span>
-                            Duration:
-                        </span>{{path.duration_minutes }}</p>
-                </div>
-            </section>
+            <div class="details" *ngFor="let path of rout.details.direct_paths">
+
+                <p><span>{{path.from}} -> {{path.to}} -> {{path.transportation_type}}</span><span class="spacer"></span>
+                    <span>{{path.euro_price}}</span></p>
+                <p>
+                    <span>Duration:</span> <span class="spacer"></span> <span>{{path.duration_minutes }}</span></p>
+            </div>
         </mat-expansion-panel>
     </mat-accordion>
-</article>
+</section>
