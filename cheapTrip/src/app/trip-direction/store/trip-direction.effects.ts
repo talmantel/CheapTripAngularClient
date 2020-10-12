@@ -1,6 +1,13 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { switchMap, catchError, map, tap } from 'rxjs/operators';
+import {
+  switchMap,
+  catchError,
+  map,
+  tap,
+  withLatestFrom,
+  mergeMap,
+} from 'rxjs/operators';
 import { of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -15,6 +22,8 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -67,7 +76,8 @@ export class TripDirectionEffects {
     private sanitizer: DomSanitizer,
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<AppState>
   ) {}
 
   @Effect()
@@ -99,49 +109,34 @@ export class TripDirectionEffects {
   @Effect()
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
-    switchMap((request: { payload: IPathPoint[] }) => {
-      console.log('get routs');
-      const URL =
-        environment.url +
-        'CheapTrip/getRoute?format=json&from=' +
-        request.payload[0].id +
-        '&to=' +
-        request.payload[1].id;
-      return this.http.get(URL).pipe(
-        map((res) => {
-          const resultPathArr = this.transformObject(res);
-          const queryParams = {
-            from: request.payload[0].name,
-            to: request.payload[1].name,
-          };
-          this.router.navigate(['path', queryParams], {
-            relativeTo: this.route,
-          });
+    //  withLatestFrom(this.store.select('directions')),
 
-          return new TripDirectionActions.SetRouts({
-            paths: resultPathArr,
-            endPoints: queryParams,
-          });
-        }),
-        catchError((error) => {
-          const errorMessage = 'An unknown error occured!';
-          console.log('error', error);
-          return of(new TripDirectionActions.AutoCompleteFail(error));
-        })
-      );
-    })
-  );
-
-  @Effect({ dispatch: false })
-  setRouts$ = this.actions$.pipe(
-    ofType(TripDirectionActions.SET_ROUTS),
-    tap(
-      (res: {
-        payload: { paths: any; endPoints: { from: string; to: string } };
-      }) => {
-        this.router.navigate(['/search/myPath'], {
-          queryParams: res.payload.endPoints,
-        });
+    switchMap(
+      (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
+        const URL =
+          environment.url +
+          'CheapTrip/getRoute?format=json&from=' +
+          request.payload[0].id +
+          '&to=' +
+          request.payload[1].id;
+        return this.http.get(URL).pipe(
+          map((res) => {
+            const resultPathArr = this.transformObject(res);
+            const endPoints = {
+              from: request.payload[0],
+              to: request.payload[1],
+            };
+            return new TripDirectionActions.SetRouts({
+              paths: resultPathArr,
+              endPoints: endPoints,
+            });
+          }),
+          catchError((error) => {
+            const errorMessage = 'An unknown error occured!';
+            console.log('error', error);
+            return of(new TripDirectionActions.AutoCompleteFail(error));
+          })
+        );
       }
     )
   );
@@ -184,20 +179,23 @@ export class TripDirectionEffects {
     const days = Math.floor(minutes / 60 / 24);
     const dayStr = days == 0 ? '' : days == 1 ? days + ' day' : days + ' days';
     const hours = Math.floor(minutes / 60 - days * 24);
-    const hourStr =
-      hours == 0 ? '' : hours == 1 ? hours + ' hour' : hours + ' hours';
+    /*  const hourStr =
+      hours == 0 ? '' : hours == 1 ? hours + ' hour' : hours + ' hours'; */
+    const hourStr = hours + 'h';
     const min = minutes - days * 24 * 60 - hours * 60;
-    const minStr =
-      min == 0 ? '' : min == 1 ? min + ' minute' : min + ' minutes';
+    /*    const minStr =
+      min == 0 ? '' : min == 1 ? min + ' minute' : min + ' minutes'; */
+    const minStr = min + 'min';
     return dayStr + ' ' + hourStr + ' ' + minStr;
   }
 
-  private transformPrice(price: number): string {
+  private transformPrice(price: number): number {
     const euro = Math.floor(+price);
     const cent = Math.floor(+price - euro) * 10;
     const euroStr = euro == 0 ? '' : euro + ' euro';
     const centStr = cent == 0 ? '' : cent + ' cent';
-    return euroStr + '' + centStr;
+    // return euroStr + '' + centStr;
+    return price;
   }
 
   private mapSanitazingDetaled(): Map<string, SafeHtml> {

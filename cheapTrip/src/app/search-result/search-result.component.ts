@@ -11,12 +11,31 @@ import { Subscription } from 'rxjs';
 import * as fromApp from '../store/app.reducer';
 import { IPath } from '../trip-direction/trip-direction.model';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 export interface IGrid {
   color: string;
   cols: number;
   rows: number;
 }
+
+// reference information: available resolutions
+const viewportSizes = [
+  Breakpoints.XSmall,
+  Breakpoints.Small,
+  Breakpoints.Medium,
+  Breakpoints.Large,
+  Breakpoints.XLarge,
+  Breakpoints.Web,
+  Breakpoints.WebLandscape,
+  Breakpoints.WebPortrait,
+  Breakpoints.Handset,
+  Breakpoints.HandsetLandscape,
+  Breakpoints.HandsetPortrait,
+  Breakpoints.Tablet,
+  Breakpoints.TabletLandscape,
+  Breakpoints.TabletPortrait,
+];
 
 @Component({
   selector: 'app-search-result',
@@ -33,24 +52,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   matcher: MediaQueryList;
 
-  // reference information: available resolutions
-  viewportSizes = [
-    Breakpoints.XSmall,
-    Breakpoints.Small,
-    Breakpoints.Medium,
-    Breakpoints.Large,
-    Breakpoints.XLarge,
-    Breakpoints.Web,
-    Breakpoints.WebLandscape,
-    Breakpoints.WebPortrait,
-    Breakpoints.Handset,
-    Breakpoints.HandsetLandscape,
-    Breakpoints.HandsetPortrait,
-    Breakpoints.Tablet,
-    Breakpoints.TabletLandscape,
-    Breakpoints.TabletPortrait,
-  ];
-
   constructor(
     breakpointObserver: BreakpointObserver,
     private store: Store<fromApp.AppState>,
@@ -58,8 +59,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   ) {
     breakpointObserver
       .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
-      .subscribe((state: BreakpointState) => {
-      });
+      .subscribe((state: BreakpointState) => {});
 
     breakpointObserver
       .observe([
@@ -75,7 +75,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('search result component on init');
     this.getPathsSubscription = this.store
       .select('directions')
       .subscribe((state) => {
@@ -91,7 +90,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     let sizeTab: IGrid[] = [];
     if (obs.isMatched(Breakpoints.XSmall) || obs.isMatched(Breakpoints.Small)) {
       sizeTab = [
-        { color: 'grey', cols: 7, rows: 2 },
+        { color: 'whitesmoke', cols: 7, rows: 2 },
         { color: 'blue', cols: 0, rows: 2 },
       ];
     } else if (
@@ -101,16 +100,11 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     ) {
       sizeTab = [
         { color: 'grey', cols: 2, rows: 2 },
-        { color: 'whitesmoke', cols: 5, rows: 2},
+        { color: 'whitesmoke', cols: 5, rows: 2 },
       ];
     }
     return sizeTab;
   }
 
-  goBack() {
-    // window.history.back();
-    this.location.back();
-
-    console.log( 'goBack()...' );
-  }
+  
 }

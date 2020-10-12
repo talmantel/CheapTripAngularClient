@@ -51,3 +51,30 @@
   -moz-box-shadow: $hLength $vLength $blurR $spreadR rgba(0, 0, 0, 0.75);
   box-shadow: $hLength $vLength $blurR $spreadR rgba(0, 0, 0, 0.75);
 }
+
+@mixin desktop {
+  @media screen and (max-width: 1200px) {
+       @content;
+  }
+}
+@mixin laptop {
+  @media screen and (max-width: 992px) {
+      @content;
+  }
+}
+@mixin tablets {
+  @media screen and (max-width: 768px) {
+      @content;
+  }
+}
+@mixin phones {
+ @media screen and (max-width: 480px) {
+      @content;
+ }
+}
+
+@mixin smallphones {
+  @media screen and (max-width: 376px) {
+       @content;
+  }
+ }

@@ -1,11 +1,13 @@
-<mat-grid-list [cols]="colsAmount" rowHeight="600px">
-    <mat-grid-tile class="aside-grid" [colspan]="grids[0].cols" [rowspan]="grids[0].rows"
-        [style.background-color]="grids[0].color">
-        <app-path-details [paths]="paths"></app-path-details>
-    </mat-grid-tile>
-    <mat-grid-tile class="main-grid" [colspan]="grids[1].cols" [rowspan]="grids[1].rows"
-        [style.background-color]="grids[1].color">
-     <app-path-map></app-path-map>
-    </mat-grid-tile>
-</mat-grid-list>
-<button (click)="goBack()">go home</button>
+<div>
+    <mat-grid-list [cols]="colsAmount" rowHeight="fit" style="height: 1000px">
+        <mat-grid-tile class="aside-grid" [colspan]="grids[0].cols" [rowspan]="grids[0].rows"
+            [style.background-color]="grids[0].color">
+            <app-path-details [paths]="paths"></app-path-details>
+        </mat-grid-tile>
+
+        <mat-grid-tile class="main-grid" [colspan]="grids[1].cols" [rowspan]="grids[1].rows"
+            [style.background-color]="grids[1].color">
+            <app-path-map></app-path-map>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

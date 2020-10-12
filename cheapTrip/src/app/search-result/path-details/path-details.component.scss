@@ -9,12 +9,8 @@
   padding: 0;
 }
 
-p span.type {
-  color: $base-blue;
-}
 p span.points {
   font-style: oblique;
-  font-weight: bold;
 }
 p span.points:after {
   content: " -> ";
@@ -27,8 +23,8 @@ p span.points:last-child:after {
 @media screen and (max-width: 650px) {
   section {
     width: 100%;
-    background-color: rgba(42, 218, 182, 0.2);
     height: auto;
+    margin-top: 0.2rem;
     mat-accordion {
       width: 100%;
       height: inherit;
@@ -40,26 +36,19 @@ p span.points:last-child:after {
         .mat-expansion-panel-header-description {
           flex-basis: 70%;
         }
-        div.details{
-          padding: 1rem 0;
-        border-top: 5px solid $base-light;
-          p{
-             display: flex;
-             span.spacer {
-               flex: 1 1 auto;
-             }
-             span:last-child{
-               color: $accent-dark;
-               font-weight: bold;
-             }
+        div.details {
+          border-top: 5px solid $base-light;
+          width: 95%;
+          p {
+            display: flex;
 
+            span.spacer {
+              flex: 1 1 auto;
+            }
           }
-         
         }
         mat-expansion-panel-header {
-          //  align-items: stretch !important;
           height: auto !important;
-          //   width: 100%;
           mat-panel-title {
             div.icons {
               display: flex;
@@ -69,7 +58,7 @@ p span.points:last-child:after {
               align-items: center;
               border-right: 1px solid $base-light;
               span {
-                padding: 0.5rem 1rem;
+                padding: 0.1rem 1rem;
                 color: $base-dark;
                 span.material-icons {
                   color: $base-dark;
@@ -80,9 +69,13 @@ p span.points:last-child:after {
           mat-panel-description {
             div.description {
               p:first-child {
+                padding: 0.5rem 0;
                 color: $base-dark;
+                font-size: 0.9rem;
+                margin: 0;
               }
               p.time {
+                margin-top: 1rem;
                 display: flex;
                 align-items: flex-end;
 
@@ -93,8 +86,13 @@ p span.points:last-child:after {
             }
           }
         }
+        div.details {
+          p:first-child {
+            text-align: right;
+          }
+        }
       }
     }
-    
   }
 }
+
