@@ -18,7 +18,7 @@ const routes: Routes = [
           import('../search-result/search-result.module').then(
             (m) => m.SearchResultModule
           ),
-         
+
       },
       {path: 'noPage', component: NoPageComponent},
      // {path: 'myPath1', component: SearchResultComponent}

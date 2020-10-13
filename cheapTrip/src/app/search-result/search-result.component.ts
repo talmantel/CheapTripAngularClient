@@ -46,7 +46,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   paths: IPath[];
   getPathsSubscription: Subscription;
 
-  //for UIw
+  // for UIw
   grids: IGrid[];
   colsAmount = 7;
 
@@ -83,7 +83,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.getPathsSubscription.unsubscribe;
+    this.getPathsSubscription.unsubscribe();
   }
 
   private getGridsSize(obs: BreakpointObserver): IGrid[] {
@@ -106,5 +106,5 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     return sizeTab;
   }
 
-  
+
 }

@@ -93,7 +93,7 @@ export class TripDirectionEffects {
       return this.http.get<IPathPoint[]>(URL).pipe(
         map((res) => {
           const newAction =
-            request.payload.type == '1'
+            request.payload.type === '1'
               ? new TripDirectionActions.SetStartPointAutocomplete(res)
               : new TripDirectionActions.SetEndPointAutocomplete(res);
           return newAction;
@@ -142,8 +142,8 @@ export class TripDirectionEffects {
   );
 
   private transformObject(obj: object): IPath[] {
-    let objArr: IPath[] = [];
-    for (let i in obj) {
+    const objArr: IPath[] = [];
+    for (const i in obj) {
       const transformedDetails = this.transformDetails(obj[i]);
       const testObj: IPath = {
         pathType: PATHMAP.get(i).type,
@@ -177,7 +177,7 @@ export class TripDirectionEffects {
 
   private transformTime(minutes: number): string {
     const days = Math.floor(minutes / 60 / 24);
-    const dayStr = days == 0 ? '' : days == 1 ? days + ' day' : days + ' days';
+    const dayStr = days === 0 ? '' : days === 1 ? days + ' day' : days + ' days';
     const hours = Math.floor(minutes / 60 - days * 24);
     /*  const hourStr =
       hours == 0 ? '' : hours == 1 ? hours + ' hour' : hours + ' hours'; */
@@ -192,14 +192,14 @@ export class TripDirectionEffects {
   private transformPrice(price: number): number {
     const euro = Math.floor(+price);
     const cent = Math.floor(+price - euro) * 10;
-    const euroStr = euro == 0 ? '' : euro + ' euro';
-    const centStr = cent == 0 ? '' : cent + ' cent';
+    const euroStr = euro === 0 ? '' : euro + ' euro';
+    const centStr = cent === 0 ? '' : cent + ' cent';
     // return euroStr + '' + centStr;
     return price;
   }
 
   private mapSanitazingDetaled(): Map<string, SafeHtml> {
-    let newSanitisedMap = new Map<string, SafeHtml>();
+    const newSanitisedMap = new Map<string, SafeHtml>();
     PATHMAPDETAILED.forEach((value, key, _map) => {
       newSanitisedMap.set(key, this.sanitizer.bypassSecurityTrustHtml(value));
     });
@@ -208,7 +208,7 @@ export class TripDirectionEffects {
 
   private getTransport(paths: IRout[]): SafeHtml[] {
     const sanitisedMap = this.mapSanitazingDetaled();
-    let result = [];
+    const result = [];
     paths.map((item) => {
       const smth = sanitisedMap.get(item.transportation_type);
       result.push(smth);
@@ -217,7 +217,7 @@ export class TripDirectionEffects {
     return result;
   }
 
-  private handleError(err: HttpErrorResponse) {
+  private handleError(err: HttpErrorResponse): void {
     let message = '';
     switch (err.status) {
       case 201:

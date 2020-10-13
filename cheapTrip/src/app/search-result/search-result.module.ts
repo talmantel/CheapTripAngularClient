@@ -10,9 +10,9 @@ import { SearchResultRoutingModule } from './search-result-routing.module';
 
 @NgModule({
   declarations: [
-    SearchResultComponent, 
-    PathDetailsComponent, 
-    CapitalFirstLetterPipe, 
+    SearchResultComponent,
+    PathDetailsComponent,
+    CapitalFirstLetterPipe,
     PathMapComponent],
   imports: [CommonModule, MaterialModule, SearchResultRoutingModule],
 })

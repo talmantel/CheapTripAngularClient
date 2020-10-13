@@ -55,15 +55,15 @@ export class TripDirectionComponent implements OnInit {
         this.points = [state.startPoint, state.endPoint];
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
-        this.mode = state.mode; //for form horisontal or vertical oriantation
+        this.mode = state.mode; // for form horisontal or vertical oriantation
       });
   }
 
-  onChangePoint(point: IPoint) {
+  onChangePoint(point: IPoint): void {
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
-  getRouts(points: IPoint) {
+  getRouts(points: IPoint): void {
     this.store.dispatch(new TripDirectionActions.SetStartPoint(points[0]));
     this.store.dispatch(new TripDirectionActions.SetEndPoint(points[1]));
 
@@ -74,15 +74,14 @@ export class TripDirectionComponent implements OnInit {
       toID: points[1].id,
     };
     this.router.navigate(['/search/myPath'], {
-      queryParams: queryParams,
+      queryParams,
     });
   }
 
 
 
-  cleanData(_event: boolean) {
+  cleanData(_event: boolean): void {
     this.store.dispatch(new TripDirectionActions.CleanData());
-    console.log('after clean and before routing');
     this.router.navigate(['/']);
   }
 }

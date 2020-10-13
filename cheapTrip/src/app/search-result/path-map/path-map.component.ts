@@ -7,6 +7,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class PathMapComponent {
   constructor() {
-   
   }
 }
+

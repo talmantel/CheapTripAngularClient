@@ -24,7 +24,7 @@ const initialState: ITripDirectionState = {
 export function tripDirectionReducer(
   state = initialState,
   action: TripDirectionActions.TripDirectionActions
-) {
+): ITripDirectionState {
   switch (action.type) {
     case TripDirectionActions.SET_START_POINT:
       return {
@@ -39,11 +39,11 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.SET_START_POINT_AUTOCOMPLETE:
-      let newStartAutocompleteList = []
-      if(action.payload.length == 0){
-        newStartAutocompleteList = [...state.startPointAutoComplete]
+      let newStartAutocompleteList = [];
+      if (action.payload.length === 0){
+        newStartAutocompleteList = [...state.startPointAutoComplete];
       } else {
-        newStartAutocompleteList = action.payload
+        newStartAutocompleteList = action.payload;
       }
       return {
         ...state,
@@ -51,11 +51,11 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.SET_END_POINT_AUTOCOMPLETE:
-      let newEndAutocompleteList = []
-      if(action.payload.length == 0){
-        newEndAutocompleteList = [...state.endPointAutoComplete]
+      let newEndAutocompleteList = [];
+      if (action.payload.length === 0){
+        newEndAutocompleteList = [...state.endPointAutoComplete];
       } else {
-        newEndAutocompleteList = action.payload
+        newEndAutocompleteList = action.payload;
       }
       return {
         ...state,

@@ -42,8 +42,8 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     this.subscripton = this.pointSubj.subscribe((points) => {
       if (
         this.directionForm &&
-        this.directionForm.get('startPointControl').value == '' &&
-        this.directionForm.get('endPointControl').value == ''
+        this.directionForm.get('startPointControl').value === '' &&
+        this.directionForm.get('endPointControl').value === ''
       ) {
         this.directionForm.setValue({
           startPointControl: points.from.name,
@@ -65,28 +65,28 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
       ]),
     });
   }
-  //autocompete is invoked
-  onInput(str: string, type: '1' | '2') {
-    const point: IPoint = { name: str, type: type };
+  // autocompete is invoked
+  onInput(str: string, type: '1' | '2'): void {
+    const point: IPoint = { name: str, type };
     this.changePoint.emit(point);
   }
 
-  changeDirection() {
+  changeDirection():void {
     [this.startPoint, this.endPoint] = [this.endPoint, this.startPoint];
-    this.directionForm.controls['endPointControl'].setValue(this.endPoint.name);
-    this.directionForm.controls['startPointControl'].setValue(
+    this.directionForm.controls.endPointControl.setValue(this.endPoint.name);
+    this.directionForm.controls.startPointControl.setValue(
       this.startPoint.name
     );
   }
 
-  onSubmit() {
+  onSubmit():void {
     this.selectedPoints.emit([
       { id: this.startPoint.id, name: this.startPoint.name },
       { id: this.endPoint.id, name: this.endPoint.name },
     ]);
   }
 
-  onOptionSelected(point: string, type: string) {
+  onOptionSelected(point: string, type: string): void {
     if (type == 'start') {
       this.startPoint = {
         name: point,
@@ -102,12 +102,12 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  cleanForm() {
+  cleanForm(): void {
     this.cleanData.emit(true);
   }
 
 
-  onFocusOut(event: any) {
+  onFocusOut(event: any): void{
     if (event.target.attributes.formControlName.value == 'startPointControl') {
       this.startPoint = this.startPointAutoComplete[0];
       this.directionForm.patchValue({

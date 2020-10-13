@@ -5,16 +5,16 @@ export interface ISearchResultState {
 }
 const initialState: ISearchResultState = {
 
-  someVal: "some attribute"
+  someVal: 'some attribute'
 };
 
 export function searchResultReducer(
   state = initialState,
   action: SearchResultActions.SearchResultActions
-) {
+): ISearchResultState {
   switch (action.type) {
     case SearchResultActions.SOME_ACTION:
-      //do smth
+      // do smth
       return {
         ...state,
       };

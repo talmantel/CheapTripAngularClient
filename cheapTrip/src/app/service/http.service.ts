@@ -79,7 +79,7 @@ export interface IPath {
   pathType: { type: string; icon: SafeHtml[] };
   details: IDetails;
 }
- //url = http://3.23.159.104:3333
+ // url = http://3.23.159.104:3333
 @Injectable({
   providedIn: 'root',
 })
@@ -121,8 +121,8 @@ export class HttpService {
   }
 
   private transformObject(obj: object): Observable<IPath[]> {
-    let objArr: IPath[] = [];
-    for (let i in obj) {
+    const objArr: IPath[] = [];
+    for (const i in obj) {
       const transformedDetails = this.transformDetails(obj[i]);
       const testObj = {
         pathType: this.mapSanitazing().get(i),
@@ -172,7 +172,7 @@ export class HttpService {
   }
 
   private mapSanitazing(): Map<string, { type: string; icon: SafeHtml[] }> {
-    let newMap = new Map<string, { type: string; icon: SafeHtml[] }>();
+    const newMap = new Map<string, { type: string; icon: SafeHtml[] }>();
     PATHMAP.forEach((value, key, map) => {
       const sanitizedArr = value.icon.map((icon) =>
         this.sanitizer.bypassSecurityTrustHtml(icon)

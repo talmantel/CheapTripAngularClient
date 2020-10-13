@@ -4,10 +4,8 @@ import { SearchResultComponent } from './search-result.component';
 
 const routes: Routes = [
   {
-    path: "",
-    component: SearchResultComponent, 
+    path: '', component: SearchResultComponent,
   },
-  
 ];
 
 @NgModule({
@@ -15,3 +13,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class SearchResultRoutingModule {}
+

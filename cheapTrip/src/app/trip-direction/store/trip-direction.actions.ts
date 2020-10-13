@@ -65,7 +65,7 @@ export class GetRouts implements Action {
 export class SetRouts implements Action {
   readonly type = SET_ROUTS;
   constructor(
-    public payload: { paths: IPath[]; endPoints: { from: IPathPoint; to:IPathPoint} }
+    public payload: { paths: IPath[]; endPoints: { from: IPathPoint; to: IPathPoint} }
   ) {}
 }
 

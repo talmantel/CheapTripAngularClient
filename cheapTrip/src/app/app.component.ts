@@ -32,7 +32,7 @@ export class AppComponent {
              Please, use your mobile device.
              Thanks.`
           );
-          this.router.navigate(['pageNotFound'])
+          this.router.navigate(['pageNotFound']);
         }
       });
   }
