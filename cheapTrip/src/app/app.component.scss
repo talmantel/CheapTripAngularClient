@@ -6,3 +6,9 @@
     font-size: 1.3rem;
   }
 }
+ @include laptop{
+   body{
+      background-color: dodgerblue;
+   }
+  
+ }

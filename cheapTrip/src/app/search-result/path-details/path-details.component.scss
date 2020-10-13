@@ -36,8 +36,11 @@ section {
         flex-basis: 70%;
       }
       div.details {
-        border-top: 5px solid $base-light;
+        border-top: 1px solid $base-light;
         width: 95%;
+        p:first-child {
+          text-align: right;
+        }
         p {
           display: flex;
           span.spacer {
@@ -84,11 +87,7 @@ section {
           }
         }
       }
-      div.details {
-        p:first-child {
-          text-align: right;
-        }
-      }
+     
     }
   }
 }
@@ -104,6 +103,7 @@ section {
           //   flex-basis: 70%;
         }
         div.details {
+     
           p {
             span.spacer {
               // flex: 1 1 auto;

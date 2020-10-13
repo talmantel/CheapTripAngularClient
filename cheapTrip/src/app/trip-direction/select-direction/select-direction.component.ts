@@ -55,17 +55,17 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     this.directionForm = new FormGroup({
       startPointControl: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z ]*$'),
-        Validators.maxLength(30),
+        Validators.pattern('^[a-zA-Z0-9\- ]*$'),
+      Validators.maxLength(30),
       ]),
       endPointControl: new FormControl('', [
         Validators.required,
-        Validators.maxLength(30),
-        Validators.pattern('^[a-zA-Z ]*$'),
+       Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z0-9\- ]*$'),
       ]),
     });
   }
-  // autocompete is invoked
+  // autocomplete is invoked
   onInput(str: string, type: '1' | '2'): void {
     const point: IPoint = { name: str, type };
     this.changePoint.emit(point);
@@ -87,19 +87,25 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   }
 
   onOptionSelected(point: string, type: string): void {
+    console.log( 'on selectpoint type', type);
+    console.log('on select point', point);
     if (type == 'start') {
       this.startPoint = {
         name: point,
         id: this.startPointAutoComplete.filter((item) => item.name == point)[0]
           .id,
       };
+      console.log('start point', this.startPoint);
     } else {
       this.endPoint = {
         name: point,
         id: this.endPointAutoComplete.filter((item) => item.name == point)[0]
           .id,
       };
+
+      console.log('end point', this.endPoint);
     }
+
   }
 
   cleanForm(): void {
@@ -108,13 +114,17 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
 
 
   onFocusOut(event: any): void{
-    if (event.target.attributes.formControlName.value == 'startPointControl') {
+    if (event.target.attributes.formControlName.value === 'startPointControl' && !this.startPoint) {
+
       this.startPoint = this.startPointAutoComplete[0];
+
       this.directionForm.patchValue({
         startPointControl: this.startPoint.name,
       });
-    } else {
+    } else if (event.target.attributes.formControlName.value === 'endPointControl' && !this.endPoint){
+
       this.endPoint = this.endPointAutoComplete[0];
+      console.log('this end point on focus out,',  this.endPoint );
       this.directionForm.patchValue({
         endPointControl: this.endPoint.name,
       });

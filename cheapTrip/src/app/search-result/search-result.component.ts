@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 import * as fromApp from '../store/app.reducer';
 import { IPath } from '../trip-direction/trip-direction.model';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+
 
 export interface IGrid {
   color: string;
@@ -36,7 +36,7 @@ const viewportSizes = [
   Breakpoints.TabletLandscape,
   Breakpoints.TabletPortrait,
 ];
-
+const ROW_HEIGHT = 250;
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
@@ -49,6 +49,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   // for UIw
   grids: IGrid[];
   colsAmount = 7;
+  rowHeight: string;
 
   matcher: MediaQueryList;
 
@@ -79,6 +80,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       .select('directions')
       .subscribe((state) => {
         this.paths = state.paths;
+        this.rowHeight = state.pathsAmount * ROW_HEIGHT + 'px';
       });
   }
 
@@ -90,8 +92,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     let sizeTab: IGrid[] = [];
     if (obs.isMatched(Breakpoints.XSmall) || obs.isMatched(Breakpoints.Small)) {
       sizeTab = [
-        { color: 'whitesmoke', cols: 7, rows: 2 },
-        { color: 'blue', cols: 0, rows: 2 },
+        { color: 'whitesmoke', cols: 7, rows: 1 },
+        { color: 'blue', cols: 0, rows: 0 },
       ];
     } else if (
       obs.isMatched(Breakpoints.Medium) ||
@@ -99,12 +101,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       obs.isMatched(Breakpoints.XLarge)
     ) {
       sizeTab = [
-        { color: 'grey', cols: 2, rows: 2 },
-        { color: 'whitesmoke', cols: 5, rows: 2 },
+        { color: 'grey', cols: 2, rows: 1 },
+        { color: 'whitesmoke', cols: 5, rows: 1 },
       ];
     }
     return sizeTab;
   }
-
-
 }

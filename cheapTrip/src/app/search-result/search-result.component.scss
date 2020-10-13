@@ -1,6 +1,6 @@
-div {
-  width: auto;
-  background-color: darkturquoise;
+:host{
+
+}
   mat-grid-list {
     width: 98%;
     margin: auto;
@@ -9,4 +9,4 @@ div {
       align-items: flex-start;
     }
   }
-}
+

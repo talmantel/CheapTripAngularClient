@@ -234,4 +234,6 @@ export class TripDirectionEffects {
     const result = new Set(transformedArr.reduce((a, b) => a.concat(b), []));
     return result;
   }
+
+  
 }

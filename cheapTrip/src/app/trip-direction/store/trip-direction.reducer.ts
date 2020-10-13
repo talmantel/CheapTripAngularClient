@@ -9,6 +9,7 @@ export interface ITripDirectionState {
   paths: IPath[];
   mode: Modes;
   errorMessage: string;
+  pathsAmount: number;
 }
 
 const initialState: ITripDirectionState = {
@@ -19,6 +20,7 @@ const initialState: ITripDirectionState = {
   paths: [],
   mode: Modes.SEARCH,
   errorMessage: '',
+  pathsAmount: 0,
 };
 
 export function tripDirectionReducer(
@@ -40,7 +42,7 @@ export function tripDirectionReducer(
 
     case TripDirectionActions.SET_START_POINT_AUTOCOMPLETE:
       let newStartAutocompleteList = [];
-      if (action.payload.length === 0){
+      if (action.payload.length === 0) {
         newStartAutocompleteList = [...state.startPointAutoComplete];
       } else {
         newStartAutocompleteList = action.payload;
@@ -52,7 +54,7 @@ export function tripDirectionReducer(
 
     case TripDirectionActions.SET_END_POINT_AUTOCOMPLETE:
       let newEndAutocompleteList = [];
-      if (action.payload.length === 0){
+      if (action.payload.length === 0) {
         newEndAutocompleteList = [...state.endPointAutoComplete];
       } else {
         newEndAutocompleteList = action.payload;
@@ -82,13 +84,21 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.SET_ROUTS:
-
+      const paths = action.payload.paths.length;
+      console.log('paths', action.payload.paths);
+      const length1 = action.payload.paths.reduce((sum, current) => {
+        console.log('current', current);
+        return sum + current.details.direct_paths.length;
+      }, 0);
+      const res = length1+ paths;
+      console.log(' reducer paths amount', res);
       return {
         ...state,
         paths: [...action.payload.paths],
         startPoint: action.payload.endPoints.from,
         endPoint: action.payload.endPoints.to,
         mode: Modes.DELIVERY,
+        pathsAmount: res
       };
 
     case TripDirectionActions.AUTOCOMPLETE_FAIL:

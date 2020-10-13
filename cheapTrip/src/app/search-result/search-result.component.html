@@ -1,5 +1,5 @@
-<div>
-    <mat-grid-list [cols]="colsAmount" rowHeight="fit" style="height: 1000px">
+
+    <mat-grid-list [cols]="colsAmount" rowHeight="{{rowHeight}}" >
         <mat-grid-tile class="aside-grid" [colspan]="grids[0].cols" [rowspan]="grids[0].rows"
             [style.background-color]="grids[0].color">
             <app-path-details [paths]="paths"></app-path-details>
@@ -10,4 +10,3 @@
             <app-path-map></app-path-map>
         </mat-grid-tile>
     </mat-grid-list>
-</div>

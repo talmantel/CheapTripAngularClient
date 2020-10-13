@@ -30,9 +30,10 @@ export class AppComponent {
           alert(
             `No desktop version is available.
              Please, use your mobile device.
+            
              Thanks.`
           );
-          this.router.navigate(['pageNotFound']);
+          this.router.navigate(['pageNotFound']); 
         }
       });
   }

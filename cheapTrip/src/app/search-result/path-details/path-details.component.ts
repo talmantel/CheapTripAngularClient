@@ -17,6 +17,6 @@ price: number;
   constructor() {}
 
   ngOnInit(): void {
-    this.price = 46;
+
   }
 }
