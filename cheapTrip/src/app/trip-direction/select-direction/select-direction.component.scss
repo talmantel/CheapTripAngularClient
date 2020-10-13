@@ -9,6 +9,7 @@ div.mainContainer {
   width: 100%;
   margin: auto;
   height: auto;
+  padding-bottom: 0.5rem;
   form {
     width: 100%;
     margin: auto;
@@ -29,7 +30,7 @@ div.mainContainer {
         border-left: 3px solid $base-dark;
         padding: 5px;
         input {
-          @include placeholder(red, 1rem, normal, cursive);
+          @include placeholder($base-dark, 1rem, normal, cursive);
         }
       }
       span {
@@ -37,21 +38,21 @@ div.mainContainer {
       }
     }
     div.actions {
-      margin-top: 1rem;
+      margin: 0.5rem auto;
       button {
         margin: 0 2rem;
+        padding: 0 1rem;
       }
     }
   }
   p {
     text-align: center;
     position: relative;
-    font-family: "Lobster", cursive;
+    font-family: "Dosis", sans-serif;
     color: $base-dark;
   }
 }
 
-/* @media screen and (max-width: 641px) and (orientation: landscape) {
   div.mainContainer {
     p {
       font-size: 1.5rem;
@@ -71,8 +72,8 @@ div.mainContainer {
       }
     }
   }
-} */
-@media screen and (max-width: 640px) {
+
+@include phones {
   div.searchMode {
     p {
       box-sizing: border-box;
@@ -103,26 +104,31 @@ div.mainContainer {
   }
 
   div.deliveryMode {
+    border-bottom: 5px solid grey;
     p {
       display: none;
     }
     form {
-    //  box-sizing: border-box;
       flex-direction: column;
-
+      div.actions {
+        margin: 0;
+ 
+      }
       div.formInfo {
         width: 98%;
-        margin: auto;
+        margin: 0.5rem auto 0;
         position: relative;
+  
         mat-form-field {
           width: 170px !important;
           position: relative;
           border-left: none;
         }
         span {
+          font-size: 0.9rem;
           position: absolute;
           top: 20px;
-          left: 180px;
+          left: calc(50vw - 0.9rem);
           z-index: 10;
           color: $base-dark;
         }
@@ -131,57 +137,68 @@ div.mainContainer {
   }
 }
 
-@media screen and (min-width: 641px) {
-  div.mainContainer,
+
+
+@include smallphones {
   div.searchMode {
     p {
       box-sizing: border-box;
-      width: 70%;
+      width: 95%;
       margin: 2rem auto;
       text-align: center;
-      font-size: 2rem;
+      font-size: 1.5rem;
       line-height: 150%;
     }
-
     form {
       width: 100%;
-    
       div.formInfo {
         height: auto;
-        display: flex;
-        flex-direction: row;
-        width: 70%;
-        margin: auto;
-        box-sizing: border-box;
+        flex-direction: column;
         mat-form-field {
-          background-color: rgb(219, 224, 223, 0.2);
-          margin: 0 auto;
-          padding: 0.5rem;
-          border-radius: 5px;
-          box-sizing: border-box;
           width: 95%;
           margin: auto;
         }
         span {
-          width: 3rem;
+          width: 1.5rem;
           align-self: center;
           justify-self: baseline;
           text-align: center;
+          transform: rotate(90deg);
         }
-      }
-      div.actions {
-
-       
       }
     }
   }
 
   div.deliveryMode {
+    border-bottom: 5px solid grey;
     p {
       display: none;
     }
     form {
-      margin: 2rem;
+      flex-direction: column;
+      div.actions {
+        margin: 0;
+      }
+      div.formInfo {
+        width: 98%;
+        margin: 0.5rem auto 0;
+        position: relative;
+  
+        mat-form-field {
+          width: 150px !important;
+          position: relative;
+          border-left: none;
+        }
+        span {
+          font-size: 0.9rem;
+          position: absolute;
+          top: 20px;
+          left: calc(50vw - 1rem);
+          z-index: 10;
+          color: $base-dark;
+         
+        }
+      }
     }
   }
 }

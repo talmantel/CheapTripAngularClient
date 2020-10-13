@@ -1,14 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
-import { IPathPoint, IPoint, IPoints, Modes } from '../trip-direction.model';
+import { Subject, Subscription } from 'rxjs';
+import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
 
 @Component({
   selector: 'app-select-direction',
   templateUrl: './select-direction.component.html',
   styleUrls: ['./select-direction.component.scss'],
 })
-export class SelectDirectionComponent implements OnInit {
+export class SelectDirectionComponent implements OnInit, OnDestroy {
   @Input() points: [IPathPoint, IPathPoint];
   @Input() startPointAutoComplete: IPathPoint[];
   @Input() endPointAutoComplete: IPathPoint[];
@@ -23,60 +30,104 @@ export class SelectDirectionComponent implements OnInit {
   directionForm: FormGroup;
   modes = Modes;
 
-  constructor() {}
+  @Input() pointSubj: Subject<{ from: IPathPoint; to: IPathPoint }>;
+  subscripton: Subscription;
 
-  ngOnInit(): void {
-    [this.startPoint, this.endPoint] = [...this.points];
-    this.directionForm = new FormGroup({
-      startPointControl: new FormControl(
-        this.startPoint.name,
-        Validators.required
-      ),
-      endPointControl: new FormControl(this.endPoint.name, Validators.required),
-    });
+  constructor() {}
+  ngOnDestroy(): void {
+    this.subscripton.unsubscribe();
   }
 
-  onChangePoint(str: string, type: any) {
-    const point: IPoint = { name: str, type: type };
+  ngOnInit(): void {
+    this.subscripton = this.pointSubj.subscribe((points) => {
+      if (
+        this.directionForm &&
+        this.directionForm.get('startPointControl').value === '' &&
+        this.directionForm.get('endPointControl').value === ''
+      ) {
+        this.directionForm.setValue({
+          startPointControl: points.from.name,
+          endPointControl: points.to.name,
+        });
+      }
+    });
+
+    this.directionForm = new FormGroup({
+      startPointControl: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9\- ]*$'),
+      Validators.maxLength(30),
+      ]),
+      endPointControl: new FormControl('', [
+        Validators.required,
+       Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z0-9\- ]*$'),
+      ]),
+    });
+  }
+  // autocomplete is invoked
+  onInput(str: string, type: '1' | '2'): void {
+    const point: IPoint = { name: str, type };
     this.changePoint.emit(point);
   }
 
-  changeDirection() {
+  changeDirection():void {
     [this.startPoint, this.endPoint] = [this.endPoint, this.startPoint];
-    this.directionForm.controls['endPointControl'].setValue(this.endPoint.name);
-    this.directionForm.controls['startPointControl'].setValue(
+    this.directionForm.controls.endPointControl.setValue(this.endPoint.name);
+    this.directionForm.controls.startPointControl.setValue(
       this.startPoint.name
     );
   }
 
-  onSubmit() {
+  onSubmit():void {
     this.selectedPoints.emit([
       { id: this.startPoint.id, name: this.startPoint.name },
       { id: this.endPoint.id, name: this.endPoint.name },
     ]);
   }
 
-  selectPoint(point: string, type: string) {
+  onOptionSelected(point: string, type: string): void {
+    console.log( 'on selectpoint type', type);
+    console.log('on select point', point);
     if (type == 'start') {
       this.startPoint = {
         name: point,
         id: this.startPointAutoComplete.filter((item) => item.name == point)[0]
           .id,
       };
+      console.log('start point', this.startPoint);
     } else {
       this.endPoint = {
         name: point,
         id: this.endPointAutoComplete.filter((item) => item.name == point)[0]
           .id,
       };
+
+      console.log('end point', this.endPoint);
     }
+
   }
 
-  cleanForm() {
+  cleanForm(): void {
     this.cleanData.emit(true);
   }
 
-  myMethod(any: any) {
-    console.log('jhjhj', any);
+
+  onFocusOut(event: any): void{
+    if (event.target.attributes.formControlName.value === 'startPointControl' && !this.startPoint) {
+
+      this.startPoint = this.startPointAutoComplete[0];
+
+      this.directionForm.patchValue({
+        startPointControl: this.startPoint.name,
+      });
+    } else if (event.target.attributes.formControlName.value === 'endPointControl' && !this.endPoint){
+
+      this.endPoint = this.endPointAutoComplete[0];
+      console.log('this end point on focus out,',  this.endPoint );
+      this.directionForm.patchValue({
+        endPointControl: this.endPoint.name,
+      });
+    }
   }
 }

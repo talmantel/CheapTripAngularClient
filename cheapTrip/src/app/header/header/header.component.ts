@@ -12,17 +12,13 @@ import { Modes } from 'src/app/trip-direction/trip-direction.model';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
- 
-  constructor(private route: Router,   private store: Store<fromApp.AppState>) {}
+  constructor(private route: Router, private store: Store<fromApp.AppState>) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
+  toHomePage(): void {
+    this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
+    this.store.dispatch(new TripDirectionActions.CleanData());
+    this.route.navigate(['/']);
   }
-
-   toHomePage(){
-     this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH) );
-     this.store.dispatch(new TripDirectionActions.CleanData() );
-     this.route.navigate(["/"]);
-
-   }
 }

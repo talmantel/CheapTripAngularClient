@@ -19,12 +19,12 @@ export class SearchResultGuard implements CanActivate {
   ): Promise<boolean> | Observable<boolean> | boolean {
   return  this.store.select('directions').pipe(
       map((res) => {
-          console.log("guard",res);
-          console.log("guard",!res.startPoint);
-          console.log("guard",!!res.startPoint);
-        return true;
+          console.log('guard', res);
+          console.log('guard', !res.startPoint);
+          console.log('guard', !!res.startPoint);
+          return true;
       })
     );
-   
+
   }
 }

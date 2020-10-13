@@ -1,11 +1,12 @@
-mat-grid-list {
-  width: 100%;
-  margin:2rem auto;
-  height: auto;
-  overflow: scroll;
-  background-color: firebrick;
-  
-  .aside-grid >::ng-deep .mat-figure{
-    align-items: flex-start;
+:host{
+
 }
-}
+  mat-grid-list {
+    width: 98%;
+    margin: auto;
+
+    .aside-grid > ::ng-deep .mat-figure {
+      align-items: flex-start;
+    }
+  }
+

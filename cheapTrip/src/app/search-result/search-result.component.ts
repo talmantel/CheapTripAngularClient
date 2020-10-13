@@ -12,12 +12,31 @@ import * as fromApp from '../store/app.reducer';
 import { IPath } from '../trip-direction/trip-direction.model';
 import { Location } from '@angular/common';
 
+
 export interface IGrid {
   color: string;
   cols: number;
   rows: number;
 }
 
+// reference information: available resolutions
+const viewportSizes = [
+  Breakpoints.XSmall,
+  Breakpoints.Small,
+  Breakpoints.Medium,
+  Breakpoints.Large,
+  Breakpoints.XLarge,
+  Breakpoints.Web,
+  Breakpoints.WebLandscape,
+  Breakpoints.WebPortrait,
+  Breakpoints.Handset,
+  Breakpoints.HandsetLandscape,
+  Breakpoints.HandsetPortrait,
+  Breakpoints.Tablet,
+  Breakpoints.TabletLandscape,
+  Breakpoints.TabletPortrait,
+];
+const ROW_HEIGHT = 250;
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
@@ -27,29 +46,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   paths: IPath[];
   getPathsSubscription: Subscription;
 
-  //for UIw
+  // for UIw
   grids: IGrid[];
   colsAmount = 7;
+  rowHeight: string;
 
   matcher: MediaQueryList;
-
-  // reference information: available resolutions
-  viewportSizes = [
-    Breakpoints.XSmall,
-    Breakpoints.Small,
-    Breakpoints.Medium,
-    Breakpoints.Large,
-    Breakpoints.XLarge,
-    Breakpoints.Web,
-    Breakpoints.WebLandscape,
-    Breakpoints.WebPortrait,
-    Breakpoints.Handset,
-    Breakpoints.HandsetLandscape,
-    Breakpoints.HandsetPortrait,
-    Breakpoints.Tablet,
-    Breakpoints.TabletLandscape,
-    Breakpoints.TabletPortrait,
-  ];
 
   constructor(
     breakpointObserver: BreakpointObserver,
@@ -58,8 +60,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   ) {
     breakpointObserver
       .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
-      .subscribe((state: BreakpointState) => {
-      });
+      .subscribe((state: BreakpointState) => {});
 
     breakpointObserver
       .observe([
@@ -75,24 +76,24 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('search result component on init');
     this.getPathsSubscription = this.store
       .select('directions')
       .subscribe((state) => {
         this.paths = state.paths;
+        this.rowHeight = state.pathsAmount * ROW_HEIGHT + 'px';
       });
   }
 
   ngOnDestroy(): void {
-    this.getPathsSubscription.unsubscribe;
+    this.getPathsSubscription.unsubscribe();
   }
 
   private getGridsSize(obs: BreakpointObserver): IGrid[] {
     let sizeTab: IGrid[] = [];
     if (obs.isMatched(Breakpoints.XSmall) || obs.isMatched(Breakpoints.Small)) {
       sizeTab = [
-        { color: 'grey', cols: 7, rows: 2 },
-        { color: 'blue', cols: 0, rows: 2 },
+        { color: 'whitesmoke', cols: 7, rows: 1 },
+        { color: 'blue', cols: 0, rows: 0 },
       ];
     } else if (
       obs.isMatched(Breakpoints.Medium) ||
@@ -100,17 +101,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       obs.isMatched(Breakpoints.XLarge)
     ) {
       sizeTab = [
-        { color: 'grey', cols: 2, rows: 2 },
-        { color: 'whitesmoke', cols: 5, rows: 2},
+        { color: 'grey', cols: 2, rows: 1 },
+        { color: 'whitesmoke', cols: 5, rows: 1 },
       ];
     }
     return sizeTab;
-  }
-
-  goBack() {
-    // window.history.back();
-    this.location.back();
-
-    console.log( 'goBack()...' );
   }
 }

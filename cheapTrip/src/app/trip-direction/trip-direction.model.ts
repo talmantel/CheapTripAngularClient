@@ -21,7 +21,7 @@ export interface IPoint {
 }
 
 export interface IRout {
-  euro_price: string;
+  euro_price: number;
   duration_minutes: string;
   transportation_type: string;
   from: string;
@@ -29,7 +29,7 @@ export interface IRout {
 }
 
 export interface IDetails {
-  euro_price: string;
+  euro_price: number;
   duration_minutes: string;
   direct_paths: IRout[];
   points: Set<string>;

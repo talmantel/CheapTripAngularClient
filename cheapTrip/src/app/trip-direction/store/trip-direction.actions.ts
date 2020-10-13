@@ -1,10 +1,16 @@
 import { Action } from '@ngrx/store/src';
-import { IPath, IPoint, IPoints, Modes } from '../trip-direction.model';
+import {
+  IPath,
+  IPathPoint,
+  IPoint,
+  IPoints,
+  Modes,
+} from '../trip-direction.model';
 
 export const SET_START_POINT = '[TripDirection] Set startPoint';
-export const SET_END_POINT = '[TripDirection] Set endartPoint';
+export const SET_END_POINT = '[TripDirection] Set endPoint';
 export const GET_START_POINT = '[TripDirection] Get startPoint';
-export const GET_END_POINT = '[TripDirection] Get endartPoint';
+export const GET_END_POINT = '[TripDirection] Get endPoint';
 export const GET_AUTOCOMPLETE = '[TripDirection] Get Autocomplete';
 export const SET_START_POINT_AUTOCOMPLETE =
   '[TripDirection] Set startPointAutocomplete';
@@ -18,12 +24,12 @@ export const SET_MODE = '[TripDirection] Set Mode';
 
 export class SetStartPoint implements Action {
   readonly type = SET_START_POINT;
-  constructor(public payload: string) {}
+  constructor(public payload: IPathPoint) {}
 }
 
 export class SetEndPoint implements Action {
   readonly type = SET_END_POINT;
-  constructor(public payload: string) {}
+  constructor(public payload: IPathPoint) {}
 }
 
 export class GetStartPoint implements Action {
@@ -43,23 +49,23 @@ export class GetAutocomplete implements Action {
 
 export class SetStartPointAutocomplete implements Action {
   readonly type = SET_START_POINT_AUTOCOMPLETE;
-  constructor(public payload: Array<{ id: number; name: string }>) {}
+  constructor(public payload: IPathPoint[]) {}
 }
 
 export class SetEndPointAutocomplete implements Action {
   readonly type = SET_END_POINT_AUTOCOMPLETE;
-  constructor(public payload: Array<{ id: number; name: string }>) {}
+  constructor(public payload: IPathPoint[]) {}
 }
 
 export class GetRouts implements Action {
   readonly type = GET_ROUTS;
-  constructor(public payload: [number, number]) {}
+  constructor(public payload: IPathPoint[]) {}
 }
 
 export class SetRouts implements Action {
   readonly type = SET_ROUTS;
   constructor(
-    public payload: { paths: IPath[]; endPoints: { from: string; to: string } }
+    public payload: { paths: IPath[]; endPoints: { from: IPathPoint; to: IPathPoint} }
   ) {}
 }
 
@@ -78,15 +84,15 @@ export class SetMode implements Action {
 }
 
 export type TripDirectionActions =
+  | SetStartPoint
+  | SetEndPoint
   | GetEndPoint
   | GetStartPoint
   | GetAutocomplete
-  | SetEndPoint
   | SetEndPointAutocomplete
-  | SetStartPoint
   | SetStartPointAutocomplete
   | GetRouts
   | SetRouts
   | AutoCompleteFail
-  | CleanData
-  | SetMode;
+  | SetMode
+  | CleanData;
