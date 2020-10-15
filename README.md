@@ -19,7 +19,7 @@ Make sure to add appropriate labels including:
 <li>version: {version number} (example: "version: d0.0.1")</li>
 </ul>
 
-Assign Roman (rmant7) or any developer if you know who is reponsible for resolving the issue<br>
+Assign Olga (OlgaZaleskovskaya) or any developer if you know who is reponsible for resolving the issue<br>
 
 
 
