@@ -7,20 +7,29 @@
 
 div.mainContainer {
   width: 100%;
-  margin: auto;
+  margin: 0 auto;
   height: auto;
   padding-bottom: 0.5rem;
+  position: relative;
+  p {
+    width: 95%;
+    margin: 1rem auto;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 150%;
+    font-family: "Dosis", sans-serif;
+    color: $base-dark;
+  }
   form {
     width: 100%;
     margin: auto;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
     div.formInfo {
       width: 100%;
       margin: auto;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       align-items: baseline;
       mat-form-field {
@@ -45,36 +54,11 @@ div.mainContainer {
       }
     }
   }
-  p {
-    text-align: center;
-    position: relative;
-    font-family: "Dosis", sans-serif;
-    color: $base-dark;
-  }
 }
 
-  div.mainContainer {
-    p {
-      font-size: 1.5rem;
-      line-height: 150%;
-      margin-bottom: 2rem;
-    }
-    form {
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      box-sizing: border-box;
-      div.actions {
-        button {
-          margin: 1rem;
-        }
-      }
-    }
-  }
-
-@include phones {
+@media screen and (max-width: 480px) {
   div.searchMode {
+    margin: 0 auto;
     p {
       box-sizing: border-box;
       width: 95%;
@@ -85,7 +69,9 @@ div.mainContainer {
     }
     form {
       width: 100%;
+      flex-direction: column;
       div.formInfo {
+        flex-direction: column;
         height: auto;
         flex-direction: column;
         mat-form-field {
@@ -112,13 +98,12 @@ div.mainContainer {
       flex-direction: column;
       div.actions {
         margin: 0;
- 
       }
       div.formInfo {
         width: 98%;
         margin: 0.5rem auto 0;
         position: relative;
-  
+
         mat-form-field {
           width: 170px !important;
           position: relative;
@@ -137,20 +122,20 @@ div.mainContainer {
   }
 }
 
-
-
 @include smallphones {
   div.searchMode {
     p {
       box-sizing: border-box;
       width: 95%;
-      margin: 2rem auto;
+      margin: 0.5rem auto;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       line-height: 150%;
     }
     form {
       width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
       div.formInfo {
         height: auto;
         flex-direction: column;
@@ -165,6 +150,10 @@ div.mainContainer {
           text-align: center;
           transform: rotate(90deg);
         }
+      }
+
+      div.actions {
+        margin-top: 0;
       }
     }
   }
@@ -183,7 +172,7 @@ div.mainContainer {
         width: 98%;
         margin: 0.5rem auto 0;
         position: relative;
-  
+
         mat-form-field {
           width: 150px !important;
           position: relative;
@@ -196,7 +185,6 @@ div.mainContainer {
           left: calc(50vw - 1rem);
           z-index: 10;
           color: $base-dark;
-         
         }
       }
     }

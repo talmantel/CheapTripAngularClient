@@ -99,7 +99,7 @@ export class TripDirectionEffects {
           return newAction;
         }),
         catchError((error) => {
-          const errorMessage = 'An unknown error occured!';
+          this.handleError(error);
           return of(new TripDirectionActions.AutoCompleteFail(error));
         })
       );
@@ -131,9 +131,9 @@ export class TripDirectionEffects {
               endPoints: endPoints,
             });
           }),
-          catchError((error) => {
+          catchError(error => {
             const errorMessage = 'An unknown error occured!';
-            console.log('error', error);
+            this.handleError(error);
             return of(new TripDirectionActions.AutoCompleteFail(error));
           })
         );
