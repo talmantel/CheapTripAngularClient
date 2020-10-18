@@ -22,9 +22,7 @@ import {
 } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.reducer';
+
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -48,27 +46,25 @@ enum Icons {
   CAR = `<span class="material-icons">
   directions_car
   </span>`,
+  TAXI = `<span class="material-icons">
+  local_taxi
+  </span>`,
 }
-const PATHMAP = new Map();
 
-PATHMAP.set('mixed_routes', {
-  type: 'Mixed Trip',
-  icon: [Icons.BUS, Icons.FLIGHT],
-});
-PATHMAP.set('flying_routes', {
-  type: 'Air Trip',
-  icon: [Icons.FLIGHT],
-});
-PATHMAP.set('ground_routes', {
-  type: 'Ground Trip',
-  icon: [Icons.TRAIN, Icons.SUBWAY],
-});
 
 const PATHMAPDETAILED = new Map();
 PATHMAPDETAILED.set('Bus', Icons.BUS);
 PATHMAPDETAILED.set('Flight', Icons.FLIGHT);
 PATHMAPDETAILED.set('Train', Icons.TRAIN);
 PATHMAPDETAILED.set('Ride Share', Icons.TRAIN);
+PATHMAPDETAILED.set('Car Drive', Icons.CAR);
+PATHMAPDETAILED.set('Walk', Icons.ONFOOT);
+PATHMAPDETAILED.set('Town Car', Icons.CAR);
+PATHMAPDETAILED.set('Car Ferry', Icons.CAR);
+PATHMAPDETAILED.set('Shuttle', Icons.TRAIN);
+PATHMAPDETAILED.set('Taxi', Icons.TAXI);
+
+
 
 @Injectable()
 export class TripDirectionEffects {
@@ -76,9 +72,6 @@ export class TripDirectionEffects {
     private actions$: Actions,
     private sanitizer: DomSanitizer,
     private http: HttpClient,
-    private router: Router,
-    private route: ActivatedRoute,
-    private store: Store<AppState>
   ) {}
 
   @Effect()
