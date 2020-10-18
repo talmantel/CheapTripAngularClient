@@ -17,7 +17,7 @@ export enum Modes {
 
 export interface IPoint {
   name: string;
-  type: '1' | '2';
+  type: 'from' | 'to';
 }
 
 export interface IRout {
@@ -32,8 +32,16 @@ export interface IDetails {
   euro_price: number;
   duration_minutes: string;
   direct_paths: IRout[];
-  points: Set<string>;
-  transport: SafeHtml[];
+  points?: Set<string>;
+  transport?: SafeHtml[];
+}
+
+export interface IRecievedRouts{
+  routeType: string;
+  euro_price: number;
+  duration_minutes: number;
+  direct_paths: IRout[];
+
 }
 
 export interface IPath {

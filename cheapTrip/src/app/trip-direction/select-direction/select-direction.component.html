@@ -5,7 +5,7 @@
     <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
         <div class="formInfo">
             <mat-form-field class="full-width">
-                <input  (focusout)="onFocusOut($event)"  (input)="onInput($event.target.value, '1')" type="text" placeholder="From"
+                <input  (focusout)="onFocusOut($event)"  (input)="onInput($event.target.value, 'from')" type="text" placeholder="From"
                     aria-label="Number" matInput formControlName="startPointControl" [matAutocomplete]="auto1">
                 <mat-autocomplete #auto1="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "start")'>
                     <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name">
@@ -17,7 +17,7 @@
                 sync_alt
             </span>
             <mat-form-field class="full-width">
-                <input  (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, '2')" type="text" placeholder="To"
+                <input  (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text" placeholder="To"
                     aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
                 <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "end")'>
                     <mat-option *ngFor="let end of endPointAutoComplete" [value]="end.name">

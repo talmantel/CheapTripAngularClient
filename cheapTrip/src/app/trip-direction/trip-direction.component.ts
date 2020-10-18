@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import * as fromApp from '../store/app.reducer';
 import * as TripDirectionActions from './store/trip-direction.actions';
 import { IPathPoint, IPoint, IPoints, Modes } from './trip-direction.model';
@@ -60,6 +59,7 @@ export class TripDirectionComponent implements OnInit {
   }
 
   onChangePoint(point: IPoint): void {
+    console.log('my point for autocomplete', point);
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 

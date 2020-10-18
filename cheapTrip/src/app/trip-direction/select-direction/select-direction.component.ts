@@ -66,8 +66,8 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     });
   }
   // autocomplete is invoked
-  onInput(str: string, type: '1' | '2'): void {
-    const point: IPoint = { name: str, type };
+  onInput(str: string, type: 'from' | 'to'): void {
+    const point: IPoint = { name: str, type: type };
     this.changePoint.emit(point);
   }
 

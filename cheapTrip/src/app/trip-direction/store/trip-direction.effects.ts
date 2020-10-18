@@ -17,6 +17,7 @@ import {
   IPath,
   IPathPoint,
   IPoint,
+  IRecievedRouts,
   IRout,
 } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -86,14 +87,14 @@ export class TripDirectionEffects {
     switchMap((request: { payload: IPoint; type: string }) => {
       const URL =
         environment.url +
-        'CheapTrip/getLocations?type=' +
+        'locations?type=' +
         request.payload.type +
         '&search_name=' +
         encodeURIComponent(request.payload.name);
       return this.http.get<IPathPoint[]>(URL).pipe(
         map((res) => {
           const newAction =
-            request.payload.type === '1'
+            request.payload.type === 'from'
               ? new TripDirectionActions.SetStartPointAutocomplete(res)
               : new TripDirectionActions.SetEndPointAutocomplete(res);
           return newAction;
@@ -115,13 +116,16 @@ export class TripDirectionEffects {
       (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
         const URL =
           environment.url +
-          'CheapTrip/getRoute?format=json&from=' +
+          'routes?from=' +
           request.payload[0].id +
           '&to=' +
           request.payload[1].id;
+
         return this.http.get(URL).pipe(
           map((res) => {
-            const resultPathArr = this.transformObject(res);
+            console.log('new Res', res);
+
+            const resultPathArr = this.transformObject(res as IRecievedRouts[]);
             const endPoints = {
               from: request.payload[0],
               to: request.payload[1],
@@ -141,23 +145,31 @@ export class TripDirectionEffects {
     )
   );
 
-  private transformObject(obj: object): IPath[] {
+  private transformObject(routs: IRecievedRouts[]): IPath[] {
     const objArr: IPath[] = [];
-    for (const i in obj) {
-      const transformedDetails = this.transformDetails(obj[i]);
-      const testObj: IPath = {
-        pathType: PATHMAP.get(i).type,
-        details: transformedDetails,
+    routs.forEach((rout) => {
+      const details = {
+        euro_price: rout.euro_price,
+        duration_minutes: rout.duration_minutes,
+        direct_paths: rout.direct_paths,
       };
-      objArr.push(testObj);
-    }
 
-    return this.reducedPaths(objArr);
+      const transformedRout: any = {
+        pathType: rout.routeType,
+        details: this.transformDetails(details),
+      };
+
+      objArr.push(transformedRout);
+    });
+
+    return objArr;
   }
 
-  private transformDetails(obj: IDetails): IDetails {
+  private transformDetails(obj: any): IDetails {
     const transport = this.getTransport(obj.direct_paths);
+
     const points = this.getPoints(obj.direct_paths);
+    // console.log('points', points);
     const newPaths = obj.direct_paths.map((item) => {
       return {
         ...item,
