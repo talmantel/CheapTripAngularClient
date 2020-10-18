@@ -1,12 +1,21 @@
-:host{
-
+:host {
+  display: block;
+  border-top: 1px solid grey;
 }
-  mat-grid-list {
-    width: 98%;
-    margin: auto;
+mat-grid-list {
+  width: 98%;
+  margin: 2rem auto;
 
-    .aside-grid > ::ng-deep .mat-figure {
-      align-items: flex-start;
-    }
+  .aside-grid > ::ng-deep .mat-figure {
+    align-items: flex-start;
+    background-color: white;
+    padding: 0 2rem;
+    border-right: 1px solig grey;
   }
 
+  .main-grid > ::ng-deep .mat-figure {
+    align-items: flex-start;
+    padding: 0;
+   background-color: white;
+  }
+}

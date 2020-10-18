@@ -27,13 +27,8 @@ export class AppComponent {
           breakpointObserver.isMatched(Breakpoints.Medium) ||
           breakpointObserver.isMatched(Breakpoints.Large)
         ) {
-          alert(
-            `No desktop version is available.
-             Please, use your mobile device.
-            
-             Thanks.`
-          );
-          this.router.navigate(['pageNotFound']); 
+
+
         }
       });
   }

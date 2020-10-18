@@ -24,12 +24,13 @@ div.mainContainer {
     width: 100%;
     margin: auto;
     display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     div.formInfo {
       width: 100%;
       margin: auto;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: space-between;
       align-items: baseline;
       mat-form-field {
@@ -48,6 +49,8 @@ div.mainContainer {
     }
     div.actions {
       margin: 0.5rem auto;
+      display: flex;
+      flex-direction: row;
       button {
         margin: 0 2rem;
         padding: 0 1rem;
@@ -56,9 +59,53 @@ div.mainContainer {
   }
 }
 
+@include desktop {
+  div.mainContainer {
+    width: 80%;
+    margin: 2rem auto;
+    p {
+      font-size: 2rem;
+      margin: 3rem auto;
+      line-height: 200%;
+      font-weight: bold;
+    }
+    form {
+      div.formInfo {
+        mat-form-field {
+          input {
+          }
+        }
+        span {
+        }
+      }
+      div.actions {
+        margin: 3rem auto;
+        button {
+          margin: 0 2rem;
+          padding: 0 1rem;
+        }
+      }
+    }
+  }
+
+  div.deliveryMode {
+    margin: 0.5rem auto;
+    p {
+      margin: 1rem auto;
+    }
+    form {
+      div.actions {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 480px) {
   div.searchMode {
     margin: 0 auto;
+    width: 90%;
+
     p {
       box-sizing: border-box;
       width: 95%;
@@ -90,7 +137,9 @@ div.mainContainer {
   }
 
   div.deliveryMode {
-    border-bottom: 5px solid grey;
+  // border-bottom: 5px solid grey;
+    width: 90%;
+    margin: 0 auto;
     p {
       display: none;
     }
@@ -105,7 +154,7 @@ div.mainContainer {
         position: relative;
 
         mat-form-field {
-          width: 170px !important;
+          width: 190px !important;
           position: relative;
           border-left: none;
         }
@@ -113,7 +162,7 @@ div.mainContainer {
           font-size: 0.9rem;
           position: absolute;
           top: 20px;
-          left: calc(50vw - 0.9rem);
+          left: calc(50vw -2rem);
           z-index: 10;
           color: $base-dark;
         }
@@ -140,7 +189,7 @@ div.mainContainer {
         height: auto;
         flex-direction: column;
         mat-form-field {
-          width: 95%;
+          width: 100%;
           margin: auto;
         }
         span {
@@ -159,7 +208,7 @@ div.mainContainer {
   }
 
   div.deliveryMode {
-    border-bottom: 5px solid grey;
+ //   border-bottom: 5px solid grey;
     p {
       display: none;
     }
@@ -169,12 +218,12 @@ div.mainContainer {
         margin: 0;
       }
       div.formInfo {
-        width: 98%;
+        width:100%;
         margin: 0.5rem auto 0;
         position: relative;
 
         mat-form-field {
-          width: 150px !important;
+          width: 170px !important;
           position: relative;
           border-left: none;
         }
@@ -182,7 +231,7 @@ div.mainContainer {
           font-size: 0.9rem;
           position: absolute;
           top: 20px;
-          left: calc(50vw - 1rem);
+       left: calc(50vw - 2rem);
           z-index: 10;
           color: $base-dark;
         }

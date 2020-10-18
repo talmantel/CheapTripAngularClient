@@ -22,7 +22,7 @@ export class TripDirectionComponent implements OnInit {
   endPointAutoComplete: IPathPoint[];
   selectDirectionSubscription: Subscription;
   mode: Modes;
-  pointSubj$: Subject<{from: IPathPoint, to: IPathPoint}>;
+  pointSubj$: Subject<{ from: IPathPoint; to: IPathPoint }>;
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -31,7 +31,7 @@ export class TripDirectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pointSubj$ = new BehaviorSubject({from: null, to: null});
+    this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
     this.route.queryParams.subscribe(
       (queryParams: {
         from: string;
@@ -51,7 +51,7 @@ export class TripDirectionComponent implements OnInit {
     this.selectDirectionSubscription = this.store
       .select('directions')
       .subscribe((state) => {
-        this.pointSubj$.next({from: state.startPoint, to: state.endPoint});
+        this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
         this.points = [state.startPoint, state.endPoint];
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
@@ -76,9 +76,11 @@ export class TripDirectionComponent implements OnInit {
     this.router.navigate(['/search/myPath'], {
       queryParams,
     });
+    const message = `Dear Traveler!
+    The fate of this project depends only on you.
+    We will be very grateful for your feedback`;
+    alert(message);
   }
-
-
 
   cleanData(_event: boolean): void {
     this.store.dispatch(new TripDirectionActions.CleanData());

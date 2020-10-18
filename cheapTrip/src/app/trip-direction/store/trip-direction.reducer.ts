@@ -84,21 +84,20 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.SET_ROUTS:
-      const paths = action.payload.paths.length;
-      console.log('paths', action.payload.paths);
+      const pathsAmount = action.payload.paths.length;
       const length1 = action.payload.paths.reduce((sum, current) => {
-        console.log('current', current);
         return sum + current.details.direct_paths.length;
       }, 0);
-      const res = length1+ paths;
-      console.log(' reducer paths amount', res);
+
+
+      const res = length1 + pathsAmount;
       return {
         ...state,
         paths: [...action.payload.paths],
         startPoint: action.payload.endPoints.from,
         endPoint: action.payload.endPoints.to,
         mode: Modes.DELIVERY,
-        pathsAmount: res
+        pathsAmount: res,
       };
 
     case TripDirectionActions.AUTOCOMPLETE_FAIL:
@@ -130,3 +129,5 @@ export function tripDirectionReducer(
       return state;
   }
 }
+
+

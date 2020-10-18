@@ -131,7 +131,7 @@ export class TripDirectionEffects {
               endPoints: endPoints,
             });
           }),
-          catchError(error => {
+          catchError((error) => {
             const errorMessage = 'An unknown error occured!';
             this.handleError(error);
             return of(new TripDirectionActions.AutoCompleteFail(error));
@@ -151,7 +151,8 @@ export class TripDirectionEffects {
       };
       objArr.push(testObj);
     }
-    return objArr;
+
+    return this.reducedPaths(objArr);
   }
 
   private transformDetails(obj: IDetails): IDetails {
@@ -177,7 +178,8 @@ export class TripDirectionEffects {
 
   private transformTime(minutes: number): string {
     const days = Math.floor(minutes / 60 / 24);
-    const dayStr = days === 0 ? '' : days === 1 ? days + ' day' : days + ' days';
+    const dayStr =
+      days === 0 ? '' : days === 1 ? days + ' day' : days + ' days';
     const hours = Math.floor(minutes / 60 - days * 24);
     /*  const hourStr =
       hours == 0 ? '' : hours == 1 ? hours + ' hour' : hours + ' hours'; */
@@ -235,5 +237,16 @@ export class TripDirectionEffects {
     return result;
   }
 
-  
+  private reducedPaths(paths: IPath[]): IPath[] {
+    const stringifyArr = paths.map((p) => JSON.stringify(p.details));
+    let ind = -1;
+    for (let i = 1; i < paths.length; i++) {
+      if (stringifyArr[0] == stringifyArr[i]) {
+        ind = i;
+      }
+    }
+    return paths.filter((_path, index) => {
+      return index != ind;
+    });
+  }
 }

@@ -87,7 +87,7 @@ section {
           }
         }
       }
-     
+
     }
   }
 }
@@ -103,7 +103,7 @@ section {
           //   flex-basis: 70%;
         }
         div.details {
-     
+
           p {
             span.spacer {
               // flex: 1 1 auto;
@@ -138,6 +138,7 @@ section {
     }
   }
 }
+
 
 @include smallphones {
   section {
