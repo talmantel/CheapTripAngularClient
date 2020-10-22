@@ -29,12 +29,15 @@ div.mainContainer {
 @include phones {
   div.mainContainer {
     flex-direction: column;
-    background-color: whitesmoke;
+
     div.aside {
-      flex-basis: 100%;
+      //flex-basis: 100%;
+      background-color: lawngreen;
+      align-self: stretch;
     }
     div.map {
       flex-basis: 100%;
+
     }
   }
 }
