@@ -1,20 +1,24 @@
-img{
-    width:4rem;
-    cursor: pointer;
+img {
+  width: 6rem;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  box-shadow: 3px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
-div{
-    position: relative; 
-    .material-icons{       
-    display: block;   
-}
-}
-    
-    
-p {
-    box-sizing: border-box;
-    width: 95%;
-    margin:2rem  auto;
-   text-align: center;
-  }
 
-  
+a {
+  color: white;
+  text-decoration: none;
+}
+
+p {
+  box-sizing: border-box;
+  width: 95%;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

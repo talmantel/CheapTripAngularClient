@@ -72,6 +72,6 @@ export class TripDirectionComponent implements OnInit {
 
   cleanData(_event: boolean): void {
     this.store.dispatch(new TripDirectionActions.CleanData());
-    this.router.navigate(['/']);
+
   }
 }

@@ -1,7 +1,7 @@
 @import "../../../cheapTripStyles/styles.scss";
 :host {
   position: relative;
-  display: block;
+  //@extend display: block;
 }
 
 * {
@@ -24,11 +24,14 @@ div {
   }
 }
 div.desktop {
+  display: block;
   position: relative;
+  left: 0;
+
+  width: 80%;
+  height: 100px;
 
   iframe {
-    border-left: 2px solid grey;
-
     position: relative;
     top: -0.6rem;
   }

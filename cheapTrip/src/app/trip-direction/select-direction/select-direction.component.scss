@@ -72,32 +72,16 @@ div.mainContainer {
       font-weight: bold;
     }
     form {
-      div.formInfo {
-        mat-form-field {
-          input {
-          }
-        }
-        span {
-        }
-      }
       div.actions {
-        //  margin: 3rem auto;
-        button {
-          //    margin: 0 2rem;
-          //   padding: 0 1rem;
-        }
+        margin-top: 1rem;
       }
     }
   }
 
   div.deliveryMode {
-    //  margin: 0.5rem auto;
-    p {
-      // margin: 1rem auto;
-    }
     form {
       div.actions {
-        margin: 0 auto;
+        margin: 1rem auto;
       }
     }
   }
@@ -147,7 +131,7 @@ div.mainContainer {
 
   div.deliveryMode {
     width: 100%;
-    margin:5px auto;
+    margin: 5px auto;
     p {
       display: none;
     }

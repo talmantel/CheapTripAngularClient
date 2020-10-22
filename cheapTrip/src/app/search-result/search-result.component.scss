@@ -10,13 +10,18 @@ div.mainContainer {
     width: 80%;
     height: auto;
     margin: auto;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
+
     div.aside {
-      flex-basis: 30%;
+      flex-basis: 33%;
     }
     div.map {
       position: relative;
       flex-basis: 65%;
+
+      height: auto;
+
     }
   }
 }

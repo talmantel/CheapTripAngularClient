@@ -113,7 +113,7 @@ export function tripDirectionReducer(
         endPoint: null,
         startPointAutoComplete: [],
         endPointAutoComplete: [],
-        paths: [],
+       // paths: [],
         mode: Modes.SEARCH,
         errorMessage: '',
       };
