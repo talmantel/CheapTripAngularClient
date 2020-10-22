@@ -66,20 +66,8 @@ export class TripDirectionComponent implements OnInit {
   getRouts(points: IPoint): void {
     this.store.dispatch(new TripDirectionActions.SetStartPoint(points[0]));
     this.store.dispatch(new TripDirectionActions.SetEndPoint(points[1]));
+    this.store.dispatch(new TripDirectionActions.GetRouts([points[0], points[1]]));
 
-    const queryParams = {
-      from: points[0].name,
-      fromID: points[0].id,
-      to: points[1].name,
-      toID: points[1].id,
-    };
-    this.router.navigate(['/search/myPath'], {
-      queryParams,
-    });
-    const message = `Dear Traveler!
-    The fate of this project depends only on you.
-    We will be very grateful for your feedback`;
-    alert(message);
   }
 
   cleanData(_event: boolean): void {

@@ -32,8 +32,8 @@ export interface IDetails {
   euro_price: number;
   duration_minutes: string;
   direct_paths: IRout[];
-  points?: Set<string>;
-  transport?: SafeHtml[];
+  points: Set<string>;
+  transport: SafeHtml[];
 }
 
 export interface IRecievedRouts{

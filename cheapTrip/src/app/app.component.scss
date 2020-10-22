@@ -1,14 +1,3 @@
 @import "../cheapTripStyles/styles.scss";
 
-@include smallphones {
-  :host ::ng-deep  input{
-    //color: rgb(17, 0, 255);
-    font-size: 1.3rem;
-  }
-}
- @include laptop{
-   body{
-      background-color: dodgerblue;
-   }
-  
- }
+

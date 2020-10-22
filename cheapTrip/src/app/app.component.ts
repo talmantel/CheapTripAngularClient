@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'CheapTrip';
+  width=400;
   constructor(breakpointObserver: BreakpointObserver, private router: Router) {
     breakpointObserver
       .observe([
@@ -23,13 +24,22 @@ export class AppComponent {
         Breakpoints.XLarge,
       ])
       .subscribe((state: BreakpointState) => {
-        if (
-          breakpointObserver.isMatched(Breakpoints.Medium) ||
-          breakpointObserver.isMatched(Breakpoints.Large)
-        ) {
-
-
-        }
+        this.getGridsSize(breakpointObserver);
       });
+  }
+
+  private getGridsSize(obs: BreakpointObserver) {
+    if (obs.isMatched(Breakpoints.XSmall)) {
+
+      this.width = 390;
+    } else if (obs.isMatched(Breakpoints.Small)) {
+      this.width = 400;
+    } else if (
+      obs.isMatched(Breakpoints.Medium) ||
+      obs.isMatched(Breakpoints.Large) ||
+      obs.isMatched(Breakpoints.XLarge)
+    ) {
+      this.width = 700;
+    }
   }
 }

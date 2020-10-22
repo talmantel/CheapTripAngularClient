@@ -1,4 +1,4 @@
-
+<!--
     <mat-grid-list [cols]="colsAmount" rowHeight="{{rowHeight}}" >
         <mat-grid-tile class="aside-grid" [colspan]="grids[0].cols" [rowspan]="grids[0].rows"
             [style.background-color]="grids[0].color">
@@ -9,4 +9,8 @@
             [style.background-color]="grids[1].color">
             <app-path-map></app-path-map>
         </mat-grid-tile>
-    </mat-grid-list>
+    </mat-grid-list> -->
+<div class="mainContainer">
+  <div class="aside">  <app-path-details [paths]="paths"></app-path-details></div>
+  <div class="map">  <app-path-map [isDeskTop]="isDesktop" [frameWidth]="frameWidth"></app-path-map></div>
+</div>

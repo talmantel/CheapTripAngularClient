@@ -1,13 +1,6 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import {
-  switchMap,
-  catchError,
-  map,
-  tap,
-  withLatestFrom,
-  mergeMap,
-} from 'rxjs/operators';
+import { switchMap, catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -22,7 +15,7 @@ import {
 } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -49,22 +42,22 @@ enum Icons {
   TAXI = `<span class="material-icons">
   local_taxi
   </span>`,
+  SHUTTLE = `<span class="material-icons">
+  shuttle
+  </span>`,
 }
-
 
 const PATHMAPDETAILED = new Map();
 PATHMAPDETAILED.set('Bus', Icons.BUS);
 PATHMAPDETAILED.set('Flight', Icons.FLIGHT);
 PATHMAPDETAILED.set('Train', Icons.TRAIN);
-PATHMAPDETAILED.set('Ride Share', Icons.TRAIN);
+PATHMAPDETAILED.set('Ride Share', Icons.CAR);
 PATHMAPDETAILED.set('Car Drive', Icons.CAR);
 PATHMAPDETAILED.set('Walk', Icons.ONFOOT);
 PATHMAPDETAILED.set('Town Car', Icons.CAR);
 PATHMAPDETAILED.set('Car Ferry', Icons.CAR);
-PATHMAPDETAILED.set('Shuttle', Icons.TRAIN);
+PATHMAPDETAILED.set('Shuttle', Icons.SHUTTLE);
 PATHMAPDETAILED.set('Taxi', Icons.TAXI);
-
-
 
 @Injectable()
 export class TripDirectionEffects {
@@ -72,6 +65,7 @@ export class TripDirectionEffects {
     private actions$: Actions,
     private sanitizer: DomSanitizer,
     private http: HttpClient,
+    private router: Router
   ) {}
 
   @Effect()
@@ -107,6 +101,7 @@ export class TripDirectionEffects {
 
     switchMap(
       (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
+        console.log('effects');
         const URL =
           environment.url +
           'routes?from=' +
@@ -123,6 +118,16 @@ export class TripDirectionEffects {
               from: request.payload[0],
               to: request.payload[1],
             };
+            const queryParams = {
+              from: request.payload[0].name,
+              fromID: request.payload[0].id,
+              to: request.payload[1].name,
+              toID: request.payload[1].id,
+            };
+            this.router.navigate(['/search/myPath'], {
+              queryParams,
+            });
+
             return new TripDirectionActions.SetRouts({
               paths: resultPathArr,
               endPoints: endPoints,
@@ -155,14 +160,14 @@ export class TripDirectionEffects {
       objArr.push(transformedRout);
     });
 
-    return objArr;
+    return this.reducedPaths(objArr);
   }
 
   private transformDetails(obj: any): IDetails {
     const transport = this.getTransport(obj.direct_paths);
 
     const points = this.getPoints(obj.direct_paths);
-    // console.log('points', points);
+
     const newPaths = obj.direct_paths.map((item) => {
       return {
         ...item,
@@ -183,15 +188,12 @@ export class TripDirectionEffects {
 
   private transformTime(minutes: number): string {
     const days = Math.floor(minutes / 60 / 24);
-    const dayStr =
-      days === 0 ? '' : days === 1 ? days + ' day' : days + ' days';
+    const dayStr = days < 1 ? '' : 'd';
     const hours = Math.floor(minutes / 60 - days * 24);
-    /*  const hourStr =
-      hours == 0 ? '' : hours == 1 ? hours + ' hour' : hours + ' hours'; */
-    const hourStr = hours + 'h';
+
+    const hourStr = hours < 1 ? '' : +'h';
     const min = minutes - days * 24 * 60 - hours * 60;
-    /*    const minStr =
-      min == 0 ? '' : min == 1 ? min + ' minute' : min + ' minutes'; */
+
     const minStr = min + 'min';
     return dayStr + ' ' + hourStr + ' ' + minStr;
   }

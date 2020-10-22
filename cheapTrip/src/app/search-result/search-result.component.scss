@@ -1,21 +1,35 @@
-:host {
-  display: block;
-  border-top: 1px solid grey;
+@import "../../cheapTripStyles/styles.scss";
+
+div.mainContainer {
+  display: flex;
 }
-mat-grid-list {
-  width: 98%;
-  margin: 2rem auto;
 
-  .aside-grid > ::ng-deep .mat-figure {
-    align-items: flex-start;
-    background-color: white;
-    padding: 0 2rem;
-    border-right: 1px solig grey;
+@include desktop {
+  div.mainContainer {
+    flex-direction: row;
+    width: 80%;
+    height: auto;
+    margin: auto;
+    justify-content: center;
+    div.aside {
+      flex-basis: 30%;
+    }
+    div.map {
+      position: relative;
+      flex-basis: 65%;
+    }
   }
+}
 
-  .main-grid > ::ng-deep .mat-figure {
-    align-items: flex-start;
-    padding: 0;
-   background-color: white;
+@include phones {
+  div.mainContainer {
+    flex-direction: column;
+    background-color: whitesmoke;
+    div.aside {
+      flex-basis: 100%;
+    }
+    div.map {
+      flex-basis: 100%;
+    }
   }
 }

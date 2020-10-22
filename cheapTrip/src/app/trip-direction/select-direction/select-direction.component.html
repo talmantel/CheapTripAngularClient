@@ -4,7 +4,10 @@
     <p>Discover the cheapest way to get anywhere by plane, train, bus and ride share altogether</p>
     <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
         <div class="formInfo">
-            <mat-form-field class="full-width">
+            <mat-form-field
+            class="startPoint"
+             [class.valid]="directionForm.get('startPointControl').valid && directionForm.get('startPointControl').touched"
+             [class.invalid]="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched">
                 <input  (focusout)="onFocusOut($event)"  (input)="onInput($event.target.value, 'from')" type="text" placeholder="From"
                     aria-label="Number" matInput formControlName="startPointControl" [matAutocomplete]="auto1">
                 <mat-autocomplete #auto1="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "start")'>
@@ -16,8 +19,9 @@
             <span class="material-icons arrows" (click)="changeDirection()">
                 sync_alt
             </span>
-            <mat-form-field class="full-width">
-                <input  (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text" placeholder="To"
+            <mat-form-field class="endPoint"  [class.valid]="directionForm.get('endPointControl').valid && directionForm.get('endPointControl').touched"
+            [class.invalid]="directionForm.get('endPointControl').invalid && directionForm.get('endPointControl').touched">
+                <input #endPoint (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text" placeholder="To"
                     aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
                 <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "end")'>
                     <mat-option *ngFor="let end of endPointAutoComplete" [value]="end.name">
