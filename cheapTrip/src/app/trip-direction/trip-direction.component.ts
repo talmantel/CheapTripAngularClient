@@ -1,7 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  DoCheck,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
+
+import { HostListener } from '@angular/core';
+
 import * as fromApp from '../store/app.reducer';
 import * as TripDirectionActions from './store/trip-direction.actions';
 import { IPathPoint, IPoint, IPoints, Modes } from './trip-direction.model';
@@ -22,6 +34,8 @@ export class TripDirectionComponent implements OnInit {
   selectDirectionSubscription: Subscription;
   mode: Modes;
   pointSubj$: Subject<{ from: IPathPoint; to: IPathPoint }>;
+  private subscription: Subscription;
+
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -29,7 +43,15 @@ export class TripDirectionComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    console.log('Back button pressed', event);
+  }
+
   ngOnInit(): void {
+    this.subscription = this.route.params.subscribe((params) => {
+      console.log('params', params);
+    });
     this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
     this.route.queryParams.subscribe(
       (queryParams: {
@@ -66,12 +88,12 @@ export class TripDirectionComponent implements OnInit {
   getRouts(points: IPoint): void {
     this.store.dispatch(new TripDirectionActions.SetStartPoint(points[0]));
     this.store.dispatch(new TripDirectionActions.SetEndPoint(points[1]));
-    this.store.dispatch(new TripDirectionActions.GetRouts([points[0], points[1]]));
-
+    this.store.dispatch(
+      new TripDirectionActions.GetRouts([points[0], points[1]])
+    );
   }
 
   cleanData(_event: boolean): void {
     this.store.dispatch(new TripDirectionActions.CleanData());
-
   }
 }

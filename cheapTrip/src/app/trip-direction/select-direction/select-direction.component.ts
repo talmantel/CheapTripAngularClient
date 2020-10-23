@@ -64,6 +64,7 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
         Validators.pattern('^[a-zA-Z0-9- ]*$'),
       ]),
     });
+
   }
   // autocomplete is invoked
   onInput(str: string, type: 'from' | 'to'): void {
