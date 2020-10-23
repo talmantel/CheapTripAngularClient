@@ -41,8 +41,8 @@ enum FrameWidth {
   SSMALL = 360,
   XSMALL = 420,
   SMALL = 500,
-  MEDIUM = 700,
-  LARGE = 800,
+  MEDIUM = 800,
+  LARGE = 900,
   XLARGE = 1000,
 }
 

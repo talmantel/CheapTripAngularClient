@@ -16,7 +16,7 @@ import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
   styleUrls: ['./select-direction.component.scss'],
 })
 export class SelectDirectionComponent implements OnInit, OnDestroy {
-  @Input() points: [IPathPoint, IPathPoint];
+ // @Input() points: [IPathPoint, IPathPoint];
   @Input() startPointAutoComplete: IPathPoint[];
   @Input() endPointAutoComplete: IPathPoint[];
   @Input() mode: Modes = Modes.SEARCH;
@@ -40,6 +40,8 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscripton = this.pointSubj.subscribe((points) => {
+    //  console.log('child conponen this.points', this.points);
+      console.log('child conponenpoints', points);
       if (
         this.directionForm &&
         this.directionForm.get('startPointControl').value === '' &&

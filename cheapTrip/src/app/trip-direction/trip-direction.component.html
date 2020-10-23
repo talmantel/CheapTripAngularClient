@@ -1,4 +1,4 @@
-<app-select-direction [points]="points" [pointSubj]="pointSubj$" (changePoint)="onChangePoint($event)"
+<app-select-direction  [pointSubj]="pointSubj$" (changePoint)="onChangePoint($event)"
    (selectedPoints)="getRouts($event)" [startPointAutoComplete]="startPointAutoComplete"
    [endPointAutoComplete]="endPointAutoComplete" [mode]="mode" (cleanData)="cleanData($event)"></app-select-direction>
 <router-outlet></router-outlet>

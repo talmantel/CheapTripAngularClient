@@ -17,16 +17,27 @@ div {
   margin: 0;
   iframe {
     position: relative;
-    left: -10%;
+
     box-sizing: border-box;
   }
 }
 
 div.desktop {
- border-left: 3px solid grey;
+  border-left: 3px solid grey;
   iframe {
     position: relative;
     left: 0;
     top: -0.6rem;
+  }
+}
+
+@include phones {
+  div {
+    width: 100%;
+    margin: auto;
+    position: relative;
+    iframe {
+      position: relative;
+    }
   }
 }

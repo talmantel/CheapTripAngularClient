@@ -2,6 +2,8 @@
 
 div.mainContainer {
   display: flex;
+  width: 98%;
+  margin:auto;
 }
 
 @include desktop {
@@ -21,7 +23,6 @@ div.mainContainer {
       flex-basis: 65%;
 
       height: auto;
-
     }
   }
 }
@@ -29,15 +30,16 @@ div.mainContainer {
 @include phones {
   div.mainContainer {
     flex-direction: column;
+    background-color: lightcyan;
+    width: 98%;
+    margin:auto;
 
     div.aside {
-      //flex-basis: 100%;
-      background-color: lawngreen;
+      flex-basis: 100%;
       align-self: stretch;
     }
     div.map {
       flex-basis: 100%;
-
     }
   }
 }

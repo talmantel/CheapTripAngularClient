@@ -100,47 +100,20 @@ p span.points:last-child:after {
 
 @include phones {
   section {
+    width:100%;
     mat-accordion {
       mat-expansion-panel {
-        .mat-expansion-panel-header-title {
-          //  flex-basis: 20%;
-        }
-        .mat-expansion-panel-header-description {
-          //   flex-basis: 70%;
-        }
-        div.details {
-          p {
-            span.spacer {
-              // flex: 1 1 auto;
-            }
-          }
-        }
         mat-expansion-panel-header {
-          mat-panel-title {
-            div.icons {
-              span {
-                span.material-icons {
-                }
-              }
-            }
-          }
           mat-panel-description {
             div.description {
               p:first-child {
                 font-size: 1rem;
-              }
-              p.time {
-                .spacer {
-                  //flex: 1 1 auto;
-                }
               }
             }
           }
         }
         div.details {
           font-size: 1rem;
-          p:first-child {
-          }
         }
       }
     }

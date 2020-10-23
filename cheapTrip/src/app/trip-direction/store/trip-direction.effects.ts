@@ -101,7 +101,6 @@ export class TripDirectionEffects {
 
     switchMap(
       (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
-        console.log('effects');
         const URL =
           environment.url +
           'routes?from=' +
@@ -111,8 +110,6 @@ export class TripDirectionEffects {
 
         return this.http.get(URL).pipe(
           map((res) => {
-            console.log('new Res', res);
-
             const resultPathArr = this.transformObject(res as IRecievedRouts[]);
             const endPoints = {
               from: request.payload[0],
@@ -188,13 +185,12 @@ export class TripDirectionEffects {
 
   private transformTime(minutes: number): string {
     const days = Math.floor(minutes / 60 / 24);
-    const dayStr = days < 1 ? '' : 'd';
+    const dayStr = days < 1 ? '' : days + 'd';
     const hours = Math.floor(minutes / 60 - days * 24);
-
-    const hourStr = hours < 1 ? '' : +'h';
+    const hourStr = hours < 1 ? '' : hours + 'h';
     const min = minutes - days * 24 * 60 - hours * 60;
-
     const minStr = min + 'min';
+
     return dayStr + ' ' + hourStr + ' ' + minStr;
   }
 

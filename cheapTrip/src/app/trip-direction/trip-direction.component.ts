@@ -46,11 +46,13 @@ export class TripDirectionComponent implements OnInit {
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     console.log('Back button pressed', event);
+  //  this.cleanData();
+    this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
+
   }
 
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe((params) => {
-      console.log('params', params);
     });
     this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
     this.route.queryParams.subscribe(
@@ -73,7 +75,9 @@ export class TripDirectionComponent implements OnInit {
       .select('directions')
       .subscribe((state) => {
         this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
+
         this.points = [state.startPoint, state.endPoint];
+        console.log('points', this.points)
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
         this.mode = state.mode; // for form horisontal or vertical oriantation
@@ -81,7 +85,7 @@ export class TripDirectionComponent implements OnInit {
   }
 
   onChangePoint(point: IPoint): void {
-    console.log('my point for autocomplete', point);
+
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
@@ -93,7 +97,8 @@ export class TripDirectionComponent implements OnInit {
     );
   }
 
-  cleanData(_event: boolean): void {
+  cleanData(_event?: boolean): void {
+    console.log('clean data');
     this.store.dispatch(new TripDirectionActions.CleanData());
   }
 }

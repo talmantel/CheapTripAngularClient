@@ -107,6 +107,7 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.CLEAN_DATA:
+      console.log('reducer');
       return {
         ...state,
         startPoint: null,
@@ -114,7 +115,7 @@ export function tripDirectionReducer(
         startPointAutoComplete: [],
         endPointAutoComplete: [],
        // paths: [],
-        mode: Modes.SEARCH,
+     //   mode: Modes.SEARCH,
         errorMessage: '',
       };
 

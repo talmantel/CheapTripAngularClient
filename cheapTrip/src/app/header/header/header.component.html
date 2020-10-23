@@ -1,6 +1,10 @@
 <mat-toolbar color="primary" role="heading">
+
   <img src="../../../assets/images/logo.jpg" alt="CheapTrip" (click)="toHomePage()" matTooltip="Home">
   <span class="spacer"></span>
+  <button mat-button><a routerLink="/search"> CheapTrip</a></button>
   <button mat-button><a routerLink=""> Home</a>
   </button>
 </mat-toolbar>
+<router-outlet></router-outlet>
+
