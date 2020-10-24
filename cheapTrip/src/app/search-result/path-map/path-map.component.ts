@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-path-map',
@@ -6,6 +6,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./path-map.component.scss'],
 })
 export class PathMapComponent {
+
+  @Input() frameWidth: number;
+  @Input() isDeskTop: boolean;
   constructor() {
   }
 }

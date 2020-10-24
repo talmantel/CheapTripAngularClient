@@ -6,6 +6,9 @@ import {
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,8 +16,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'CheapTrip';
+  width=400;
   constructor(breakpointObserver: BreakpointObserver, private router: Router) {
-    breakpointObserver
+   /*  breakpointObserver
       .observe([
         Breakpoints.XSmall,
         Breakpoints.Small,
@@ -23,18 +27,22 @@ export class AppComponent {
         Breakpoints.XLarge,
       ])
       .subscribe((state: BreakpointState) => {
-        if (
-          breakpointObserver.isMatched(Breakpoints.Medium) ||
-          breakpointObserver.isMatched(Breakpoints.Large)
-        ) {
-          alert(
-            `No desktop version is available.
-             Please, use your mobile device.
-            
-             Thanks.`
-          );
-          this.router.navigate(['pageNotFound']); 
-        }
-      });
+        this.getGridsSize(breakpointObserver);
+      }); */
   }
+
+ /*  private getGridsSize(obs: BreakpointObserver) {
+    if (obs.isMatched(Breakpoints.XSmall)) {
+
+      this.width = 390;
+    } else if (obs.isMatched(Breakpoints.Small)) {
+      this.width = 400;
+    } else if (
+      obs.isMatched(Breakpoints.Medium) ||
+      obs.isMatched(Breakpoints.Large) ||
+      obs.isMatched(Breakpoints.XLarge)
+    ) {
+      this.width = 700;
+    }
+  } */
 }

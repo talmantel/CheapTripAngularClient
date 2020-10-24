@@ -3,6 +3,7 @@ import {
   BreakpointObserver,
   Breakpoints,
   BreakpointState,
+  MediaMatcher,
 } from '@angular/cdk/layout';
 
 import { Store } from '@ngrx/store';
@@ -11,7 +12,6 @@ import { Subscription } from 'rxjs';
 import * as fromApp from '../store/app.reducer';
 import { IPath } from '../trip-direction/trip-direction.model';
 import { Location } from '@angular/common';
-
 
 export interface IGrid {
   color: string;
@@ -37,6 +37,15 @@ const viewportSizes = [
   Breakpoints.TabletPortrait,
 ];
 const ROW_HEIGHT = 250;
+enum FrameWidth {
+  SSMALL = 360,
+  XSMALL = 420,
+  SMALL = 500,
+  MEDIUM = 800,
+  LARGE = 900,
+  XLARGE = 1000,
+}
+
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
@@ -44,23 +53,26 @@ const ROW_HEIGHT = 250;
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
   paths: IPath[];
+  isDesktop = false;
   getPathsSubscription: Subscription;
 
   // for UIw
   grids: IGrid[];
   colsAmount = 7;
   rowHeight: string;
+  frameWidth: number;
 
-  matcher: MediaQueryList;
+  // matcher: MediaQueryList;
 
   constructor(
     breakpointObserver: BreakpointObserver,
     private store: Store<fromApp.AppState>,
-    private location: Location
+
+    public mediaMatcher: MediaMatcher
   ) {
-    breakpointObserver
+    /*   breakpointObserver
       .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
-      .subscribe((state: BreakpointState) => {});
+      .subscribe((state: BreakpointState) => {}); */
 
     breakpointObserver
       .observe([
@@ -71,7 +83,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         Breakpoints.XLarge,
       ])
       .subscribe((state: BreakpointState) => {
-        this.grids = this.getGridsSize(breakpointObserver);
+        this.getGridsSize(breakpointObserver);
       });
   }
 
@@ -80,6 +92,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       .select('directions')
       .subscribe((state) => {
         this.paths = state.paths;
+        console.log('paths parent', this.paths);
         this.rowHeight = state.pathsAmount * ROW_HEIGHT + 'px';
       });
   }
@@ -88,23 +101,21 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.getPathsSubscription.unsubscribe();
   }
 
-  private getGridsSize(obs: BreakpointObserver): IGrid[] {
-    let sizeTab: IGrid[] = [];
-    if (obs.isMatched(Breakpoints.XSmall) || obs.isMatched(Breakpoints.Small)) {
-      sizeTab = [
-        { color: 'whitesmoke', cols: 7, rows: 1 },
-        { color: 'blue', cols: 0, rows: 0 },
-      ];
+  private getGridsSize(obs: BreakpointObserver) {
+    if (obs.isMatched('(max-width: 410px)')) {
+      this.frameWidth = FrameWidth.SSMALL;
+    } else if (obs.isMatched(Breakpoints.XSmall)) {
+      this.frameWidth = FrameWidth.XSMALL;
+    } else if (obs.isMatched(Breakpoints.Small)) {
+      this.frameWidth = FrameWidth.SMALL;
+      this.isDesktop = true;
     } else if (
       obs.isMatched(Breakpoints.Medium) ||
       obs.isMatched(Breakpoints.Large) ||
       obs.isMatched(Breakpoints.XLarge)
     ) {
-      sizeTab = [
-        { color: 'grey', cols: 2, rows: 1 },
-        { color: 'whitesmoke', cols: 5, rows: 1 },
-      ];
+      this.frameWidth = FrameWidth.MEDIUM;
+      this.isDesktop = true;
     }
-    return sizeTab;
   }
 }

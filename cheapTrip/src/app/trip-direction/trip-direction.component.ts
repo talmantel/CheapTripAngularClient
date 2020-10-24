@@ -1,8 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  DoCheck,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+
+import { HostListener } from '@angular/core';
+
 import * as fromApp from '../store/app.reducer';
 import * as TripDirectionActions from './store/trip-direction.actions';
 import { IPathPoint, IPoint, IPoints, Modes } from './trip-direction.model';
@@ -22,7 +33,9 @@ export class TripDirectionComponent implements OnInit {
   endPointAutoComplete: IPathPoint[];
   selectDirectionSubscription: Subscription;
   mode: Modes;
-  pointSubj$: Subject<{from: IPathPoint, to: IPathPoint}>;
+  pointSubj$: Subject<{ from: IPathPoint; to: IPathPoint }>;
+  private subscription: Subscription;
+
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -30,8 +43,18 @@ export class TripDirectionComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    console.log('Back button pressed', event);
+  //  this.cleanData();
+    this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
+
+  }
+
   ngOnInit(): void {
-    this.pointSubj$ = new BehaviorSubject({from: null, to: null});
+    this.subscription = this.route.params.subscribe((params) => {
+    });
+    this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
     this.route.queryParams.subscribe(
       (queryParams: {
         from: string;
@@ -51,8 +74,10 @@ export class TripDirectionComponent implements OnInit {
     this.selectDirectionSubscription = this.store
       .select('directions')
       .subscribe((state) => {
-        this.pointSubj$.next({from: state.startPoint, to: state.endPoint});
+        this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
+
         this.points = [state.startPoint, state.endPoint];
+        console.log('points', this.points)
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
         this.mode = state.mode; // for form horisontal or vertical oriantation
@@ -60,28 +85,20 @@ export class TripDirectionComponent implements OnInit {
   }
 
   onChangePoint(point: IPoint): void {
+
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
   getRouts(points: IPoint): void {
     this.store.dispatch(new TripDirectionActions.SetStartPoint(points[0]));
     this.store.dispatch(new TripDirectionActions.SetEndPoint(points[1]));
-
-    const queryParams = {
-      from: points[0].name,
-      fromID: points[0].id,
-      to: points[1].name,
-      toID: points[1].id,
-    };
-    this.router.navigate(['/search/myPath'], {
-      queryParams,
-    });
+    this.store.dispatch(
+      new TripDirectionActions.GetRouts([points[0], points[1]])
+    );
   }
 
-
-
-  cleanData(_event: boolean): void {
+  cleanData(_event?: boolean): void {
+    console.log('clean data');
     this.store.dispatch(new TripDirectionActions.CleanData());
-    this.router.navigate(['/']);
   }
 }

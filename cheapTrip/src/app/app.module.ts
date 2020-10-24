@@ -14,16 +14,10 @@ import { TripDirectionModule } from './trip-direction/trip-direction.module';
 import { TripDirectionEffects } from './trip-direction/store/trip-direction.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { SearchResultModule } from './search-result/search-result.module';
-import { TestComponent } from './test/test.component';
 import { NoPageComponent } from './no-page/no-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    TestComponent,
-    NoPageComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent, NoPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,10 +29,9 @@ import { NoPageComponent } from './no-page/no-page.component';
     TripDirectionModule,
     SearchResultModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([TripDirectionEffects])
-
+    EffectsModule.forRoot([TripDirectionEffects]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

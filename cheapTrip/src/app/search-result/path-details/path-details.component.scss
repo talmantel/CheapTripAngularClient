@@ -20,118 +20,77 @@ p span.points:last-child:after {
   content: "";
 }
 
-section {
-  width: 100%;
-  height: auto;
-  margin-top: 0.2rem;
-  mat-accordion {
-    width: 100%;
-    height: inherit;
-    mat-expansion-panel {
-      padding: 0;
-      .mat-expansion-panel-header-title {
-        flex-basis: 20%;
-      }
-      .mat-expansion-panel-header-description {
-        flex-basis: 70%;
-      }
-      div.details {
-        border-top: 1px solid $base-light;
-        width: 95%;
-        p:first-child {
-          text-align: right;
-        }
-        p {
-          display: flex;
-          span.spacer {
-            flex: 1 1 auto;
-          }
-        }
-      }
-      mat-expansion-panel-header {
-        height: auto !important;
-        mat-panel-title {
-          div.icons {
-            display: flex;
-            @include boxSizing(border-box);
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid $base-light;
-            span {
-              padding: 0.1rem 1rem;
-              color: $base-dark;
-              span.material-icons {
-                color: $base-dark;
-              }
-            }
-          }
-        }
-        mat-panel-description {
-          div.description {
-            p:first-child {
-              padding: 0.5rem 0;
-              color: $base-dark;
-              font-size: 0.9rem;
-              margin: 0;
-            }
-            p.time {
-              margin-top: 1rem;
-              display: flex;
-              align-items: flex-end;
-
-              .spacer {
-                flex: 1 1 auto;
-              }
-            }
-          }
-        }
-      }
-     
-    }
-  }
-}
-
-@media screen and (max-width: 650px) {
+@include desktop {
   section {
+    width: 100%;
+    height: auto;
+    margin-top: 0.2rem;
     mat-accordion {
+      width: 100%;
+      height: inherit;
       mat-expansion-panel {
+        padding: 0;
         .mat-expansion-panel-header-title {
-          // flex-basis: 20%;
+          flex-basis: 20%;
         }
         .mat-expansion-panel-header-description {
-          //   flex-basis: 70%;
+          flex-basis: 70%;
         }
         div.details {
-     
+          border-top: 1px solid $base-light;
+          width: 95%;
+          p:first-child {
+            text-align: right;
+          }
           p {
+            display: flex;
             span.spacer {
-              // flex: 1 1 auto;
+              flex: 1 1 auto;
             }
           }
         }
         mat-expansion-panel-header {
+          height: auto !important;
           mat-panel-title {
             div.icons {
+              display: flex;
+              @include boxSizing(border-box);
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              border-right: 1px solid $base-light;
               span {
+                padding: 0.1rem 1rem;
+                color: $base-dark;
                 span.material-icons {
+                  color: $base-dark;
                 }
               }
             }
           }
           mat-panel-description {
             div.description {
+              width: 100%;
               p:first-child {
+                padding: 0.5rem 0;
+                color: $base-dark;
+                font-size: 0.9rem;
+                margin: 0;
+
+                width: 100%;
               }
               p.time {
+                margin-top: 1rem;
+                display: flex;
+
+                justify-content: space-between;
+                width: 100%;
+
                 .spacer {
+                  flex: 1 1 auto;
                 }
               }
             }
-          }
-        }
-        div.details {
-          p:first-child {
           }
         }
       }
@@ -139,49 +98,22 @@ section {
   }
 }
 
-@include smallphones {
+@include phones {
   section {
+    width:100%;
     mat-accordion {
       mat-expansion-panel {
-        .mat-expansion-panel-header-title {
-          //  flex-basis: 20%;
-        }
-        .mat-expansion-panel-header-description {
-          //   flex-basis: 70%;
-        }
-        div.details {
-          p {
-            span.spacer {
-              // flex: 1 1 auto;
-            }
-          }
-        }
         mat-expansion-panel-header {
-          mat-panel-title {
-            div.icons {
-              span {
-                span.material-icons {
-                }
-              }
-            }
-          }
           mat-panel-description {
             div.description {
               p:first-child {
                 font-size: 1rem;
-              }
-              p.time {
-                .spacer {
-                  //flex: 1 1 auto;
-                }
               }
             }
           }
         }
         div.details {
           font-size: 1rem;
-          p:first-child {
-          }
         }
       }
     }
