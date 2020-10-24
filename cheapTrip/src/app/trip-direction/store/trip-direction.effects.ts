@@ -47,6 +47,8 @@ enum Icons {
   </span>`,
 }
 
+
+
 const PATHMAPDETAILED = new Map();
 PATHMAPDETAILED.set('Bus', Icons.BUS);
 PATHMAPDETAILED.set('Flight', Icons.FLIGHT);
@@ -72,14 +74,40 @@ export class TripDirectionEffects {
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     switchMap((request: { payload: IPoint; type: string }) => {
-      const URL =
-        environment.url +
+      /*    for appachi server */
+      /*   const URLAPPACHI =
+        environment.urlAppachi +
         'locations?type=' +
         request.payload.type +
         '&search_name=' +
         encodeURIComponent(request.payload.name);
-      return this.http.get<IPathPoint[]>(URL).pipe(
+        return this.http.get<IPathPoint[]>(URLAPPACHI).pipe(
         map((res) => {
+          const newAction =
+            request.payload.type === 'from'
+              ? new TripDirectionActions.SetStartPointAutocomplete(res)
+              : new TripDirectionActions.SetEndPointAutocomplete(res);
+          return newAction;
+        }),
+        catchError((error) => {
+          this.handleError(error);
+          return of(new TripDirectionActions.AutoCompleteFail(error));
+        })
+      );
+    })  */
+
+    /*    for NomCat server */
+      const type = request.payload.type === 'from' ? '1' : '2';
+      console.log('type', type);
+      const URLTOMCAT =
+        environment.urlTomCat +
+        'CheapTrip/getLocations?type=' +
+        type +
+        '&search_name=' +
+        encodeURIComponent(request.payload.name);
+      return this.http.get<IPathPoint[]>(URLTOMCAT).pipe(
+        map((res) => {
+          console.log('autocomplete', res);
           const newAction =
             request.payload.type === 'from'
               ? new TripDirectionActions.SetStartPointAutocomplete(res)
@@ -97,18 +125,30 @@ export class TripDirectionEffects {
   @Effect()
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
-    //  withLatestFrom(this.store.select('directions')),
-
     switchMap(
       (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
+       /*  for Appachi server
         const URL =
-          environment.url +
+          environment.urlAppachi +
           'routes?from=' +
           request.payload[0].id +
           '&to=' +
-          request.payload[1].id;
+          request.payload[1].id; */
 
-        return this.http.get(URL).pipe(
+        /*   for TomCat Server */
+
+        const URL =
+          environment.urlTomCat +
+          'CheapTrip/getRoute?format=json&from=' +
+          request.payload[0].id +
+          '&to=' +
+          request.payload[1].id;
+          return this.http.get(URL).pipe(map(res => {
+
+          }));
+
+
+      /*   return this.http.get(URL).pipe(
           map((res) => {
             const resultPathArr = this.transformObject(res as IRecievedRouts[]);
             const endPoints = {
@@ -135,10 +175,28 @@ export class TripDirectionEffects {
             this.handleError(error);
             return of(new TripDirectionActions.AutoCompleteFail(error));
           })
-        );
+        );*/
       }
     )
   );
+
+
+
+  private transformObjectAppachi(obj: object): IPath[] {
+    const objArr: IPath[] = [];
+    for (const i in obj) {
+      const transformedDetails = this.transformDetails(obj[i]);
+      const PATHMAP = {
+
+      }
+      const testObj: IPath = {
+        pathType: PATHMAP.get(i).type,
+        details: transformedDetails,
+      };
+      objArr.push(testObj);
+    }
+    return objArr;
+  }
 
   private transformObject(routs: IRecievedRouts[]): IPath[] {
     const objArr: IPath[] = [];
