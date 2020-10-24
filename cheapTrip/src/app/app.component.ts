@@ -18,7 +18,7 @@ export class AppComponent {
   title = 'CheapTrip';
   width=400;
   constructor(breakpointObserver: BreakpointObserver, private router: Router) {
-    breakpointObserver
+   /*  breakpointObserver
       .observe([
         Breakpoints.XSmall,
         Breakpoints.Small,
@@ -28,10 +28,10 @@ export class AppComponent {
       ])
       .subscribe((state: BreakpointState) => {
         this.getGridsSize(breakpointObserver);
-      });
+      }); */
   }
 
-  private getGridsSize(obs: BreakpointObserver) {
+ /*  private getGridsSize(obs: BreakpointObserver) {
     if (obs.isMatched(Breakpoints.XSmall)) {
 
       this.width = 390;
@@ -44,5 +44,5 @@ export class AppComponent {
     ) {
       this.width = 700;
     }
-  }
+  } */
 }

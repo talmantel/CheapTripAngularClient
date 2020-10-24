@@ -17,6 +17,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+type SERVER = 'tomcat' | 'appachi';
+
 enum Icons {
   FLIGHT = `<span class="material-icons">
   flight
@@ -47,7 +49,16 @@ enum Icons {
   </span>`,
 }
 
-
+const PATHMAP = new Map<string, { type: string }>();
+PATHMAP.set('mixed_routes', {
+  type: 'Mixed Trip',
+});
+PATHMAP.set('flying_routes', {
+  type: 'Air Trip',
+});
+PATHMAP.set('ground_routes', {
+  type: 'Ground Trip',
+});
 
 const PATHMAPDETAILED = new Map();
 PATHMAPDETAILED.set('Bus', Icons.BUS);
@@ -63,12 +74,15 @@ PATHMAPDETAILED.set('Taxi', Icons.TAXI);
 
 @Injectable()
 export class TripDirectionEffects {
+  server: SERVER;
   constructor(
     private actions$: Actions,
     private sanitizer: DomSanitizer,
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) {
+    this.server = 'tomcat'; //to be fixed
+  }
 
   @Effect()
   getAutocomplete$ = this.actions$.pipe(
@@ -95,17 +109,24 @@ export class TripDirectionEffects {
         })
       );
     })  */
+      let url = '';
+      if (this.server === 'appachi') {
+        url = `{$environment.urlAppachi } +
+          'locations?type=' +
+          {$request.payload.type} +
+          '&search_name=' +
+          {$encodeURIComponent(request.payload.name)}`;
+      } else {
+        const type = request.payload.type === 'from' ? '1' : '2';
+        url =
+          environment.urlTomCat +
+          'CheapTrip/getLocations?type=' +
+          type +
+          '&search_name=' +
+          encodeURIComponent(request.payload.name);
+      }
 
-    /*    for NomCat server */
-      const type = request.payload.type === 'from' ? '1' : '2';
-      console.log('type', type);
-      const URLTOMCAT =
-        environment.urlTomCat +
-        'CheapTrip/getLocations?type=' +
-        type +
-        '&search_name=' +
-        encodeURIComponent(request.payload.name);
-      return this.http.get<IPathPoint[]>(URLTOMCAT).pipe(
+      return this.http.get<IPathPoint[]>(url).pipe(
         map((res) => {
           console.log('autocomplete', res);
           const newAction =
@@ -127,28 +148,60 @@ export class TripDirectionEffects {
     ofType(TripDirectionActions.GET_ROUTS),
     switchMap(
       (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
-       /*  for Appachi server
-        const URL =
-          environment.urlAppachi +
-          'routes?from=' +
-          request.payload[0].id +
-          '&to=' +
-          request.payload[1].id; */
+        let url = '';
 
-        /*   for TomCat Server */
+        if (this.server === 'appachi') {
+          url =
+            environment.urlAppachi +
+            'routes?from=' +
+            request.payload[0].id +
+            '&to=' +
+            request.payload[1].id;
+        } else {
+          url =
+            environment.urlTomCat +
+            'CheapTrip/getRoute?format=json&from=' +
+            request.payload[0].id +
+            '&to=' +
+            request.payload[1].id;
+        }
 
-        const URL =
-          environment.urlTomCat +
-          'CheapTrip/getRoute?format=json&from=' +
-          request.payload[0].id +
-          '&to=' +
-          request.payload[1].id;
-          return this.http.get(URL).pipe(map(res => {
+        return this.http.get(url).pipe(
+          map(res => {
+            let resultPathArr=null;
+            if (this.server === 'appachi'){
+              resultPathArr = this.transformObject(res  as IRecievedRouts[]);
+            } else {
+              resultPathArr = this.transformObjectTomCat(res);
+            }
 
-          }));
+            const endPoints = {
+              from: request.payload[0],
+              to: request.payload[1],
+            };
+            const queryParams = {
+              from: request.payload[0].name,
+              fromID: request.payload[0].id,
+              to: request.payload[1].name,
+              toID: request.payload[1].id,
+            };
+            this.router.navigate(['/search/myPath'], {
+              queryParams,
+            });
 
+            return new TripDirectionActions.SetRouts({
+              paths: resultPathArr,
+              endPoints: endPoints,
+            });
+          }),
+          catchError((error) => {
+            const errorMessage = 'An unknown error occured!';
+            this.handleError(error);
+            return of(new TripDirectionActions.AutoCompleteFail(error));
+          })
+        );
 
-      /*   return this.http.get(URL).pipe(
+        /*   return this.http.get(URL).pipe(
           map((res) => {
             const resultPathArr = this.transformObject(res as IRecievedRouts[]);
             const endPoints = {
@@ -180,15 +233,10 @@ export class TripDirectionEffects {
     )
   );
 
-
-
-  private transformObjectAppachi(obj: object): IPath[] {
+  private transformObjectTomCat(obj: object): IPath[] {
     const objArr: IPath[] = [];
     for (const i in obj) {
       const transformedDetails = this.transformDetails(obj[i]);
-      const PATHMAP = {
-
-      }
       const testObj: IPath = {
         pathType: PATHMAP.get(i).type,
         details: transformedDetails,
@@ -206,15 +254,12 @@ export class TripDirectionEffects {
         duration_minutes: rout.duration_minutes,
         direct_paths: rout.direct_paths,
       };
-
       const transformedRout: any = {
         pathType: rout.routeType,
         details: this.transformDetails(details),
       };
-
       objArr.push(transformedRout);
     });
-
     return this.reducedPaths(objArr);
   }
 
