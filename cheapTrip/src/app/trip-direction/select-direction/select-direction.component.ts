@@ -1,3 +1,4 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import {
   Component,
   EventEmitter,
@@ -14,6 +15,26 @@ import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
   selector: 'app-select-direction',
   templateUrl: './select-direction.component.html',
   styleUrls: ['./select-direction.component.scss'],
+  animations: [
+    trigger('insertRemoveTrigger1', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('100ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('100ms', style({ opacity: 0}))
+      ])
+    ]),
+    trigger('insertRemoveTrigger2', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms 1300ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('100ms', style({ opacity: 0 }))
+      ])
+    ]),
+  ]
 })
 export class SelectDirectionComponent implements OnInit, OnDestroy {
  // @Input() points: [IPathPoint, IPathPoint];

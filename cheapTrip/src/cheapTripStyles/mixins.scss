@@ -52,29 +52,42 @@
   box-shadow: $hLength $vLength $blurR $spreadR rgba(0, 0, 0, 0.75);
 }
 
-@mixin desktop {
-  @media screen and (max-width: 2000px) {
+@mixin XLarge {
+  @media screen and (max-width: 2000px) and (min-width: 1920px) {
        @content;
   }
 }
-@mixin laptop {
-  @media screen and (max-width: 992px) {
+@mixin Large {
+  @media screen and (max-width: 1919.99px) and (min-width: 1280px){
       @content;
   }
 }
-@mixin tablets {
-  @media screen and (max-width: 768px) {
+@mixin Medium {
+  @media screen and  (max-width: 1279.99px) and (min-width: 960px) {
       @content;
   }
 }
-@mixin phones {
- @media screen and (max-width: 480px) {
+
+@mixin Small {
+  @media screen and  (max-width: 959.99px) and (min-width: 600px) {
+      @content;
+  }
+}
+
+@mixin XSmall {
+  @media screen and  (max-width: 599.99px) and (min-width: 411px) {
+      @content;
+  }
+}
+
+@mixin Phones {
+ @media screen and (max-width: 410.99px) and (min-width: 360px) {
       @content;
  }
 }
 
-@mixin smallphones {
-  @media screen and (max-width: 376px) {
+@mixin Smallphones {
+  @media screen and (max-width: 359.99px) {
        @content;
   }
  }

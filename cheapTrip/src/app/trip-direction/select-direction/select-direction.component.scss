@@ -6,15 +6,31 @@
 }
 
 div.mainContainer {
-  width: 95%;
+  width: 80%;
+  margin: auto;
   height: auto;
   box-sizing: border-box;
   position: relative;
-  p {
-    text-align: center;
-    font-family: "Dosis", sans-serif;
-    color: $base-dark;
+  div.message {
+    margin: 0;
+    padding: 0;
+
+    p {
+      text-align: center;
+      font-family: "Dosis", sans-serif;
+      color: $base-dark;
+      margin: 3rem auto;
+      font-size: 3rem;
+      line-height: 2rem;
+    }
+    div {
+      position: relative;
+      p:last-of-type {
+        font-size: 2rem;
+      }
+    }
   }
+
   form {
     width: 100%;
     margin: auto;
@@ -49,28 +65,39 @@ div.mainContainer {
       }
     }
     div.actions {
-      margin: 0.5rem auto;
+      height: 5rem;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: flex-end;
       button {
+        width: 6rem;
         margin: 0 2rem;
-        padding: 0 1rem;
       }
     }
   }
 }
 
-@include desktop {
-  div.mainContainer {
-    width: 80%;
-    margin: 2rem auto;
+div.deliveryMode {
+  div.message {
     p {
-      font-size: 2rem;
-      margin: 3rem auto;
-      line-height: 200%;
-      font-weight: bold;
+      display: none;
     }
+    p:first-child {
+      display: block;
+      font-size: 2rem;
+    }
+  }
+  form{
+    div.actions{
+      align-items: flex-start;
+      height: 2.5rem;
+    }
+  }
+}
+
+@include Large {
+  div.mainContainer {
     form {
       div.actions {
         margin-top: 1rem;
@@ -86,19 +113,40 @@ div.mainContainer {
     }
   }
 }
+@include Small {
+  div.mainContainer {
+    width: 90%;
 
-@include phones {
+    p {
+      margin: 2rem auto;
+    }
+  }
+}
+
+@include Phones {
   div.searchMode {
     margin: auto;
     width: 98%;
-    p {
-      display: block;
-      width: 90%;
-      margin: 1rem auto;
-      font-size: 1rem;
-      line-height: 150%;
+    div.message {
+      p {
+        display: block;
+        width: 90%;
+        margin: auto;
+     font-size: 1.5rem;
+
+      }
+      div {
+        p:last-of-type {
+          font-weight: normal;
+          line-height: 150%;
+          font-size: 1rem;
+        }
+      }
     }
+
     form {
+      position: relative;
+      top: -0.5rem;
       width: 100%;
       flex-direction: column;
       div.formInfo {
@@ -126,15 +174,20 @@ div.mainContainer {
           transform: rotate(90deg);
         }
       }
+      div.actions {
+        height: auto;
+        align-items: flex-start;
+      }
     }
   }
 
   div.deliveryMode {
     width: 100%;
     margin: 5px auto;
-    p {
+    div.message {
       display: none;
     }
+
     form {
       div.actions {
         margin: 0;
@@ -154,6 +207,7 @@ div.mainContainer {
           color: $base-dark;
         }
       }
+
     }
   }
 }

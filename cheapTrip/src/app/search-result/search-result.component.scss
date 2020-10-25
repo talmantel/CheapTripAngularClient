@@ -3,10 +3,11 @@
 div.mainContainer {
   display: flex;
   width: 98%;
-  margin:auto;
+  margin: auto;
+  position: relative;
 }
 
-@include desktop {
+@include Large {
   div.mainContainer {
     flex-direction: row;
     width: 80%;
@@ -16,29 +17,105 @@ div.mainContainer {
     align-items: flex-start;
 
     div.aside {
-      flex-basis: 33%;
+      flex-basis: 45%;
+    //  background-color: magenta;
+      flex-grow: 1;
     }
     div.map {
       position: relative;
-      flex-basis: 65%;
-
+      flex-basis: 54%;
+    //  background-color: mediumaquamarine;
       height: auto;
     }
   }
 }
 
-@include phones {
+@include Medium {
   div.mainContainer {
+    flex-direction: row;
+    width: 95%;
+    height: auto;
+    margin: auto;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    div.aside {
+      flex-basis: 49%;
+    //  background-color: rgb(30, 255, 0);
+    }
+    div.map {
+      position: relative;
+      flex-basis: 55%;
+    //  background-color: rgb(112, 102, 205);
+      height: auto;
+    }
+  }
+}
+@include Small {
+  div.mainContainer {
+    top: 2rem;
     flex-direction: column;
-    width: 98%;
-    margin:auto;
+    width: 95%;
+    height: auto;
+    margin: auto;
+    justify-content: flex-start;
+    align-items: stretch;
+   // border: 3px solid red;
+    margin: auto;
+    div.aside {
+      flex-basis: 100%;
+    //  background-color: rgb(217, 255, 0);
+    }
+    div.map {
+      position: relative;
+      flex-basis: 100%;
+ //     background-color: rgb(205, 102, 133);
+      height: auto;
+    }
+  }
+}
+
+@include XSmall {
+  div.mainContainer {
+    top: 2rem;
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    margin: auto;
+    justify-content: space-between;
+    align-items: flex-start;
 
     div.aside {
       flex-basis: 100%;
-      align-self: stretch;
+   //   background-color: rgb(209, 152, 46);
     }
     div.map {
+      position: relative;
       flex-basis: 100%;
+    //  background-color: blue;
+      height: auto;
+    }
+  }
+}
+@include Phones {
+  div.mainContainer {
+    top: 2rem;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    div.aside {
+      flex-basis: 100%;
+   //   background-color: rgb(128, 90, 19);
+    }
+    div.map {
+      position: relative;
+      flex-basis: 100%;
+    //  background-color: rgb(250, 1, 76);
+      height: auto;
     }
   }
 }

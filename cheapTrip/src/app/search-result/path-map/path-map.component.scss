@@ -17,8 +17,6 @@ div {
   margin: 0;
   iframe {
     position: relative;
-
-    box-sizing: border-box;
   }
 }
 
@@ -31,7 +29,7 @@ div.desktop {
   }
 }
 
-@include phones {
+@include Phones {
   div {
     width: 100%;
     margin: auto;

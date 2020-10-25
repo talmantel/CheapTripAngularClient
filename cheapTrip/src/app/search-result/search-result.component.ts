@@ -38,12 +38,14 @@ const viewportSizes = [
 ];
 const ROW_HEIGHT = 250;
 enum FrameWidth {
+  SMALLPHONES = 360 * 0.95,
+  PHONES = 411 * 0.95,
   SSMALL = 360,
-  XSMALL = 420,
-  SMALL = 500,
-  MEDIUM = 800,
-  LARGE = 900,
-  XLARGE = 1000,
+  XSMALL = 600 * 0.9,
+  SMALL = 768 * 0.9,
+  MEDIUM = 700,
+  LARGE = 700,
+  // XLARGE = 1000,
 }
 
 @Component({
@@ -102,19 +104,24 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   private getGridsSize(obs: BreakpointObserver) {
-    if (obs.isMatched('(max-width: 410px)')) {
-      this.frameWidth = FrameWidth.SSMALL;
+    if (obs.isMatched('(max-width: 361px)')) {
+      this.frameWidth = FrameWidth.SMALLPHONES;
+    } else if (obs.isMatched('(max-width: 412px)')) {
+      this.frameWidth = FrameWidth.PHONES;
     } else if (obs.isMatched(Breakpoints.XSmall)) {
       this.frameWidth = FrameWidth.XSMALL;
     } else if (obs.isMatched(Breakpoints.Small)) {
       this.frameWidth = FrameWidth.SMALL;
       this.isDesktop = true;
     } else if (
-      obs.isMatched(Breakpoints.Medium) ||
-      obs.isMatched(Breakpoints.Large) ||
-      obs.isMatched(Breakpoints.XLarge)
+      obs.isMatched(Breakpoints.Medium)
+      // obs.isMatched(Breakpoints.Large) ||
+      // obs.isMatched(Breakpoints.XLarge)
     ) {
       this.frameWidth = FrameWidth.MEDIUM;
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.Large)) {
+      this.frameWidth = FrameWidth.LARGE;
       this.isDesktop = true;
     }
   }
