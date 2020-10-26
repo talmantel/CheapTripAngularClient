@@ -17,5 +17,6 @@ price: number;
   constructor() {}
 
   ngOnInit(): void {
+
   }
 }

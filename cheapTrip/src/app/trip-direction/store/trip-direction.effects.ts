@@ -81,7 +81,7 @@ export class TripDirectionEffects {
     private http: HttpClient,
     private router: Router
   ) {
-    // this.server = 'tomcat'; //to be fixed
+     //this.server = 'tomcat'; //to be fixed
     this.server = 'appachi';
   }
 
@@ -110,7 +110,6 @@ export class TripDirectionEffects {
 
       return this.http.get<IPathPoint[]>(url).pipe(
         map((res) => {
-          console.log('autocomplete', res);
           const newAction =
             request.payload.type === 'from'
               ? new TripDirectionActions.SetStartPointAutocomplete(res)
@@ -183,34 +182,7 @@ export class TripDirectionEffects {
           })
         );
 
-        /*   return this.http.get(URL).pipe(
-          map((res) => {
-            const resultPathArr = this.transformObject(res as IRecievedRouts[]);
-            const endPoints = {
-              from: request.payload[0],
-              to: request.payload[1],
-            };
-            const queryParams = {
-              from: request.payload[0].name,
-              fromID: request.payload[0].id,
-              to: request.payload[1].name,
-              toID: request.payload[1].id,
-            };
-            this.router.navigate(['/search/myPath'], {
-              queryParams,
-            });
 
-            return new TripDirectionActions.SetRouts({
-              paths: resultPathArr,
-              endPoints: endPoints,
-            });
-          }),
-          catchError((error) => {
-            const errorMessage = 'An unknown error occured!';
-            this.handleError(error);
-            return of(new TripDirectionActions.AutoCompleteFail(error));
-          })
-        );*/
       }
     )
   );
@@ -282,9 +254,6 @@ export class TripDirectionEffects {
   private transformPrice(price: number): number {
     const euro = Math.floor(+price);
     const cent = Math.floor(+price - euro) * 10;
-    const euroStr = euro === 0 ? '' : euro + ' euro';
-    const centStr = cent === 0 ? '' : cent + ' cent';
-    // return euroStr + '' + centStr;
     return price;
   }
 
@@ -326,7 +295,6 @@ export class TripDirectionEffects {
   }
 
   private reducedPaths(paths: IPath[]): IPath[] {
-    console.log('effect', paths);
     const stringifyArr = paths.map((p) => JSON.stringify(p.details));
     let ind = -1;
     for (let i = 1; i < paths.length; i++) {
@@ -334,11 +302,6 @@ export class TripDirectionEffects {
         ind = i;
       }
     }
-    console.log(
-      paths.filter((_path, index) => {
-        return index != ind;
-      })
-    );
     return paths.filter((_path, index) => {
       return index != ind;
     });

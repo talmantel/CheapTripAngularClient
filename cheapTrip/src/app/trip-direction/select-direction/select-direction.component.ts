@@ -1,4 +1,10 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 import {
   Component,
   EventEmitter,
@@ -21,23 +27,19 @@ import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
         style({ opacity: 0 }),
         animate('100ms', style({ opacity: 1 })),
       ]),
-      transition(':leave', [
-        animate('100ms', style({ opacity: 0}))
-      ])
+      transition(':leave', [animate('100ms', style({ opacity: 0 }))]),
     ]),
     trigger('insertRemoveTrigger2', [
       transition(':enter', [
         style({ opacity: 0 }),
         animate('300ms 1300ms', style({ opacity: 1 })),
       ]),
-      transition(':leave', [
-        animate('100ms', style({ opacity: 0 }))
-      ])
+      transition(':leave', [animate('100ms', style({ opacity: 0 }))]),
     ]),
-  ]
+  ],
 })
 export class SelectDirectionComponent implements OnInit, OnDestroy {
- // @Input() points: [IPathPoint, IPathPoint];
+  // @Input() points: [IPathPoint, IPathPoint];
   @Input() startPointAutoComplete: IPathPoint[];
   @Input() endPointAutoComplete: IPathPoint[];
   @Input() mode: Modes = Modes.SEARCH;
@@ -52,17 +54,28 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   modes = Modes;
 
   @Input() pointSubj: Subject<{ from: IPathPoint; to: IPathPoint }>;
-  subscripton: Subscription;
+  @Input() clearFormSubj: Subject<boolean>;
+  pointSubscripton: Subscription;
+  clearFormSubscription:Subscription;
 
   constructor() {}
   ngOnDestroy(): void {
-    this.subscripton.unsubscribe();
+    this.pointSubscripton.unsubscribe();
+    this.clearFormSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.subscripton = this.pointSubj.subscribe((points) => {
-    //  console.log('child conponen this.points', this.points);
-      console.log('child conponenpoints', points);
+    this.clearFormSubscription = this.clearFormSubj.subscribe((val) => {
+      if (val && this.directionForm) {
+        this.directionForm.setValue({
+          startPointControl: '',
+          endPointControl: '',
+        });
+        this.directionForm.markAsUntouched();
+
+      }
+    });
+    this.pointSubscripton = this.pointSubj.subscribe((points) => {
       if (
         this.directionForm &&
         this.directionForm.get('startPointControl').value === '' &&
@@ -87,7 +100,6 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
         Validators.pattern('^[a-zA-Z0-9- ]*$'),
       ]),
     });
-
   }
   // autocomplete is invoked
   onInput(str: string, type: 'from' | 'to'): void {

@@ -20,16 +20,17 @@ export class TripDirectionComponent implements OnInit {
   endP: IPathPoint;
   endPoint: IPathPoint;
   points: [IPathPoint, IPathPoint];
+
   startPointAutoComplete: IPathPoint[];
   endPointAutoComplete: IPathPoint[];
   selectDirectionSubscription: Subscription;
   mode: Modes;
   pointSubj$: Subject<{ from: IPathPoint; to: IPathPoint }>;
-  private subscription: Subscription;
+  clearFormSubj$: Subject<boolean>;
+
 
   constructor(
     private store: Store<fromApp.AppState>,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -40,6 +41,7 @@ export class TripDirectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
+    this.clearFormSubj$ = new BehaviorSubject(true);
     this.route.queryParams.subscribe(
       (queryParams: {
         from: string;
@@ -58,11 +60,12 @@ export class TripDirectionComponent implements OnInit {
     );
     this.selectDirectionSubscription = this.store
       .select('directions')
-      .subscribe((state) => {
+      .subscribe(state => {
+        if(state.startPoint == null && state.endPoint == null){
+          this.clearFormSubj$.next(true);
+        }
         this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
-
         this.points = [state.startPoint, state.endPoint];
-        console.log('points', this.points);
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
         this.mode = state.mode; // for form horisontal or vertical oriantation

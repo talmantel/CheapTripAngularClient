@@ -67,10 +67,10 @@ div.mainContainer {
         mat-form-field.invalid {
           border-color: var(--color-warn);
         }
-        span.arrows {
-          color: var(--color-primary);
-          cursor: pointer;
-        }
+      }
+      span.arrows {
+        color: var(--color-primary);
+        cursor: pointer;
       }
     }
     div.actions {
@@ -181,7 +181,6 @@ div.deliveryMode {
           justify-self: baseline;
           text-align: center;
           transform: rotate(90deg);
-          color: var(--color-accent);
         }
       }
       div.actions {
@@ -214,7 +213,7 @@ div.deliveryMode {
         span {
           font-size: 0.9rem;
 
-          color: var(--color-accent);
+          // color: var(--color-accent);
         }
       }
     }

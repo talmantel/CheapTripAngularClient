@@ -91,7 +91,6 @@ export function tripDirectionReducer(
       const length1 = action.payload.paths.reduce((sum, current) => {
         return sum + current.details.direct_paths.length;
       }, 0);
-      console.log('action payload', action.payload.paths);
 
       const res = length1 + pathsAmount;
       return {
@@ -111,15 +110,12 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.CLEAN_DATA:
-      console.log('reducer');
       return {
         ...state,
         startPoint: null,
         endPoint: null,
         startPointAutoComplete: [],
         endPointAutoComplete: [],
-       // paths: [],
-     //   mode: Modes.SEARCH,
         errorMessage: '',
       };
 

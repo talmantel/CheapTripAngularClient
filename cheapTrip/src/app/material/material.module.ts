@@ -20,6 +20,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -52,7 +53,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
+
 
   ]
 })

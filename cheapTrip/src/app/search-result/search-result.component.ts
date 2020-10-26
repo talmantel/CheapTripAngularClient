@@ -38,9 +38,9 @@ enum FrameWidth {
   PHONES = 420 ,
   SSMALL = 360,
   XSMALL = 600 * 0.9,
-  SMALL = 768 * 0.9,
-  MEDIUM = 700,
-  LARGE = 700,
+  SMALL = 600 * 0.9,
+  MEDIUM = 600 * 0.9,
+  LARGE = 600 * 0.9,
   // XLARGE = 1000,
 }
 
@@ -69,9 +69,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
     public mediaMatcher: MediaMatcher
   ) {
-    /*   breakpointObserver
-      .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
-      .subscribe((state: BreakpointState) => {}); */
 
     breakpointObserver
       .observe([

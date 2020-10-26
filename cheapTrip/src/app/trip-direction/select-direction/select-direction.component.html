@@ -8,15 +8,10 @@
       <p>to get anywhere by plane,
         train, bus and ride share altogether</p>
     </div>
-
-
   </div>
-
   <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
     <div class="formInfo">
       <section>
-
-
         <mat-form-field class="startPoint"
           [class.valid]="directionForm.get('startPointControl').valid && directionForm.get('startPointControl').touched"
           [class.invalid]="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched">

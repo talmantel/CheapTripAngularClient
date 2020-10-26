@@ -20,13 +20,13 @@ mat-spinner{
     align-items: flex-start;
 
     div.aside {
-      flex-basis: 45%;
+      flex-basis: 49%;
     //  background-color: magenta;
       flex-grow: 1;
     }
     div.map {
       position: relative;
-      flex-basis: 54%;
+      flex-basis: 50%;
     //  background-color: mediumaquamarine;
       height: auto;
     }
@@ -48,7 +48,7 @@ mat-spinner{
     }
     div.map {
       position: relative;
-      flex-basis: 55%;
+      flex-basis: 50%;
     //  background-color: rgb(112, 102, 205);
       height: auto;
     }
