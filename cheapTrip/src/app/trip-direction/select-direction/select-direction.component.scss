@@ -14,11 +14,10 @@ div.mainContainer {
   div.message {
     margin: 0;
     padding: 0;
-
+    color: var(--color-accent);
     p {
       text-align: center;
       font-family: "Dosis", sans-serif;
-      color: $base-dark;
       margin: 3rem auto;
       font-size: 3rem;
       line-height: 2rem;
@@ -47,21 +46,22 @@ div.mainContainer {
       mat-form-field {
         width: 45%;
         @include boxSizing(border-box);
-        border-left: 3px solid $base-light;
+        border-left: 3px solid var(--color-accent);
         padding-left: 0.5rem;
         input {
-          @include placeholder($base-dark, 2rem, normal, cursive);
+          @include placeholder(var(--color-primary), 2rem, normal, cursive);
         }
       }
       mat-form-field.valid {
-        border-color: $base-dark;
+        border-color: var(--color-primary);
       }
 
       mat-form-field.invalid {
-        border-color: $accent-dark;
+        border-color: var(--color-warn);
       }
       span {
-        color: $base-dark;
+        color: var(--color-primary);
+        cursor: pointer;
       }
     }
     div.actions {
@@ -88,8 +88,8 @@ div.deliveryMode {
       font-size: 2rem;
     }
   }
-  form{
-    div.actions{
+  form {
+    div.actions {
       align-items: flex-start;
       height: 2.5rem;
     }
@@ -132,8 +132,7 @@ div.deliveryMode {
         display: block;
         width: 90%;
         margin: auto;
-     font-size: 1.5rem;
-
+        font-size: 1.5rem;
       }
       div {
         p:last-of-type {
@@ -204,10 +203,9 @@ div.deliveryMode {
         span {
           font-size: 0.9rem;
 
-          color: $base-dark;
+          color: var(--color-accent);
         }
       }
-
     }
   }
 }

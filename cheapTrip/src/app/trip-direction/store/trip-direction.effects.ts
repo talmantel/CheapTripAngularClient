@@ -81,8 +81,8 @@ export class TripDirectionEffects {
     private http: HttpClient,
     private router: Router
   ) {
-   // this.server = 'tomcat'; //to be fixed
-   this.server = 'appachi';
+    this.server = 'tomcat'; //to be fixed
+    // this.server = 'appachi';
   }
 
   @Effect()
@@ -168,10 +168,10 @@ export class TripDirectionEffects {
         }
 
         return this.http.get(url).pipe(
-          map(res => {
-            let resultPathArr=null;
-            if (this.server === 'appachi'){
-              resultPathArr = this.transformObject(res  as IRecievedRouts[]);
+          map((res) => {
+            let resultPathArr = null;
+            if (this.server === 'appachi') {
+              resultPathArr = this.transformObject(res as IRecievedRouts[]);
             } else {
               resultPathArr = this.transformObjectTomCat(res);
             }
@@ -244,7 +244,7 @@ export class TripDirectionEffects {
       };
       objArr.push(testObj);
     }
-    return objArr;
+    return this.reducedPaths(objArr);
   }
 
   private transformObject(routs: IRecievedRouts[]): IPath[] {
@@ -345,6 +345,7 @@ export class TripDirectionEffects {
   }
 
   private reducedPaths(paths: IPath[]): IPath[] {
+    console.log('effect', paths);
     const stringifyArr = paths.map((p) => JSON.stringify(p.details));
     let ind = -1;
     for (let i = 1; i < paths.length; i++) {
@@ -352,6 +353,9 @@ export class TripDirectionEffects {
         ind = i;
       }
     }
+    console.log(paths.filter((_path, index) => {
+      return index != ind;
+    }));
     return paths.filter((_path, index) => {
       return index != ind;
     });

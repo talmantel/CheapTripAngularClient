@@ -45,15 +45,13 @@ export class TripDirectionComponent implements OnInit {
 
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
-    console.log('Back button pressed', event);
-  //  this.cleanData();
+
     this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
 
   }
 
   ngOnInit(): void {
-    this.subscription = this.route.params.subscribe((params) => {
-    });
+
     this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
     this.route.queryParams.subscribe(
       (queryParams: {
@@ -69,6 +67,7 @@ export class TripDirectionComponent implements OnInit {
           ];
           this.store.dispatch(new TripDirectionActions.GetRouts(payload));
         }
+
       }
     );
     this.selectDirectionSubscription = this.store
