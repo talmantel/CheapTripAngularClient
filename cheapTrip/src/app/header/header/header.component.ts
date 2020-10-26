@@ -5,6 +5,7 @@ import * as TripDirectionActions from '../../trip-direction/store/trip-direction
 
 import * as fromApp from '../../store/app.reducer';
 import { Modes } from 'src/app/trip-direction/trip-direction.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,8 @@ import { Modes } from 'src/app/trip-direction/trip-direction.model';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  isLoading: boolean;
+  subscription: Subscription;
   constructor(private route: Router, private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {}

@@ -11,13 +11,9 @@ import { Subscription } from 'rxjs';
 
 import * as fromApp from '../store/app.reducer';
 import { IPath } from '../trip-direction/trip-direction.model';
-import { Location } from '@angular/common';
 
-export interface IGrid {
-  color: string;
-  cols: number;
-  rows: number;
-}
+
+
 
 // reference information: available resolutions
 const viewportSizes = [
@@ -39,7 +35,7 @@ const viewportSizes = [
 const ROW_HEIGHT = 250;
 enum FrameWidth {
   SMALLPHONES = 360 * 0.95,
-  PHONES = 411 * 0.95,
+  PHONES = 420 ,
   SSMALL = 360,
   XSMALL = 600 * 0.9,
   SMALL = 768 * 0.9,
@@ -57,9 +53,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   paths: IPath[];
   isDesktop = false;
   getPathsSubscription: Subscription;
+  isLoading: boolean;
 
   // for UIw
-  grids: IGrid[];
+
   colsAmount = 7;
   rowHeight: string;
   frameWidth: number;
@@ -92,9 +89,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getPathsSubscription = this.store
       .select('directions')
-      .subscribe((state) => {
+      .subscribe(state => {
         this.paths = state.paths;
-        console.log('paths parent', this.paths);
+        this.isLoading = state.isLoading
+
         this.rowHeight = state.pathsAmount * ROW_HEIGHT + 'px';
       });
   }

@@ -43,25 +43,34 @@ div.mainContainer {
       flex-direction: row;
       justify-content: space-between;
       align-items: baseline;
-      mat-form-field {
+      section {
         width: 45%;
-        @include boxSizing(border-box);
-        border-left: 3px solid var(--color-accent);
-        padding-left: 0.5rem;
-        input {
-          @include placeholder(var(--color-primary), 2rem, normal, cursive);
+        p.error {
+          color: var(--color-warn);
+          font-style: italic;
+          padding-left: 3rem;
         }
-      }
-      mat-form-field.valid {
-        border-color: var(--color-primary);
-      }
+        mat-form-field {
+          width: 100%;
+          @include boxSizing(border-box);
+          border-left: 3px solid var(--color-accent);
+          padding-left: 0.5rem;
 
-      mat-form-field.invalid {
-        border-color: var(--color-warn);
-      }
-      span {
-        color: var(--color-primary);
-        cursor: pointer;
+          input {
+            @include placeholder(var(--color-primary), 2rem, normal, cursive);
+          }
+        }
+        mat-form-field.valid {
+          border-color: var(--color-accent);
+        }
+
+        mat-form-field.invalid {
+          border-color: var(--color-warn);
+        }
+        span.arrows {
+          color: var(--color-primary);
+          cursor: pointer;
+        }
       }
     }
     div.actions {
@@ -152,25 +161,27 @@ div.deliveryMode {
         flex-direction: column;
         height: auto;
         flex-direction: column;
-        mat-form-field {
+        section {
           width: 100%;
-          margin: auto;
-          position: relative;
-          padding-left: 0.4rem;
+          mat-form-field {
+            margin: auto;
+            position: relative;
+            padding-left: 0.4rem;
+          }
+          mat-form-field.startPoint {
+            top: 0.5rem;
+          }
+          mat-form-field.endPoint {
+            top: -0.5rem;
+          }
         }
-
-        mat-form-field.startPoint {
-          top: 0.5rem;
-        }
-        mat-form-field.endPoint {
-          top: -0.5rem;
-        }
-        span {
+        span.arrows {
           width: 1.5rem;
           align-self: center;
           justify-self: baseline;
           text-align: center;
           transform: rotate(90deg);
+          color: var(--color-accent);
         }
       }
       div.actions {

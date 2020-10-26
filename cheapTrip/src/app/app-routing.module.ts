@@ -5,8 +5,16 @@ import { HeaderComponent } from './header/header/header.component';
 import { NoPageComponent } from './no-page/no-page.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/search', pathMatch: 'full' },
+  { path: '', redirectTo: '/search', pathMatch: 'full' },
   {
+    path: 'search',
+    //   canActivate: [SearchResultGuard],
+    loadChildren: () =>
+      import('./trip-direction/trip-direction.module').then(
+        (m) => m.TripDirectionModule
+      ),
+  },
+ /*  {
     path: '',
     component: HeaderComponent,
     children: [
@@ -19,7 +27,7 @@ const routes: Routes = [
           ),
       },
     ],
-  },
+  }, */
 
   { path: '**', component: NoPageComponent },
 ];

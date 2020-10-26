@@ -89,27 +89,7 @@ export class TripDirectionEffects {
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     switchMap((request: { payload: IPoint; type: string }) => {
-      /*    for appachi server */
-      /*   const URLAPPACHI =
-        environment.urlAppachi +
-        'locations?type=' +
-        request.payload.type +
-        '&search_name=' +
-        encodeURIComponent(request.payload.name);
-        return this.http.get<IPathPoint[]>(URLAPPACHI).pipe(
-        map((res) => {
-          const newAction =
-            request.payload.type === 'from'
-              ? new TripDirectionActions.SetStartPointAutocomplete(res)
-              : new TripDirectionActions.SetEndPointAutocomplete(res);
-          return newAction;
-        }),
-        catchError((error) => {
-          this.handleError(error);
-          return of(new TripDirectionActions.AutoCompleteFail(error));
-        })
-      );
-    })  */
+
       let url = '';
       if (this.server === 'appachi') {
         url =

@@ -82,7 +82,6 @@ export class TripDirectionComponent implements OnInit {
   }
 
   cleanData(_event?: boolean): void {
-    console.log('clean data');
     this.store.dispatch(new TripDirectionActions.CleanData());
   }
 }

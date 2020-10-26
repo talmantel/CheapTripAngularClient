@@ -10,6 +10,7 @@ export interface ITripDirectionState {
   mode: Modes;
   errorMessage: string;
   pathsAmount: number;
+  isLoading: boolean;
 }
 
 const initialState: ITripDirectionState = {
@@ -21,6 +22,7 @@ const initialState: ITripDirectionState = {
   mode: Modes.SEARCH,
   errorMessage: '',
   pathsAmount: 0,
+  isLoading: false
 };
 
 export function tripDirectionReducer(
@@ -81,6 +83,7 @@ export function tripDirectionReducer(
     case TripDirectionActions.GET_ROUTS:
       return {
         ...state,
+        isLoading: true
       };
 
     case TripDirectionActions.SET_ROUTS:
@@ -98,6 +101,7 @@ export function tripDirectionReducer(
         endPoint: action.payload.endPoints.to,
         mode: Modes.DELIVERY,
         pathsAmount: res,
+        isLoading: false,
       };
 
     case TripDirectionActions.AUTOCOMPLETE_FAIL:

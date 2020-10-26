@@ -6,6 +6,9 @@ div.mainContainer {
   margin: auto;
   position: relative;
 }
+mat-spinner{
+  margin: auto;
+}
 
 @include Large {
   div.mainContainer {
