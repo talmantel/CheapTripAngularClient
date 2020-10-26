@@ -81,8 +81,8 @@ export class TripDirectionEffects {
     private http: HttpClient,
     private router: Router
   ) {
-    this.server = 'tomcat'; //to be fixed
-    // this.server = 'appachi';
+    // this.server = 'tomcat'; //to be fixed
+    this.server = 'appachi';
   }
 
   @Effect()
@@ -112,11 +112,12 @@ export class TripDirectionEffects {
     })  */
       let url = '';
       if (this.server === 'appachi') {
-        url = `{$environment.urlAppachi } +
+        url =
+          environment.urlAppachi +
           'locations?type=' +
-          {$request.payload.type} +
+          request.payload.type +
           '&search_name=' +
-          {$encodeURIComponent(request.payload.name)}`;
+          encodeURIComponent(request.payload.name);
       } else {
         const type = request.payload.type === 'from' ? '1' : '2';
         url =
@@ -353,9 +354,11 @@ export class TripDirectionEffects {
         ind = i;
       }
     }
-    console.log(paths.filter((_path, index) => {
-      return index != ind;
-    }));
+    console.log(
+      paths.filter((_path, index) => {
+        return index != ind;
+      })
+    );
     return paths.filter((_path, index) => {
       return index != ind;
     });
