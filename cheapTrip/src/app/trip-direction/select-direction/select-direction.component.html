@@ -18,7 +18,7 @@
           <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text"
             placeholder="From" aria-label="Number" matInput formControlName="startPointControl"
             [matAutocomplete]="auto1">
-          <mat-autocomplete #auto1="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "start")'>
+          <mat-autocomplete #auto1="matAutocomplete"  (optionSelected)='onOptionSelected($event.option.value, "start")'>
             <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name">
               {{start.name}}
             </mat-option>
