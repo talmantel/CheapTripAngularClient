@@ -75,13 +75,13 @@
 }
 
 @mixin XSmall {
-  @media screen and  (max-width: 599.99px) and (min-width: 411px) {
+  @media screen and  (max-width: 599.99px) and (min-width: 420px) {
       @content;
   }
 }
 
 @mixin Phones {
- @media screen and (max-width: 410.99px) and (min-width: 360px) {
+ @media screen and (max-width: 419.99px) and (min-width: 360px) {
       @content;
  }
 }
