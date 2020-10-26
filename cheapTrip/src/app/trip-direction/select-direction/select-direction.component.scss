@@ -11,12 +11,12 @@ height: 40px;
 }
 div.mainContainer {
   width: 80%;
-  margin: auto;
-  height: auto;
+ margin: auto;
+  height: auto ;
   box-sizing: border-box;
   position: relative;
   div.message {
-    margin: 0;
+    margin: 1rem auto 0.5rem;
     padding: 0;
     color: var(--color-accent);
     p {
@@ -42,7 +42,7 @@ div.mainContainer {
     box-sizing: border-box;
     div.formInfo {
       width: 100%;
-      margin: auto;
+      margin: 1rem auto 0.5rem;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
