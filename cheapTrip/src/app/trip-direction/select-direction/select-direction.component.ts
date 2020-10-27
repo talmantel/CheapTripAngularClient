@@ -54,26 +54,28 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   modes = Modes;
 
   @Input() pointSubj: Subject<{ from: IPathPoint; to: IPathPoint }>;
-  @Input() clearFormSubj: Subject<boolean>;
+  @Input() toHome: Subject<boolean>;
   pointSubscripton: Subscription;
-  clearFormSubscription: Subscription;
+  toHomeSubscription: Subscription;
 
   constructor() {}
   ngOnDestroy(): void {
     this.pointSubscripton.unsubscribe();
-    this.clearFormSubscription.unsubscribe();
+    this.toHomeSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.clearFormSubscription = this.clearFormSubj.subscribe((val) => {
-      if (val && this.directionForm) {
+   this.toHomeSubscription= this.toHome.subscribe((res) => {
+      if ( this.directionForm && res) {
         this.directionForm.setValue({
           startPointControl: '',
           endPointControl: '',
         });
+        this.directionForm.markAsPristine();
         this.directionForm.markAsUntouched();
       }
     });
+
     this.pointSubscripton = this.pointSubj.subscribe((points) => {
       if (
         this.directionForm &&
@@ -146,24 +148,19 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
       event.target.attributes.formControlName.value === 'startPointControl' &&
       !this.startPoint
     ) {
-      console.log('start point1');
       this.startPoint = this.startPointAutoComplete[0];
 
       this.directionForm.patchValue({
         startPointControl: this.startPoint.name,
       });
-      console.log('point1', this.startPoint);
     } else if (
       event.target.attributes.formControlName.value === 'endPointControl' &&
       !this.endPoint
     ) {
-      console.log('start point2');
       this.endPoint = this.endPointAutoComplete[0];
       this.directionForm.patchValue({
         endPointControl: this.endPoint.name,
       });
-      console.log('point2', this.startPoint);
-      console.log('point2', this.endPoint);
     }
   }
 }

@@ -20,14 +20,14 @@ export class TripDirectionComponent implements OnInit {
   endP: IPathPoint;
   endPoint: IPathPoint;
   points: [IPathPoint, IPathPoint];
+  toHome: boolean;
 
   startPointAutoComplete: IPathPoint[];
   endPointAutoComplete: IPathPoint[];
   selectDirectionSubscription: Subscription;
   mode: Modes;
   pointSubj$: Subject<{ from: IPathPoint; to: IPathPoint }>;
-  clearFormSubj$: Subject<boolean>;
-
+  toHomeSubj$: Subject<boolean>;
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -41,7 +41,7 @@ export class TripDirectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
-    this.clearFormSubj$ = new BehaviorSubject(true);
+    this.toHomeSubj$ = new Subject();
     this.route.queryParams.subscribe(
       (queryParams: {
         from: string;
@@ -60,14 +60,14 @@ export class TripDirectionComponent implements OnInit {
     );
     this.selectDirectionSubscription = this.store
       .select('directions')
-      .subscribe(state => {
-        if(state.startPoint == null && state.endPoint == null){
-          this.clearFormSubj$.next(true);
-        }
+      .subscribe((state) => {
         this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
         this.points = [state.startPoint, state.endPoint];
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
+
+        this.toHomeSubj$.next(state.toHome);
+
         this.mode = state.mode; // for form horisontal or vertical oriantation
       });
   }
@@ -85,6 +85,6 @@ export class TripDirectionComponent implements OnInit {
   }
 
   cleanData(_event?: boolean): void {
-    this.store.dispatch(new TripDirectionActions.CleanData());
+    this.store.dispatch(new TripDirectionActions.CleanData(false));
   }
 }

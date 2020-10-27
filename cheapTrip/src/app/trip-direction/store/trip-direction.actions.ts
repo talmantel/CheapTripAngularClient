@@ -76,7 +76,7 @@ export class AutoCompleteFail implements Action {
 
 export class CleanData implements Action {
   readonly type = CLEAN_DATA;
-  constructor() {}
+  constructor(public payload: boolean) {}
 }
 export class SetMode implements Action {
   readonly type = SET_MODE;

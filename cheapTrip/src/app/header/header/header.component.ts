@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
   toHomePage(): void {
     this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
-    this.store.dispatch(new TripDirectionActions.CleanData());
+    this.store.dispatch(new TripDirectionActions.CleanData(true));
     this.route.navigate(['/']);
   }
 }
