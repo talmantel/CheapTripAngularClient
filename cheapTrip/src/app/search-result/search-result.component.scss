@@ -122,3 +122,48 @@ mat-spinner{
     }
   }
 }
+
+
+@include Phones {
+  div.mainContainer {
+    top: 2rem;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    justify-content: space-between;
+    align-items: stretch;
+
+    div.aside {
+      flex-basis: 100%;
+   //   background-color: rgb(128, 90, 19);
+    }
+    div.map {
+      position: relative;
+      flex-basis: 100%;
+    //  background-color: rgb(250, 1, 76);
+      height: auto;
+    }
+  }
+}
+@include Smallphones {
+  div.mainContainer {
+    top: 0.5rem;
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    margin: auto;
+    justify-content: space-between;
+    align-items: stretch;
+    div.aside {
+      flex-basis: 100%;
+   //   background-color: rgb(209, 152, 46);
+    }
+    div.map {
+      position: relative;
+      flex-basis: 100%;
+    //  background-color: blue;
+      height: auto;
+    }
+  }
+}

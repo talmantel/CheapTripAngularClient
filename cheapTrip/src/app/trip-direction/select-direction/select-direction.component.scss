@@ -136,6 +136,102 @@ div.deliveryMode {
   }
 }
 
+@include Smallphones {
+  div.searchMode {
+    margin: auto;
+    width: 98%;
+    div.message {
+      p {
+        display: block;
+        width: 90%;
+        margin: auto;
+        font-size: 1.5rem;
+      }
+      div {
+        p:last-of-type {
+          font-weight: normal;
+          line-height: 150%;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    form {
+      position: relative;
+      top: -0.5rem;
+      width: 100%;
+      flex-direction: column;
+      div.formInfo {
+        flex-direction: column;
+        height: auto;
+        flex-direction: column;
+        section {
+          width: 100%;
+          mat-form-field {
+            margin: auto;
+            position: relative;
+            padding-left: 0.4rem;
+          }
+          mat-form-field.startPoint {
+            top: 0.5rem;
+          }
+
+        }
+        span.arrows {
+          width: 1.5rem;
+          align-self: center;
+          justify-self: baseline;
+          text-align: center;
+          transform: rotate(90deg);
+        }
+      }
+      div.actions {
+        height: auto;
+        align-items: flex-start;
+      }
+    }
+  }
+
+  div.deliveryMode {
+    width: 100%;
+    margin: 5px auto;
+    div.message {
+      display: none;
+    }
+
+    form {
+      div.actions {
+        margin: 0;
+      }
+      div.formInfo {
+        width: 98%;
+        margin: 0.5rem auto 0;
+        position: relative;
+
+        mat-form-field {
+          position: relative;
+          border-left: none;
+        }
+        span {
+          font-size: 0.9rem;
+
+          // color: var(--color-accent);
+        }
+      }
+    }
+  }
+}
+
+@include Small {
+  div.mainContainer {
+    width: 90%;
+
+    p {
+      margin: 2rem auto;
+    }
+  }
+}
+
 @include Phones {
   div.searchMode {
     margin: auto;
