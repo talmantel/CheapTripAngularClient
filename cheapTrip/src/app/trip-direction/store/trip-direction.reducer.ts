@@ -110,10 +110,11 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.CLEAN_DATA:
+      const emptyPoint = {id: null, name: ''}
       return {
         ...state,
-        startPoint: null,
-        endPoint: null,
+        startPoint: emptyPoint,
+        endPoint:  emptyPoint,
         startPointAutoComplete: [],
         endPointAutoComplete: [],
         errorMessage: '',
