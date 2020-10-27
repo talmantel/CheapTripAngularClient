@@ -128,6 +128,7 @@ export class TripDirectionEffects {
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
     switchMap(
+
       (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
         let url = '';
 

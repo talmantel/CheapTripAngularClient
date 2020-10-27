@@ -45,6 +45,8 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   @Input() mode: Modes = Modes.SEARCH;
 
   @Output() changePoint = new EventEmitter<IPoint>();
+  @Output() startPointSelected = new EventEmitter<IPathPoint>();
+  @Output() endPointSelected = new EventEmitter<IPathPoint>();
   @Output() selectedPoints = new EventEmitter<IPathPoint[]>();
   @Output() cleanData = new EventEmitter<boolean>();
 
@@ -54,38 +56,33 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   modes = Modes;
 
   @Input() pointSubj: Subject<{ from: IPathPoint; to: IPathPoint }>;
-  @Input() toHome: Subject<boolean>;
+  //@Input() toHome: Subject<boolean>;
   pointSubscripton: Subscription;
-  toHomeSubscription: Subscription;
+  // toHomeSubscription: Subscription;
 
   constructor() {}
   ngOnDestroy(): void {
     this.pointSubscripton.unsubscribe();
-    this.toHomeSubscription.unsubscribe();
+    // this.toHomeSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-   this.toHomeSubscription= this.toHome.subscribe((res) => {
-      if ( this.directionForm && res) {
-        this.directionForm.setValue({
-          startPointControl: '',
-          endPointControl: '',
-        });
-        this.directionForm.markAsPristine();
-        this.directionForm.markAsUntouched();
-      }
-    });
-
     this.pointSubscripton = this.pointSubj.subscribe((points) => {
       if (
-        this.directionForm &&
+       ( this.directionForm &&
         this.directionForm.get('startPointControl').value === '' &&
-        this.directionForm.get('endPointControl').value === ''
+        this.directionForm.get('endPointControl').value === '') || (points.from.id == null)
       ) {
+        console.log('points', points);
         this.directionForm.setValue({
           startPointControl: points.from.name,
           endPointControl: points.to.name,
         });
+         if(points.from.id == null){
+            this.directionForm.markAsUntouched();
+            this.directionForm.markAsPristine();
+         }
+
       }
     });
 
@@ -123,44 +120,39 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  onOptionSelected(point: string, type: string): void {
+  private onOptionSelected(point: any, type: string): void {
     if (type == 'start') {
-      this.startPoint = {
-        name: point,
-        id: this.startPointAutoComplete.filter((item) => item.name == point)[0]
-          .id,
-      };
+      this.startPointSelected.emit(point);
     } else {
-      this.endPoint = {
-        name: point,
-        id: this.endPointAutoComplete.filter((item) => item.name == point)[0]
-          .id,
-      };
+      this.endPointSelected.emit(point);
     }
   }
 
   cleanForm(): void {
     this.cleanData.emit(true);
+    this.directionForm.setValue({
+      startPointControl: '',
+      endPointControl: '',
+    });
+    this.directionForm.markAsPristine();
+    this.directionForm.markAsUntouched();
   }
 
   onFocusOut(event: any): void {
-    if (
-      event.target.attributes.formControlName.value === 'startPointControl' &&
-      !this.startPoint
-    ) {
+    if (event.target.attributes.formControlName.value === 'startPointControl') {
       this.startPoint = this.startPointAutoComplete[0];
-
       this.directionForm.patchValue({
         startPointControl: this.startPoint.name,
       });
+      this.onOptionSelected({ ...this.startPoint }, 'start');
     } else if (
-      event.target.attributes.formControlName.value === 'endPointControl' &&
-      !this.endPoint
+      event.target.attributes.formControlName.value === 'endPointControl'
     ) {
       this.endPoint = this.endPointAutoComplete[0];
       this.directionForm.patchValue({
         endPointControl: this.endPoint.name,
       });
+      this.onOptionSelected({ ...this.endPoint }, 'end');
     }
   }
 }

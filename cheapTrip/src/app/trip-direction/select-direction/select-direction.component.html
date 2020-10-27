@@ -18,7 +18,8 @@
           <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text"
             placeholder="From" aria-label="Number" matInput formControlName="startPointControl"
             [matAutocomplete]="auto1">
-          <mat-autocomplete #auto1="matAutocomplete"  (optionSelected)='onOptionSelected($event.option.value, "start")'>
+ <!--          <mat-autocomplete #auto1="matAutocomplete"  (optionSelected)='onOptionSelected($event.option.value, "start")'> -->
+            <mat-autocomplete #auto1="matAutocomplete"  >
             <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name">
               {{start.name}}
             </mat-option>
@@ -37,7 +38,8 @@
           [class.invalid]="directionForm.get('endPointControl').invalid && directionForm.get('endPointControl').touched">
           <input #endPoint (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text"
             placeholder="To" aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
-          <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "end")'>
+      <!--       <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "end")'> -->
+            <mat-autocomplete #auto2="matAutocomplete" >
             <mat-option *ngFor="let end of endPointAutoComplete" [value]="end.name">
               {{end.name}}
             </mat-option>

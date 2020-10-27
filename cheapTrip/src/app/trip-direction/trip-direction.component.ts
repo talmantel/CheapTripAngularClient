@@ -61,15 +61,34 @@ export class TripDirectionComponent implements OnInit {
     this.selectDirectionSubscription = this.store
       .select('directions')
       .subscribe((state) => {
-        this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
-        this.points = [state.startPoint, state.endPoint];
+        if (state.startPoint != null && state.startPoint != null) {
+          this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
+        } else if (state.mode === 0) {
+          const empty = { id: null, name: '' };
+          console.log('empty');
+
+          this.pointSubj$.next({ from: { ...empty }, to: { ...empty } });
+        }
+
+        //  this.points = [state.startPoint, state.endPoint];
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
 
-        this.toHomeSubj$.next(state.toHome);
+        //   this.toHomeSubj$.next(state.toHome);
 
         this.mode = state.mode; // for form horisontal or vertical oriantation
       });
+  }
+
+  onStartPointSelected(point: IPathPoint) {
+    this.store.dispatch(new TripDirectionActions.SetStartPoint(point));
+    this.startPoint = point;
+    console.log('start point,', this.startPoint);
+  }
+
+  onEndPointSelected(point: IPathPoint) {
+    this.store.dispatch(new TripDirectionActions.SetEndPoint(point));
+    this.endPoint = point;
   }
 
   onChangePoint(point: IPoint): void {
@@ -77,10 +96,10 @@ export class TripDirectionComponent implements OnInit {
   }
 
   getRouts(points: IPoint): void {
-    this.store.dispatch(new TripDirectionActions.SetStartPoint(points[0]));
-    this.store.dispatch(new TripDirectionActions.SetEndPoint(points[1]));
+    //  this.store.dispatch(new TripDirectionActions.SetStartPoint(points[0]));
+    //  this.store.dispatch(new TripDirectionActions.SetEndPoint(points[1]));
     this.store.dispatch(
-      new TripDirectionActions.GetRouts([points[0], points[1]])
+      new TripDirectionActions.GetRouts([this.startPoint, this.endPoint])
     );
   }
 

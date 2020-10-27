@@ -35,7 +35,7 @@ export function tripDirectionReducer(
     case TripDirectionActions.SET_START_POINT:
       return {
         ...state,
-        endPoint: action.payload,
+        startPoint: action.payload,
       };
 
     case TripDirectionActions.SET_END_POINT:
