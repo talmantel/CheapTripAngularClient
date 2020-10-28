@@ -2,58 +2,49 @@
 
 div.mainContainer {
   display: flex;
+  flex-direction: row;
   width: 98%;
   margin: auto;
   position: relative;
-}
-mat-spinner{
-  margin: auto;
-}
+  justify-content: stretch;
+  align-items: flex-start;
 
-@include Large {
-  div.mainContainer {
-    flex-direction: row;
-    width: 80%;
-    height: auto;
+  mat-spinner {
     margin: auto;
-    justify-content: space-between;
-    align-items: flex-start;
+  }
 
-    div.aside {
-      flex-basis: 49%;
-    //  background-color: magenta;
-      flex-grow: 1;
-    }
-    div.map {
-      position: relative;
-      flex-basis: 50%;
-    //  background-color: mediumaquamarine;
-      height: auto;
-    }
+  div.aside {
+    flex-basis: 49%;
+    flex-grow: 1;
+  }
+  div.map {
+    flex-basis: 50%;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+@include Large {
+  div.map {
+    // background-color: rgb(0, 255, 106);
   }
 }
 
 @include Medium {
   div.mainContainer {
-    flex-direction: row;
+    top: 2rem;
     width: 95%;
     height: auto;
     margin: auto;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    div.aside {
-      flex-basis: 49%;
-    //  background-color: rgb(30, 255, 0);
-    }
     div.map {
-      position: relative;
-      flex-basis: 50%;
-    //  background-color: rgb(112, 102, 205);
+      //  align-self: stretch;
       height: auto;
+      // background-color: red;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }
+
 @include Small {
   div.mainContainer {
     top: 2rem;
@@ -62,18 +53,17 @@ mat-spinner{
     height: auto;
     margin: auto;
     justify-content: flex-start;
-    align-items: stretch;
-   // border: 3px solid red;
+    align-items: baseline;
     margin: auto;
     div.aside {
-      flex-basis: 100%;
-    //  background-color: rgb(217, 255, 0);
+      align-self: stretch;
     }
     div.map {
-      position: relative;
-      flex-basis: 100%;
- //     background-color: rgb(205, 102, 133);
+      align-self: stretch;
       height: auto;
+      //   background-color: red;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }
@@ -82,21 +72,21 @@ mat-spinner{
   div.mainContainer {
     top: 2rem;
     flex-direction: column;
-    width: 90%;
+    width: 98%;
     height: auto;
     margin: auto;
-    justify-content: space-between;
-    align-items: stretch;
+    justify-content: flex-start;
+    align-items: baseline;
 
     div.aside {
-      flex-basis: 100%;
-   //   background-color: rgb(209, 152, 46);
+      align-self: stretch;
     }
     div.map {
-      position: relative;
-      flex-basis: 100%;
-    //  background-color: blue;
+      align-self: stretch;
       height: auto;
+      //  background-color: green;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }
@@ -104,66 +94,43 @@ mat-spinner{
   div.mainContainer {
     top: 2rem;
     flex-direction: column;
-    width: 100%;
+    width: 98%;
     height: auto;
     margin: auto;
-    justify-content: space-between;
-    align-items: stretch;
+    justify-content: flex-start;
+    align-items: baseline;
 
     div.aside {
-      flex-basis: 100%;
-   //   background-color: rgb(128, 90, 19);
+      align-self: stretch;
     }
     div.map {
-      position: relative;
-      flex-basis: 100%;
-    //  background-color: rgb(250, 1, 76);
+      align-self: stretch;
       height: auto;
+      //   background-color: blue;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }
 
-
-@include Phones {
-  div.mainContainer {
-    top: 2rem;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    margin: auto;
-    justify-content: space-between;
-    align-items: stretch;
-
-    div.aside {
-      flex-basis: 100%;
-   //   background-color: rgb(128, 90, 19);
-    }
-    div.map {
-      position: relative;
-      flex-basis: 100%;
-    //  background-color: rgb(250, 1, 76);
-      height: auto;
-    }
-  }
-}
 @include Smallphones {
   div.mainContainer {
     top: 0.5rem;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
     height: auto;
     margin: auto;
-    justify-content: space-between;
-    align-items: stretch;
+    justify-content: flex-start;
+    align-items: baseline;
     div.aside {
-      flex-basis: 100%;
-   //   background-color: rgb(209, 152, 46);
+      align-self: stretch;
     }
     div.map {
-      position: relative;
-      flex-basis: 100%;
-    //  background-color: blue;
+      align-self: stretch;
       height: auto;
+      // background-color: yellow;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }

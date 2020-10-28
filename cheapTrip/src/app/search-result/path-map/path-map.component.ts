@@ -8,6 +8,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 export class PathMapComponent {
 
   @Input() frameWidth: number;
+  @Input() frameHeight: number;
   @Input() isDeskTop: boolean;
   constructor() {
   }

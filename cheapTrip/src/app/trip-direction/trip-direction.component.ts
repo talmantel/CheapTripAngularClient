@@ -95,9 +95,8 @@ export class TripDirectionComponent implements OnInit {
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
-  getRouts(points: IPoint): void {
-    //  this.store.dispatch(new TripDirectionActions.SetStartPoint(points[0]));
-    //  this.store.dispatch(new TripDirectionActions.SetEndPoint(points[1]));
+  getRouts(_points: IPoint): void {
+
     this.store.dispatch(
       new TripDirectionActions.GetRouts([this.startPoint, this.endPoint])
     );

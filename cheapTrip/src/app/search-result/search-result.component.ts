@@ -12,37 +12,45 @@ import { Subscription } from 'rxjs';
 import * as fromApp from '../store/app.reducer';
 import { IPath } from '../trip-direction/trip-direction.model';
 
-
-
-
 // reference information: available resolutions
-const viewportSizes = [
-  Breakpoints.XSmall,
-  Breakpoints.Small,
-  Breakpoints.Medium,
-  Breakpoints.Large,
-  Breakpoints.XLarge,
-  Breakpoints.Web,
-  Breakpoints.WebLandscape,
-  Breakpoints.WebPortrait,
-  Breakpoints.Handset,
-  Breakpoints.HandsetLandscape,
-  Breakpoints.HandsetPortrait,
-  Breakpoints.Tablet,
-  Breakpoints.TabletLandscape,
-  Breakpoints.TabletPortrait,
-];
-const ROW_HEIGHT = 250;
-enum FrameWidth {
-  SMALLPHONES = 360 * 0.95,
-  PHONES = 420 ,
-  SSMALL = 360,
-  XSMALL = 600 * 0.9,
-  SMALL = 600 * 0.9,
-  MEDIUM = 600 * 0.9,
-  LARGE = 600 * 0.9,
-  // XLARGE = 1000,
+enum VIEWPORTS {
+  XSmall,
+  Small,
+  SmallPortrait,
+  Medium,
+  Large,
+  XLarge,
+  WebLandscape,
+  WebPortrait,
+  HandsetLandscape,
+  HandsetPortrait,
+  TabletLandscape,
+  TabletPortrait,
+  Phones,
+  SmallPhones,
 }
+
+const ROW_HEIGHT = 250;
+
+type IFrameSize = {
+  width: number;
+  height: number;
+};
+
+const iframeSizeMap = new Map<VIEWPORTS, IFrameSize>();
+iframeSizeMap.set(VIEWPORTS.XSmall, { width: 500, height: 1300 });//
+iframeSizeMap.set(VIEWPORTS.Small, { width: 590, height: 1130 });//
+iframeSizeMap.set(VIEWPORTS.Medium, { width: 590, height: 1130 });//
+iframeSizeMap.set(VIEWPORTS.Large, { width: 650, height: 1130 });//
+iframeSizeMap.set(VIEWPORTS.XLarge, { width: 650, height: 1130 });//
+iframeSizeMap.set(VIEWPORTS.WebLandscape, { width: 650, height: 1130 });//
+iframeSizeMap.set(VIEWPORTS.WebPortrait, { width: 400, height: 1800 });
+iframeSizeMap.set(VIEWPORTS.HandsetPortrait, { width: 400, height: 1800 });
+iframeSizeMap.set(VIEWPORTS.HandsetLandscape, { width: 400, height: 1800 });
+iframeSizeMap.set(VIEWPORTS.TabletLandscape, { width: 590, height: 1130 });//
+iframeSizeMap.set(VIEWPORTS.TabletPortrait, { width: 590, height: 1130 });//
+iframeSizeMap.set(VIEWPORTS.Phones, { width: 360, height: 1100 });
+iframeSizeMap.set(VIEWPORTS.SmallPhones, { width: 360, height: 1100 });
 
 @Component({
   selector: 'app-search-result',
@@ -56,10 +64,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   isLoading: boolean;
 
   // for UIw
-
-  colsAmount = 7;
-  rowHeight: string;
-  frameWidth: number;
+  iframeWidth: number;
+  iframeHeight: number;
+  iframeSize: IFrameSize;
 
   // matcher: MediaQueryList;
 
@@ -69,7 +76,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
     public mediaMatcher: MediaMatcher
   ) {
-
     breakpointObserver
       .observe([
         Breakpoints.XSmall,
@@ -77,20 +83,25 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         Breakpoints.Medium,
         Breakpoints.Large,
         Breakpoints.XLarge,
+        Breakpoints.WebLandscape,
+        Breakpoints.WebPortrait,
+        Breakpoints.HandsetLandscape,
+        Breakpoints.HandsetPortrait,
+        Breakpoints.TabletLandscape,
+        Breakpoints.TabletPortrait,
       ])
       .subscribe((state: BreakpointState) => {
-        this.getGridsSize(breakpointObserver);
+        this.getIFrameSize(breakpointObserver);
       });
   }
 
   ngOnInit(): void {
     this.getPathsSubscription = this.store
       .select('directions')
-      .subscribe(state => {
+      .subscribe((state) => {
         this.paths = state.paths;
-        this.isLoading = state.isLoading
+        this.isLoading = state.isLoading;
 
-        this.rowHeight = state.pathsAmount * ROW_HEIGHT + 'px';
       });
   }
 
@@ -98,25 +109,78 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.getPathsSubscription.unsubscribe();
   }
 
-  private getGridsSize(obs: BreakpointObserver) {
+  private getIFrameSize(obs: BreakpointObserver) {
     if (obs.isMatched('(max-width: 361px)')) {
-      this.frameWidth = FrameWidth.SMALLPHONES;
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.SmallPhones);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('SmallPhones', iframeSize);
     } else if (obs.isMatched('(max-width: 412px)')) {
-      this.frameWidth = FrameWidth.PHONES;
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.Phones);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('Phones', iframeSize);
     } else if (obs.isMatched(Breakpoints.XSmall)) {
-      this.frameWidth = FrameWidth.XSMALL;
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.XSmall);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('Xsmall', iframeSize);
     } else if (obs.isMatched(Breakpoints.Small)) {
-      this.frameWidth = FrameWidth.SMALL;
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.Small);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('Small', iframeSize);
+
       this.isDesktop = true;
-    } else if (
-      obs.isMatched(Breakpoints.Medium)
-      // obs.isMatched(Breakpoints.Large) ||
-      // obs.isMatched(Breakpoints.XLarge)
-    ) {
-      this.frameWidth = FrameWidth.MEDIUM;
+    } else if (obs.isMatched(Breakpoints.Medium)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.Medium);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('Medium', iframeSize);
+
       this.isDesktop = true;
-    } else if (obs.isMatched(Breakpoints.Large)) {
-      this.frameWidth = FrameWidth.LARGE;
+    } else if (obs.isMatched(Breakpoints.WebLandscape)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebLandscape);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('weblanscape', iframeSize);
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.WebPortrait)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebPortrait);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('webPOrt', iframeSize);
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.HandsetLandscape)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.HandsetLandscape);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('handlanscape', iframeSize);
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.HandsetPortrait)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.HandsetPortrait);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('handPort', iframeSize);
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.TabletLandscape)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.TabletLandscape);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('tabletlanscape', iframeSize);
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.TabletPortrait)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.TabletPortrait);
+
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+      console.log('tabletPort', iframeSize);
+
       this.isDesktop = true;
     }
   }

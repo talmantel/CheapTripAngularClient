@@ -81,15 +81,14 @@ export class TripDirectionEffects {
     private http: HttpClient,
     private router: Router
   ) {
-    //this.server = 'tomcat'; //to be fixed
-     this.server = 'appachi';
+    //  this.server = 'tomcat'; //to be fixed
+    this.server = 'appachi';
   }
 
   @Effect()
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     switchMap((request: { payload: IPoint; type: string }) => {
-
       let url = '';
       if (this.server === 'appachi') {
         url =
@@ -128,7 +127,6 @@ export class TripDirectionEffects {
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
     switchMap(
-
       (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
         let url = '';
 
@@ -182,8 +180,6 @@ export class TripDirectionEffects {
             return of(new TripDirectionActions.AutoCompleteFail(error));
           })
         );
-
-
       }
     )
   );

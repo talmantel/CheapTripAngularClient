@@ -73,7 +73,6 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
         this.directionForm.get('startPointControl').value === '' &&
         this.directionForm.get('endPointControl').value === '') || (points.from.id == null)
       ) {
-        console.log('points', points);
         this.directionForm.setValue({
           startPointControl: points.from.name,
           endPointControl: points.to.name,
