@@ -24,7 +24,7 @@ const initialState: ITripDirectionState = {
   errorMessage: '',
   pathsAmount: 0,
   isLoading: false,
- reset: false,
+  reset: false,
 };
 
 export function tripDirectionReducer(
@@ -79,6 +79,12 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.GET_AUTOCOMPLETE:
+      if (state.reset) {
+        return {
+          ...state,
+          reset: false,
+        };
+      }
       return {
         ...state,
       };
@@ -131,7 +137,8 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.GO_HOME:
-      return {...state,
+      return {
+        ...state,
         startPoint: { id: 0, name: '' },
         endPoint: { id: 0, name: '' },
         startPointAutoComplete: [],
@@ -141,7 +148,7 @@ export function tripDirectionReducer(
         errorMessage: '',
         pathsAmount: 0,
         isLoading: false,
-        reset: true
+        reset: true,
       };
 
     default:
