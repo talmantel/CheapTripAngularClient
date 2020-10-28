@@ -27,7 +27,7 @@ export class TripDirectionComponent implements OnInit {
   selectDirectionSubscription: Subscription;
   mode: Modes;
   pointSubj$: Subject<{ from: IPathPoint; to: IPathPoint }>;
-  toHomeSubj$: Subject<boolean>;
+
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -41,7 +41,7 @@ export class TripDirectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
-    this.toHomeSubj$ = new Subject();
+
     this.route.queryParams.subscribe(
       (queryParams: {
         from: string;
@@ -61,16 +61,16 @@ export class TripDirectionComponent implements OnInit {
     this.selectDirectionSubscription = this.store
       .select('directions')
       .subscribe((state) => {
-        if (state.startPoint != null && state.startPoint != null) {
+        /*  if (state.startPoint != null && state.startPoint != null) {
           this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
         } else if (state.mode === 0) {
           const empty = { id: null, name: '' };
-          console.log('empty');
+
 
           this.pointSubj$.next({ from: { ...empty }, to: { ...empty } });
-        }
-
-        //  this.points = [state.startPoint, state.endPoint];
+        } */
+        console.log('parent state', state);
+        this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
 
@@ -96,7 +96,7 @@ export class TripDirectionComponent implements OnInit {
   }
 
   getRouts(_points: IPoint): void {
-
+    console.log('trip direction', this.startPoint);
     this.store.dispatch(
       new TripDirectionActions.GetRouts([this.startPoint, this.endPoint])
     );

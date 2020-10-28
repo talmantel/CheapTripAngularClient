@@ -21,6 +21,7 @@ export const SET_ROUTS = '[TripDirection] Set Routs';
 export const AUTOCOMPLETE_FAIL = '[TripDirection] Autocomplete Fail';
 export const CLEAN_DATA = '[TripDirection] Clean Data';
 export const SET_MODE = '[TripDirection] Set Mode';
+export const GO_HOME = '[TripDirection] Go Home';
 
 export class SetStartPoint implements Action {
   readonly type = SET_START_POINT;
@@ -83,6 +84,10 @@ export class SetMode implements Action {
   constructor(public payload: Modes) {}
 }
 
+export class GoHome implements Action {
+  readonly type = GO_HOME;
+  constructor() {}
+}
 export type TripDirectionActions =
   | SetStartPoint
   | SetEndPoint
@@ -95,4 +100,5 @@ export type TripDirectionActions =
   | SetRouts
   | AutoCompleteFail
   | SetMode
+  | GoHome
   | CleanData;

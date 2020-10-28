@@ -14,6 +14,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
 import { Subject, Subscription } from 'rxjs';
 import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
 
@@ -56,32 +58,43 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   modes = Modes;
 
   @Input() pointSubj: Subject<{ from: IPathPoint; to: IPathPoint }>;
-  //@Input() toHome: Subject<boolean>;
+  @Input() toHomeSubj: Subject<boolean>;
   pointSubscripton: Subscription;
-  // toHomeSubscription: Subscription;
+  resetSubscription: Subscription;
 
-  constructor() {}
+  constructor(private store: Store<fromApp.AppState>) {}
   ngOnDestroy(): void {
     this.pointSubscripton.unsubscribe();
-    // this.toHomeSubscription.unsubscribe();
+    this.resetSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
+    this.resetSubscription = this.store
+      .select('directions')
+      .subscribe((state) => {
+        console.log('reset')
+        if ( this.directionForm && state.reset) {
+          this.directionForm.setValue({
+            startPointControl: '',
+            endPointControl: '',
+          });
+          this.directionForm.markAsUntouched();
+          this.directionForm.markAsPristine();
+        }
+      });
+
     this.pointSubscripton = this.pointSubj.subscribe((points) => {
       if (
-       ( this.directionForm &&
+        this.directionForm &&
         this.directionForm.get('startPointControl').value === '' &&
-        this.directionForm.get('endPointControl').value === '') || (points.from.id == null)
+        this.directionForm.get('endPointControl').value === ''
       ) {
         this.directionForm.setValue({
           startPointControl: points.from.name,
           endPointControl: points.to.name,
         });
-         if(points.from.id == null){
-            this.directionForm.markAsUntouched();
-            this.directionForm.markAsPristine();
-         }
-
+        this.directionForm.controls.endPointControl.valid;
+        this.directionForm.controls.startPointControl.valid;
       }
     });
 
@@ -113,6 +126,15 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    console.log('points id', this.startPoint.id);
+    console.log('points name', this.startPoint.name);
+
+    console.log('points id', this.endPoint.id);
+    console.log('points name', this.endPoint.name);
+    console.log([
+      { id: this.startPoint.id, name: this.startPoint.name },
+      { id: this.endPoint.id, name: this.endPoint.name },
+    ]);
     this.selectedPoints.emit([
       { id: this.startPoint.id, name: this.startPoint.name },
       { id: this.endPoint.id, name: this.endPoint.name },
@@ -127,6 +149,20 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     }
   }
 
+  optionSelected(point: any, type: string) {
+    if (type == 'start') {
+      this.startPoint = this.startPointAutoComplete.filter((p) => {
+        return p.name == point;
+      })[0];
+      this.startPointSelected.emit({ ...this.startPoint });
+    } else {
+      this.endPoint = this.endPointAutoComplete.filter((p) => {
+        return p.name == point;
+      })[0];
+      this.endPointSelected.emit({ ...this.endPoint });
+    }
+  }
+
   cleanForm(): void {
     this.cleanData.emit(true);
     this.directionForm.setValue({
@@ -138,8 +174,12 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   }
 
   onFocusOut(event: any): void {
-    if (event.target.attributes.formControlName.value === 'startPointControl') {
-      this.startPoint = this.startPointAutoComplete[0];
+    console.log('on focus out');
+    /* if (event.target.attributes.formControlName.value === 'startPointControl') {
+      if (this.startPoint == null) {
+        this.startPoint = this.startPointAutoComplete[0];
+      }
+
       this.directionForm.patchValue({
         startPointControl: this.startPoint.name,
       });
@@ -147,11 +187,14 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     } else if (
       event.target.attributes.formControlName.value === 'endPointControl'
     ) {
-      this.endPoint = this.endPointAutoComplete[0];
+      if (this.endPoint == null) {
+        this.endPoint = this.endPointAutoComplete[0];
+      }
+
       this.directionForm.patchValue({
         endPointControl: this.endPoint.name,
       });
       this.onOptionSelected({ ...this.endPoint }, 'end');
-    }
+    } */
   }
 }

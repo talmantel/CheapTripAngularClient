@@ -11,7 +11,7 @@ export interface ITripDirectionState {
   errorMessage: string;
   pathsAmount: number;
   isLoading: boolean;
-  toHome: boolean;
+  reset: boolean;
 }
 
 const initialState: ITripDirectionState = {
@@ -24,7 +24,7 @@ const initialState: ITripDirectionState = {
   errorMessage: '',
   pathsAmount: 0,
   isLoading: false,
-  toHome: false,
+ reset: false,
 };
 
 export function tripDirectionReducer(
@@ -112,15 +112,15 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.CLEAN_DATA:
-      console.log('reducer', action.payload);
+      const empty = { id: 0, name: '' };
       return {
         ...state,
-        startPoint: null,
-        endPoint: null,
+        startPoint: empty,
+        endPoint: empty,
         startPointAutoComplete: [],
         endPointAutoComplete: [],
         errorMessage: '',
-        toHome: action.payload,
+        //  toHome: action.payload,
       };
 
     case TripDirectionActions.SET_MODE:
@@ -128,6 +128,20 @@ export function tripDirectionReducer(
         ...state,
 
         mode: action.payload,
+      };
+
+    case TripDirectionActions.GO_HOME:
+      return {...state,
+        startPoint: { id: 0, name: '' },
+        endPoint: { id: 0, name: '' },
+        startPointAutoComplete: [],
+        endPointAutoComplete: [],
+        paths: [],
+        mode: Modes.SEARCH,
+        errorMessage: '',
+        pathsAmount: 0,
+        isLoading: false,
+        reset: true
       };
 
     default:

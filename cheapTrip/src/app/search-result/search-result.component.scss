@@ -21,11 +21,12 @@ div.mainContainer {
     flex-basis: 50%;
     display: flex;
     justify-content: space-around;
+    border-left: 1px solid var(--color-accent);
   }
 }
 @include Large {
   div.map {
-    // background-color: rgb(0, 255, 106);
+   // border-left: 1px solid var(--color-accent);
   }
 }
 
@@ -38,7 +39,7 @@ div.mainContainer {
     div.map {
       //  align-self: stretch;
       height: auto;
-      // background-color: red;
+  //   border-left: 1px solid var(--color-accent);
       display: flex;
       justify-content: space-around;
     }
@@ -61,7 +62,7 @@ div.mainContainer {
     div.map {
       align-self: stretch;
       height: auto;
-      //   background-color: red;
+    border: none;
       display: flex;
       justify-content: space-around;
     }
@@ -84,7 +85,7 @@ div.mainContainer {
     div.map {
       align-self: stretch;
       height: auto;
-      //  background-color: green;
+      border: none;
       display: flex;
       justify-content: space-around;
     }
@@ -106,7 +107,7 @@ div.mainContainer {
     div.map {
       align-self: stretch;
       height: auto;
-      //   background-color: blue;
+      border: none;
       display: flex;
       justify-content: space-around;
     }
@@ -128,9 +129,10 @@ div.mainContainer {
     div.map {
       align-self: stretch;
       height: auto;
-      // background-color: yellow;
+      border: none;
       display: flex;
       justify-content: space-around;
+      background-color: yellowgreen;
     }
   }
 }

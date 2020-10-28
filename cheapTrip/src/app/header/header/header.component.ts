@@ -6,6 +6,7 @@ import * as TripDirectionActions from '../../trip-direction/store/trip-direction
 import * as fromApp from '../../store/app.reducer';
 import { Modes } from 'src/app/trip-direction/trip-direction.model';
 import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-header',
@@ -15,13 +16,15 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit {
   isLoading: boolean;
   subscription: Subscription;
+
   constructor(private route: Router, private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {}
 
   toHomePage(): void {
-    this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
-    this.store.dispatch(new TripDirectionActions.CleanData(true));
+
+    this.store.dispatch(new TripDirectionActions.GoHome());
+
     this.route.navigate(['/']);
   }
 }
