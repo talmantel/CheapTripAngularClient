@@ -16,6 +16,7 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
 type SERVER = 'tomcat' | 'appachi';
 
@@ -273,17 +274,21 @@ export class TripDirectionEffects {
     return result;
   }
 
-  private handleError(err: HttpErrorResponse): void {
-    let message = '';
-    switch (err.status) {
-      case 201:
-        message = 'dfdfdf';
-        break;
-      case 400:
-        message = 'dfdfdf';
-        break;
+  private handleError(err: HttpErrorResponse) {
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${err.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${err.status}\nMessage: ${err.message}`;
     }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
+
+
+
 
   private getPoints(paths: IRout[]): Set<string> {
     const transformedArr = paths.map((item) => [item.from, item.to]);

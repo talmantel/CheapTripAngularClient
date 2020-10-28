@@ -1,8 +1,8 @@
 <div class="mainContainer" [ngClass]="{'searchMode': mode === modes.SEARCH,
 'deliveryMode': mode === modes.DELIVERY}">
   <div class="message">
-    <p *ngIf=" mode === modes.DELIVERY">Discover the cheapest way to get anywhere by plane,
-      train, bus and ride share altogether</p>
+    <p *ngIf=" mode === modes.DELIVERY">Discover the cheapest way to get anywhere combining plane,
+      train, bus and rideshare</p>
     <div @insertRemoveTrigger1 *ngIf=" mode === modes.SEARCH">
       <p>Discover the cheapest way </p>
       <p>to get anywhere by plane,
