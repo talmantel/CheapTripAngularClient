@@ -5,8 +5,8 @@
       train, bus and rideshare</p>
     <div @insertRemoveTrigger1 *ngIf=" mode === modes.SEARCH">
       <p>Discover the cheapest way </p>
-      <p>to get anywhere by plane,
-        train, bus and ride share altogether</p>
+      <p>to get anywhere combining plane,
+        train, bus and rideshare</p>
     </div>
   </div>
   <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">

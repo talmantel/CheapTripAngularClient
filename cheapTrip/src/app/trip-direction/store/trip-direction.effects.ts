@@ -274,7 +274,7 @@ export class TripDirectionEffects {
     return result;
   }
 
-  private handleError(err: HttpErrorResponse) {
+  private handleError(err: HttpErrorResponse): void {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
       // client-side error
@@ -283,9 +283,8 @@ export class TripDirectionEffects {
       // server-side error
       errorMessage = `Error Code: ${err.status}\nMessage: ${err.message}`;
     }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
-  }
+    window.alert(errorMessage);}
+
 
 
 
