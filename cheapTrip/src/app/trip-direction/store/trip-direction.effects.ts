@@ -81,8 +81,8 @@ export class TripDirectionEffects {
     private http: HttpClient,
     private router: Router
   ) {
-   this.server = 'tomcat'; //to be fixed
-    //   this.server = 'appachi';
+   //    this.server = 'tomcat'; //to be fixed
+   this.server = 'appachi';
   }
 
   @Effect()
