@@ -69,7 +69,7 @@ export class TripDirectionComponent implements OnInit {
 
           this.pointSubj$.next({ from: { ...empty }, to: { ...empty } });
         } */
-        console.log('parent state', state);
+
         this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
@@ -83,7 +83,6 @@ export class TripDirectionComponent implements OnInit {
   onStartPointSelected(point: IPathPoint) {
     this.store.dispatch(new TripDirectionActions.SetStartPoint(point));
     this.startPoint = point;
-    console.log('start point,', this.startPoint);
   }
 
   onEndPointSelected(point: IPathPoint) {
@@ -96,7 +95,6 @@ export class TripDirectionComponent implements OnInit {
   }
 
   getRouts(_points: IPoint): void {
-    console.log('trip direction', this.startPoint);
     this.store.dispatch(
       new TripDirectionActions.GetRouts([this.startPoint, this.endPoint])
     );
