@@ -4,15 +4,14 @@
   margin: 0;
   padding: 0;
 }
-mat-option{
-color: var(--color-accent);
-height: 40px;
-
+mat-option {
+  color: var(--color-accent);
+  height: 40px;
 }
 div.mainContainer {
   width: 80%;
- margin: auto;
-  height: auto ;
+  margin: auto;
+  height: auto;
   box-sizing: border-box;
   position: relative;
   div.message {
@@ -134,6 +133,11 @@ div.deliveryMode {
       margin: 2rem auto;
     }
   }
+  div.searchMode {
+    .mat-autocomplete .autocomplete {
+      height: 50% !important;
+    }
+  }
 }
 
 @include Smallphones {
@@ -175,7 +179,6 @@ div.deliveryMode {
           mat-form-field.startPoint {
             top: 0.5rem;
           }
-
         }
         span.arrows {
           width: 1.5rem;
@@ -271,7 +274,6 @@ div.deliveryMode {
           mat-form-field.startPoint {
             top: 0.5rem;
           }
-
         }
         span.arrows {
           width: 1.5rem;
