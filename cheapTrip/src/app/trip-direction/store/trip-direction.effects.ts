@@ -82,8 +82,8 @@ export class TripDirectionEffects {
     private http: HttpClient,
     private router: Router
   ) {
-   //    this.server = 'tomcat'; //to be fixed
-   this.server = 'appachi';
+    //    this.server = 'tomcat'; //to be fixed
+    this.server = 'appachi';
   }
 
   @Effect()
@@ -91,6 +91,13 @@ export class TripDirectionEffects {
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     switchMap((request: { payload: IPoint; type: string }) => {
       let url = '';
+
+      //  observe?: 'body' | 'events' | 'response',
+      //   params?: HttpParams|{[param: string]: string | string[]},
+
+      //responseType?: 'arraybuffer'|'blob'|'json'|'text',
+
+      /*     'http://52.14.161.122:8080/locations?type=from&search_name=6', */
       if (this.server === 'appachi') {
         url =
           environment.urlAppachi +
@@ -104,23 +111,29 @@ export class TripDirectionEffects {
           environment.urlTomCat +
           'CheapTrip/getLocations?type=' +
           type +
-          '&search_name=' +
+          '&search_name==' +
           encodeURIComponent(request.payload.name);
       }
 
-      return this.http.get<IPathPoint[]>(url).pipe(
-        map((res) => {
-          const newAction =
-            request.payload.type === 'from'
-              ? new TripDirectionActions.SetStartPointAutocomplete(res)
-              : new TripDirectionActions.SetEndPointAutocomplete(res);
-          return newAction;
-        }),
-        catchError((error) => {
+      // return this.http.get<IPathPoint[]>(url, { observe: 'response' }).pipe(
+      return this.http
+        .get<any>(url, { observe: 'response' })
+        .pipe(
+          map((res) => {
+            console.log('response', res);
+            const newAction =
+              request.payload.type === 'from'
+                ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
+                : new TripDirectionActions.SetEndPointAutocomplete(res.body);
+            return newAction;
+          })
+          /*  catchError((error) => {
+          console.log('error', error);
           this.handleError(error);
+
           return of(new TripDirectionActions.AutoCompleteFail(error));
-        })
-      );
+        }) */
+        );
     })
   );
 
@@ -130,7 +143,6 @@ export class TripDirectionEffects {
     switchMap(
       (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
         let url = '';
-
         if (this.server === 'appachi') {
           url =
             environment.urlAppachi +
@@ -147,13 +159,15 @@ export class TripDirectionEffects {
             request.payload[1].id;
         }
 
-        return this.http.get(url).pipe(
+        return this.http.get(url, { observe: 'response' }).pipe(
           map((res) => {
             let resultPathArr = null;
             if (this.server === 'appachi') {
-              resultPathArr = this.transformObject(res as IRecievedRouts[]);
+              resultPathArr = this.transformObject(
+                res.body as IRecievedRouts[]
+              );
             } else {
-              resultPathArr = this.transformObjectTomCat(res);
+              resultPathArr = this.transformObjectTomCat(res.body);
             }
 
             const endPoints = {
@@ -174,12 +188,12 @@ export class TripDirectionEffects {
               paths: resultPathArr,
               endPoints: endPoints,
             });
-          }),
-          catchError((error) => {
+          })
+          /*   catchError((error) => {
             const errorMessage = 'An unknown error occured!';
             this.handleError(error);
             return of(new TripDirectionActions.AutoCompleteFail(error));
-          })
+          }) */
         );
       }
     )
@@ -276,6 +290,7 @@ export class TripDirectionEffects {
 
   private handleError(err: HttpErrorResponse): void {
     let errorMessage = '';
+    console.log('error', err);
     if (err.error instanceof ErrorEvent) {
       // client-side error
       errorMessage = `Error: ${err.error.message}`;
@@ -283,11 +298,8 @@ export class TripDirectionEffects {
       // server-side error
       errorMessage = `Error Code: ${err.status}\nMessage: ${err.message}`;
     }
-    window.alert(errorMessage);}
-
-
-
-
+    window.alert(errorMessage);
+  }
 
   private getPoints(paths: IRout[]): Set<string> {
     const transformedArr = paths.map((item) => [item.from, item.to]);
