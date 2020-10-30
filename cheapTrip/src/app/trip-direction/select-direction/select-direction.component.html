@@ -28,7 +28,14 @@
 
         </mat-form-field>
         <p *ngIf="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched"
-          class="error">Select start point, please</p>
+          class="error">
+          <span *ngIf="directionForm.get('startPointControl').errors['notInList']">This name is invalid!</span>
+          <span *ngIf="directionForm.get('startPointControl').errors['required']">This field is required!</span>
+        </p>
+
+
+
+
       </section>
       <span class="material-icons arrows" (click)="changeDirection()">
         sync_alt

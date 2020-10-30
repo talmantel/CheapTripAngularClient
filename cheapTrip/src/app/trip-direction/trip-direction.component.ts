@@ -61,21 +61,9 @@ export class TripDirectionComponent implements OnInit {
     this.selectDirectionSubscription = this.store
       .select('directions')
       .subscribe((state) => {
-        /*  if (state.startPoint != null && state.startPoint != null) {
-          this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
-        } else if (state.mode === 0) {
-          const empty = { id: null, name: '' };
-
-
-          this.pointSubj$.next({ from: { ...empty }, to: { ...empty } });
-        } */
-
         this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
-
-        //   this.toHomeSubj$.next(state.toHome);
-
         this.mode = state.mode; // for form horisontal or vertical oriantation
       });
   }

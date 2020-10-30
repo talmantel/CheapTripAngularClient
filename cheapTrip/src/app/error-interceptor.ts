@@ -23,11 +23,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap((evt) => {
         if (evt instanceof HttpResponse) {
-          console.log('response', evt.body);
-
-          if (evt.body.length == 0) {
+       if (evt.body.length == 0) {
             this.dialog.open(ErrorComponent, {
-              data: { message: 'No cheap way to get there!' },
+              data: { message: 'No result for this search!' },
             });
           }
         }

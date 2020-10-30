@@ -13,7 +13,9 @@ p span.points {
   font-style: oblique;
 }
 p span.points:after {
-  content: " -> ";
+  content: " > ";
+  font-weight: bold;
+  color: var(--color-primary);
 }
 
 p span.points:last-child:after {
@@ -40,6 +42,7 @@ section {
         width: 95%;
         p:first-child {
           text-align: right;
+          padding-top: 0.5rem;
         }
         p {
           display: flex;

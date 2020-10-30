@@ -1,6 +1,6 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { switchMap, catchError, map } from 'rxjs/operators';
+import { switchMap, catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -82,22 +82,17 @@ export class TripDirectionEffects {
     private http: HttpClient,
     private router: Router
   ) {
-    //    this.server = 'tomcat'; //to be fixed
-    this.server = 'appachi';
+    this.server = 'tomcat'; //to be fixed
+    //  this.server = 'appachi';
   }
 
   @Effect()
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
-    switchMap((request: { payload: IPoint; type: string }) => {
+    mergeMap((request: { payload: IPoint; type: string }) => {
       let url = '';
-
-      //  observe?: 'body' | 'events' | 'response',
-      //   params?: HttpParams|{[param: string]: string | string[]},
-
-      //responseType?: 'arraybuffer'|'blob'|'json'|'text',
-
       /*     'http://52.14.161.122:8080/locations?type=from&search_name=6', */
+      /*  http://3.23.159.104:3333/CheapTrip/getLocations?type=1 */
       if (this.server === 'appachi') {
         url =
           environment.urlAppachi +
@@ -111,7 +106,7 @@ export class TripDirectionEffects {
           environment.urlTomCat +
           'CheapTrip/getLocations?type=' +
           type +
-          '&search_name==' +
+          '&search_name=' +
           encodeURIComponent(request.payload.name);
       }
 
@@ -120,7 +115,6 @@ export class TripDirectionEffects {
         .get<any>(url, { observe: 'response' })
         .pipe(
           map((res) => {
-            console.log('response', res);
             const newAction =
               request.payload.type === 'from'
                 ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
