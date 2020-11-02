@@ -1,7 +1,13 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { switchMap, catchError, map, mergeMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {
+  switchMap,
+  map,
+  mergeMap,
+  withLatestFrom,
+  tap,
+} from 'rxjs/operators';
+
 import { environment } from '../../../environments/environment';
 
 import * as TripDirectionActions from './trip-direction.actions';
@@ -16,7 +22,9 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import { of } from 'rxjs';
 
 type SERVER = 'tomcat' | 'appachi';
 
@@ -80,11 +88,24 @@ export class TripDirectionEffects {
     private actions$: Actions,
     private sanitizer: DomSanitizer,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private store$: Store<fromApp.AppState>
   ) {
     this.server = 'tomcat'; //to be fixed
-    //  this.server = 'appachi';
+    // this.server = 'appachi';
   }
+
+
+  @Effect()
+  newEffect = this.actions$.pipe(
+    ofType(TripDirectionActions.GET_AUTOCOMPLETE),
+     withLatestFrom(this.store$.select('directions')),
+     tap(state => {console.log('new effect, ', state)}),
+     mergeMap(req =>{
+       console.log('new effect,', req);
+       return of('1')
+     })
+  )
 
   @Effect()
   getAutocomplete$ = this.actions$.pipe(
@@ -101,6 +122,7 @@ export class TripDirectionEffects {
           '&search_name=' +
           encodeURIComponent(request.payload.name);
       } else {
+        console.log('I am tomcat');
         const type = request.payload.type === 'from' ? '1' : '2';
         url =
           environment.urlTomCat +
@@ -115,6 +137,7 @@ export class TripDirectionEffects {
         .get<any>(url, { observe: 'response' })
         .pipe(
           map((res) => {
+            //   console.log('response effect', res);
             const newAction =
               request.payload.type === 'from'
                 ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
@@ -218,7 +241,10 @@ export class TripDirectionEffects {
         pathType: rout.routeType,
         details: this.transformDetails(details),
       };
-      objArr.push(transformedRout);
+      console.log('details', transformedRout);
+      if (transformedRout.details['duration_minutes'] != '  0min') {
+        objArr.push(transformedRout);
+      }
     });
     return this.reducedPaths(objArr);
   }

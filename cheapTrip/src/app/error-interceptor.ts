@@ -23,15 +23,17 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap((evt) => {
         if (evt instanceof HttpResponse) {
-       if (evt.body.length == 0) {
+        console.log('response interceptor', evt);
+        /*  if (evt.body.length == 0) {
             this.dialog.open(ErrorComponent, {
               data: { message: 'No result for this search!' },
             });
-          }
+          } */
         }
       }),
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'An unknown error occurred!';
+        console.log('error', error);
         if (error.statusText == 'Unknown Error') {
           errorMessage = 'Server is sleeping';
         }

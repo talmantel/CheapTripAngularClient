@@ -1,4 +1,4 @@
-import { IPath, IPathPoint, Modes } from '../trip-direction.model';
+import { IPath, IPathPoint, Modes, Server } from '../trip-direction.model';
 import * as TripDirectionActions from './trip-direction.actions';
 
 export interface ITripDirectionState {
@@ -12,6 +12,7 @@ export interface ITripDirectionState {
   pathsAmount: number;
   isLoading: boolean;
   reset: boolean;
+  currentServer: Server
 }
 
 const initialState: ITripDirectionState = {
@@ -25,6 +26,7 @@ const initialState: ITripDirectionState = {
   pathsAmount: 0,
   isLoading: false,
   reset: false,
+  currentServer: Server.TOMCAT
 };
 
 export function tripDirectionReducer(
