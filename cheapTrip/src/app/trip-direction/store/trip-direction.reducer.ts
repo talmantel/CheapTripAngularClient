@@ -27,8 +27,8 @@ const initialState: ITripDirectionState = {
   pathsAmount: 0,
   isLoading: false,
   reset: false,
-  // currentServer: Server.TOMCAT,
- currentServer: Server.SPRINGBOOT,
+  currentServer: Server.TOMCAT,
+  //currentServer: Server.SPRINGBOOT,
  serverChanged: false
 };
 

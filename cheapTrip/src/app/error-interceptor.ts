@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap((evt) => {
         if (evt instanceof HttpResponse) {
-          console.log('response interceptor', evt);
+          //console.log('response interceptor', evt);
            if (evt.body.length == 0) {
             this.dialog.open(ErrorComponent, {
               data: { message: 'No result for this search!' },
@@ -41,6 +41,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let errorMessage =
           'Server out of humor today! Let try with another one';
+          console.log('interceptor');
         if (error.status == 500) {
           this.store.dispatch(new TripDirectionActions.AutocompleteFail('error 500'));
          // this.dialog.open(ErrorComponent, { data: { message: errorMessage } });

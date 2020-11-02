@@ -66,6 +66,7 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   @Input() toHomeSubj: Subject<boolean>;
   pointSubscripton: Subscription;
   resetSubscription: Subscription;
+  server: any;
 
   constructor(private store: Store<fromApp.AppState>) {}
   ngOnDestroy(): void {
@@ -79,6 +80,7 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     this.resetSubscription = this.store
       .select('directions')
       .subscribe((state) => {
+        this.server = state.currentServer;
         if (this.directionForm && state.reset) {
           this.directionForm.setValue({
             startPointControl: '',

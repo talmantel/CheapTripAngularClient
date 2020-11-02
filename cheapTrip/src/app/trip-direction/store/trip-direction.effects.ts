@@ -93,12 +93,11 @@ export class TripDirectionEffects {
     private router: Router,
     private store$: Store<fromApp.AppState>
   ) {
-  this.server = 'tomcat'; //to be fixed
+    this.server = 'tomcat'; //to be fixed
     //   this.server = 'appachi';
   }
 
-
- /*  @Effect()
+  /*  @Effect()
   newEffect = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
      withLatestFrom(this.store$.select('directions')),
@@ -109,14 +108,15 @@ export class TripDirectionEffects {
      })
   ) */
 
-    // 'http://52.14.161.122:8080/locations?type=from&search_name=6',
-     // http://3.23.159.104:3333/CheapTrip/getLocations?type=1
+  // 'http://52.14.161.122:8080/locations?type=from&search_name=6',
+  // http://3.23.159.104:3333/CheapTrip/getLocations?type=1
 
   @Effect()
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     withLatestFrom(this.store$.select('directions')),
-    mergeMap((request: Array<any>) => { //[fff, { payload: IPoint; type: string }]
+    mergeMap((request: Array<any>) => {
+      //[fff, { payload: IPoint; type: string }]
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
         url =
@@ -126,7 +126,6 @@ export class TripDirectionEffects {
           '&search_name=' +
           encodeURIComponent(request[0].payload.name);
       } else {
-
         const type = request[0].payload.type === 'from' ? '1' : '2';
         url =
           environment.urlTomCat +
@@ -145,7 +144,7 @@ export class TripDirectionEffects {
                 ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
                 : new TripDirectionActions.SetEndPointAutocomplete(res.body);
             return newAction;
-          }),
+          })
           /*  catchError((error) => {
           console.log('error', error);
           this.handleError(error);
@@ -156,67 +155,64 @@ export class TripDirectionEffects {
     })
   );
 
-
   @Effect()
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
-    switchMap(
-      (request: { payload: [IPathPoint, IPathPoint]; type: string }) => {
-        let url = '';
-        if (this.server === 'appachi') {
-          url =
-            environment.urlAppachi +
-            'routes?from=' +
-            request.payload[0].id +
-            '&to=' +
-            request.payload[1].id;
-        } else {
-          url =
-            environment.urlTomCat +
-            'CheapTrip/getRoute?format=json&from=' +
-            request.payload[0].id +
-            '&to=' +
-            request.payload[1].id;
-        }
+    withLatestFrom(this.store$.select('directions')),
+    switchMap((request: Array<any>) => {
+      //{ payload: [IPathPoint, IPathPoint]; type: string }
+      let url = '';
+      if (request[1].currentServer === Server.SPRINGBOOT) {
+        url =
+          environment.urlAppachi +
+          'routes?from=' +
+          request[0].payload[0].id +
+          '&to=' +
+          request[0].payload[1].id;
+      } else {
+        url =
+          environment.urlTomCat +
+          'CheapTrip/getRoute?format=json&from=' +
+          request[0].payload[0].id +
+          '&to=' +
+          request[0].payload[1].id;
+      }
 
-        return this.http.get(url, { observe: 'response' }).pipe(
-          map((res) => {
-            let resultPathArr = null;
-            if (this.server === 'appachi') {
-              resultPathArr = this.transformObject(
-                res.body as IRecievedRouts[]
-              );
-            } else {
-              resultPathArr = this.transformObjectTomCat(res.body);
-            }
+      return this.http.get(url, { observe: 'response' }).pipe(
+        map((res) => {
+          let resultPathArr = null;
+          if (request[1].currentServer === Server.SPRINGBOOT) {
+            resultPathArr = this.transformObject(res.body as IRecievedRouts[]);
+          } else {
+            resultPathArr = this.transformObjectTomCat(res.body);
+          }
 
-            const endPoints = {
-              from: request.payload[0],
-              to: request.payload[1],
-            };
-            const queryParams = {
-              from: request.payload[0].name,
-              fromID: request.payload[0].id,
-              to: request.payload[1].name,
-              toID: request.payload[1].id,
-            };
-            this.router.navigate(['/search/myPath'], {
-              queryParams,
-            });
+          const endPoints = {
+            from: request[0].payload[0],
+            to: request[0].payload[1],
+          };
+          const queryParams = {
+            from: request[0].payload[0].name,
+            fromID: request[0].payload[0].id,
+            to: request[0].payload[1].name,
+            toID: request[0].payload[1].id,
+          };
+          this.router.navigate(['/search/myPath'], {
+            queryParams,
+          });
 
-            return new TripDirectionActions.SetRouts({
-              paths: resultPathArr,
-              endPoints: endPoints,
-            });
-          }),
-          /* atchError((error) => {
+          return new TripDirectionActions.SetRouts({
+            paths: resultPathArr,
+            endPoints: endPoints,
+          });
+        })
+        /* atchError((error) => {
             const errorMessage = 'An unknown error occured!';
             this.handleError(error);
             return of(new TripDirectionActions.AutoCompleteFail(error));
           }) */
-        );
-      }
-    )
+      );
+    })
   );
 
   private transformObjectTomCat(obj: object): IPath[] {
@@ -244,7 +240,6 @@ export class TripDirectionEffects {
         pathType: rout.routeType,
         details: this.transformDetails(details),
       };
-      console.log('details', transformedRout);
       if (transformedRout.details['duration_minutes'] != '  0min') {
         objArr.push(transformedRout);
       }
@@ -313,16 +308,15 @@ export class TripDirectionEffects {
 
   private handleError(err: HttpErrorResponse): void {
     let errorMessage = '';
-    console.log('error', err);
+
     if (err.error instanceof ErrorEvent) {
       // client-side error
-    //  errorMessage = `Error: ${err.error.message}`;
+      //  errorMessage = `Error: ${err.error.message}`;
     } else {
       // server-side error
-   //   errorMessage = `Error Code: ${err.status}\nMessage: ${err.message}`;
-      console.log('error,', err);
+      //   errorMessage = `Error Code: ${err.status}\nMessage: ${err.message}`;
     }
-  //  window.alert(errorMessage);
+    //  window.alert(errorMessage);
   }
 
   private getPoints(paths: IRout[]): Set<string> {
