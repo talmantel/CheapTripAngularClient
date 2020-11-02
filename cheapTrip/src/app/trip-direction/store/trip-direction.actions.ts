@@ -70,7 +70,7 @@ export class SetRouts implements Action {
   ) {}
 }
 
-export class AutoCompleteFail implements Action {
+export class AutocompleteFail implements Action {
   readonly type = AUTOCOMPLETE_FAIL;
   constructor(public payload: string) {}
 }
@@ -98,7 +98,7 @@ export type TripDirectionActions =
   | SetStartPointAutocomplete
   | GetRouts
   | SetRouts
-  | AutoCompleteFail
+  | AutocompleteFail
   | SetMode
   | GoHome
   | CleanData;

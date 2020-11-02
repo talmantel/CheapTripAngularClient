@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+
 import * as fromApp from '../../store/app.reducer';
 import { Subject, Subscription } from 'rxjs';
 import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
@@ -77,6 +78,7 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     this.isSelectedEndPoint = false;
     this.resetSubscription = this.store
       .select('directions')
+      //   . distinctUntilChanged((prev, curr) => prev.value === curr.value)
       .subscribe((state) => {
         if (this.directionForm && state.reset) {
           this.directionForm.setValue({
@@ -119,7 +121,10 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   // autocomplete is invoked
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };
-    this.changePoint.emit(point);
+    if(point.name.length >0 ){
+         this.changePoint.emit(point);
+    }
+
   }
 
   changeDirection(): void {
@@ -132,8 +137,8 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
       endPointControl: this.endPoint.name,
     });
     //select points
-    this.optionSelected(this.startPoint.name, "from");
-    this.optionSelected(this.endPoint.name, "to");
+    this.optionSelected(this.startPoint.name, 'from');
+    this.optionSelected(this.endPoint.name, 'to');
   }
 
   onSubmit(): void {
@@ -141,12 +146,10 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
       { id: this.startPoint.id, name: this.startPoint.name },
       { id: this.endPoint.id, name: this.endPoint.name },
     ]);
-
   }
 
   optionSelected(point: any, type: string) {
-    console.log('option selected');
-    if (type == 'start' ) {
+    if (type == 'start') {
       if (this.startPointAutoComplete.length > 0) {
         this.startPoint = this.startPointAutoComplete.filter((p) => {
           return p.name == point;
@@ -155,13 +158,12 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
         this.startPointSelected.emit({ ...this.startPoint });
       }
     } else {
-      if( this.endPointAutoComplete.length > 0){
-          this.endPoint = this.endPointAutoComplete.filter((p) => {
-        return p.name == point;
-      })[0];
-      this.endPointSelected.emit({ ...this.endPoint });
-      this.isSelectedEndPoint = true;
-
+      if (this.endPointAutoComplete.length > 0) {
+        this.endPoint = this.endPointAutoComplete.filter((p) => {
+          return p.name == point;
+        })[0];
+        this.endPointSelected.emit({ ...this.endPoint });
+        this.isSelectedEndPoint = true;
       }
     }
   }
@@ -179,22 +181,26 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   }
 
   notInStartListValidator(control: FormControl): { [s: string]: boolean } {
-    const arr = this.startPointAutoComplete.map((point) =>
-      point.name.toLocaleLowerCase()
-    );
-    if (arr.indexOf(control.value.toLowerCase()) == -1) {
-      return { notInList: true };
+    if (this.startPointAutoComplete.length > 0) {
+      const arr = this.startPointAutoComplete.map((point) =>
+        point.name.toLocaleLowerCase()
+      );
+      if (arr.indexOf(control.value.toLowerCase()) == -1) {
+        return { notInList: true };
+      }
     }
+
     return null;
   }
 
   notInEndListValidator(control: FormControl): { [s: string]: boolean } {
+    if (this.endPointAutoComplete.length > 0) {
     const arr = this.endPointAutoComplete.map((point) =>
       point.name.toLocaleLowerCase()
     );
     if (arr.indexOf(control.value.toLowerCase()) == -1) {
       return { notInList: true };
-    }
+    }}
     return null;
   }
 

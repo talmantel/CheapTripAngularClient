@@ -6,6 +6,7 @@ import {
   mergeMap,
   withLatestFrom,
   tap,
+  catchError,
 } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
@@ -18,6 +19,7 @@ import {
   IPoint,
   IRecievedRouts,
   IRout,
+  Server,
 } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -91,12 +93,12 @@ export class TripDirectionEffects {
     private router: Router,
     private store$: Store<fromApp.AppState>
   ) {
-    this.server = 'tomcat'; //to be fixed
-    // this.server = 'appachi';
+  this.server = 'tomcat'; //to be fixed
+    //   this.server = 'appachi';
   }
 
 
-  @Effect()
+ /*  @Effect()
   newEffect = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
      withLatestFrom(this.store$.select('directions')),
@@ -105,45 +107,45 @@ export class TripDirectionEffects {
        console.log('new effect,', req);
        return of('1')
      })
-  )
+  ) */
+
+    // 'http://52.14.161.122:8080/locations?type=from&search_name=6',
+     // http://3.23.159.104:3333/CheapTrip/getLocations?type=1
 
   @Effect()
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
-    mergeMap((request: { payload: IPoint; type: string }) => {
+    withLatestFrom(this.store$.select('directions')),
+    mergeMap((request: Array<any>) => { //[fff, { payload: IPoint; type: string }]
       let url = '';
-      /*     'http://52.14.161.122:8080/locations?type=from&search_name=6', */
-      /*  http://3.23.159.104:3333/CheapTrip/getLocations?type=1 */
-      if (this.server === 'appachi') {
+      if (request[1].currentServer === Server.SPRINGBOOT) {
         url =
           environment.urlAppachi +
           'locations?type=' +
-          request.payload.type +
+          request[0].payload.type +
           '&search_name=' +
-          encodeURIComponent(request.payload.name);
+          encodeURIComponent(request[0].payload.name);
       } else {
-        console.log('I am tomcat');
-        const type = request.payload.type === 'from' ? '1' : '2';
+
+        const type = request[0].payload.type === 'from' ? '1' : '2';
         url =
           environment.urlTomCat +
           'CheapTrip/getLocations?type=' +
           type +
           '&search_name=' +
-          encodeURIComponent(request.payload.name);
+          encodeURIComponent(request[0].payload.name);
       }
 
-      // return this.http.get<IPathPoint[]>(url, { observe: 'response' }).pipe(
       return this.http
         .get<any>(url, { observe: 'response' })
         .pipe(
           map((res) => {
-            //   console.log('response effect', res);
             const newAction =
-              request.payload.type === 'from'
+              request[0].payload.type === 'from'
                 ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
                 : new TripDirectionActions.SetEndPointAutocomplete(res.body);
             return newAction;
-          })
+          }),
           /*  catchError((error) => {
           console.log('error', error);
           this.handleError(error);
@@ -153,6 +155,7 @@ export class TripDirectionEffects {
         );
     })
   );
+
 
   @Effect()
   getRouts$ = this.actions$.pipe(
@@ -205,8 +208,8 @@ export class TripDirectionEffects {
               paths: resultPathArr,
               endPoints: endPoints,
             });
-          })
-          /*   catchError((error) => {
+          }),
+          /* atchError((error) => {
             const errorMessage = 'An unknown error occured!';
             this.handleError(error);
             return of(new TripDirectionActions.AutoCompleteFail(error));
@@ -313,12 +316,13 @@ export class TripDirectionEffects {
     console.log('error', err);
     if (err.error instanceof ErrorEvent) {
       // client-side error
-      errorMessage = `Error: ${err.error.message}`;
+    //  errorMessage = `Error: ${err.error.message}`;
     } else {
       // server-side error
-      errorMessage = `Error Code: ${err.status}\nMessage: ${err.message}`;
+   //   errorMessage = `Error Code: ${err.status}\nMessage: ${err.message}`;
+      console.log('error,', err);
     }
-    window.alert(errorMessage);
+  //  window.alert(errorMessage);
   }
 
   private getPoints(paths: IRout[]): Set<string> {
