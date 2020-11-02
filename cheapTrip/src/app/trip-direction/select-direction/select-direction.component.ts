@@ -78,7 +78,6 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     this.isSelectedEndPoint = false;
     this.resetSubscription = this.store
       .select('directions')
-      //   . distinctUntilChanged((prev, curr) => prev.value === curr.value)
       .subscribe((state) => {
         if (this.directionForm && state.reset) {
           this.directionForm.setValue({
