@@ -18,17 +18,17 @@ div.mainContainer {
     margin: 1rem auto 0.5rem;
     padding: 0;
     color: var(--color-accent);
-    p {
+    h1 {
       text-align: center;
       font-family: "Dosis", sans-serif;
       margin: 3rem auto;
       font-size: 3rem;
-      line-height: 2rem;
+      line-height: 3rem;
     }
     div {
       position: relative;
-      p:last-of-type {
-        font-size: 2rem;
+      h1:last-of-type {
+        font-size: 1.5rem;
       }
     }
   }
@@ -128,9 +128,12 @@ div.deliveryMode {
 @include Small {
   div.mainContainer {
     width: 90%;
-
-    p {
-      margin: 2rem auto;
+    div.message {
+      div {
+        h1 {
+          margin: 1rem auto;
+        }
+      }
     }
   }
   div.searchMode {
@@ -145,14 +148,14 @@ div.deliveryMode {
     margin: auto;
     width: 98%;
     div.message {
-      p {
+      h1 {
         display: block;
         width: 90%;
         margin: auto;
-        font-size: 1.5rem;
+        font-size: 1rem;
       }
       div {
-        p:last-of-type {
+        h1:last-child {
           font-weight: normal;
           line-height: 150%;
           font-size: 1rem;
@@ -228,7 +231,6 @@ div.deliveryMode {
 @include Small {
   div.mainContainer {
     width: 90%;
-
     p {
       margin: 2rem auto;
     }
@@ -239,15 +241,18 @@ div.deliveryMode {
   div.searchMode {
     margin: auto;
     width: 98%;
+
     div.message {
-      p {
+      margin-top:0;
+      h1 {
         display: block;
         width: 90%;
         margin: auto;
         font-size: 1.5rem;
+
       }
       div {
-        p:last-of-type {
+        h1:last-of-type {
           font-weight: normal;
           line-height: 150%;
           font-size: 1rem;

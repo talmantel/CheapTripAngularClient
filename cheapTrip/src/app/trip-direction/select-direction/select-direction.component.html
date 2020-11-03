@@ -2,12 +2,12 @@
 <div class="mainContainer" [ngClass]="{'searchMode': mode === modes.SEARCH,
 'deliveryMode': mode === modes.DELIVERY}">
   <div class="message">
-    <p *ngIf=" mode === modes.DELIVERY">Discover the cheapest way to get anywhere combining plane,
-      train, bus and rideshare</p>
+
+      <h1 *ngIf=" mode === modes.DELIVERY">Discover the cheapest way to get anywhere combining plane, train, bus and rideshare at lowcoststrip.com -</h1>
     <div @insertRemoveTrigger1 *ngIf=" mode === modes.SEARCH">
-      <p>Discover the cheapest way </p>
-      <p>to get anywhere combining plane,
-        train, bus and rideshare</p>
+      <h1>Discover the cheapest way </h1>
+      <h1>to get anywhere combining plane,
+        train, bus and rideshare</h1>
     </div>
   </div>
   <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
