@@ -6,14 +6,9 @@ span.logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  span {
-    color: var(--color-primary);
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  span:first-child {
-    color: var(--color-accent);
-  }
+   img {
+    width: 3rem;
+     }
 }
 
 a {
@@ -27,7 +22,7 @@ a {
 
 @include XLarge {
   img {
-    border: 2px solid rgb(255, 136, 0);
+
   }
 }
 
@@ -43,29 +38,23 @@ a {
 
 @include Small {
   img {
+    width:3rem;
   }
 }
 
 @include Phones {
   img {
-    margin-left: 0.5rem;
-    position: relative;
-    top: 0;
-    left: 0;
+    width:3rem;
+
   }
 }
 
 @include Smallphones {
   img {
-    position: relative;
-    top: 0;
-    left: 0;
+
     width: 3rem;
-    height: 3rem;
-    margin-left: 0.5rem;
+
   }
 }
 
-span.logo {
-  font-family: "Courgette", cursive;
-}
+

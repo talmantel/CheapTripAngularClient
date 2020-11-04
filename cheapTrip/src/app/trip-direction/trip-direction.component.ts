@@ -42,6 +42,8 @@ export class TripDirectionComponent implements OnInit {
   ngOnInit(): void {
     this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
 
+
+
     this.route.queryParams.subscribe(
       (queryParams: {
         from: string;
@@ -54,7 +56,7 @@ export class TripDirectionComponent implements OnInit {
             { id: queryParams.fromID, name: queryParams.from },
             { id: queryParams.toID, name: queryParams.to },
           ];
-          this.store.dispatch(new TripDirectionActions.GetRouts(payload));
+          this.store.dispatch(new TripDirectionActions.GetRouts());
         }
       }
     );
@@ -82,11 +84,11 @@ export class TripDirectionComponent implements OnInit {
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
-  getRouts(_points: IPoint): void {
+   /*getRouts(_points: IPoint): void {
     this.store.dispatch(
       new TripDirectionActions.GetRouts([this.startPoint, this.endPoint])
     );
-  }
+  } */
 
   cleanData(_event?: boolean): void {
     this.store.dispatch(new TripDirectionActions.CleanData(false));

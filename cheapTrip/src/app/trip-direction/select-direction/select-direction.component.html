@@ -33,14 +33,14 @@
           <span *ngIf="directionForm.get('startPointControl').errors['notInList']">This name is invalid!</span>
           <span *ngIf="directionForm.get('startPointControl').errors['required']">This field is required!</span>
         </p>
-
-
-
-
       </section>
-      <span class="material-icons arrows" (click)="changeDirection()">
+    <!--   <span class="material-icons arrows" (click)="changeDirection()">
         sync_alt
-      </span>
+      </span> -->
+
+      <span class="material-icons arrows">
+        double_arrow
+        </span>
       <section>
         <mat-form-field class="endPoint"
           [class.valid]="directionForm.get('endPointControl').valid && directionForm.get('endPointControl').touched"

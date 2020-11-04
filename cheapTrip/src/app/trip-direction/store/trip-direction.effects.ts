@@ -117,6 +117,7 @@ export class TripDirectionEffects {
     withLatestFrom(this.store$.select('directions')),
     mergeMap((request: Array<any>) => {
       //[fff, { payload: IPoint; type: string }]
+      console.log('autocomplete,',)
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
         url =
@@ -160,22 +161,23 @@ export class TripDirectionEffects {
     ofType(TripDirectionActions.GET_ROUTS),
     withLatestFrom(this.store$.select('directions')),
     switchMap((request: Array<any>) => {
+      console.log('request', request[1].startPoint);
       //{ payload: [IPathPoint, IPathPoint]; type: string }
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
         url =
           environment.urlAppachi +
           'routes?from=' +
-          request[0].payload[0].id +
+          request[1].startPoint.id +
           '&to=' +
-          request[0].payload[1].id;
+          request[1].endPoint.id;
       } else {
         url =
           environment.urlTomCat +
           'CheapTrip/getRoute?format=json&from=' +
-          request[0].payload[0].id +
+          request[1].startPoint.id +
           '&to=' +
-          request[0].payload[1].id;
+          request[1].startPoint.id;
       }
 
       return this.http.get(url, { observe: 'response' }).pipe(
@@ -188,14 +190,14 @@ export class TripDirectionEffects {
           }
 
           const endPoints = {
-            from: request[0].payload[0],
-            to: request[0].payload[1],
+            from: request[1].startPoint,
+            to: request[1].endPoint,
           };
           const queryParams = {
-            from: request[0].payload[0].name,
-            fromID: request[0].payload[0].id,
-            to: request[0].payload[1].name,
-            toID: request[0].payload[1].id,
+            from: request[1].startPoint.name,
+            fromID: request[1].startPoint.id,
+            to: request[1].endPoint.name,
+            toID: request[1].endPoint.id,
           };
           this.router.navigate(['/search/myPath'], {
             queryParams,

@@ -15,6 +15,7 @@ import { ErrorComponent } from './error/error.component';
 import * as fromApp from './store/app.reducer';
 import * as TripDirectionActions from './trip-direction/store/trip-direction.actions';
 import { Store } from '@ngrx/store';
+import { AlertMessage } from './error/alertMessage.model';
 
 //import { ErrorComponent } from "./error/error.component";
 //ngimport { ErrorService } from "./error/error.service";
@@ -30,27 +31,35 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap((evt) => {
         if (evt instanceof HttpResponse) {
+          console.log('alert');
           if (evt.body.length == 0) {
+            const alertMessage = new AlertMessage('warning', 'Oh no!', 'Sorry, the data we have accumulated is not enough to build a route between the indicated cities. Try changing your request.', ['Back']);
             this.dialog.open(ErrorComponent, {
-              data: { message: 'No result for this search!' },
+              data: alertMessage,
             });
           }
         }
       }),
       catchError((error: HttpErrorResponse) => {
-        let errorMessage = '';
+        let errorData: AlertMessage;
         switch (true) {
           case error.status >= 400:
-            errorMessage = 'Sorry. No information  for request';
+            errorData = new AlertMessage('warning', 'Oh no!', 'Sorry, the data we have accumulated is not enough to build a route between the indicated cities. Try changing your request.', ['Back']);
             break;
           case error.status >= 500:
-            errorMessage = 'Sorry. Server not responding';
+            errorData = new AlertMessage(
+              'error',
+              'Oops!',
+              'Pss! Our server is sleeping now. Please come back later.',
+              ['Close']
+            );
             break;
         }
         this.store.dispatch(
-          new TripDirectionActions.AutocompleteFail(errorMessage)
+          new TripDirectionActions.AutocompleteFail('errorMessage')
         );
-        this.dialog.open(ErrorComponent, { data: { message: errorMessage } });
+
+        this.dialog.open(ErrorComponent, { data: errorData });
         return throwError(error);
       })
     );
