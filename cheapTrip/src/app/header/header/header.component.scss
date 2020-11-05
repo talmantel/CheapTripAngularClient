@@ -4,7 +4,7 @@
   flex: 1 1 auto;
 }
 
-div.test {
+div.slogan {
   p {
     font-style: italic;
     font-size: 0.9em;
@@ -14,44 +14,46 @@ div.test {
     font-family: "Anton", sans-serif;
     font-style: italic;
     font-weight: lighter;
-    span {
-      letter-spacing: 3px;
-    }
+
+    letter-spacing: 4px;
+
     span.red {
       color: var(--color-primary);
       font-size: 1.5em;
+      font-weight: bold;
     }
-    span.pay {
-   //   font-size: 0.9rem;
-    // letter-spacing: normal;
-    }
-    span.tr {
+
+    span.transformed {
       display: inline-block;
       transform: scale(-1, -1);
+      position:relative;
+      left:0.1rem;
     }
   }
 }
 
 @include Phones {
-  div.test {
+  div.slogan {
     p {
       font-style: italic;
       font-size: 0.7em;
       color: white;
       margin: 0%;
       line-height: 1.5rem;
+      letter-spacing: 2px;
     }
   }
 }
 
 @include Smallphones {
-  div.test {
+  div.slogan {
     p {
       font-style: italic;
       font-size: 0.7em;
       color: white;
       margin: 0%;
       line-height: 1.5rem;
+      letter-spacing: 2px;
     }
   }
 }

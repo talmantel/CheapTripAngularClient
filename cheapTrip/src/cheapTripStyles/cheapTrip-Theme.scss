@@ -2,7 +2,7 @@
 
 @include mat-core();
 
-$ct-primary: mat-palette($mat-deep-orange, A400, A200, A700 );
+$ct-primary: mat-palette($mat-deep-orange, A400, A200, A700);
 $ct-accent: mat-palette($mat-teal, 700, A100, A400);
 $ct-warn: mat-palette($mat-red);
 $ct-success: mat-palette($mat-light-blue);
@@ -20,5 +20,3 @@ $accent: map-get($ct-theme, accent);
   --color-warn: #{mat-color($ct-warn)};
   --color-success: #{mat-color($ct-success)};
 }
-
-
