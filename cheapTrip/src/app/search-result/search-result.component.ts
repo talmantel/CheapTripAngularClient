@@ -49,8 +49,8 @@ iframeSizeMap.set(VIEWPORTS.HandsetPortrait, { width: 400, height: 1800 });
 iframeSizeMap.set(VIEWPORTS.HandsetLandscape, { width: 400, height: 1800 });
 iframeSizeMap.set(VIEWPORTS.TabletLandscape, { width: 590, height: 1130 });//
 iframeSizeMap.set(VIEWPORTS.TabletPortrait, { width: 590, height: 1130 });//
-iframeSizeMap.set(VIEWPORTS.Phones, { width: 360, height: 1400 });
-iframeSizeMap.set(VIEWPORTS.SmallPhones, { width: 360, height: 1450 });
+iframeSizeMap.set(VIEWPORTS.Phones, { width: 390, height: 1800 });
+iframeSizeMap.set(VIEWPORTS.SmallPhones, { width: 360, height: 1800 });
 
 @Component({
   selector: 'app-search-result',

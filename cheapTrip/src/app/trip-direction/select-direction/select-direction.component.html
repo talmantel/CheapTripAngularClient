@@ -1,14 +1,10 @@
-
 <div class="mainContainer" [ngClass]="{'searchMode': mode === modes.SEARCH,
 'deliveryMode': mode === modes.DELIVERY}">
   <div class="message">
+    <h1 @insertRemoveTrigger1 >Discover the cheapest way <br />to get anywhere combining
+      plane,
+      train, bus and rideshare</h1>
 
-      <h1 *ngIf=" mode === modes.DELIVERY">Discover the cheapest way to get anywhere combining plane, train, bus and rideshare at lowcoststrip.com -</h1>
-    <div @insertRemoveTrigger1 *ngIf=" mode === modes.SEARCH">
-      <h1>Discover the cheapest way </h1>
-      <h1>to get anywhere combining plane,
-        train, bus and rideshare</h1>
-    </div>
   </div>
   <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
     <div class="formInfo">
@@ -16,12 +12,13 @@
         <mat-form-field class="startPoint"
           [class.valid]="directionForm.get('startPointControl').valid && directionForm.get('startPointControl').touched"
           [class.invalid]="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched">
-        <!--   <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text" -->
+          <!--   <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text" -->
           <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text"
             placeholder="From" aria-label="Number" matInput formControlName="startPointControl"
             [matAutocomplete]="auto1">
-         <mat-autocomplete class ="single-autocomplete" #auto1="matAutocomplete"  (optionSelected)='optionSelected($event.option.value, "start")'>
-          <!--    <mat-autocomplete #auto1="matAutocomplete"  >-->
+          <mat-autocomplete class="single-autocomplete" #auto1="matAutocomplete"
+            (optionSelected)='optionSelected($event.option.value, "start")'>
+            <!--    <mat-autocomplete #auto1="matAutocomplete"  >-->
             <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name">
               {{start.name}}
             </mat-option>
@@ -34,21 +31,22 @@
           <span *ngIf="directionForm.get('startPointControl').errors['required']">This field is required!</span>
         </p>
       </section>
-    <!--   <span class="material-icons arrows" (click)="changeDirection()">
+      <!--   <span class="material-icons arrows" (click)="changeDirection()">
         sync_alt
       </span> -->
 
       <span class="material-icons arrows">
         double_arrow
-        </span>
+      </span>
       <section>
         <mat-form-field class="endPoint"
           [class.valid]="directionForm.get('endPointControl').valid && directionForm.get('endPointControl').touched"
           [class.invalid]="directionForm.get('endPointControl').invalid && directionForm.get('endPointControl').touched">
           <input #endPoint (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text"
             placeholder="To" aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
-          <mat-autocomplete class ="single-autocomplete"  #auto2="matAutocomplete" (optionSelected)='optionSelected($event.option.value, "end")'>
-         <!--      <mat-autocomplete #auto2="matAutocomplete" > -->
+          <mat-autocomplete class="single-autocomplete" #auto2="matAutocomplete"
+            (optionSelected)='optionSelected($event.option.value, "end")'>
+            <!--      <mat-autocomplete #auto2="matAutocomplete" > -->
             <mat-option *ngFor="let end of endPointAutoComplete" [value]="end.name">
               {{end.name}}
             </mat-option>

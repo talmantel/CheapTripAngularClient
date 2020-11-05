@@ -52,7 +52,7 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   @Output() changePoint = new EventEmitter<IPoint>();
   @Output() startPointSelected = new EventEmitter<IPathPoint>();
   @Output() endPointSelected = new EventEmitter<IPathPoint>();
-  // @Output() selectedPoints = new EventEmitter<IPathPoint[]>();
+ @Output() selectedPoints = new EventEmitter<IPathPoint[]>();
   @Output() cleanData = new EventEmitter<boolean>();
 
   startPoint: IPathPoint;
@@ -146,11 +146,11 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.store.dispatch(new TripDirectionActions.GetRouts());
-    /*  this.selectedPoints.emit([
+    /*  this.store.dispatch(new TripDirectionActions.GetRouts());*/
+    this.selectedPoints.emit([
       { id: this.startPoint.id, name: this.startPoint.name },
       { id: this.endPoint.id, name: this.endPoint.name },
-    ]);*/
+    ]);
   }
 
   optionSelected(point: any, type: string) {

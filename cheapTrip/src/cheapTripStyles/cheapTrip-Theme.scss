@@ -2,8 +2,8 @@
 
 @include mat-core();
 
-$ct-primary: mat-palette($mat-deep-orange);
-$ct-accent: mat-palette($mat-blue, A200, A100, A400);
+$ct-primary: mat-palette($mat-deep-orange, A400, A200, A700 );
+$ct-accent: mat-palette($mat-teal, 700, A100, A400);
 $ct-warn: mat-palette($mat-red);
 $ct-success: mat-palette($mat-light-blue);
 
@@ -14,10 +14,22 @@ $ct-theme: mat-light-theme($ct-primary, $ct-accent, $ct-warn);
 $primary: map-get($ct-theme, primary);
 $accent: map-get($ct-theme, accent);
 
-
 :root {
   --color-primary: #{mat-color($ct-primary)};
   --color-accent: #{mat-color($ct-accent)};
   --color-warn: #{mat-color($ct-warn)};
   --color-success: #{mat-color($ct-success)};
+}
+
+.dark-theme {
+  color: $light-primary-text;
+  $dark-primary: mat-palette($mat-blue);
+  $dark-accent: mat-palette($mat-amber, A400, A100, A700);
+  $dark-warn: mat-palette($mat-red);
+  $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+  @include angular-material-theme($dark-theme);
+
+  $primary: map-get($dark-theme, primary);
+
 }

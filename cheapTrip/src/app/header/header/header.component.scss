@@ -1,25 +1,37 @@
 @import "../../../cheapTripStyles/mixins.scss";
-span.logo {
-  background-color: white;
-  width: 4rem;
-  align-self: stretch;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-   img {
-    width: 3rem;
-     }
-}
-
-a {
-  color: white;
-  text-decoration: none;
-}
+@import "../../../cheapTripStyles/cheapTrip-Theme.scss";
 
 .spacer {
   flex: 1 1 auto;
 }
 
+
+div.test{
+  p{
+    font-style:italic;
+    font-size: 0.9em;
+     color: white;
+     margin: 0%;
+     line-height: 1.5rem;
+     font-family: 'Anton', sans-serif;
+     font-style: italic;
+     font-weight: lighter;
+     span{
+        letter-spacing: 5px;
+     }
+     span.red{
+       color: var(--color-primary);
+       font-size: 1.5em;
+     }
+     span.tr{
+       display: inline-block;
+    // transform: rotate(180deg);
+     transform: scale(-1, -1)
+    }
+
+  }
+
+}
 @include XLarge {
   img {
 
@@ -32,28 +44,35 @@ a {
 }
 
 @include Medium {
-  img {
-  }
+
 }
 
 @include Small {
-  img {
-    width:3rem;
-  }
+
 }
 
 @include Phones {
-  img {
-    width:3rem;
-
+  div.test{
+    p{
+      font-style:italic;
+      font-size: 0.8em;
+       color: white;
+       margin: 0%;
+       line-height: 1.5rem;
+    }
   }
+
 }
 
 @include Smallphones {
-  img {
-
-    width: 3rem;
-
+  div.test{
+    p{
+      font-style:italic;
+      font-size: 0.8em;
+       color: white;
+       margin: 0%;
+       line-height: 1.5rem;
+    }
   }
 }
 

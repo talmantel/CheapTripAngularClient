@@ -28,7 +28,6 @@ export class TripDirectionComponent implements OnInit {
   mode: Modes;
   pointSubj$: Subject<{ from: IPathPoint; to: IPathPoint }>;
 
-
   constructor(
     private store: Store<fromApp.AppState>,
     private route: ActivatedRoute
@@ -42,8 +41,6 @@ export class TripDirectionComponent implements OnInit {
   ngOnInit(): void {
     this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
 
-
-
     this.route.queryParams.subscribe(
       (queryParams: {
         from: string;
@@ -56,7 +53,23 @@ export class TripDirectionComponent implements OnInit {
             { id: queryParams.fromID, name: queryParams.from },
             { id: queryParams.toID, name: queryParams.to },
           ];
-          this.store.dispatch(new TripDirectionActions.GetRouts());
+          if (!this.startPoint) {
+            this.store.dispatch(
+              new TripDirectionActions.SetStartPoint({
+                id: queryParams.fromID,
+                name: queryParams.from,
+              })
+            );
+            this.store.dispatch(
+              new TripDirectionActions.SetEndPoint({
+                id: queryParams.toID,
+                name: queryParams.to,
+              })
+            );
+            this.store.dispatch(
+              new TripDirectionActions.GetRouts()
+            );
+          }
         }
       }
     );
@@ -67,6 +80,7 @@ export class TripDirectionComponent implements OnInit {
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
         this.mode = state.mode; // for form horisontal or vertical oriantation
+        this.startPoint = state.startPoint;
       });
   }
 
@@ -84,11 +98,9 @@ export class TripDirectionComponent implements OnInit {
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
-   /*getRouts(_points: IPoint): void {
-    this.store.dispatch(
-      new TripDirectionActions.GetRouts([this.startPoint, this.endPoint])
-    );
-  } */
+  getRouts(_points: IPoint): void {
+    this.store.dispatch(new TripDirectionActions.GetRouts());
+  }
 
   cleanData(_event?: boolean): void {
     this.store.dispatch(new TripDirectionActions.CleanData(false));

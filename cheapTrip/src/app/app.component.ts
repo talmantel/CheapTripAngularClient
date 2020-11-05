@@ -19,7 +19,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     console.log("my browser");
     console.log(this.myBrowser());
-    if (this.myBrowser() == 'IE') {
+      console.log(this.getBrowserVersion());
+
+    if (this.getBrowserVersion() == 'Opera 72') {
       const alertMessage = new AlertMessage(
         'warning',
         'Unsupported!',
@@ -30,7 +32,8 @@ export class AppComponent implements OnInit {
         data: alertMessage,
       });
     }
-    console.log(this.getBrowserVersion());
+
+
   }
 
   myBrowser() {

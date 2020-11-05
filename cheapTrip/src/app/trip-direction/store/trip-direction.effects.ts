@@ -116,7 +116,6 @@ export class TripDirectionEffects {
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     withLatestFrom(this.store$.select('directions')),
     mergeMap((request: Array<any>) => {
-      //[fff, { payload: IPoint; type: string }]
       console.log('autocomplete,',)
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
@@ -161,8 +160,6 @@ export class TripDirectionEffects {
     ofType(TripDirectionActions.GET_ROUTS),
     withLatestFrom(this.store$.select('directions')),
     switchMap((request: Array<any>) => {
-      console.log('request', request[1].startPoint);
-      //{ payload: [IPathPoint, IPathPoint]; type: string }
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
         url =

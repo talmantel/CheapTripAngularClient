@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
 }
+
 mat-option {
   color: var(--color-accent);
   height: 40px;
@@ -15,22 +16,17 @@ div.mainContainer {
   box-sizing: border-box;
   position: relative;
   div.message {
-    margin: 1rem auto 0.5rem;
+    margin: 0.5rem auto 0.5rem;
     padding: 0;
-    color: var(--color-accent);
+    color: var(--color-primary);
+
     h1 {
       text-align: center;
-      font-family: "Dosis", sans-serif;
-      margin: 3rem auto;
-      font-size: 3rem;
-      line-height: 3rem;
+      margin: 1rem auto;
+      font-size: 1.5rem;
+      line-height: 2rem;
     }
-    div {
-      position: relative;
-      h1:last-of-type {
-        font-size: 1.5rem;
-      }
-    }
+
   }
 
   form {
@@ -73,7 +69,7 @@ div.mainContainer {
       }
       span.arrows {
         color: var(--color-primary);
-       // cursor: pointer;
+        // cursor: pointer;
       }
     }
     div.actions {
@@ -91,15 +87,6 @@ div.mainContainer {
 }
 
 div.deliveryMode {
-  div.message {
-    p {
-      display: none;
-    }
-    p:first-child {
-      display: block;
-      font-size: 2rem;
-    }
-  }
   form {
     div.actions {
       align-items: flex-start;
@@ -129,11 +116,11 @@ div.deliveryMode {
   div.mainContainer {
     width: 90%;
     div.message {
-      div {
+
         h1 {
           margin: 1rem auto;
         }
-      }
+
     }
   }
   div.searchMode {
@@ -148,18 +135,14 @@ div.deliveryMode {
     margin: auto;
     width: 98%;
     div.message {
+      position: relative;
+      top: 1rem;
       h1 {
         display: block;
         width: 90%;
         margin: auto;
         font-size: 1rem;
-      }
-      div {
-        h1:last-child {
-          font-weight: normal;
-          line-height: 150%;
-          font-size: 1rem;
-        }
+        line-height: 1.5rem;
       }
     }
 
@@ -228,36 +211,22 @@ div.deliveryMode {
   }
 }
 
-@include Small {
-  div.mainContainer {
-    width: 90%;
-    p {
-      margin: 2rem auto;
-    }
-  }
-}
-
 @include Phones {
   div.searchMode {
     margin: auto;
     width: 98%;
-
     div.message {
-      margin-top:0;
+      margin-top: 0;
+      position: relative;
+      top: 1rem;
       h1 {
         display: block;
         width: 90%;
         margin: auto;
-        font-size: 1.5rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
 
-      }
-      div {
-        h1:last-of-type {
-          font-weight: normal;
-          line-height: 150%;
-          font-size: 1rem;
-        }
-      }
     }
 
     form {
