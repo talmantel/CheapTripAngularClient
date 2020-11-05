@@ -118,9 +118,11 @@ export class TripDirectionEffects {
     mergeMap((request: Array<any>) => {
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
-        url = environment.urlAppachi + 'locations?type=' + 'from'
+        url = environment.urlAppachi + 'locations?type=' + 'from'+
         // request[0].payload.type +
         '&search_name=' + encodeURIComponent(request[0].payload.name);
+        console.log('url', url);
+        console.log('url', request[0].payload.type);
       } else {
         const type = request[0].payload.type === 'from' ? '1' : '2';
         url =
