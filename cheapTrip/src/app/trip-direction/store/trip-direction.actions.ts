@@ -60,7 +60,7 @@ export class SetEndPointAutocomplete implements Action {
 
 export class GetRouts implements Action {
   readonly type = GET_ROUTS;
-  constructor(payload?: IPathPoint[]) {}
+  constructor() {}
 }
 
 export class SetRouts implements Action {

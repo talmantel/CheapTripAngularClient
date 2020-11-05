@@ -116,22 +116,18 @@ export class TripDirectionEffects {
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     withLatestFrom(this.store$.select('directions')),
     mergeMap((request: Array<any>) => {
-      console.log('autocomplete,',)
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
-        url =
-          environment.urlAppachi +
-          'locations?type=' +
-          request[0].payload.type +
-          '&search_name=' +
-          encodeURIComponent(request[0].payload.name);
+        url = environment.urlAppachi + 'locations?type=' + 'from'
+        // request[0].payload.type +
+        '&search_name=' + encodeURIComponent(request[0].payload.name);
       } else {
         const type = request[0].payload.type === 'from' ? '1' : '2';
         url =
           environment.urlTomCat +
           'CheapTrip/getLocations?type=' +
-          type +
-          '&search_name=' +
+          '1' +
+          /*   type */ '&search_name=' +
           encodeURIComponent(request[0].payload.name);
       }
 

@@ -1,17 +1,19 @@
 <div [class.dark-theme]="isDarkTheme">
-<mat-toolbar color="accent" role="heading">
-<!--  <span class="logo"><img src="../../../assets/images/logo.png"></span>
+  <mat-toolbar color="accent" role="heading">
+    <!--  <span class="logo"><img src="../../../assets/images/logo.png"></span>
 <span  class="logo">CHEAP TRIP</span>-->
-<div class="test"> <p> <span>CHEAP TR</span><span class="red tr">!</span>
-  <span>P:</span>
-Pay less, visit more<span class="red">!</span></p></div>
-  <span class="spacer"></span>
-  <!--  <button mat-button><a routerLink="/search"> CheapTrip</a></button> -->
-  <button mat-button (click)="toHomePage()"><span class="material-icons">
-      home
-    </span></button>
-  <button mat-raised-button color="primary" (click)="onChangeTheme()">ChangeTheme</button>
-</mat-toolbar>
+    <div class="test">
+      <p> <span>CHEAP TR</span><span class="red tr">!</span>
+        <span>P - </span>
+        <span class="pay">pay less, visit more</span><span class="red">!</span></p>
+    </div>
+    <span class="spacer"></span>
+    <!--  <button mat-button><a routerLink="/search"> CheapTrip</a></button> -->
+    <button mat-button (click)="toHomePage()"><span class="material-icons">
+        home
+      </span></button>
+    <!--   <button mat-raised-button color="primary" (click)="onChangeTheme()">ChangeTheme</button> -->
+  </mat-toolbar>
 </div>
 
 <router-outlet></router-outlet>

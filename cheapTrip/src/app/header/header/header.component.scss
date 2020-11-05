@@ -23,6 +23,10 @@ div.test{
        color: var(--color-primary);
        font-size: 1.5em;
      }
+     span.pay{
+      font-size: 0.9rem;
+      letter-spacing: normal;
+     }
      span.tr{
        display: inline-block;
     // transform: rotate(180deg);
@@ -55,10 +59,11 @@ div.test{
   div.test{
     p{
       font-style:italic;
-      font-size: 0.8em;
+      font-size: 0.7em;
        color: white;
        margin: 0%;
        line-height: 1.5rem;
+
     }
   }
 
@@ -68,10 +73,11 @@ div.test{
   div.test{
     p{
       font-style:italic;
-      font-size: 0.8em;
+      font-size: 0.7em;
        color: white;
        margin: 0%;
        line-height: 1.5rem;
+
     }
   }
 }
