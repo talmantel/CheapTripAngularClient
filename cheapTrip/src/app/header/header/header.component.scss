@@ -1,85 +1,57 @@
 @import "../../../cheapTripStyles/mixins.scss";
-@import "../../../cheapTripStyles/cheapTrip-Theme.scss";
 
 .spacer {
   flex: 1 1 auto;
 }
 
-
-div.test{
-  p{
-    font-style:italic;
+div.test {
+  p {
+    font-style: italic;
     font-size: 0.9em;
-     color: white;
-     margin: 0%;
-     line-height: 1.5rem;
-     font-family: 'Anton', sans-serif;
-     font-style: italic;
-     font-weight: lighter;
-     span{
-        letter-spacing: 5px;
-     }
-     span.red{
-       color: var(--color-primary);
-       font-size: 1.5em;
-     }
-     span.pay{
+    color: white;
+    margin: 0%;
+    line-height: 1.5rem;
+    font-family: "Anton", sans-serif;
+    font-style: italic;
+    font-weight: lighter;
+    span {
+      letter-spacing: 5px;
+    }
+    span.red {
+      color: var(--color-primary);
+      font-size: 1.5em;
+    }
+    span.pay {
       font-size: 0.9rem;
       letter-spacing: normal;
-     }
-     span.tr{
-       display: inline-block;
-    // transform: rotate(180deg);
-     transform: scale(-1, -1)
     }
-
+    span.tr {
+      display: inline-block;
+      transform: scale(-1, -1);
+    }
   }
-
-}
-@include XLarge {
-  img {
-
-  }
-}
-
-@include Large {
-  img {
-  }
-}
-
-@include Medium {
-
-}
-
-@include Small {
-
 }
 
 @include Phones {
-  div.test{
-    p{
-      font-style:italic;
+  div.test {
+    p {
+      font-style: italic;
       font-size: 0.7em;
-       color: white;
-       margin: 0%;
-       line-height: 1.5rem;
-
+      color: white;
+      margin: 0%;
+      line-height: 1.5rem;
     }
   }
-
 }
 
 @include Smallphones {
-  div.test{
-    p{
-      font-style:italic;
+  div.test {
+    p {
+      font-style: italic;
       font-size: 0.7em;
-       color: white;
-       margin: 0%;
-       line-height: 1.5rem;
-
+      color: white;
+      margin: 0%;
+      line-height: 1.5rem;
     }
   }
 }
-
-
