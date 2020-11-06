@@ -93,25 +93,24 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
       });
     //for reload purpose
     this.pointSubscripton = this.pointSubj.subscribe((points) => {
-      console.log('points from sub',points );
+      console.log('points from sub', points);
       if (
         this.directionForm &&
         this.directionForm.get('startPointControl').value === '' &&
         this.directionForm.get('endPointControl').value === ''
       ) {
-
         this.directionForm.setValue({
           startPointControl: points.from.name,
           endPointControl: points.to.name,
         });
         this.isSelectedStartPoint = true;
         this.isSelectedEndPoint = true;
-        this.startPoint=points.from;
-        this.endPoint=points.to;
+        this.startPoint = points.from;
+        this.endPoint = points.to;
         console.log('end point', this.endPoint);
         this.directionForm.valid;
-      this.directionForm.controls.endPointControl.valid;
-       this.directionForm.controls.startPointControl.valid;
+        this.directionForm.controls.endPointControl.valid;
+        this.directionForm.controls.startPointControl.valid;
       }
     });
 
@@ -173,7 +172,6 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-
     this.selectedPoints.emit([
       { id: this.startPoint.id, name: this.startPoint.name },
       { id: this.endPoint.id, name: this.endPoint.name },
@@ -244,17 +242,17 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
 
   onFocusOut(event: any): void {
     if (event.target.attributes.formControlName.value === 'startPointControl') {
-   //   if (this.isSelectedStartPoint) return;
+      if (this.isSelectedStartPoint) return;
       const startPoint = this.directionForm.controls.startPointControl.value;
-      if(this.startPointAutoComplete.length>0){
+      if (this.startPointAutoComplete.length > 0) {
         this.startPoint = this.startPointAutoComplete[0];
         this.startPointSelected.emit(this.startPoint);
         this.directionForm.patchValue({
           startPointControl: this.startPoint.name,
         });
-        this.isSelectedStartPoint=true;
+        this.isSelectedStartPoint = true;
       }
-    /*   if (
+      /*   if (
         this.startPointAutoComplete.filter(
           (point) => point.name.toLowerCase() == startPoint.toLowerCase()
         ).length > 0
@@ -269,21 +267,21 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     } else if (
       event.target.attributes.formControlName.value === 'endPointControl'
     ) {
-     // if (this.isSelectedEndPoint) return;
+      if (this.isSelectedEndPoint) return;
 
-      if(this.endPointAutoComplete.length>0){
+      if (this.endPointAutoComplete.length > 0) {
         this.endPoint = this.endPointAutoComplete[0];
         this.endPointSelected.emit(this.endPoint);
         this.directionForm.patchValue({
           endPointControl: this.endPoint.name,
         });
-        this.isSelectedEndPoint=true;
+        this.isSelectedEndPoint = true;
       }
-    // const startPoint = this.directionForm.controls.endPointControl.value;
+      // const startPoint = this.directionForm.controls.endPointControl.value;
       /* const points = this.endPointAutoComplete.filter(
         (point) => point.name.toLowerCase() == startPoint.toLowerCase()
       ); */
-     /*  if (
+      /*  if (
         this.endPointAutoComplete.filter(
           (point) => point.name.toLowerCase() == startPoint.toLowerCase()
         ).length > 0
@@ -296,5 +294,4 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
       } */
     }
   }
-
 }
