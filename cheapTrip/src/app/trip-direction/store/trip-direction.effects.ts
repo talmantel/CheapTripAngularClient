@@ -115,7 +115,7 @@ export class TripDirectionEffects {
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
     withLatestFrom(this.store$.select('directions')),
-    mergeMap((request: Array<any>) => {
+    switchMap((request: Array<any>) => {
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
         url = environment.urlAppachi + 'locations?type=' + 'from'+
