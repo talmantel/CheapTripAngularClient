@@ -121,16 +121,11 @@ export class TripDirectionEffects {
         url = environment.urlAppachi + 'locations?type=' + 'from'+
         // request[0].payload.type +
         '&search_name=' + encodeURIComponent(request[0].payload.name);
-        console.log('url', url);
-        console.log('url', request[0].payload.type);
+
       } else {
-        const type = request[0].payload.type === 'from' ? '1' : '2';
-        url =
-          environment.urlTomCat +
-          'CheapTrip/getLocations?type=' +
-          '1' +
-          /*   type */ '&search_name=' +
-          encodeURIComponent(request[0].payload.name);
+        url = environment.urlTomCat + 'locations?type=' + 'from'+
+        // request[0].payload.type +
+        '&search_name=' + encodeURIComponent(request[0].payload.name);
       }
 
       return this.http
@@ -169,20 +164,18 @@ export class TripDirectionEffects {
       } else {
         url =
           environment.urlTomCat +
-          'CheapTrip/getRoute?format=json&from=' +
+          'routes?from=' +
           request[1].startPoint.id +
           '&to=' +
-          request[1].startPoint.id;
+          request[1].endPoint.id;
       }
 
       return this.http.get(url, { observe: 'response' }).pipe(
         map((res) => {
           let resultPathArr = null;
-          if (request[1].currentServer === Server.SPRINGBOOT) {
+
             resultPathArr = this.transformObject(res.body as IRecievedRouts[]);
-          } else {
-            resultPathArr = this.transformObjectTomCat(res.body);
-          }
+
 
           const endPoints = {
             from: request[1].startPoint,
@@ -212,7 +205,7 @@ export class TripDirectionEffects {
     })
   );
 
-  private transformObjectTomCat(obj: object): IPath[] {
+/*   private transformObjectTomCat(obj: object): IPath[] {
     const objArr: IPath[] = [];
     for (const i in obj) {
       const transformedDetails = this.transformDetails(obj[i]);
@@ -223,7 +216,7 @@ export class TripDirectionEffects {
       objArr.push(testObj);
     }
     return this.reducedPaths(objArr);
-  }
+  } */
 
   private transformObject(routs: IRecievedRouts[]): IPath[] {
     const objArr: IPath[] = [];
