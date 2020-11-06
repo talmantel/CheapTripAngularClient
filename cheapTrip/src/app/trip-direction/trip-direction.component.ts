@@ -49,10 +49,6 @@ export class TripDirectionComponent implements OnInit {
         toID: number;
       }) => {
         if (Object.keys(queryParams).length > 0) {
-          const payload = [
-            { id: queryParams.fromID, name: queryParams.from },
-            { id: queryParams.toID, name: queryParams.to },
-          ];
           if (!this.startPoint) {
             this.store.dispatch(
               new TripDirectionActions.SetStartPoint({
@@ -80,7 +76,6 @@ export class TripDirectionComponent implements OnInit {
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
         this.mode = state.mode; // for form horisontal or vertical oriantation
-        this.startPoint = state.startPoint;
       });
   }
 
