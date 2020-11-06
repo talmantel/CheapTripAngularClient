@@ -14,21 +14,7 @@ div.slogan {
     font-family: "Anton", sans-serif;
     font-style: italic;
     font-weight: lighter;
-
     letter-spacing: 4px;
-
-    span.red {
-      color: var(--color-primary);
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-
-    span.transformed {
-      display: inline-block;
-      transform: scale(-1, -1);
-      position:relative;
-      left:0.1rem;
-    }
   }
 }
 
