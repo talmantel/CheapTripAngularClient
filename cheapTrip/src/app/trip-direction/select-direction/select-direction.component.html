@@ -58,7 +58,7 @@
     </div>
     <div class="actions">
       <button mat-flat-button color="accent" type="reset" (click)="cleanForm()">Clear form</button>
-      <button mat-flat-button [disabled]="!(isSelectedStartPoint && isSelectedEndPoint)" color="primary"
+      <button mat-flat-button [disabled]="!(isSelectedStartPoint && isSelectedEndPoint && directionForm.valid)" color="primary"
         type="submit">Let's go</button>
     </div>
 
