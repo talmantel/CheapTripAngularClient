@@ -13,13 +13,15 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import * as fromApp from '../../store/app.reducer';
 import * as TripDirectionActions from '../store/trip-direction.actions';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
+import { debounceTime } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-direction',
@@ -42,181 +44,92 @@ import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
     ]),
   ],
 })
-export class SelectDirectionComponent implements OnInit, OnDestroy {
-  myList = ['1', '2'];
-  // @Input() points: [IPathPoint, IPathPoint];
-  @Input() startPointAutoComplete: IPathPoint[];
-  @Input() endPointAutoComplete: IPathPoint[];
-  @Input() mode: Modes = Modes.SEARCH;
-
-  @Output() changePoint = new EventEmitter<IPoint>();
-  @Output() startPointSelected = new EventEmitter<IPathPoint>();
-  @Output() endPointSelected = new EventEmitter<IPathPoint>();
-  @Output() selectedPoints = new EventEmitter<IPathPoint[]>();
-  @Output() cleanData = new EventEmitter<boolean>();
-
+export class SelectDirectionComponent implements OnInit {
+  stateSubscription: Subscription;
+  directionForm: FormGroup;
+  startPointAutoComplete: IPathPoint[];
+  endPointAutoComplete: IPathPoint[];
   startPoint: IPathPoint;
   endPoint: IPathPoint;
-  isSelectedStartPoint: boolean;
-  isSelectedEndPoint: boolean;
-
-  directionForm: FormGroup;
+  endPoint2: IPathPoint;
+  mode: Modes;
   modes = Modes;
+  startSubj = new Subject();
+  endSubj = new Subject();
+  smth: string;
 
-  @Input() pointSubj: Subject<{ from: IPathPoint; to: IPathPoint }>;
-  @Input() toHomeSubj: Subject<boolean>;
-  pointSubscripton: Subscription;
-  resetSubscription: Subscription;
-  server: any;
-
-  constructor(private store: Store<fromApp.AppState>) {}
-  ngOnDestroy(): void {
-    this.pointSubscripton.unsubscribe();
-    this.resetSubscription.unsubscribe();
-  }
+  constructor(
+    private store: Store<fromApp.AppState>,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+  ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    this.isSelectedStartPoint = false;
-    this.isSelectedEndPoint = false;
-    this.resetSubscription = this.store
+    this.mode = Modes.SEARCH;
+    this.startPointAutoComplete = [];
+    this.endPointAutoComplete = [];
+    this.defineRouterParams();
+    this.setForm();
+    this.startPoint = { id: 0, name: '' };
+    this.endPoint = { id: 0, name: '' };
+    this.endPoint2 = { id: 0, name: '' };
+    this.smth = 'something';
+    this.stateSubscription = this.store
       .select('directions')
       .subscribe((state) => {
-        this.server = state.currentServer;
-        if (this.directionForm && state.reset) {
-          this.directionForm.setValue({
-            startPointControl: '',
-            endPointControl: '',
-          });
-          this.directionForm.markAsUntouched();
-          this.directionForm.markAsPristine();
-        }
+        this.startPointAutoComplete = state.startPointAutoComplete;
+        this.endPointAutoComplete = state.endPointAutoComplete;
+        this.mode = state.mode;
       });
-    //for reload purpose
-    this.pointSubscripton = this.pointSubj.subscribe((points) => {
-      console.log('points from sub', points);
-      if (
-        this.directionForm &&
-        this.directionForm.get('startPointControl').value === '' &&
-        this.directionForm.get('endPointControl').value === ''
-      ) {
-        this.directionForm.setValue({
-          startPointControl: points.from.name,
-          endPointControl: points.to.name,
-        });
-        this.isSelectedStartPoint = true;
-        this.isSelectedEndPoint = true;
-        this.startPoint = points.from;
-        this.endPoint = points.to;
-        console.log('end point', this.endPoint);
-        this.directionForm.valid;
-        this.directionForm.controls.endPointControl.valid;
-        this.directionForm.controls.startPointControl.valid;
-      }
-    });
 
-    this.directionForm = new FormGroup({
-      startPointControl: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(30),
-        this.notInStartListValidator.bind(this),
-      ]),
-      endPointControl: new FormControl('', [
-        Validators.required,
-        this.notInEndListValidator.bind(this),
-        Validators.maxLength(30),
-      ]),
-    });
+    this.pointsSubscription();
+    this.router.events.subscribe((res) => console.log('rout', res));
   }
+
   // autocomplete is invoked
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };
-    if (point.name.length > 0) {
-      this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
+    if (type === 'from') {
+      this.startPoint = { id: 0, name: '' };
     } else {
-      if (type == 'from') {
-        this.directionForm.patchValue({
-          startPointControl: '',
-        });
-
-        this.directionForm.get('startPointControl').markAsUntouched();
-        this.directionForm.get('startPointControl').markAsPristine();
-      }
+      this.endPoint = { id: 0, name: '' };
     }
+    this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
-  changeDirection(): void {
-    [this.startPoint, this.endPoint] = [this.endPoint, this.startPoint];
-    this.store.dispatch(
-      new TripDirectionActions.GetAutocomplete({
-        name: this.startPoint.name,
-        type: 'from',
-      })
-    );
-    this.store.dispatch(
-      new TripDirectionActions.GetAutocomplete({
-        name: this.endPoint.name,
-        type: 'from',
-      })
-    );
-
-    // this.changePoint.emit({ name: this.startPoint.name, type: 'from' }); //invoke autocomplete
-    // this.changePoint.emit({ name: this.endPoint.name, type: 'to' }); //invoke autocomplete
-    //populate the form
-    this.directionForm.setValue({
-      startPointControl: this.startPoint.name,
-      endPointControl: this.endPoint.name,
-    });
-    //select points
-    this.optionSelected(this.startPoint.name, 'from');
-    this.optionSelected(this.endPoint.name, 'to');
+  onChange(smth: any) {
+    console.log('on change', smth);
   }
 
   onSubmit(): void {
-    this.selectedPoints.emit([
-      { id: this.startPoint.id, name: this.startPoint.name },
-      { id: this.endPoint.id, name: this.endPoint.name },
-    ]);
+    this.store.dispatch(new TripDirectionActions.GetRouts());
   }
 
   optionSelected(point: any, type: string) {
-    if (type == 'start') {
-      if (this.startPointAutoComplete.length > 0) {
-        this.startPoint = this.startPointAutoComplete.filter((p) => {
-          return p.name == point;
-        })[0];
-        this.isSelectedStartPoint = true;
-        this.store.dispatch(
-          new TripDirectionActions.SetStartPoint({ ...this.startPoint })
-        );
-      }
-    } else {
-      if (this.endPointAutoComplete.length > 0) {
-        this.endPoint = this.endPointAutoComplete.filter((p) => {
-          return p.name == point;
-        })[0];
-        //   this.endPointSelected.emit({ ...this.endPoint });
-        this.isSelectedEndPoint = true;
-        this.store.dispatch(
-          new TripDirectionActions.SetEndPoint({ ...this.endPoint })
-        );
-      }
+    console.log('type', type);
+    if (type == 'from') {
+      this.startSubj.next(point);
+      console.log('start point', point);
+    } else if (type === 'to') {
+      this.endSubj.next(point);
     }
   }
 
   cleanForm(): void {
-    this.cleanData.emit(true);
-    this.directionForm.setValue({
-      startPointControl: '',
-      endPointControl: '',
-    });
-    this.directionForm.markAsPristine();
+    this.directionForm.reset();
+    this.startPoint = { id: 0, name: '' };
+    this.endPoint = { id: 0, name: '' };
+    this.startPointAutoComplete = [];
+    this.endPointAutoComplete = [];
     this.directionForm.markAsUntouched();
-    this.isSelectedEndPoint = false;
-    this.isSelectedStartPoint = false;
+    this.directionForm.markAsPristine();
+
+    this.store.dispatch(new TripDirectionActions.CleanData(false));
   }
 
-  notInStartListValidator(control: FormControl): { [s: string]: boolean } {
-    if (this.startPointAutoComplete.length > 0) {
+  /*  notInStartListValidator(control: FormControl): { [s: string]: boolean } {
+   if (this.startPointAutoComplete.length > 0) {
       const arr = this.startPointAutoComplete.map((point) =>
         point.name.toLocaleLowerCase()
       );
@@ -226,72 +139,179 @@ export class SelectDirectionComponent implements OnInit, OnDestroy {
     }
 
     return null;
-  }
+  } */
+
+  /*   notInStartListValidatorAsync(
+    control: FormControl
+  ): Promise<any> | Observable<any> {
+    const promise = new Promise<any>((resolve, reset) => {
+      if (this.startPointAutoComplete.length > 0) {
+        const arr = this.startPointAutoComplete.map((point) =>
+          point.name.toLocaleLowerCase()
+        );
+        if (arr.indexOf(control.value.toLowerCase()) == -1) {
+          resolve({ notInList: true });
+        }
+      } else {
+        resolve(null);
+      }
+    });
+    return promise;
+  } */
 
   notInEndListValidator(control: FormControl): { [s: string]: boolean } {
-    if (this.endPointAutoComplete.length > 0) {
-      const arr = this.endPointAutoComplete.map((point) =>
-        point.name.toLocaleLowerCase()
-      );
-      if (arr.indexOf(control.value.toLowerCase()) == -1) {
-        return { notInList: true };
-      }
-    }
     return null;
   }
 
   onFocusOut(event: any): void {
     if (event.target.attributes.formControlName.value === 'startPointControl') {
-      if (this.isSelectedStartPoint) return;
-      const startPoint = this.directionForm.controls.startPointControl.value;
-      if (this.startPointAutoComplete.length > 0) {
-        this.startPoint = this.startPointAutoComplete[0];
-        this.startPointSelected.emit(this.startPoint);
-        this.directionForm.patchValue({
-          startPointControl: this.startPoint.name,
-        });
-        this.isSelectedStartPoint = true;
+      if (this.startPoint.name === '') {
+        console.log('this.startPoint', this.startPoint);
+        console.log('this.startPoinAutoCompletet', this.startPointAutoComplete);
+        if (this.startPointAutoComplete.length === 0) {
+          this.directionForm.patchValue({
+            startPointControl: '',
+          });
+          this.directionForm.get('startPointControl').markAsUntouched();
+          return;
+        }
+        this.startSubj.next(this.startPointAutoComplete[0]);
       }
-      /*   if (
-        this.startPointAutoComplete.filter(
-          (point) => point.name.toLowerCase() == startPoint.toLowerCase()
-        ).length > 0
-      ) {
-        this.startPoint = this.startPointAutoComplete[0];
-        console.log('my point',   this.startPoint );
-        this.startPointSelected.emit(this.startPoint);
-        this.directionForm.patchValue({
-          startPointControl: this.startPoint.name,
-        });
-      } */
     } else if (
       event.target.attributes.formControlName.value === 'endPointControl'
     ) {
-      if (this.isSelectedEndPoint) return;
-
-      if (this.endPointAutoComplete.length > 0) {
-        this.endPoint = this.endPointAutoComplete[0];
-        this.endPointSelected.emit(this.endPoint);
-        this.directionForm.patchValue({
-          endPointControl: this.endPoint.name,
-        });
-        this.isSelectedEndPoint = true;
+      if (this.endPoint.name === '') {
+        if (this.endPointAutoComplete.length === 0) {
+          this.directionForm.patchValue({
+            endPointControl: '',
+          });
+          this.directionForm.get('endPointControl').markAsUntouched();
+          return;
+        }
+        this.endSubj.next(this.endPointAutoComplete[0]);
       }
-      // const startPoint = this.directionForm.controls.endPointControl.value;
-      /* const points = this.endPointAutoComplete.filter(
-        (point) => point.name.toLowerCase() == startPoint.toLowerCase()
-      ); */
-      /*  if (
-        this.endPointAutoComplete.filter(
-          (point) => point.name.toLowerCase() == startPoint.toLowerCase()
-        ).length > 0
-      ) {
-        this.endPoint = points[0];
-        this.endPointSelected.emit(this.endPoint);
+    }
+  }
+
+  private setForm() {
+    this.directionForm = new FormGroup({
+      startPointControl: new FormControl('', [
+        // Validators.required,
+        // this.notInStartListValidator.bind(this),
+      ]),
+      endPointControl: new FormControl('', [
+        //Validators.required,
+        // this.notInStartListValidator.bind(this),
+      ]),
+    });
+  }
+
+  private defineRouterParams() {
+    this.route.queryParams.subscribe(
+      (queryParams: {
+        from: string;
+        fromID: number;
+        to: string;
+        toID: number;
+      }) => {
+        console.log('params', queryParams);
+        if (
+          Object.keys(queryParams).length === 0 &&
+          queryParams.constructor === Object &&
+          this.directionForm
+        ) {
+          this.cleanForm();
+        } else {
+          this.startPoint = {
+            id: queryParams.fromID,
+            name: queryParams.from,
+          };
+          this.store.dispatch(
+            new TripDirectionActions.SetStartPoint({ ...this.startPoint })
+          );
+          this.endPoint = {
+            id: queryParams.toID,
+            name: queryParams.to,
+          };
+          this.store.dispatch(
+            new TripDirectionActions.SetEndPoint({ ...this.endPoint })
+          );
+          this.setForm();
+          this.directionForm.setValue({
+            startPointControl: this.startPoint.name,
+            endPointControl: this.endPoint.name,
+          });
+          this.store.dispatch(new TripDirectionActions.GetRouts());
+        }
+        //  if (Object.keys(queryParams).length === 0) {
+        //  this.cleanForm();
+        /*  if (this.startPoint.name === '') {
+           this.startPoint={
+              id: queryParams.fromID,
+              name: queryParams.from,
+            }
+            this.store.dispatch(
+              new TripDirectionActions.SetStartPoint({...this.startPoint})
+            ); */
+        /*  this.endPoint={
+              id: queryParams.toID,
+              name: queryParams.to,
+            }
+            this.store.dispatch(
+              new TripDirectionActions.SetEndPoint({...this.endPoint})
+            );
+            this.setForm();
+            this.directionForm.setValue({
+              startPointControl: this.startPoint.name,
+              endPointControl: this.endPoint.name,
+
+            })
+            this.store.dispatch(
+              new TripDirectionActions.GetRouts()
+            );
+          } */
+      }
+      // }
+    );
+  }
+
+  private pointsSubscription() {
+    this.startSubj.pipe(debounceTime(200)).subscribe((res) => {
+      if (typeof res == 'string') {
+        this.startPoint = this.startPointAutoComplete.filter(
+          (p) => p.name === res
+        )[0];
+      } else {
+        console.log('else', res);
+        this.startPoint = res as IPathPoint;
+
+        this.directionForm.patchValue({
+          startPointControl: this.startPoint.name,
+        });
+      }
+      this.store.dispatch(
+        new TripDirectionActions.SetStartPoint({ ...this.startPoint })
+      );
+    });
+
+    this.endSubj.pipe(debounceTime(200)).subscribe((res) => {
+      if (typeof res == 'string') {
+        console.log('end point subj res', res);
+        this.endPoint = this.endPointAutoComplete.filter(
+          (p) => p.name === res
+        )[0];
+        this.smth = this.endPoint.name;
+        this.endPoint2 = this.endPoint;
+        console.log('END POINT smth', this.smth);
+      } else {
+        this.endPoint = res as IPathPoint;
         this.directionForm.patchValue({
           endPointControl: this.endPoint.name,
         });
-      } */
-    }
+      }
+      this.store.dispatch(
+        new TripDirectionActions.SetEndPoint({ ...this.endPoint })
+      );
+    });
   }
 }

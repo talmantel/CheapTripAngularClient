@@ -118,14 +118,21 @@ export class TripDirectionEffects {
     switchMap((request: Array<any>) => {
       let url = '';
       if (request[1].currentServer === Server.SPRINGBOOT) {
-        url = environment.urlAppachi + 'locations?type=' + 'from'+
-        // request[0].payload.type +
-        '&search_name=' + encodeURIComponent(request[0].payload.name);
-
+        url =
+          environment.urlAppachi +
+          'locations?type=' +
+          'from' +
+          // request[0].payload.type +
+          '&search_name=' +
+          encodeURIComponent(request[0].payload.name);
       } else {
-        url = environment.urlTomCat + 'locations?type=' + 'from'+
-        // request[0].payload.type +
-        '&search_name=' + encodeURIComponent(request[0].payload.name);
+        url =
+          environment.urlTomCat +
+          'locations?type=' +
+          'from' +
+          // request[0].payload.type +
+          '&search_name=' +
+          encodeURIComponent(request[0].payload.name);
       }
 
       return this.http
@@ -174,9 +181,7 @@ export class TripDirectionEffects {
         map((res) => {
           let resultPathArr = null;
 
-            resultPathArr = this.transformObject(res.body as IRecievedRouts[]);
-
-
+          resultPathArr = this.transformObject(res.body as IRecievedRouts[]);
           const endPoints = {
             from: request[1].startPoint,
             to: request[1].endPoint,
@@ -205,7 +210,7 @@ export class TripDirectionEffects {
     })
   );
 
-/*   private transformObjectTomCat(obj: object): IPath[] {
+  /*   private transformObjectTomCat(obj: object): IPath[] {
     const objArr: IPath[] = [];
     for (const i in obj) {
       const transformedDetails = this.transformDetails(obj[i]);

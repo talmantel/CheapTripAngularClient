@@ -31,7 +31,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap((evt) => {
        if (evt instanceof HttpResponse) {
-          console.log('alert');
           if (evt.body.length == 0) {
             const alertMessage = new AlertMessage('warning', 'Oh no!', 'Sorry, the data we have accumulated is not enough to build a route between the indicated cities. Try changing your request.', ['Back']);
             this.dialog.open(ErrorComponent, {

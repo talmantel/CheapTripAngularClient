@@ -35,13 +35,14 @@ export class TripDirectionComponent implements OnInit {
 
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
-    this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
+    console.log('refresh');
+  //.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
   }
 
   ngOnInit(): void {
-    this.pointSubj$ = new BehaviorSubject({ from: null, to: null });
+  //  this.pointSubj$ = new BehaviorSubject({ from: {id: 0, name: ''}, to:  {id: 0, name: ''} });
 
-    this.route.queryParams.subscribe(
+  /*  this.route.queryParams.subscribe(
       (queryParams: {
         from: string;
         fromID: number;
@@ -49,6 +50,7 @@ export class TripDirectionComponent implements OnInit {
         toID: number;
       }) => {
         if (Object.keys(queryParams).length > 0) {
+          console.log('query params,',queryParams );
           if (!this.startPoint) {
             this.store.dispatch(
               new TripDirectionActions.SetStartPoint({
@@ -68,36 +70,31 @@ export class TripDirectionComponent implements OnInit {
           }
         }
       }
-    );
-    this.selectDirectionSubscription = this.store
-      .select('directions')
-      .subscribe((state) => {
-        this.pointSubj$.next({ from: state.startPoint, to: state.endPoint });
-        this.startPointAutoComplete = state.startPointAutoComplete;
-        this.endPointAutoComplete = state.endPointAutoComplete;
-        this.mode = state.mode; // for form horisontal or vertical oriantation
-      });
+    ); */
+
   }
 
   onStartPointSelected(point: IPathPoint) {
-    this.store.dispatch(new TripDirectionActions.SetStartPoint(point));
-    this.startPoint = point;
+   // this.store.dispatch(new TripDirectionActions.SetStartPoint(point));
+   // this.startPoint = point;
   }
 
   onEndPointSelected(point: IPathPoint) {
-    this.store.dispatch(new TripDirectionActions.SetEndPoint(point));
-    this.endPoint = point;
+  //  this.store.dispatch(new TripDirectionActions.SetEndPoint(point));
+  //  this.endPoint = point;
   }
 
   onChangePoint(point: IPoint): void {
-    this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
+   // this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
   getRouts(_points: IPoint): void {
-    this.store.dispatch(new TripDirectionActions.GetRouts());
+  /*   this.store.dispatch(
+      new TripDirectionActions.GetRouts([this.startPoint, this.endPoint])
+    ); */
   }
 
   cleanData(_event?: boolean): void {
-    this.store.dispatch(new TripDirectionActions.CleanData(false));
+  //  this.store.dispatch(new TripDirectionActions.CleanData(false));
   }
 }
