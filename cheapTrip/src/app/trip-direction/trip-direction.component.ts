@@ -36,65 +36,8 @@ export class TripDirectionComponent implements OnInit {
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     console.log('refresh');
-  //.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
+    this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
   }
 
-  ngOnInit(): void {
-  //  this.pointSubj$ = new BehaviorSubject({ from: {id: 0, name: ''}, to:  {id: 0, name: ''} });
-
-  /*  this.route.queryParams.subscribe(
-      (queryParams: {
-        from: string;
-        fromID: number;
-        to: string;
-        toID: number;
-      }) => {
-        if (Object.keys(queryParams).length > 0) {
-          console.log('query params,',queryParams );
-          if (!this.startPoint) {
-            this.store.dispatch(
-              new TripDirectionActions.SetStartPoint({
-                id: queryParams.fromID,
-                name: queryParams.from,
-              })
-            );
-            this.store.dispatch(
-              new TripDirectionActions.SetEndPoint({
-                id: queryParams.toID,
-                name: queryParams.to,
-              })
-            );
-            this.store.dispatch(
-              new TripDirectionActions.GetRouts()
-            );
-          }
-        }
-      }
-    ); */
-
-  }
-
-  onStartPointSelected(point: IPathPoint) {
-   // this.store.dispatch(new TripDirectionActions.SetStartPoint(point));
-   // this.startPoint = point;
-  }
-
-  onEndPointSelected(point: IPathPoint) {
-  //  this.store.dispatch(new TripDirectionActions.SetEndPoint(point));
-  //  this.endPoint = point;
-  }
-
-  onChangePoint(point: IPoint): void {
-   // this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
-  }
-
-  getRouts(_points: IPoint): void {
-  /*   this.store.dispatch(
-      new TripDirectionActions.GetRouts([this.startPoint, this.endPoint])
-    ); */
-  }
-
-  cleanData(_event?: boolean): void {
-  //  this.store.dispatch(new TripDirectionActions.CleanData(false));
-  }
+  ngOnInit(): void {}
 }

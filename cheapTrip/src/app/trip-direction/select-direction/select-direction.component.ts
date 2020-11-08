@@ -7,11 +7,13 @@ import {
 } from '@angular/animations';
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -51,12 +53,14 @@ export class SelectDirectionComponent implements OnInit {
   endPointAutoComplete: IPathPoint[];
   startPoint: IPathPoint;
   endPoint: IPathPoint;
-  endPoint2: IPathPoint;
+
   mode: Modes;
   modes = Modes;
   startSubj = new Subject();
   endSubj = new Subject();
-  smth: string;
+
+  @ViewChild('nameText', { static: false })
+  nameParagraph: ElementRef;
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -66,16 +70,14 @@ export class SelectDirectionComponent implements OnInit {
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    this.setForm();
     this.mode = Modes.SEARCH;
     this.startPointAutoComplete = [];
     this.endPointAutoComplete = [];
-    this.defineRouterParams();
 
+    this.setForm();
     this.startPoint = { id: 0, name: '' };
     this.endPoint = { id: 0, name: '' };
-    this.endPoint2 = { id: 0, name: '' };
-    this.smth = 'something';
+     this.defineRouterParams();
     this.stateSubscription = this.store
       .select('directions')
       .subscribe((state) => {
@@ -99,16 +101,13 @@ export class SelectDirectionComponent implements OnInit {
     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
 
-  onChange(smth: any) {
-    console.log('on change', smth);
-  }
+
 
   onSubmit(): void {
     this.store.dispatch(new TripDirectionActions.GetRouts());
   }
 
   optionSelected(point: any, type: string) {
-    console.log('type', type);
     if (type == 'from') {
       this.startSubj.next(point);
       console.log('start point', point);
@@ -194,9 +193,8 @@ export class SelectDirectionComponent implements OnInit {
 
   private setForm() {
     this.directionForm = new FormGroup({
-       endPointControl: new FormControl(''),
+      endPointControl: new FormControl(''),
       startPointControl: new FormControl(''),
-
     });
   }
 
@@ -229,42 +227,22 @@ export class SelectDirectionComponent implements OnInit {
           this.store.dispatch(
             new TripDirectionActions.SetEndPoint({ ...this.endPoint })
           );
+
           this.setForm();
           this.directionForm.setValue({
             startPointControl: this.startPoint.name,
             endPointControl: this.endPoint.name,
           });
-          this.store.dispatch(new TripDirectionActions.GetRouts());
-        }
-        //  if (Object.keys(queryParams).length === 0) {
-        //  this.cleanForm();
-        /*  if (this.startPoint.name === '') {
-           this.startPoint={
-              id: queryParams.fromID,
-              name: queryParams.from,
-            }
-            this.store.dispatch(
-              new TripDirectionActions.SetStartPoint({...this.startPoint})
-            ); */
-        /*  this.endPoint={
-              id: queryParams.toID,
-              name: queryParams.to,
-            }
-            this.store.dispatch(
-              new TripDirectionActions.SetEndPoint({...this.endPoint})
-            );
-            this.setForm();
-            this.directionForm.setValue({
-              startPointControl: this.startPoint.name,
-              endPointControl: this.endPoint.name,
+          console.log('start point after refresh', this.startPoint);
+          console.log('end point after refresh', this.endPoint);
 
-            })
-            this.store.dispatch(
-              new TripDirectionActions.GetRouts()
-            );
-          } */
+          this.store.dispatch(new TripDirectionActions.GetRouts());
+          console.log('start point after refresh', this.startPoint);
+          console.log('end point after refresh', this.endPoint);
+        }
+
       }
-      // }
+
     );
   }
 
@@ -293,9 +271,7 @@ export class SelectDirectionComponent implements OnInit {
         this.endPoint = this.endPointAutoComplete.filter(
           (p) => p.name === res
         )[0];
-        this.smth = this.endPoint.name;
-        this.endPoint2 = this.endPoint;
-        console.log('END POINT smth', this.smth);
+
       } else {
         this.endPoint = res as IPathPoint;
         this.directionForm.patchValue({
