@@ -194,8 +194,9 @@ export class SelectDirectionComponent implements OnInit {
 
   private setForm() {
     this.directionForm = new FormGroup({
+       endPointControl: new FormControl(''),
       startPointControl: new FormControl(''),
-      endPointControl: new FormControl(''),
+
     });
   }
 
@@ -207,7 +208,6 @@ export class SelectDirectionComponent implements OnInit {
         to: string;
         toID: number;
       }) => {
-        console.log('params', queryParams);
         if (
           Object.keys(queryParams).length === 0 &&
           queryParams.constructor === Object &&
