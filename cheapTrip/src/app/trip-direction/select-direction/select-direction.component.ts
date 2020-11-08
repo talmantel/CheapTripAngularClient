@@ -66,11 +66,12 @@ export class SelectDirectionComponent implements OnInit {
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
+    this.setForm();
     this.mode = Modes.SEARCH;
     this.startPointAutoComplete = [];
     this.endPointAutoComplete = [];
     this.defineRouterParams();
-    this.setForm();
+
     this.startPoint = { id: 0, name: '' };
     this.endPoint = { id: 0, name: '' };
     this.endPoint2 = { id: 0, name: '' };
@@ -166,8 +167,6 @@ export class SelectDirectionComponent implements OnInit {
   onFocusOut(event: any): void {
     if (event.target.attributes.formControlName.value === 'startPointControl') {
       if (this.startPoint.name === '') {
-        console.log('this.startPoint', this.startPoint);
-        console.log('this.startPoinAutoCompletet', this.startPointAutoComplete);
         if (this.startPointAutoComplete.length === 0) {
           this.directionForm.patchValue({
             startPointControl: '',
@@ -195,14 +194,8 @@ export class SelectDirectionComponent implements OnInit {
 
   private setForm() {
     this.directionForm = new FormGroup({
-      startPointControl: new FormControl('', [
-        // Validators.required,
-        // this.notInStartListValidator.bind(this),
-      ]),
-      endPointControl: new FormControl('', [
-        //Validators.required,
-        // this.notInStartListValidator.bind(this),
-      ]),
+      startPointControl: new FormControl(''),
+      endPointControl: new FormControl(''),
     });
   }
 
