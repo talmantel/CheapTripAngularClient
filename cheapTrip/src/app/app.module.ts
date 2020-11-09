@@ -17,9 +17,10 @@ import { SearchResultModule } from './search-result/search-result.module';
 import { NoPageComponent } from './no-page/no-page.component';
 import { ErrorInterceptor } from "./error-interceptor";
 import { ErrorComponent } from './error/error.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, NoPageComponent, ErrorComponent],
+  declarations: [AppComponent, HeaderComponent, NoPageComponent, ErrorComponent, LandingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

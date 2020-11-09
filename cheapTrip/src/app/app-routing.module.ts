@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header/header.component';
+import { LandingComponent } from './landing/landing.component';
 import { NoPageComponent } from './no-page/no-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/search', pathMatch: 'full' },
+  { path: 'loading', component: LandingComponent },
+  { path: '', redirectTo: '/loading', pathMatch: 'full' },
+ // { path: '', redirectTo: '/search', pathMatch: 'full' },
   {
     path: 'search',
     //   canActivate: [SearchResultGuard],

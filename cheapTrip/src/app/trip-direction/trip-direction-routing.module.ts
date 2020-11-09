@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LandingComponent } from '../landing/landing.component';
 import { NoPageComponent } from '../no-page/no-page.component';
 import { SearchResultComponent } from '../search-result/search-result.component';
 import { SearchResultGuard } from '../search-result/search-result.guard';
@@ -7,13 +8,14 @@ import { SelectDirectionComponent } from './select-direction/select-direction.co
 import { TripDirectionComponent } from './trip-direction.component';
 
 const routes: Routes = [
+  {path: 'landing', component: LandingComponent},
   {
     path: '',
     component: TripDirectionComponent,
     children: [
       {
         path: 'myPath',
-   // canActivate: [SearchResultGuard],
+
         loadChildren: () =>
           import('../search-result/search-result.module').then(
             (m) => m.SearchResultModule
@@ -21,6 +23,7 @@ const routes: Routes = [
 
       },
       {path: 'noPage', component: NoPageComponent},
+
      // {path: 'myPath1', component: SearchResultComponent}
     ],
   },
