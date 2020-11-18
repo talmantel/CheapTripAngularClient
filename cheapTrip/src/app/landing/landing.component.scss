@@ -5,6 +5,7 @@ body {
 mat-toolbar {
   justify-content: space-between;
   position: fixed;
+  z-index: 100;
   background-color: rgb(224, 226, 225);
   font-size: 90%;
   transition: background-color 1s, color 1s;
