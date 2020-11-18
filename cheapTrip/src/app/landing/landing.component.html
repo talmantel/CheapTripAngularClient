@@ -1,14 +1,55 @@
-<mat-toolbar>
-
-  <span>My App</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-   login
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-   SignIn
-   </button>
+<mat-toolbar [class.dark]="isDark">
+  <div class="logo">
+    <img @myInsertRemoveTrigger *ngIf="!isDark" src="../../assets/images/cheapTrip.png">
+    <img @myInsertRemoveTrigger *ngIf="isDark" src="../../assets/images/cheapTrip_white.png">
+  </div>
+  <div class="menu">
+    <button mat-button [matMenuTriggerFor]="belowMenu">MENU1<span class="material-icons">
+        keyboard_arrow_down
+      </span></button>
+    <mat-menu #belowMenu="matMenu" yPosition="below">
+      <button mat-menu-item>Submenu1</button>
+      <button mat-menu-item>Submenu2</button>
+    </mat-menu>
+    <button mat-button>MENU2</button>
+    <button mat-button>MENU3</button>
+    <button mat-button>MENU4</button>
+  </div>
+  <div class="buttons">
+    <button mat-button type="button">LOGIN</button>
+    <button mat-button type="button" class="start">START</button>
+  </div>
 </mat-toolbar>
+<div class="screen screen_1">
+  <div class="message">
+    <div>
+      <p>LOREM one</p>
+      <h1>Lorem two dolor sit amet</h1>
+      <p>Lorem three dolor sit amet, at eos impedit.</p>
+      <p>Lorem five oporteat suavitate.</p>
+      <button mat-button type="button" class="start">START</button>
+    </div>
+  </div>
+  <div class="picture">
+    <img src="../../assets/images/computer1.png">
+
+
+  </div>
+</div>
+<div class="screen screen_2" id="secondScreen">
+  <div class="message">
+    <div>
+      <p>LOREM SIX ISPUM DOLOR SIT AMET</p>
+
+      <p>"Lorem seven ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium."</p>
+      <p>LOREM EIGHT </p>
+
+    </div>
+
+  </div>
+  <div class="picture"> <img src="../../assets/images/computer4.png">
+    <img class="ball" src="../../assets/images/ball.png">
+
+
+  </div>
+</div>

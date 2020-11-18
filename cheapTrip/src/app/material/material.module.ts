@@ -15,12 +15,13 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule} from '@angular/material/select';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule} from '@angular/material/chips';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -54,7 +55,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatIconModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatMenuModule
 
 
   ]

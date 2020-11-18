@@ -6,8 +6,8 @@ import { LandingComponent } from './landing/landing.component';
 import { NoPageComponent } from './no-page/no-page.component';
 
 const routes: Routes = [
-  { path: 'loading', component: LandingComponent },
-  { path: '', redirectTo: '/loading', pathMatch: 'full' },
+  { path: 'landing', component: LandingComponent },
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
  // { path: '', redirectTo: '/search', pathMatch: 'full' },
   {
     path: 'search',

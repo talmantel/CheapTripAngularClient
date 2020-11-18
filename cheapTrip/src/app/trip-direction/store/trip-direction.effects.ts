@@ -93,8 +93,8 @@ export class TripDirectionEffects {
     private router: Router,
     private store$: Store<fromApp.AppState>
   ) {
-    this.server = 'tomcat'; //to be fixed
-    //   this.server = 'appachi';
+    //   this.server = 'tomcat'; //to be fixed
+    this.server = 'appachi';
   }
 
   /*  @Effect()

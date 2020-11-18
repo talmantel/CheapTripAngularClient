@@ -18,9 +18,13 @@ import { NoPageComponent } from './no-page/no-page.component';
 import { ErrorInterceptor } from "./error-interceptor";
 import { ErrorComponent } from './error/error.component';
 import { LandingComponent } from './landing/landing.component';
+import { DataTableComponent } from './authors/data-table/data-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, NoPageComponent, ErrorComponent, LandingComponent],
+  declarations: [AppComponent, HeaderComponent, NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,6 +37,9 @@ import { LandingComponent } from './landing/landing.component';
     SearchResultModule,
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([TripDirectionEffects]),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
