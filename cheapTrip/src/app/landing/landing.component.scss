@@ -1,47 +1,59 @@
 body {
   background-color: rgb(224, 226, 225);
+  font-family: "Roboto", sans-serif;
+}
+button.btn {
+  font-style: normal;
+}
+button.start {
+  color: var(--color-primary);
+  color: white;
 }
 
 mat-toolbar {
-  justify-content: space-between;
+  justify-content: space-around;
   position: fixed;
   z-index: 100;
   background-color: rgb(224, 226, 225);
   font-size: 90%;
   transition: background-color 1s, color 1s;
-  div {
-    button {
-      font-size: 90%;
-    }
-  }
+  color: var(--color-primary);
+  font-family: "Lato", sans-serif;
+
   div.logo {
     position: relative;
-    img {
-      position: absolute;
-      transform: scale(0.5);
-      top: -1.5rem;
+    button {
+      font-weight: bold;
+      font-style: italic;
     }
   }
+  div.menu button {
+    font-style: italic;
+  }
+
 }
-
+button.mat-menu-item {
+  font-family: "Lato", sans-serif;
+  font-style: italic!important;
+  font-size:12px;
+  color: var(--color-primary);
+}
 mat-toolbar.dark {
-  background-color: black;
-  color: rgb(224, 226, 225);
+  background-color: var(--color-primary);
+  color: white;
   transition: background-color 1s, color 1s;
-
   div.buttons {
     button.start {
-      color: black;
+      color: var(--color-primary);
       background-color: rgb(224, 226, 225);
       transition: background-color 1s, color 1s;
-      outline: white 1px solid;
     }
   }
 }
 
 button.start {
   color: white;
-  background-color: black;
+  background-color: var(--color-primary);
   border-radius: 0%;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -58,33 +70,26 @@ div.screen {
   justify-content: space-between;
   align-items: center;
   div.message {
-    width: 35%;
+    width: 45%;
     height: auto;
+
     div {
       width: 60%;
       margin: auto;
       position: relative;
       top: 100px;
-      h1 {
-        font-size: 1.9em;
-        font-family: "Nunito Sans", sans-serif;
-        font-weight: 600;
-      }
       p {
-        font-size: 0.9em;
-        padding: 0;
+        font-family: "Roboto", sans-serif;
       }
-      p:last-of-type {
-        margin-top: 0px;
-        margin-top: -10px;
+      h1 {
+        font-family: "Lato", sans-serif;
       }
     }
   }
   div.picture {
     width: 65%;
     height: auto;
-  //  position: relative;
-
+    //  position: relative;
   }
 }
 

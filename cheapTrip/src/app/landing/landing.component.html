@@ -1,39 +1,45 @@
 <mat-toolbar [class.dark]="isDark">
   <div class="logo">
-    <img @myInsertRemoveTrigger *ngIf="!isDark" src="../../assets/images/cheapTrip.png">
-    <img @myInsertRemoveTrigger *ngIf="isDark" src="../../assets/images/cheapTrip_white.png">
+    <button mat-button> CHEAP TRIP. PAY LESS, VISIT MORE! </button>
+   <!--  <img @myInsertRemoveTrigger *ngIf="!isDark" src="../../assets/images/cheapTrip.png">
+    <img @myInsertRemoveTrigger *ngIf="isDark" src="../../assets/images/cheapTrip_white.png"> -->
   </div>
   <div class="menu">
-    <button mat-button [matMenuTriggerFor]="belowMenu">MENU1<span class="material-icons">
+    <button mat-button>PRODUCT</button>
+    <button mat-button>TEAM</button>
+    <button mat-button>BLOG</button>
+    <button mat-button>CUSTOMRS</button>
+    <button mat-button [matMenuTriggerFor]="belowMenu">ABOUT<span class="material-icons">
         keyboard_arrow_down
       </span></button>
     <mat-menu #belowMenu="matMenu" yPosition="below">
-      <button mat-menu-item>Submenu1</button>
-      <button mat-menu-item>Submenu2</button>
+      <button class="submenu" mat-menu-item>CONTACT US</button>
+
     </mat-menu>
-    <button mat-button>MENU2</button>
-    <button mat-button>MENU3</button>
-    <button mat-button>MENU4</button>
   </div>
   <div class="buttons">
-    <button mat-button type="button">LOGIN</button>
-    <button mat-button type="button" class="start">START</button>
+    <button mat-button type="button" class="btn login">LOGIN</button>
+    <button mat-button type="button" class="btn start">START</button>
   </div>
 </mat-toolbar>
+
+
 <div class="screen screen_1">
   <div class="message">
     <div>
-      <p>LOREM one</p>
-      <h1>Lorem two dolor sit amet</h1>
-      <p>Lorem three dolor sit amet, at eos impedit.</p>
-      <p>Lorem five oporteat suavitate.</p>
+      <p>By combining different types of transport, you can create a route that will be cheaper than you originally
+        thought.</p>
+      <h1> Priceless impressions by less price!
+      </h1>
+
+      <p>Discover the cheapest way to get anywhere (Currently in Europe) combining plane, train, bus and rideshare.
+      </p>
       <button mat-button type="button" class="start">START</button>
     </div>
   </div>
+
   <div class="picture">
     <img src="../../assets/images/computer1.png">
-
-
   </div>
 </div>
 <div class="screen screen_2" id="secondScreen">
