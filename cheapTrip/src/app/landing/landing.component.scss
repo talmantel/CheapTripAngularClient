@@ -108,9 +108,13 @@ div.screen_2 {
       }
 
       p:nth-child(2) {
-        font-size: 1.5rem;
-        padding-bottom: 20rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
         padding-top: 0px;
+        span{
+
+          padding: 1rem inherit;
+        }
       }
     }
   }
