@@ -27,7 +27,7 @@ const initialState: ITripDirectionState = {
   pathsAmount: 0,
   isLoading: false,
   reset: false,
-  currentServer: 'server68',
+  currentServer: 'server104',
  serverChanged: false
 };
 
