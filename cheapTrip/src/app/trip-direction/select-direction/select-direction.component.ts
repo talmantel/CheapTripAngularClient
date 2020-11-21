@@ -48,7 +48,7 @@ export class SelectDirectionComponent implements OnInit {
   modes = Modes;
   startSubj = new Subject();
   endSubj = new Subject();
-  cityNamePattern = '[a-zA-Z]';
+
 
   @ViewChild('nameText', { static: false })
   nameParagraph: ElementRef;
@@ -212,7 +212,7 @@ export class SelectDirectionComponent implements OnInit {
       startPointControl: new FormControl('', [
         this.patternValid({
           pattern: /[a-zA-Z0-9\-\s]/,
-          msg: 'Sorry, only Latin names not allowed',
+          msg: 'Sorry, only Latin names are allowed',
         }),
         /*     this.patternValid({
           pattern: /^([а-ЯА-Я])/,
@@ -222,7 +222,7 @@ export class SelectDirectionComponent implements OnInit {
       endPointControl: new FormControl('', [
         this.patternValid({
           pattern: /[a-zA-Z0-9\-\s]/,
-          msg: 'Sorry, only Latin names not allowed',
+          msg: 'Sorry, only Latin names are allowed',
         }),
         /* this.patternValid({
           pattern: /^([^0-9]*)$/,
