@@ -15,10 +15,8 @@ export enum Modes {
   DELIVERY,
 }
 
-export enum Server {
-  SPRINGBOOT,
-  TOMCAT
-}
+export  type Server = 'server68'| 'server104';
+
 
 export interface IPoint {
   name: string;

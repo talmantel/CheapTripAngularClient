@@ -5,7 +5,7 @@
     <img @myInsertRemoveTrigger *ngIf="isDark" src="../../assets/images/cheapTrip_white.png"> -->
   </div>
   <div class="menu">
-    <button mat-button>PRODUCT</button>
+    <button mat-button>PRODUCT1</button>
     <button mat-button>TEAM</button>
     <button mat-button>BLOG</button>
     <button mat-button>CUSTOMRS</button>
@@ -19,7 +19,7 @@
   </div>
   <div class="buttons">
     <button mat-button type="button" class="btn login">LOGIN</button>
-    <button mat-button type="button" class="btn start">START</button>
+    <button mat-button type="button" class="btn start" (click)="toSearchPage()">START</button>
   </div>
 </mat-toolbar>
 
@@ -34,7 +34,7 @@
 
       <p>Discover the cheapest way to get anywhere (Currently in Europe) combining plane, train, bus and rideshare.
       </p>
-      <button mat-button type="button" class="start">START</button>
+      <button mat-button type="button" class="start"  (click)="toSearchPage()">START</button>
     </div>
   </div>
 
@@ -53,7 +53,7 @@
         Always check your travel details with your direct carrier.
         Ready, then you go there:
         </p>
-      <p> <button mat-button type="button" class="start">START</button></p>
+      <p> <button mat-button type="button" class="start"  (click)="toSearchPage()">START</button></p>
 
     </div>
 

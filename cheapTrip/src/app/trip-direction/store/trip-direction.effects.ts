@@ -1,13 +1,6 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import {
-  switchMap,
-  map,
-  mergeMap,
-  withLatestFrom,
-  tap,
-  catchError,
-} from 'rxjs/operators';
+import { switchMap, map, withLatestFrom } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -15,20 +8,14 @@ import * as TripDirectionActions from './trip-direction.actions';
 import {
   IDetails,
   IPath,
-  IPathPoint,
-  IPoint,
   IRecievedRouts,
   IRout,
-  Server,
 } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
-import { of } from 'rxjs';
-
-type SERVER = 'tomcat' | 'appachi';
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -85,7 +72,6 @@ PATHMAPDETAILED.set('Taxi', Icons.TAXI);
 
 @Injectable()
 export class TripDirectionEffects {
-  server: SERVER;
   constructor(
     private actions$: Actions,
     private sanitizer: DomSanitizer,
@@ -94,7 +80,7 @@ export class TripDirectionEffects {
     private store$: Store<fromApp.AppState>
   ) {
     //   this.server = 'tomcat'; //to be fixed
-    this.server = 'appachi';
+    // this.server = Server.SERVER104;
   }
 
   /*  @Effect()
@@ -117,24 +103,26 @@ export class TripDirectionEffects {
     withLatestFrom(this.store$.select('directions')),
     switchMap((request: Array<any>) => {
       let url = '';
-      if (request[1].currentServer === Server.SPRINGBOOT) {
+      console.log('effects');
+      if (request[1].currentServer === 'server68') {
         url =
-          environment.urlAppachi +
+          environment.url68 +
           'locations?type=' +
           'from' +
           // request[0].payload.type +
           '&search_name=' +
           encodeURIComponent(request[0].payload.name);
       } else {
+
         url =
-          environment.urlTomCat +
+          environment.url104 +
           'locations?type=' +
           'from' +
           // request[0].payload.type +
           '&search_name=' +
           encodeURIComponent(request[0].payload.name);
       }
-
+ console.log('url', url);
       return this.http
         .get<any>(url, { observe: 'response' })
         .pipe(
@@ -161,22 +149,22 @@ export class TripDirectionEffects {
     withLatestFrom(this.store$.select('directions')),
     switchMap((request: Array<any>) => {
       let url = '';
-      if (request[1].currentServer === Server.SPRINGBOOT) {
+      if (request[1].currentServer === 'server68') {
         url =
-          environment.urlAppachi +
+          environment.url68 +
           'routes?from=' +
           request[1].startPoint.id +
           '&to=' +
           request[1].endPoint.id;
       } else {
         url =
-          environment.urlTomCat +
+          environment.url104 +
           'routes?from=' +
           request[1].startPoint.id +
           '&to=' +
           request[1].endPoint.id;
       }
-
+      console.log('my url', url);
       return this.http.get(url, { observe: 'response' }).pipe(
         map((res) => {
           let resultPathArr = null;

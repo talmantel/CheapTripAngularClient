@@ -26,7 +26,6 @@ div.mainContainer {
       font-size: 1.5rem;
       line-height: 2rem;
     }
-
   }
 
   form {
@@ -44,27 +43,41 @@ div.mainContainer {
       align-items: baseline;
       section {
         width: 45%;
-        p.error {
-          color: var(--color-warn);
-          font-style: italic;
-          padding-left: 3rem;
-        }
-        mat-form-field {
-          width: 100%;
-          @include boxSizing(border-box);
-          border-left: 3px solid var(--color-accent);
-          padding-left: 0.5rem;
-
-          input {
-            @include placeholder(var(--color-primary), 2rem, normal, cursive);
+        div.error {
+          p {
+            color: var(--color-warn);
+            font-style: italic;
+            padding-left: 3rem;
           }
         }
-        mat-form-field.valid {
-          border-color: var(--color-accent);
-        }
 
-        mat-form-field.invalid {
-          border-color: var(--color-warn);
+        div.input {
+          width: 100%;
+
+          display: flex;
+          span {
+            align-self: center;
+            color: var(--color-accent);
+            cursor: pointer;
+          }
+
+          mat-form-field {
+            width: 100%;
+            @include boxSizing(border-box);
+            border-left: 3px solid var(--color-accent);
+            padding-left: 0.5rem;
+
+            input {
+              @include placeholder(var(--color-primary), 2rem, normal, cursive);
+            }
+          }
+          mat-form-field.valid {
+            border-color: var(--color-accent);
+          }
+
+          mat-form-field.invalid {
+            border-color: var(--color-warn);
+          }
         }
       }
       span.arrows {
@@ -116,11 +129,9 @@ div.deliveryMode {
   div.mainContainer {
     width: 90%;
     div.message {
-
-        h1 {
-          margin: 1rem auto;
-        }
-
+      h1 {
+        margin: 1rem auto;
+      }
     }
   }
   div.searchMode {
@@ -145,7 +156,6 @@ div.deliveryMode {
         line-height: 1.5rem;
       }
     }
-
     form {
       position: relative;
       top: -0.5rem;
@@ -157,19 +167,22 @@ div.deliveryMode {
         flex-direction: column;
         section {
           width: 100%;
-          mat-form-field {
-            margin: auto;
-            position: relative;
-            padding-left: 0.4rem;
-          }
-          mat-form-field.startPoint {
-            top: 0.5rem;
+          div {
+            mat-form-field {
+              margin: auto;
+              position: relative;
+              padding-left: 0.4rem;
+              border: none;
+            }
+            mat-form-field.startPoint {
+              top: 0.5rem;
+            }
           }
         }
         span.arrows {
           width: 1.5rem;
           align-self: center;
-          justify-self: baseline;
+
           text-align: center;
           transform: rotate(90deg);
         }
@@ -189,6 +202,17 @@ div.deliveryMode {
     }
 
     form {
+      div.formInfo {
+        section {
+          margin-right: 1rem;
+          div.input {
+            mat-form-field {
+              border: none;
+            }
+          }
+        }
+      }
+
       div.actions {
         margin: 0;
       }
@@ -224,9 +248,7 @@ div.deliveryMode {
         font-size: 1rem;
         line-height: 1.5rem;
       }
-
     }
-
     form {
       position: relative;
       top: -0.5rem;
@@ -238,19 +260,19 @@ div.deliveryMode {
         flex-direction: column;
         section {
           width: 100%;
-          mat-form-field {
-            margin: auto;
-            position: relative;
-            padding-left: 0.4rem;
-          }
-          mat-form-field.startPoint {
-            top: 0.5rem;
+          div.input {
+            mat-form-field {
+              margin: auto;
+              position: relative;
+              padding-left: 0.4rem;
+              border: none;
+            }
+            mat-form-field.startPoint {
+              top: 0.5rem;
+            }
           }
         }
         span.arrows {
-          width: 1.5rem;
-          align-self: center;
-          justify-self: baseline;
           text-align: center;
           transform: rotate(90deg);
         }
@@ -277,13 +299,19 @@ div.deliveryMode {
         width: 98%;
         margin: 0.5rem auto 0;
         position: relative;
-
-        mat-form-field {
-          position: relative;
-          border-left: none;
-        }
-        span {
-          font-size: 0.9rem;
+        section {
+          div.input {
+            mat-form-field {
+              position: relative;
+              border: none;
+            }
+            span {
+              position: relative;
+              left: -1rem;
+              font-size: 0.9rem;
+              //  align-self: end;
+            }
+          }
         }
       }
     }

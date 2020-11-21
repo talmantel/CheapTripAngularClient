@@ -1,26 +1,16 @@
+import { trigger, style, transition, animate } from '@angular/animations';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import * as fromApp from '../../store/app.reducer';
 import * as TripDirectionActions from '../store/trip-direction.actions';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
 import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -58,6 +48,7 @@ export class SelectDirectionComponent implements OnInit {
   modes = Modes;
   startSubj = new Subject();
   endSubj = new Subject();
+  cityNamePattern = '[a-zA-Z]';
 
   @ViewChild('nameText', { static: false })
   nameParagraph: ElementRef;
@@ -77,7 +68,7 @@ export class SelectDirectionComponent implements OnInit {
     this.setForm();
     this.startPoint = { id: 0, name: '' };
     this.endPoint = { id: 0, name: '' };
-     this.defineRouterParams();
+    this.defineRouterParams();
     this.stateSubscription = this.store
       .select('directions')
       .subscribe((state) => {
@@ -93,15 +84,22 @@ export class SelectDirectionComponent implements OnInit {
   // autocomplete is invoked
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };
-    if (type === 'from') {
+    if (
+      type === 'from' &&
+      this.directionForm.get('startPointControl').valid &&
+      str.length > 0
+    ) {
       this.startPoint = { id: 0, name: '' };
-    } else {
+      this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
+    } else if (
+      type === 'to' &&
+      this.directionForm.get('endPointControl').valid &&
+      str.length > 0
+    ) {
       this.endPoint = { id: 0, name: '' };
+      this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
     }
-    this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
   }
-
-
 
   onSubmit(): void {
     this.store.dispatch(new TripDirectionActions.GetRouts());
@@ -110,7 +108,6 @@ export class SelectDirectionComponent implements OnInit {
   optionSelected(point: any, type: string) {
     if (type == 'from') {
       this.startSubj.next(point);
-      console.log('start point', point);
     } else if (type === 'to') {
       this.endSubj.next(point);
     }
@@ -128,6 +125,25 @@ export class SelectDirectionComponent implements OnInit {
     this.store.dispatch(new TripDirectionActions.CleanData(false));
   }
 
+  onCleanInput(point: 'end' | 'start') {
+    if (point === 'start') {
+      this.startPoint = { id: 0, name: '' };
+      this.startPointAutoComplete = [];
+      this.directionForm.patchValue({
+        startPointControl: '',
+      });
+      this.directionForm.get('startPointControl').markAsUntouched();
+      this.directionForm.get('startPointControl').markAsPristine();
+    } else {
+      this.endPoint = { id: 0, name: '' };
+      this.endPointAutoComplete = [];
+      this.directionForm.patchValue({
+        endPointControl: '',
+      });
+      this.directionForm.get('endPointControl').markAsUntouched();
+      this.directionForm.get('endPointControl').markAsPristine();
+    }
+  }
   /*  notInStartListValidator(control: FormControl): { [s: string]: boolean } {
    if (this.startPointAutoComplete.length > 0) {
       const arr = this.startPointAutoComplete.map((point) =>
@@ -193,9 +209,44 @@ export class SelectDirectionComponent implements OnInit {
 
   private setForm() {
     this.directionForm = new FormGroup({
-      endPointControl: new FormControl(''),
-      startPointControl: new FormControl(''),
+      startPointControl: new FormControl('', [
+        this.patternValid({
+          pattern: /[a-zA-Z0-9\-\s]/,
+          msg: 'Sorry, only Latin names not allowed',
+        }),
+        /*     this.patternValid({
+          pattern: /^([а-ЯА-Я])/,
+          msg: 'Sorry, Cyrillic is  not allowed',
+        }), */
+      ]),
+      endPointControl: new FormControl('', [
+        this.patternValid({
+          pattern: /[a-zA-Z0-9\-\s]/,
+          msg: 'Sorry, only Latin names not allowed',
+        }),
+        /* this.patternValid({
+          pattern: /^([^0-9]*)$/,
+          msg: 'Numbers is not allowed',
+        }), */
+      ]),
     });
+  }
+
+  public patternValid(config: any): ValidatorFn {
+    return (control: FormControl) => {
+      let urlRegEx: RegExp = config.pattern;
+      if (control.value) {
+        console.log('validaTOR', control.value.match(urlRegEx));
+      }
+
+      if (control.value && !control.value.match(urlRegEx)) {
+        return {
+          invalidMsg: config.msg,
+        };
+      } else {
+        return null;
+      }
+    };
   }
 
   private defineRouterParams() {
@@ -233,21 +284,14 @@ export class SelectDirectionComponent implements OnInit {
             startPointControl: this.startPoint.name,
             endPointControl: this.endPoint.name,
           });
-          console.log('start point after refresh', this.startPoint);
-          console.log('end point after refresh', this.endPoint);
-
           this.store.dispatch(new TripDirectionActions.GetRouts());
-          console.log('start point after refresh', this.startPoint);
-          console.log('end point after refresh', this.endPoint);
         }
-
       }
-
     );
   }
 
   private pointsSubscription() {
-    this.startSubj.pipe(debounceTime(200)).subscribe((res) => {
+    this.startSubj.subscribe((res) => {
       if (typeof res == 'string') {
         this.startPoint = this.startPointAutoComplete.filter(
           (p) => p.name === res
@@ -265,13 +309,12 @@ export class SelectDirectionComponent implements OnInit {
       );
     });
 
-    this.endSubj.pipe(debounceTime(200)).subscribe((res) => {
+    this.endSubj.subscribe((res) => {
       if (typeof res == 'string') {
         console.log('end point subj res', res);
         this.endPoint = this.endPointAutoComplete.filter(
           (p) => p.name === res
         )[0];
-
       } else {
         this.endPoint = res as IPathPoint;
         this.directionForm.patchValue({

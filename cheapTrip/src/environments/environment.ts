@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  urlAppachi: 'http://3.18.167.68:8080/',
-  urlTomCat:  'http://3.23.159.104:8080/'
+  url68: 'http://3.18.167.68:8080/',
+  url104:  'http://18.158.89.230:8080/'
 
 };
 

@@ -1,5 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -30,11 +31,15 @@ export class LandingComponent implements OnInit {
 
   isDark: boolean;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.isDark = false;
     let el = document.getElementById("secondScreen");
     console.log(el);
+  }
+
+  toSearchPage(){
+this.router.navigate(['/search']);
   }
 }

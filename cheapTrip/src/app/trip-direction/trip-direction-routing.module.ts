@@ -8,7 +8,7 @@ import { SelectDirectionComponent } from './select-direction/select-direction.co
 import { TripDirectionComponent } from './trip-direction.component';
 
 const routes: Routes = [
-  {path: 'landing', component: LandingComponent},
+ // {path: 'landing', component: LandingComponent},
   {
     path: '',
     component: TripDirectionComponent,
@@ -22,6 +22,7 @@ const routes: Routes = [
           ),
 
       },
+
       {path: 'noPage', component: NoPageComponent},
 
      // {path: 'myPath1', component: SearchResultComponent}

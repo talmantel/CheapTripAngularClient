@@ -27,8 +27,7 @@ const initialState: ITripDirectionState = {
   pathsAmount: 0,
   isLoading: false,
   reset: false,
-  //currentServer: Server.TOMCAT,
-  currentServer: Server.SPRINGBOOT,
+  currentServer: 'server68',
  serverChanged: false
 };
 
@@ -117,14 +116,14 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.AUTOCOMPLETE_FAIL:
-      let server = Server.TOMCAT;
-      if (state.currentServer == Server.TOMCAT) {
-        server = Server.SPRINGBOOT;
+      let server = 'server68';
+      if (state.currentServer == 'server104' ){
+      //  server = Server.SERVER104;
       }
       return {
         ...state,
-        currentServer: server,
-        serverChanged: true
+     //   currentServer: server,
+     //   serverChanged: true
       };
 
     case TripDirectionActions.CLEAN_DATA:
