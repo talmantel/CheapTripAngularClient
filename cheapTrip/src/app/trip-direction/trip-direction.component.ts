@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
-
 import { HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
 
+import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
 import * as TripDirectionActions from './store/trip-direction.actions';
-import { IPathPoint, IPoint, IPoints, Modes } from './trip-direction.model';
+import { IPathPoint, Modes } from './trip-direction.model';
 
 @Component({
   selector: 'app-trip-direction',
@@ -28,10 +27,7 @@ export class TripDirectionComponent implements OnInit {
   mode: Modes;
   pointSubj$: Subject<{ from: IPathPoint; to: IPathPoint }>;
 
-  constructor(
-    private store: Store<fromApp.AppState>,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private store: Store<fromApp.AppState>, private router: Router) {}
 
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
@@ -39,4 +35,8 @@ export class TripDirectionComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  toHomePage() {
+    this.router.navigate(['/']);
+  }
 }

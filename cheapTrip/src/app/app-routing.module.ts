@@ -7,8 +7,8 @@ import { NoPageComponent } from './no-page/no-page.component';
 
 const routes: Routes = [
   { path: 'landing', component: LandingComponent },
-  // { path: '', redirectTo: '/landing', pathMatch: 'full' },
-  { path: '', redirectTo: '/search', pathMatch: 'full' },
+//  { path: 'main',component: HeaderComponent},
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
   {
     path: 'search',
     //   canActivate: [SearchResultGuard],

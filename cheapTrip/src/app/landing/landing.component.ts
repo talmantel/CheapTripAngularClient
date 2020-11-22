@@ -12,21 +12,19 @@ import { Router } from '@angular/router';
         style({ opacity: 0 }),
         animate('100ms', style({ opacity: 1 })),
       ]),
-      transition(':leave', [
-        animate('100ms', style({ opacity: 0 }))
-      ])
+      transition(':leave', [animate('100ms', style({ opacity: 0 }))]),
     ]),
   ],
 })
 export class LandingComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
-      let el = document.getElementById("secondScreen").getBoundingClientRect();
-      if(el.top < 650){
-        this.isDark = true;
-      } else{
-        this.isDark = false;
-      }
+    let el = document.getElementById('secondScreen').getBoundingClientRect();
+    if (el.top < 650) {
+      this.isDark = true;
+    } else {
+      this.isDark = false;
+    }
   }
 
   isDark: boolean;
@@ -35,11 +33,10 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.isDark = false;
-    let el = document.getElementById("secondScreen");
-    console.log(el);
+    let el = document.getElementById('secondScreen');
   }
 
-  toSearchPage(){
-this.router.navigate(['/search']);
+  toSearchPage() {
+    this.router.navigate(['/search']);
   }
 }

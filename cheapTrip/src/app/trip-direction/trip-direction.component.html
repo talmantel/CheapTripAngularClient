@@ -1,7 +1,13 @@
-<!-- <app-select-direction [pointSubj]="pointSubj$"  (changePoint)="onChangePoint($event)" (selectedPoints)="getRouts($event)"
-  [startPointAutoComplete]="startPointAutoComplete" [endPointAutoComplete]="endPointAutoComplete" [mode]="mode"
-  (cleanData)="cleanData($event)" (startPointSelected)="onStartPointSelected($event)"
-  (endPointSelected)="onEndPointSelected($event)"></app-select-direction> -->
-
+<div>
+  <mat-toolbar color="primary" role="heading">
+    <div class="slogan">
+      <p>CHEAP TRIP. PAY LESS, VISIT MORE!</p>
+    </div>
+    <span class="spacer"></span>
+    <button mat-button (click)="toHomePage()"><span class="material-icons">
+        home
+      </span></button>
+  </mat-toolbar>
+</div>
   <app-select-direction></app-select-direction>
 <router-outlet></router-outlet>
