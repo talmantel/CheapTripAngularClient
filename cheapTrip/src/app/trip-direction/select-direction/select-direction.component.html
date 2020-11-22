@@ -16,7 +16,7 @@
             <!--   <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text" -->
             <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text"
               placeholder="From" aria-label="Number" matInput formControlName="startPointControl"
-              [matAutocomplete]="auto1">
+              [matAutocomplete]="auto1" #startPointInput>
 
             <mat-autocomplete class="single-autocomplete" #auto1="matAutocomplete"
               (optionSelected)='optionSelected($event.option.value, "from")'>
@@ -53,7 +53,7 @@
           <mat-form-field class="endPoint"
             [class.valid]="directionForm.get('endPointControl').valid && directionForm.get('endPointControl').touched"
             [class.invalid]="directionForm.get('endPointControl').invalid && directionForm.get('endPointControl').touched">
-            <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text"
+            <input #endPointInput (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text"
               placeholder="To" aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
             <mat-autocomplete class="single-autocomplete" #auto2="matAutocomplete"
               (optionSelected)='optionSelected($event.option.value, "to")'>

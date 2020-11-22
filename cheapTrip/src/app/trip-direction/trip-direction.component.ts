@@ -35,7 +35,6 @@ export class TripDirectionComponent implements OnInit {
 
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
-    console.log('refresh');
     this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
   }
 

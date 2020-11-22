@@ -37,6 +37,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   ],
 })
 export class SelectDirectionComponent implements OnInit {
+  @ViewChild('startPointInput', { static: false })
+  startPointInputEl: ElementRef;
+  @ViewChild('endPointInput', { static: false })
+  endPointInputEl: ElementRef;
+
   stateSubscription: Subscription;
   directionForm: FormGroup;
   startPointAutoComplete: IPathPoint[];
@@ -48,7 +53,6 @@ export class SelectDirectionComponent implements OnInit {
   modes = Modes;
   startSubj = new Subject();
   endSubj = new Subject();
-
 
   @ViewChild('nameText', { static: false })
   nameParagraph: ElementRef;
@@ -134,6 +138,12 @@ export class SelectDirectionComponent implements OnInit {
       });
       this.directionForm.get('startPointControl').markAsUntouched();
       this.directionForm.get('startPointControl').markAsPristine();
+      this.directionForm.get('startPointControl').valid;
+
+      this.store.dispatch(
+        new TripDirectionActions.SetStartPointAutocomplete([])
+      );
+      this.startPointInputEl.nativeElement.focus();
     } else {
       this.endPoint = { id: 0, name: '' };
       this.endPointAutoComplete = [];
@@ -142,6 +152,9 @@ export class SelectDirectionComponent implements OnInit {
       });
       this.directionForm.get('endPointControl').markAsUntouched();
       this.directionForm.get('endPointControl').markAsPristine();
+      this.store.dispatch(new TripDirectionActions.SetEndPointAutocomplete([]));
+      this.directionForm.get('endPointControl').valid;
+      this.endPointInputEl.nativeElement.focus();
     }
   }
   /*  notInStartListValidator(control: FormControl): { [s: string]: boolean } {
@@ -214,20 +227,12 @@ export class SelectDirectionComponent implements OnInit {
           pattern: /[a-zA-Z0-9\-\s]/,
           msg: 'Sorry, only Latin names are allowed',
         }),
-        /*     this.patternValid({
-          pattern: /^([а-ЯА-Я])/,
-          msg: 'Sorry, Cyrillic is  not allowed',
-        }), */
       ]),
       endPointControl: new FormControl('', [
         this.patternValid({
           pattern: /[a-zA-Z0-9\-\s]/,
           msg: 'Sorry, only Latin names are allowed',
         }),
-        /* this.patternValid({
-          pattern: /^([^0-9]*)$/,
-          msg: 'Numbers is not allowed',
-        }), */
       ]),
     });
   }
@@ -236,7 +241,6 @@ export class SelectDirectionComponent implements OnInit {
     return (control: FormControl) => {
       let urlRegEx: RegExp = config.pattern;
       if (control.value) {
-        console.log('validaTOR', control.value.match(urlRegEx));
       }
 
       if (control.value && !control.value.match(urlRegEx)) {
@@ -297,7 +301,6 @@ export class SelectDirectionComponent implements OnInit {
           (p) => p.name === res
         )[0];
       } else {
-        console.log('else', res);
         this.startPoint = res as IPathPoint;
 
         this.directionForm.patchValue({
@@ -311,7 +314,6 @@ export class SelectDirectionComponent implements OnInit {
 
     this.endSubj.subscribe((res) => {
       if (typeof res == 'string') {
-        console.log('end point subj res', res);
         this.endPoint = this.endPointAutoComplete.filter(
           (p) => p.name === res
         )[0];
