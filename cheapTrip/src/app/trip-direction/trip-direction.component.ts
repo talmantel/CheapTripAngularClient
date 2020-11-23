@@ -37,6 +37,6 @@ export class TripDirectionComponent implements OnInit {
   ngOnInit(): void {}
 
   toHomePage() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/search']);
   }
 }
