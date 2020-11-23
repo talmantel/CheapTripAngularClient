@@ -82,7 +82,7 @@ export class SelectDirectionComponent implements OnInit {
       });
 
     this.pointsSubscription();
-    this.router.events.subscribe((res) => console.log('rout', res));
+    this.router.events.subscribe((res) => console.log('rout'));
   }
 
   // autocomplete is invoked

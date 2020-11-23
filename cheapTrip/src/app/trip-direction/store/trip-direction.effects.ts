@@ -103,7 +103,7 @@ export class TripDirectionEffects {
     withLatestFrom(this.store$.select('directions')),
     switchMap((request: Array<any>) => {
       let url = '';
-      console.log('effects');
+
       if (request[1].currentServer === 'server68') {
         url =
           environment.url68 +
@@ -122,7 +122,7 @@ export class TripDirectionEffects {
           '&search_name=' +
           encodeURIComponent(request[0].payload.name);
       }
- console.log('url', url);
+
       return this.http
         .get<any>(url, { observe: 'response' })
         .pipe(
@@ -164,7 +164,7 @@ export class TripDirectionEffects {
           '&to=' +
           request[1].endPoint.id;
       }
-      console.log('my url', url);
+
       return this.http.get(url, { observe: 'response' }).pipe(
         map((res) => {
           let resultPathArr = null;

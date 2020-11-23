@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import {
   BreakpointObserver,
   Breakpoints,
@@ -38,19 +38,19 @@ type IFrameSize = {
 };
 
 const iframeSizeMap = new Map<VIEWPORTS, IFrameSize>();
-iframeSizeMap.set(VIEWPORTS.XSmall, { width: 500, height: 1300 }); //
-iframeSizeMap.set(VIEWPORTS.Small, { width: 590, height: 1130 }); //
-iframeSizeMap.set(VIEWPORTS.Medium, { width: 590, height: 1130 }); //
-iframeSizeMap.set(VIEWPORTS.Large, { width: 650, height: 1130 }); //
-iframeSizeMap.set(VIEWPORTS.XLarge, { width: 650, height: 1130 }); //
-iframeSizeMap.set(VIEWPORTS.WebLandscape, { width: 650, height: 1130 }); //
-iframeSizeMap.set(VIEWPORTS.WebPortrait, { width: 400, height: 1800 });
-iframeSizeMap.set(VIEWPORTS.HandsetPortrait, { width: 400, height: 1800 });
-iframeSizeMap.set(VIEWPORTS.HandsetLandscape, { width: 400, height: 1800 });
-iframeSizeMap.set(VIEWPORTS.TabletLandscape, { width: 590, height: 1130 }); //
-iframeSizeMap.set(VIEWPORTS.TabletPortrait, { width: 590, height: 1130 }); //
-iframeSizeMap.set(VIEWPORTS.Phones, { width: 390, height: 1800 });
-iframeSizeMap.set(VIEWPORTS.SmallPhones, { width: 360, height: 1800 });
+iframeSizeMap.set(VIEWPORTS.XSmall, { width: 500, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.Small, { width: 590, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.Medium, { width: 590, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.Large, { width: 650, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.XLarge, { width: 650, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.WebLandscape, { width: 650, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.WebPortrait, { width: 400, height: 2000 });
+iframeSizeMap.set(VIEWPORTS.HandsetPortrait, { width: 400, height: 2000 });
+iframeSizeMap.set(VIEWPORTS.HandsetLandscape, { width: 400, height: 2000 });
+iframeSizeMap.set(VIEWPORTS.TabletLandscape, { width: 590, height: 1300 }); //
+iframeSizeMap.set(VIEWPORTS.TabletPortrait, { width: 590, height: 1300 }); //
+iframeSizeMap.set(VIEWPORTS.Phones, { width: 390, height: 2000 });
+iframeSizeMap.set(VIEWPORTS.SmallPhones, { width: 360, height: 2000 });
 
 @Component({
   selector: 'app-search-result',
@@ -108,6 +108,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.getPathsSubscription.unsubscribe();
   }
 
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    let el = document.getElementById('map').getBoundingClientRect();
+
+  }
+
   private getIFrameSize(obs: BreakpointObserver) {
     if (obs.isMatched('(max-width: 361px)')) {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.SmallPhones);
@@ -131,21 +137,21 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.Medium);
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-      //    console.log('Medium', iframeSize);
+
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.WebLandscape)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebLandscape);
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-      //   console.log('weblanscape', iframeSize);
+
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.WebPortrait)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebPortrait);
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-      //    console.log('webPOrt', iframeSize);
+
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.HandsetLandscape)) {
@@ -154,7 +160,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       );
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-      //   console.log('handlanscape', iframeSize);
+
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.HandsetPortrait)) {
@@ -163,7 +169,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       );
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-      //  console.log('handPort', iframeSize);
+
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.TabletLandscape)) {
@@ -172,7 +178,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       );
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-      //  console.log('tabletlanscape', iframeSize);
+
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.TabletPortrait)) {
@@ -182,7 +188,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-      //   console.log('tabletPort', iframeSize);
+
 
       this.isDesktop = true;
     }
