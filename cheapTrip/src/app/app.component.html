@@ -1,1 +1,39 @@
+<!-- <app-header></app-header> -->
+<ul>
+  <li *ngFor="let locale of localesList">
+    <a href="/{{locale.code}}/">
+      {{locale.label}}
+    </a>
+  </li>
+</ul>
+
+  <div>
+    <mat-toolbar color="primary" role="heading">
+      <div class="slogan" >
+        <p i18n = "main slogan@@mainSlogan">CHEAP TRIP. PAY LESS, VISIT MORE!</p>
+      </div>
+      <span class="spacer"></span>
+      <!-- <button mat-button (click)="toHomePage()"></button> -->
+      <button  mat-icon-button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="button with a menu">
+         <mat-icon>menu</mat-icon> 
+        <!-- <span class="material-icons"></span> -->
+        
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="''">
+          <mat-icon>home</mat-icon>
+          <span i18n = "menu home@@menuHome">Home</span>
+        </button>
+        <button mat-menu-item [routerLink]="'/links'">
+          <mat-icon>link icon</mat-icon>
+          <span i18n = "menu links@@menuLinks">Useful links</span>
+        </button>
+        <button mat-menu-item [routerLink]="'/contacts'">
+          <mat-icon>contacts icon</mat-icon>
+          <span i18n = "menu contacts@@menuContacts">Contacts</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+  </div>
+  
 <router-outlet></router-outlet>

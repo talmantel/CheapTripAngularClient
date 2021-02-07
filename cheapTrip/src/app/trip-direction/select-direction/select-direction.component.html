@@ -1,38 +1,85 @@
-
 <div class="mainContainer" [ngClass]="{'searchMode': mode === modes.SEARCH,
 'deliveryMode': mode === modes.DELIVERY}">
-    <p>Discover the cheapest way to get anywhere by plane, train, bus and ride share altogether</p>
-    <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
-        <div class="formInfo">
-            <mat-form-field
-            class="startPoint"
-             [class.valid]="directionForm.get('startPointControl').valid && directionForm.get('startPointControl').touched"
-             [class.invalid]="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched">
-                <input  (focusout)="onFocusOut($event)"  (input)="onInput($event.target.value, 'from')" type="text" placeholder="From"
-                    aria-label="Number" matInput formControlName="startPointControl" [matAutocomplete]="auto1">
-                <mat-autocomplete #auto1="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "start")'>
-                    <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name">
-                        {{start.name}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-            <span class="material-icons arrows" (click)="changeDirection()">
-                sync_alt
-            </span>
-            <mat-form-field class="endPoint"  [class.valid]="directionForm.get('endPointControl').valid && directionForm.get('endPointControl').touched"
+  <div class="message">
+    <h1 i18n = "Long slogan@@longslogan" @insertRemoveTrigger1>Discover the cheapest way <br />to get anywhere combining
+      plane,
+      train, bus and rideshare</h1>
+
+  </div>
+  <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
+    <div class="formInfo">
+      <section>
+        <div class="input">
+          <mat-form-field class="startPoint"
+            [class.valid]="directionForm.get('startPointControl').valid && directionForm.get('startPointControl').touched"
+            [class.invalid]="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched">
+            <!--   <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text" -->
+            <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text"
+              placeholder="From" i18n-placeholder aria-label="Number" matInput formControlName="startPointControl"
+              [matAutocomplete]="auto1" #startPointInput>
+
+            <mat-autocomplete class="single-autocomplete" #auto1="matAutocomplete"
+              (optionSelected)='optionSelected($event.option.value, "from")'>
+              <!--    <mat-autocomplete #auto1="matAutocomplete"  >-->
+              <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name" >
+                {{start.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <span class="material-icons" (click)="onCleanInput('start')">
+           clear
+          </span>
+          <!--   <p *ngIf="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched"
+          class="error">
+          <span *ngIf="directionForm.get('startPointControl').errors['notInList']">This name is invalid!</span>
+          <span *ngIf="directionForm.get('startPointControl').errors['required']">This field is required!</span>
+        </p> -->
+        </div>
+        <div class="error"
+          *ngIf="!directionForm.get('startPointControl').valid && (directionForm.get('startPointControl').pristine || directionForm.get('startPointControl').untouched)">
+          <p *ngIf="directionForm.get('startPointControl').errors.invalidMsg">
+            {{directionForm.get('startPointControl').errors.invalidMsg}}</p>
+        </div>
+      </section>
+      <!--   <span class="material-icons arrows" (click)="changeDirection()">
+        sync_alt
+      </span> -->
+
+      <span class="material-icons arrows">
+        double_arrow
+      </span>
+      <section>
+        <div class="input">
+          <mat-form-field class="endPoint"
+            [class.valid]="directionForm.get('endPointControl').valid && directionForm.get('endPointControl').touched"
             [class.invalid]="directionForm.get('endPointControl').invalid && directionForm.get('endPointControl').touched">
-                <input #endPoint (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text" placeholder="To"
-                    aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
-                <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='onOptionSelected($event.option.value, "end")'>
-                    <mat-option *ngFor="let end of endPointAutoComplete" [value]="end.name">
-                        {{end.name}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+            <input #endPointInput (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text"
+              placeholder="To" i18n-placeholder aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
+            <mat-autocomplete class="single-autocomplete" #auto2="matAutocomplete"
+              (optionSelected)='optionSelected($event.option.value, "to")'>
+              <!--      <mat-autocomplete #auto2="matAutocomplete" > -->
+              <mat-option *ngFor="let end of endPointAutoComplete" [value]="end.name">
+                {{end.name}}
+              </mat-option>
+            </mat-autocomplete>
+
+          </mat-form-field>
+          <span (click)="onCleanInput('end')" class="material-icons">clear
+          </span>
         </div>
-        <div class="actions">
-            <button mat-flat-button color="accent" type="reset" (click)="cleanForm()">Clear form</button>
-            <button mat-flat-button [disabled]="!(directionForm.valid && (startPoint && endPoint))" color="primary" type="submit">Let's go</button>
+
+        <div class="error"
+          *ngIf="!directionForm.get('endPointControl').valid && (directionForm.get('endPointControl').pristine || directionForm.get('endPointControl').untouched)">
+          <p *ngIf="directionForm.get('endPointControl').errors.invalidMsg">
+            {{directionForm.get('endPointControl').errors.invalidMsg}}</p>
         </div>
-    </form>
+      </section>
+    </div>
+    <div class="actions">
+      <button mat-flat-button color="accent" type="reset" (click)="cleanForm()" i18n = "Clear form@@clearform">Clear form</button>
+      <button mat-flat-button color="primary" #sBtn [disabled]="endPoint.name.length < 1 || startPoint.name.length < 1"
+        type="submit" i18n = "letsgo@@letsgo">Let's go</button>
+    </div>
+
+  </form>
 </div>

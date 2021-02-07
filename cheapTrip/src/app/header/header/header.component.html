@@ -1,10 +1,13 @@
-<mat-toolbar color="primary" role="heading">
+<div>
+  <mat-toolbar color="primary" role="heading">
+    <div class="slogan">
+      <p>CHEAP TRIP. PAY LESS, VISIT MORE!</p>
+    </div>
+    <span class="spacer"></span>
+    <button mat-button (click)="toHomePage()"><span class="material-icons">
+        home
+      </span></button>
+  </mat-toolbar>
+</div>
 
-  <img src="../../../assets/images/logo.jpg" alt="CheapTrip" (click)="toHomePage()" matTooltip="Home">
-  <span class="spacer"></span>
-  <button mat-button><a routerLink="/search"> CheapTrip</a></button>
-  <button mat-button><a routerLink=""> Home</a>
-  </button>
-</mat-toolbar>
 <router-outlet></router-outlet>
-

@@ -4,9 +4,14 @@
 
 export const environment = {
   production: false,
-  urlAppachi: 'http://52.14.161.122:8080/',
-  urlTomCat:  'http://3.23.159.104:3333/'
-
+  mainServer:"tomcat",   // "tomcat "or "spring"
+  url68: 'http://3.18.167.68:8080/',
+  url104:  'http://3.18.167.68:8080/',
+  urlTomCat: 'http://ec2-3-134-113-37.us-east-2.compute.amazonaws.com:8080/'
+  //  url104:  'http://18.158.89.230:8080/'  //working server
+  // url104: 'http://localhost:8080/', 
+ // url104: 'http://35.238.107.151:8080/',
+  // url104: 'http://ec2-3-134-113-37.us-east-2.compute.amazonaws.com:8080/', 
 };
 
 /*

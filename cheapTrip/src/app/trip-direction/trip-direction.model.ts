@@ -15,6 +15,9 @@ export enum Modes {
   DELIVERY,
 }
 
+export  type Server = 'server68'| 'server104';
+
+
 export interface IPoint {
   name: string;
   type: 'from' | 'to';

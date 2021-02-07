@@ -11,21 +11,33 @@
         <mat-panel-description>
           <div class="description">
             <p><span class="points" *ngFor="let point of rout.details['points']">{{point}}</span></p>
-            <p class="time"><span>{{rout.details.euro_price | currency:'EUR':'symbol':'1.2-2' }}</span>
-              <span class="spacer"></span><span>{{rout.details.duration_minutes}}</span></p>
+            <p class="time">
+              <span>{{rout.details.duration_minutes}}</span>
+              <span class="spacer"></span>
+              <mat-chip color="warn" selected>{{rout.details.euro_price | currency:'EUR':'symbol':'1.2-2' }}</mat-chip>
+            </p>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="details" *ngFor="let path of rout.details.direct_paths; let i=index">
-        <p><span>{{path.from}} -> {{path.to}} </span><span class="spacer"></span></p>
-        <p>
-          <span>{{path.euro_price | currency:'EUR':'symbol':'1.2-2' }}</span>
-          <span class="spacer"></span>
-          <span>{{path.duration_minutes}}</span> </p>
+      <div class="details" *ngFor="let path of rout.details.direct_paths; let i=index" >
+        <p><span>{{path.from}} -> {{path.to}} </span><span class="spacer"></span >{{path.transportation_type}}</p>
+        <p> <span>{{path.duration_minutes}}</span>
 
-      </div>
+          <span class="spacer"></span>
+
+          <span>{{path.euro_price | currency:'EUR':'symbol':'1.2-2' }}</span> 
+          
+        </p>
+        <p *ngIf="path.transportation_type=='Flight'"><span class="spacer"></span> 
+          <span  class="flightText" i18n="@@priceAndDurationForFlight">
+            price and duration include transfer to/from airport</span>
+      </p>
+      
+      <p><span class="spacer"></span>
+      <button *ngIf="getTransportUrl(path.transportation_type)!=''" mat-button color="primary" i18n = "Buy ticket@@BuyTicket" 
+      (click)="openTransport(path.transportation_type)" >Buy ticket</button>
+      </p>
+    </div>
     </mat-expansion-panel>
   </mat-accordion>
 </section>
-
-

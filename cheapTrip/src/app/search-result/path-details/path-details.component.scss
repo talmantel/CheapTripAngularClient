@@ -13,82 +13,83 @@ p span.points {
   font-style: oblique;
 }
 p span.points:after {
-  content: " -> ";
+  content: " > ";
+  font-weight: bold;
+  color: var(--color-primary);
 }
 
 p span.points:last-child:after {
   content: "";
 }
 
-@include desktop {
-  section {
+section {
+  width: 100%;
+  height: auto;
+  margin-top: 0.2rem;
+  mat-accordion {
     width: 100%;
-    height: auto;
-    margin-top: 0.2rem;
-    mat-accordion {
-      width: 100%;
-      height: inherit;
-      mat-expansion-panel {
-        padding: 0;
-        .mat-expansion-panel-header-title {
-          flex-basis: 20%;
+    height: inherit;
+    mat-expansion-panel {
+      padding: 0;
+      .mat-expansion-panel-header-title {
+        flex-basis: 20%;
+      }
+      .mat-expansion-panel-header-description {
+        flex-basis: 70%;
+      }
+      div.details {
+        border-top: 1px solid var(--color-accent);
+        width: 95%;
+        p:first-child {
+          text-align: right;
+          padding-top: 0.5rem;
         }
-        .mat-expansion-panel-header-description {
-          flex-basis: 70%;
-        }
-        div.details {
-          border-top: 1px solid $base-light;
-          width: 95%;
-          p:first-child {
-            text-align: right;
+        p {
+          display: flex;
+          span.spacer {
+            flex: 1 1 auto;
           }
-          p {
+        }
+      }
+      mat-expansion-panel-header {
+        height: auto !important;
+        mat-panel-title {
+          div.icons {
             display: flex;
-            span.spacer {
-              flex: 1 1 auto;
+            @include boxSizing(border-box);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid var(--color-primary);
+            span {
+              padding: 0.1rem 1rem;
+              color: var(--color-primary);
+              span.material-icons {
+                color: var(--color-primary);
+              }
             }
           }
         }
-        mat-expansion-panel-header {
-          height: auto !important;
-          mat-panel-title {
-            div.icons {
-              display: flex;
-              @include boxSizing(border-box);
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              border-right: 1px solid $base-light;
-              span {
-                padding: 0.1rem 1rem;
-                color: $base-dark;
-                span.material-icons {
-                  color: $base-dark;
-                }
-              }
-            }
-          }
-          mat-panel-description {
-            div.description {
+        mat-panel-description {
+          div.description {
+            width: 100%;
+            p:first-child {
+              padding: 0.5rem 0;
+              color: var(--color-accent);
+              font-size: 0.9rem;
+              margin: 0;
+
               width: 100%;
-              p:first-child {
-                padding: 0.5rem 0;
-                color: $base-dark;
-                font-size: 0.9rem;
-                margin: 0;
+            }
+            p.time {
+              margin-top: 1rem;
+              display: flex;
 
-                width: 100%;
-              }
-              p.time {
-                margin-top: 1rem;
-                display: flex;
+              justify-content: space-between;
+              width: 100%;
 
-                justify-content: space-between;
-                width: 100%;
-
-                .spacer {
-                  flex: 1 1 auto;
-                }
+              .spacer {
+                flex: 1 1 auto;
               }
             }
           }
@@ -98,7 +99,33 @@ p span.points:last-child:after {
   }
 }
 
-@include phones {
+@include Large {
+
+}
+
+
+@include Medium{
+  section{
+  //  background-color: cadetblue;
+  }
+}
+
+@include Small{
+  section{
+    width:100%;
+  //  background-color: rgb(176, 236, 98);
+  //  border:3px solid red;
+  }
+}
+
+@include XSmall{
+  section{
+    width:100%;
+   // background-color: rgb(255, 252, 51);
+  }
+}
+
+@include Phones {
   section {
     width:100%;
     mat-accordion {
