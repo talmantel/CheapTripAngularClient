@@ -5,6 +5,8 @@ import * as TripDirectionActions from '../../trip-direction/store/trip-direction
 
 import * as fromApp from '../../store/app.reducer';
 import { Modes } from 'src/app/trip-direction/trip-direction.model';
+import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-header',
@@ -12,13 +14,21 @@ import { Modes } from 'src/app/trip-direction/trip-direction.model';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private route: Router, private store: Store<fromApp.AppState>) {}
+  isLoading: boolean;
+  subscription: Subscription;
 
+  constructor(private route: Router, private store: Store<fromApp.AppState>) {}
+isDarkTheme = false;
   ngOnInit(): void {}
 
   toHomePage(): void {
-    this.store.dispatch(new TripDirectionActions.SetMode(Modes.SEARCH));
-    this.store.dispatch(new TripDirectionActions.CleanData());
+
+    this.store.dispatch(new TripDirectionActions.GoHome());
+
     this.route.navigate(['/']);
+  }
+
+  onChangeTheme(){
+    this.isDarkTheme = !this.isDarkTheme;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import {
   BreakpointObserver,
   Breakpoints,
@@ -11,40 +11,46 @@ import { Subscription } from 'rxjs';
 
 import * as fromApp from '../store/app.reducer';
 import { IPath } from '../trip-direction/trip-direction.model';
-import { Location } from '@angular/common';
-
-export interface IGrid {
-  color: string;
-  cols: number;
-  rows: number;
-}
 
 // reference information: available resolutions
-const viewportSizes = [
-  Breakpoints.XSmall,
-  Breakpoints.Small,
-  Breakpoints.Medium,
-  Breakpoints.Large,
-  Breakpoints.XLarge,
-  Breakpoints.Web,
-  Breakpoints.WebLandscape,
-  Breakpoints.WebPortrait,
-  Breakpoints.Handset,
-  Breakpoints.HandsetLandscape,
-  Breakpoints.HandsetPortrait,
-  Breakpoints.Tablet,
-  Breakpoints.TabletLandscape,
-  Breakpoints.TabletPortrait,
-];
-const ROW_HEIGHT = 250;
-enum FrameWidth {
-  SSMALL = 360,
-  XSMALL = 420,
-  SMALL = 500,
-  MEDIUM = 800,
-  LARGE = 900,
-  XLARGE = 1000,
+enum VIEWPORTS {
+  XSmall,
+  Small,
+  SmallPortrait,
+  Medium,
+  Large,
+  XLarge,
+  WebLandscape,
+  WebPortrait,
+  HandsetLandscape,
+  HandsetPortrait,
+  TabletLandscape,
+  TabletPortrait,
+  Phones,
+  SmallPhones,
 }
+
+const ROW_HEIGHT = 250;
+
+type IFrameSize = {
+  width: number;
+  height: number;
+};
+
+const iframeSizeMap = new Map<VIEWPORTS, IFrameSize>();
+iframeSizeMap.set(VIEWPORTS.XSmall, { width: 500, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.Small, { width: 590, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.Medium, { width: 590, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.Large, { width: 650, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.XLarge, { width: 650, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.WebLandscape, { width: 650, height: 1800 }); //
+iframeSizeMap.set(VIEWPORTS.WebPortrait, { width: 400, height: 2000 });
+iframeSizeMap.set(VIEWPORTS.HandsetPortrait, { width: 400, height: 2000 });
+iframeSizeMap.set(VIEWPORTS.HandsetLandscape, { width: 400, height: 2000 });
+iframeSizeMap.set(VIEWPORTS.TabletLandscape, { width: 590, height: 1300 }); //
+iframeSizeMap.set(VIEWPORTS.TabletPortrait, { width: 590, height: 1300 }); //
+iframeSizeMap.set(VIEWPORTS.Phones, { width: 390, height: 2000 });
+iframeSizeMap.set(VIEWPORTS.SmallPhones, { width: 360, height: 2000 });
 
 @Component({
   selector: 'app-search-result',
@@ -55,12 +61,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   paths: IPath[];
   isDesktop = false;
   getPathsSubscription: Subscription;
+  isLoading: boolean;
 
   // for UIw
-  grids: IGrid[];
-  colsAmount = 7;
-  rowHeight: string;
-  frameWidth: number;
+  iframeWidth: number;
+  iframeHeight: number;
+  iframeSize: IFrameSize;
 
   // matcher: MediaQueryList;
 
@@ -70,10 +76,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
     public mediaMatcher: MediaMatcher
   ) {
-    /*   breakpointObserver
-      .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
-      .subscribe((state: BreakpointState) => {}); */
-
     breakpointObserver
       .observe([
         Breakpoints.XSmall,
@@ -81,9 +83,15 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         Breakpoints.Medium,
         Breakpoints.Large,
         Breakpoints.XLarge,
+        Breakpoints.WebLandscape,
+        Breakpoints.WebPortrait,
+        Breakpoints.HandsetLandscape,
+        Breakpoints.HandsetPortrait,
+        Breakpoints.TabletLandscape,
+        Breakpoints.TabletPortrait,
       ])
       .subscribe((state: BreakpointState) => {
-        this.getGridsSize(breakpointObserver);
+        this.getIFrameSize(breakpointObserver);
       });
   }
 
@@ -92,8 +100,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       .select('directions')
       .subscribe((state) => {
         this.paths = state.paths;
-        console.log('paths parent', this.paths);
-        this.rowHeight = state.pathsAmount * ROW_HEIGHT + 'px';
+        this.isLoading = state.isLoading;
       });
   }
 
@@ -101,20 +108,88 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.getPathsSubscription.unsubscribe();
   }
 
-  private getGridsSize(obs: BreakpointObserver) {
-    if (obs.isMatched('(max-width: 410px)')) {
-      this.frameWidth = FrameWidth.SSMALL;
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    let el = document.getElementById('map').getBoundingClientRect();
+
+  }
+
+  private getIFrameSize(obs: BreakpointObserver) {
+    if (obs.isMatched('(max-width: 361px)')) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.SmallPhones);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+    } else if (obs.isMatched('(max-width: 412px)')) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.Phones);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
     } else if (obs.isMatched(Breakpoints.XSmall)) {
-      this.frameWidth = FrameWidth.XSMALL;
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.XSmall);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
     } else if (obs.isMatched(Breakpoints.Small)) {
-      this.frameWidth = FrameWidth.SMALL;
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.Small);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+
       this.isDesktop = true;
-    } else if (
-      obs.isMatched(Breakpoints.Medium) ||
-      obs.isMatched(Breakpoints.Large) ||
-      obs.isMatched(Breakpoints.XLarge)
-    ) {
-      this.frameWidth = FrameWidth.MEDIUM;
+    } else if (obs.isMatched(Breakpoints.Medium)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.Medium);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.WebLandscape)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebLandscape);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.WebPortrait)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebPortrait);
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.HandsetLandscape)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(
+        VIEWPORTS.HandsetLandscape
+      );
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.HandsetPortrait)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(
+        VIEWPORTS.HandsetPortrait
+      );
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.TabletLandscape)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(
+        VIEWPORTS.TabletLandscape
+      );
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+
+
+      this.isDesktop = true;
+    } else if (obs.isMatched(Breakpoints.TabletPortrait)) {
+      const iframeSize: IFrameSize = iframeSizeMap.get(
+        VIEWPORTS.TabletPortrait
+      );
+
+      this.iframeWidth = iframeSize.width;
+      this.iframeHeight = iframeSize.height;
+
+
       this.isDesktop = true;
     }
   }

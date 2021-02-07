@@ -52,29 +52,82 @@
   box-shadow: $hLength $vLength $blurR $spreadR rgba(0, 0, 0, 0.75);
 }
 
-@mixin desktop {
-  @media screen and (max-width: 2000px) {
+@mixin XLarge {
+  @media screen  and (min-width: 1920px) {
        @content;
   }
 }
-@mixin laptop {
-  @media screen and (max-width: 992px) {
+@mixin Large {
+  @media screen  and (min-width: 1280px) and (max-width: 1919.99px){
       @content;
   }
 }
-@mixin tablets {
-  @media screen and (max-width: 768px) {
+@mixin Medium {
+  @media screen and (min-width: 960px) and  (max-width: 1279.99px) {
       @content;
   }
 }
-@mixin phones {
- @media screen and (max-width: 480px) {
+
+@mixin TabLandscape {
+  @media screen and   (min-width: 960px) and (max-width: 1279.99px) and (orientation: landscape){
+      @content;
+  }
+}
+
+
+
+@mixin TabPortrait {
+  @media screen and (min-width: 600px)  and  (max-width: 839.99px) and (orientation: portrait) {
+      @content;
+  }
+}
+
+@mixin WebPortrait {
+  @media screen and (min-width: 840px)   and (orientation: portrait) {
+      @content;
+  }
+}
+
+@mixin WebLandscape {
+  @media screen and   (min-width: 1280px)  and (orientation: landscape){
+      @content;
+  }
+}
+
+@mixin Small {
+  @media screen  and (min-width: 600px) and  (max-width: 959.99px){
+      @content;
+  }
+}
+
+
+@mixin XSmall {
+  @media screen and  (max-width: 599.99px) {
+      @content;
+  }
+}
+
+@mixin HandSetPortrait {
+  @media screen and  (max-width: 599.99px)  and (orientation: portrait){
+      @content;
+  }
+}
+
+@mixin HandSetLandScape {
+  @media screen and  (max-width: 959.99px)  and (orientation: landscape){
+      @content;
+  }
+}
+
+@mixin Phones {
+ @media screen  and (min-width: 360px) and (max-width: 419.99px) {
       @content;
  }
 }
 
-@mixin smallphones {
-  @media screen and (max-width: 376px) {
+@mixin Smallphones {
+  @media screen and (max-width: 359.99px) {
        @content;
   }
  }
+

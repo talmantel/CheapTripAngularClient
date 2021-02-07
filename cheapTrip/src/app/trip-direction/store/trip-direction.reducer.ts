@@ -1,4 +1,4 @@
-import { IPath, IPathPoint, Modes } from '../trip-direction.model';
+import { IPath, IPathPoint, Modes, Server } from '../trip-direction.model';
 import * as TripDirectionActions from './trip-direction.actions';
 
 export interface ITripDirectionState {
@@ -10,6 +10,10 @@ export interface ITripDirectionState {
   mode: Modes;
   errorMessage: string;
   pathsAmount: number;
+  isLoading: boolean;
+  reset: boolean;
+  currentServer: Server;
+  serverChanged: boolean;
 }
 
 const initialState: ITripDirectionState = {
@@ -21,6 +25,10 @@ const initialState: ITripDirectionState = {
   mode: Modes.SEARCH,
   errorMessage: '',
   pathsAmount: 0,
+  isLoading: false,
+  reset: false,
+  currentServer: 'server104',
+ serverChanged: false
 };
 
 export function tripDirectionReducer(
@@ -31,7 +39,7 @@ export function tripDirectionReducer(
     case TripDirectionActions.SET_START_POINT:
       return {
         ...state,
-        endPoint: action.payload,
+        startPoint: action.payload,
       };
 
     case TripDirectionActions.SET_END_POINT:
@@ -75,12 +83,19 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.GET_AUTOCOMPLETE:
+      if (state.reset) {
+        return {
+          ...state,
+          reset: false,
+        };
+      }
       return {
         ...state,
       };
     case TripDirectionActions.GET_ROUTS:
       return {
         ...state,
+        isLoading: true,
       };
 
     case TripDirectionActions.SET_ROUTS:
@@ -88,7 +103,6 @@ export function tripDirectionReducer(
       const length1 = action.payload.paths.reduce((sum, current) => {
         return sum + current.details.direct_paths.length;
       }, 0);
-      console.log('action payload', action.payload.paths);
 
       const res = length1 + pathsAmount;
       return {
@@ -98,25 +112,30 @@ export function tripDirectionReducer(
         endPoint: action.payload.endPoints.to,
         mode: Modes.DELIVERY,
         pathsAmount: res,
+        isLoading: false,
       };
 
     case TripDirectionActions.AUTOCOMPLETE_FAIL:
+      let server = 'server68';
+      if (state.currentServer == 'server104' ){
+      //  server = Server.SERVER104;
+      }
       return {
         ...state,
-        errorMessage: action.payload,
+     //   currentServer: server,
+     //   serverChanged: true
       };
 
     case TripDirectionActions.CLEAN_DATA:
-      console.log('reducer');
+      const empty = { id: 0, name: '' };
       return {
         ...state,
-        startPoint: null,
-        endPoint: null,
+        startPoint: empty,
+        endPoint: empty,
         startPointAutoComplete: [],
         endPointAutoComplete: [],
-       // paths: [],
-     //   mode: Modes.SEARCH,
         errorMessage: '',
+        //  toHome: action.payload,
       };
 
     case TripDirectionActions.SET_MODE:
@@ -124,6 +143,21 @@ export function tripDirectionReducer(
         ...state,
 
         mode: action.payload,
+      };
+
+    case TripDirectionActions.GO_HOME:
+      return {
+        ...state,
+        startPoint: { id: 0, name: '' },
+        endPoint: { id: 0, name: '' },
+        startPointAutoComplete: [],
+        endPointAutoComplete: [],
+        paths: [],
+        mode: Modes.SEARCH,
+        errorMessage: '',
+        pathsAmount: 0,
+        isLoading: false,
+        reset: true,
       };
 
     default:
