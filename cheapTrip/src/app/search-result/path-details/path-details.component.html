@@ -1,0 +1,31 @@
+<section *ngFor="let rout  of paths">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header expandedHeight="*" collapsedHeight="*">
+        <mat-panel-title>
+          <div class="icons">
+            <ng-container *ngFor="let icon of rout.details['transport']"> <span [innerHTML]="icon"></span>
+            </ng-container>
+          </div>
+        </mat-panel-title>
+        <mat-panel-description>
+          <div class="description">
+            <p><span class="points" *ngFor="let point of rout.details['points']">{{point}}</span></p>
+            <p class="time">
+              <span>{{rout.details.duration_minutes}}</span>
+              <span class="spacer"></span>
+              <mat-chip color="warn" selected>{{rout.details.euro_price | currency:'EUR':'symbol':'1.2-2' }}</mat-chip>
+            </p>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="details" *ngFor="let path of rout.details.direct_paths; let i=index">
+        <p><span>{{path.from}} -> {{path.to}} </span><span class="spacer"></span>{{path.transportation_type}}</p>
+        <p> <span>{{path.duration_minutes}}</span>
+
+          <span class="spacer"></span>
+          <span>{{path.euro_price | currency:'EUR':'symbol':'1.2-2' }}</span> </p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
