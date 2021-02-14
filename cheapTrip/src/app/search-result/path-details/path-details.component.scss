@@ -21,7 +21,11 @@ p span.points:after {
 p span.points:last-child:after {
   content: "";
 }
+.buy-ticket-button {
+  position:absolute;
+  left: 45%;
 
+}
 section {
   width: 100%;
   height: auto;

@@ -29,12 +29,14 @@ price: number;
          break; 
       } 
       case "Bus": { 
-        url = "http://bus.tickets.ua";
+        //url = "http://bus.tickets.ua";
+        url = "http://bus.tutu.ru";
          break; 
       } 
       case "Train": { 
-        url = "http://gd.tickets.ua";
-         break; 
+        //url = "http://gd.tickets.ua";
+        url = "https://www.tutu.ru/poezda";
+        break; 
       } 
       case "Car Ferry": { 
         url = "http://www.aferry.com";

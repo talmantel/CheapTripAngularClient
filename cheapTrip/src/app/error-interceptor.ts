@@ -41,6 +41,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       }),
       catchError((error: HttpErrorResponse) => {
         let errorData: AlertMessage;
+       // console.log ("--==unknown error==-- "+error)
         switch (true) {
           case error.status >= 400:
             errorData = new AlertMessage('warning', 'Oh no!', 'Sorry, the data we have accumulated is not enough to build a route between the indicated cities. Try changing your request.', ['Back']);

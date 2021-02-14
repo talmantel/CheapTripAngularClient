@@ -1,7 +1,7 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { switchMap, map, withLatestFrom } from 'rxjs/operators';
-
+import { LOCALE_ID, Inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 import * as TripDirectionActions from './trip-direction.actions';
@@ -63,6 +63,13 @@ PATHMAP.set('ground_routes', {
   type: 'Ground Trip',
 });
 
+PATHMAP.set('fixed_routes_without_ride_share',{
+  type:'Fixed trip without ride share'
+});
+PATHMAP.set('routes_without_ride_share',{
+  type:'Trip without ride share'
+});
+
 const PATHMAPDETAILED = new Map();
 PATHMAPDETAILED.set('Bus', Icons.BUS);
 PATHMAPDETAILED.set('Flight', Icons.FLIGHT);
@@ -71,12 +78,15 @@ PATHMAPDETAILED.set('Ride Share', Icons.CAR);
 PATHMAPDETAILED.set('Car Drive', Icons.CAR);
 PATHMAPDETAILED.set('Walk', Icons.ONFOOT);
 PATHMAPDETAILED.set('Town Car', Icons.CAR);
-PATHMAPDETAILED.set('Car Ferry', Icons.FERRY);
+PATHMAPDETAILED.set('Car Ferry', Icons.FERRY);  // two variants for ferry
+PATHMAPDETAILED.set('Ferry', Icons.FERRY);      //
 PATHMAPDETAILED.set('Shuttle', Icons.SHUTTLE);
 PATHMAPDETAILED.set('Taxi', Icons.TAXI);
 
 @Injectable()
 export class TripDirectionEffects {
+  private checkPoints: number[];
+  private checkPointsStrings: string[];
   constructor(
     private selectService:SelectService,
     private actions$: Actions,
@@ -109,6 +119,8 @@ export class TripDirectionEffects {
     withLatestFrom(this.store$.select('directions')),
     switchMap((request: Array<any>) => {
       let url = '';
+
+  
 //this is url for spring server
       if (request[1].currentServer === 'server68') {
         url =
@@ -164,6 +176,8 @@ export class TripDirectionEffects {
     ofType(TripDirectionActions.GET_ROUTS),
     withLatestFrom(this.store$.select('directions')),
     switchMap((request: Array<any>) => {
+      this.checkPoints=new Array;
+      this.checkPointsStrings=new Array;
       let url = '';
       // lower is url for a spring server
       if (request[1].currentServer === 'server68') {
@@ -191,13 +205,20 @@ export class TripDirectionEffects {
      '&to=' +
      request[1].endPoint.id;
      }
+     this.checkPoints.push(Date.now());
+     this.checkPointsStrings.push("Before request");
+
       return this.http.get(url, { observe: 'response' }).pipe(
         map((res) => {
+          this.checkPoints.push(Date.now());
+          this.checkPointsStrings.push("received request");
           console.log(res);
           let resultPathArr = null;
 
           resultPathArr = this.transformObject(res.body as IRecievedRouts[]);
-
+          
+          resultPathArr.sort((a, b) => (a.details.euro_price > b.details.euro_price) ? 1 : -1);
+          
           const endPoints = {
             from: request[1].startPoint,
             to: request[1].endPoint,
@@ -208,10 +229,19 @@ export class TripDirectionEffects {
             to: request[1].endPoint.name,
             toID: request[1].endPoint.id,
           };
+          this.checkPoints.push(Date.now());
+          this.checkPointsStrings.push("Before navigation to mypath");
           this.router.navigate(['/search/myPath'], {
             queryParams,
           });
+          this.checkPoints.push(Date.now());
+          this.checkPointsStrings.push("after nav, before return");
 
+          for (let index = 1; index < this.checkPoints.length; index++) {
+            console.log (this.checkPointsStrings[index-1]+" -> "+this.checkPointsStrings[index]
+            +" elapsed "+(this.checkPoints[index]-this.checkPoints[index-1])+" ms");
+            
+          }
           return new TripDirectionActions.SetRouts({
             paths: resultPathArr,
             endPoints: endPoints,
@@ -338,16 +368,30 @@ export class TripDirectionEffects {
   }
 
   private reducedPaths(paths: IPath[]): IPath[] {
-    const stringifyArr = paths.map((p) => JSON.stringify(p.details));
-    let ind = -1;
-    for (let i = 1; i < paths.length; i++) {
-      if (stringifyArr[0] == stringifyArr[i]) {
-        ind = i;
-      }
-    }
-    return paths.filter((_path, index) => {
-      return index != ind;
-    });
+     // console.log("-=Paths=- "+paths.length);
+     this.checkPoints.push(Date.now());
+     this.checkPointsStrings.push("Before filter");
+      let stringifyArr;
+      
+      let duplicateIndex;
+      do{
+        stringifyArr = paths.map((p) => JSON.stringify(p.details));
+        duplicateIndex=-1;//means no duplicate 
+          for (let j = 0; j < paths.length; j++) {
+                  
+            for (let i = 0; i < paths.length; i++) {
+              if ((stringifyArr[j] == stringifyArr[i])&&(i!=j)) {
+                duplicateIndex = i;
+              }
+            }
+          }
+          paths= paths.filter((_path, index) => {
+            return index != duplicateIndex;
+          });
+        } while(duplicateIndex!=-1) //do... while there is duplicates
+        this.checkPoints.push(Date.now());
+        this.checkPointsStrings.push("after filter");
+      return paths;
   }
 
 

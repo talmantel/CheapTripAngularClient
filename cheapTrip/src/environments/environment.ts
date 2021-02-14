@@ -7,7 +7,8 @@ export const environment = {
   mainServer:"tomcat",   // "tomcat "or "spring"
   url68: 'http://3.18.167.68:8080/',
   url104:  'http://3.18.167.68:8080/',
-  urlTomCat: 'http://ec2-3-134-113-37.us-east-2.compute.amazonaws.com:8080/'
+  urlTomCat: 'http://ec2-3-65-40-85.eu-central-1.compute.amazonaws.com:8080/'
+  // urlTomCat: 'http://ec2-3-134-113-37.us-east-2.compute.amazonaws.com:8080/'
   //  url104:  'http://18.158.89.230:8080/'  //working server
   // url104: 'http://localhost:8080/', 
  // url104: 'http://35.238.107.151:8080/',
