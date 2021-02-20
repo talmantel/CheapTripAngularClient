@@ -2,6 +2,7 @@
 @import '../cheapTripStyles/mixins.scss';
 
 * {
+  
   padding: 0;
   margin: 0;
 }
@@ -12,6 +13,7 @@
 
 div.slogan {
   p {
+    
     font-style: italic;
     font-size: 0.9em;
     color: white;

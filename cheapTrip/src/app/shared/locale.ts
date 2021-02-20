@@ -1,4 +1,9 @@
+import {Injectable} from '@angular/core';
+@Injectable()
 export class Locale {
+    constructor (){
+
+    }
 
    public getUsersLocale(defaultValue: string): string {
         if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {

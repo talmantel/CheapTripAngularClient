@@ -18,7 +18,7 @@ div.mainContainer {
   div.message {
     margin: 0.5rem auto 0.5rem;
     padding: 0;
-    color: var(--color-accent);
+    color:#607D8B;
 
     h1 {
       text-align: center;
@@ -64,7 +64,7 @@ div.mainContainer {
           mat-form-field {
             width: 100%;
             @include boxSizing(border-box);
-            border-left: 3px solid var(--color-accent);
+            
             padding-left: 0.5rem;
 
             input {

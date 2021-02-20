@@ -1,4 +1,9 @@
 @import "../../../cheapTripStyles/styles.scss";
+.price{
+  background-color:#FF5722;
+  border-radius: 5px;
+  color: white;
+}
 :host {
   width: 100%;
   position: relative;
@@ -8,6 +13,8 @@
   margin: 0;
   padding: 0;
 }
+
+
 
 p span.points {
   font-style: oblique;
@@ -24,9 +31,15 @@ p span.points:last-child:after {
 .buy-ticket-button {
   position:absolute;
   left: 45%;
-
+}
+.transport-name {
+  color: #608b69;
+}
+.price-in-details {
+  color: #FF5722;
 }
 section {
+  
   width: 100%;
   height: auto;
   margin-top: 0.2rem;
@@ -67,25 +80,27 @@ section {
             border-right: 1px solid var(--color-primary);
             span {
               padding: 0.1rem 1rem;
-              color: var(--color-primary);
+              color: var(--color-accent);
               span.material-icons {
-                color: var(--color-primary);
+                color: var(--color-accent);
               }
             }
           }
         }
         mat-panel-description {
           div.description {
+            
             width: 100%;
             p:first-child {
               padding: 0.5rem 0;
-              color: var(--color-accent);
+              color: #212121;
               font-size: 0.9rem;
               margin: 0;
 
               width: 100%;
             }
             p.time {
+              color: #757575;
               margin-top: 1rem;
               display: flex;
 

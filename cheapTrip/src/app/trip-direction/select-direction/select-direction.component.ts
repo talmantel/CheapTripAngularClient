@@ -221,18 +221,19 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   private setForm() {
+    //deactivated due to russian lan
     this.directionForm = new FormGroup({
       startPointControl: new FormControl('', [
-        this.patternValid({
-          pattern: /[a-zA-Z0-9\-\s]/,
-          msg: $localize`:@@onlyLatinAllowed:Sorry, only Latin names are allowed`,
-        }),
+        // this.patternValid({
+        //   pattern: /[a-zA-Z0-9\-\s]/,
+        //   msg: $localize`:@@onlyLatinAllowed:Sorry, only Latin names are allowed`,
+        // }),
       ]),
       endPointControl: new FormControl('', [
-        this.patternValid({
-          pattern: /[a-zA-Z0-9\-\s]/,
-          msg: $localize`:@@onlyLatinAllowed:Sorry, only Latin names are allowed`,
-        }),
+        // this.patternValid({
+        //   pattern: /[a-zA-Z0-9\-\s]/,
+        //   msg: $localize`:@@onlyLatinAllowed:Sorry, only Latin names are allowed`,
+        // }),
       ]),
     });
   }

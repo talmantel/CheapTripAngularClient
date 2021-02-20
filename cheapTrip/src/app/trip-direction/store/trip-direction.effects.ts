@@ -1,8 +1,9 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { switchMap, map, withLatestFrom } from 'rxjs/operators';
-import { LOCALE_ID, Inject } from '@angular/core';
+
 import { environment } from '../../../environments/environment';
+import { LocaleService } from '../../service/locale.service';
 
 import * as TripDirectionActions from './trip-direction.actions';
 import {
@@ -18,6 +19,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import {SelectService} from "../select-direction/select.service"
+import { LocalizedString } from '@angular/compiler';
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -85,9 +87,11 @@ PATHMAPDETAILED.set('Taxi', Icons.TAXI);
 
 @Injectable()
 export class TripDirectionEffects {
+  private language: string;
   private checkPoints: number[];
   private checkPointsStrings: string[];
   constructor(
+    private localeService:LocaleService,
     private selectService:SelectService,
     private actions$: Actions,
     private sanitizer: DomSanitizer,
@@ -142,12 +146,20 @@ export class TripDirectionEffects {
       }
         //here is url for a Tomcat server
        // url = this.selectService.getUrl('from',request[0].payload.name);
+      
+      
+      this.language= this.getLanguage(request[0].payload.name[0]);
+
        if (environment.mainServer=="tomcat"){
         url=  environment.urlTomCat +
         'CheapTrip/getLocations?type=' +
         '0' +
         '&search_name=' +
         encodeURIComponent(request[0].payload.name);
+
+        if (this.language=='ru'){
+          url+='&language_name=ru';
+        }
       }
 
       return this.http
@@ -205,13 +217,19 @@ export class TripDirectionEffects {
      '&to=' +
      request[1].endPoint.id;
      }
-     this.checkPoints.push(Date.now());
-     this.checkPointsStrings.push("Before request");
+    //  this.checkPoints.push(Date.now());
+    //  this.checkPointsStrings.push("Before request");
+
+     if (this.language=='ru')
+     {
+       url+='&language_name=ru'
+     }
 
       return this.http.get(url, { observe: 'response' }).pipe(
         map((res) => {
-          this.checkPoints.push(Date.now());
-          this.checkPointsStrings.push("received request");
+           // next is for timing... obsolete
+          // this.checkPoints.push(Date.now());
+          // this.checkPointsStrings.push("received request");
           console.log(res);
           let resultPathArr = null;
 
@@ -229,19 +247,25 @@ export class TripDirectionEffects {
             to: request[1].endPoint.name,
             toID: request[1].endPoint.id,
           };
-          this.checkPoints.push(Date.now());
-          this.checkPointsStrings.push("Before navigation to mypath");
+           // next is for timing... obsolete
+          // this.checkPoints.push(Date.now());
+          // this.checkPointsStrings.push("Before navigation to mypath");
           this.router.navigate(['/search/myPath'], {
             queryParams,
           });
-          this.checkPoints.push(Date.now());
-          this.checkPointsStrings.push("after nav, before return");
+           // next is for timing... obsolete
+          // this.checkPoints.push(Date.now());
+          // this.checkPointsStrings.push("after nav, before return");
+          //can be used to determine user locale
+         // console.log('User locale -------'+this.localeService.getUsersLocale('en'));
 
-          for (let index = 1; index < this.checkPoints.length; index++) {
-            console.log (this.checkPointsStrings[index-1]+" -> "+this.checkPointsStrings[index]
-            +" elapsed "+(this.checkPoints[index]-this.checkPoints[index-1])+" ms");
+          // next is for timing... obsolete
+          // for (let index = 1; index < this.checkPoints.length; index++) {
+          //   console.log (this.checkPointsStrings[index-1]+" -> "+this.checkPointsStrings[index]
+          //   +" elapsed "+(this.checkPoints[index]-this.checkPoints[index-1])+" ms");
             
-          }
+          // }
+          
           return new TripDirectionActions.SetRouts({
             paths: resultPathArr,
             endPoints: endPoints,
@@ -394,6 +418,14 @@ export class TripDirectionEffects {
       return paths;
   }
 
-
+  private getLanguage (char:string){
+    // if ((/[a-zA-Z]/).test(char) ){
+    //   return 'en';
+    // }
+    if ((/[а-яА-Я]/).test(char) ){
+      return 'ru';
+    }
+    return 'en';
+  }
   
 }
