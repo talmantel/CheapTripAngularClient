@@ -26,13 +26,14 @@ import { LinksComponent } from './links/links.component';
 import localeRu from '@angular/common/locales/ru';
 import localeUa from '@angular/common/locales/uk';
 import { registerLocaleData } from '@angular/common';
+import { LogoComponent } from './logo/logo.component';
 
 // the second parameter 'fr-FR' is optional
 registerLocaleData(localeRu, 'ru');
 registerLocaleData(localeUa, 'ua');
 @NgModule({
   
-  declarations: [AppComponent, HeaderComponent, NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent, LinksComponent],
+  declarations: [AppComponent, HeaderComponent, NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent, LinksComponent, LogoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,8 +1,15 @@
 @import "../../../cheapTripStyles/styles.scss";
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
   margin: 0;
   padding: 0;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 mat-option {
@@ -21,10 +28,14 @@ div.mainContainer {
     color:#607D8B;
 
     h1 {
+      
+      font-family:'Roboto', sans-serif;
       text-align: center;
       margin: 1rem auto;
       font-size: 1.5rem;
       line-height: 2rem;
+      
+      
     }
   }
 

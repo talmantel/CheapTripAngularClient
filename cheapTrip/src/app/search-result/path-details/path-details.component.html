@@ -3,30 +3,63 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header expandedHeight="*" collapsedHeight="*">
         <mat-panel-title>
-          <div class="icons">
+          <div class="icons" 
+          
+          >
             <ng-container *ngFor="let icon of rout.details['transport']"> <span [innerHTML]="icon"></span>
             </ng-container>
           </div>
         </mat-panel-title>
         <mat-panel-description>
-          <div class="description">
-            <p><span class="points" *ngFor="let point of rout.details['points']">{{point}}</span></p>
+          <div class="description" >
+            <!-- <p><span class="points" *ngFor="let point of rout.details['points']">{{point}}</span></p> -->
+            <ul class="city">
+              <li class="points" *ngFor="let point of rout.details['points']">{{point}}<mat-icon [inline]="true">arrow_forward</mat-icon></li>
+            </ul>
+
+
             <p class="time">
               <span>{{rout.details.duration_minutes}}</span>
-              <span class="spacer"></span>
-              <span class="price">
+              <span class="spacer"></span> <span>
+              <mat-chip-list><mat-chip selected=true class="price-top">
                 
-                {{rout.details.euro_price | currency:'EUR':'symbol':'1.2-2' }} </span>
+                {{rout.details.euro_price | currency:'EUR':'symbol':'1.2-2' }} </mat-chip></mat-chip-list></span>
             </p>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="details" *ngFor="let path of rout.details.direct_paths; let i=index">
-        <p><span>{{path.from}} -> {{path.to}} </span><span class="spacer"></span>
+      <div class="details"  *ngFor="let path of rout.details.direct_paths; let i=index">
+        <p class="transport" > <span class="spacer"></span>
+          {{path.transportation_type}}
+        </p>
+        <p class="rout"><span>{{path.from}}
+          <mat-icon [inline]="true">arrow_forward</mat-icon>
+         {{path.to}}</span>
+         <span class="spacer"></span>
+        </p>
+        <p>
+          
+            <button class = "buy-ticket-button" 
+          *ngIf="getTransportUrl(path.transportation_type)!=''" 
+          mat-stroked-button color="primary"
+           i18n = "Buy ticket@@BuyTicket" 
+          (click)="openTransport(path.transportation_type)" >Buy ticket</button>
+          
+          <span class="time">{{path.duration_minutes}}</span>
+          
+          <span class="spacer">
+        </span>
+          <span class="currency">
+           {{path.euro_price | currency:'EUR':'symbol-narrow':'1.2-2' }}</span>
+        </p>
+        
+        
+        
+        
+        <!-- <p><span>{{path.from}} {{path.to}} </span><span class="spacer"></span>
           <span class="transport-name">{{path.transportation_type}}</span></p>
         <p> <span>{{path.duration_minutes}}</span>
        
-          
           <button class = "buy-ticket-button" 
           style="height: 20px;
            line-height: 20px; 
@@ -41,7 +74,7 @@
           <span class="spacer"></span>
           <span class="price-in-details">{{path.euro_price | currency:'EUR':'symbol':'1.2-2' }}</span> 
           
-        </p>
+        </p> -->
        <p  style="justify-content:center; "
         *ngIf="path.transportation_type=='Flight'" i18n="@@priceAndDurationForFlight">
           price and duration include transfer to/from airport

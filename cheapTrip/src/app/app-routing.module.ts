@@ -10,7 +10,7 @@ import { NoPageComponent } from './no-page/no-page.component';
 const routes: Routes = [
   { path: 'landing', component: LandingComponent },
 //  { path: 'main',component: HeaderComponent},
-  { path: '', redirectTo: '/search', pathMatch: 'full' },
+  { path: '', redirectTo: '/search/myPath/logo', pathMatch: 'full' },
   {
     path: 'search',
     //   canActivate: [SearchResultGuard],
@@ -19,6 +19,7 @@ const routes: Routes = [
         (m) => m.TripDirectionModule
       ),
   },
+ 
   {
     path: 'links',component: LinksComponent
    

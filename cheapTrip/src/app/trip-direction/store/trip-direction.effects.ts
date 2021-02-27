@@ -9,6 +9,7 @@ import * as TripDirectionActions from './trip-direction.actions';
 import {
   IDetails,
   IPath,
+  IPathPoint,
   IRecievedRouts,
   IRout,
 } from '../trip-direction.model';
@@ -20,6 +21,8 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import {SelectService} from "../select-direction/select.service"
 import { LocalizedString } from '@angular/compiler';
+import { HttpService } from 'src/app/service/http.service';
+import {Observable} from 'rxjs';
 
 enum Icons {
   FLIGHT = `<span class="material-icons">
@@ -90,6 +93,9 @@ export class TripDirectionEffects {
   private language: string;
   private checkPoints: number[];
   private checkPointsStrings: string[];
+  private Locations: string[];
+  private LocationsRU:Observable<any>;
+  private LocationsEN:Observable<any>;
   constructor(
     private localeService:LocaleService,
     private selectService:SelectService,
@@ -97,11 +103,23 @@ export class TripDirectionEffects {
     private sanitizer: DomSanitizer,
     private http: HttpClient,
     private router: Router,
-    private store$: Store<fromApp.AppState>
+    private store$: Store<fromApp.AppState>,
+    private httpService: HttpService
   ) {
     //   this.server = 'tomcat'; //to be fixed
     // this.server = Server.SERVER104;
-  }
+    console.log ("constructor inoked");
+    this.LocationsEN = httpService.getAllEnLocationsTomcat();
+    this.LocationsRU = httpService.getAllRuLocationsTomcat();
+    console.log (this.LocationsRU);
+    console.log ("en loc "+this.LocationsEN);
+   
+    //"wake up" servlet
+      this.http.get(environment.urlTomCat+'CheapTrip/getRoute?from='+10+'&to='+20).subscribe(data => {
+        console.log("received routes");
+        console.log (this.LocationsRU);
+      }
+      )}
 
   /*  @Effect()
   newEffect = this.actions$.pipe(
@@ -149,19 +167,44 @@ export class TripDirectionEffects {
       
       
       this.language= this.getLanguage(request[0].payload.name[0]);
-
+      //actual query
        if (environment.mainServer=="tomcat"){
         url=  environment.urlTomCat +
         'CheapTrip/getLocations?type=' +
         '0' +
         '&search_name=' +
-        encodeURIComponent(request[0].payload.name);
-
+       encodeURIComponent(request[0].payload.name);
+        '';
         if (this.language=='ru'){
           url+='&language_name=ru';
         }
       }
+      
+      let locations = this.LocationsEN;
+      if (this.getLanguage(request[0].payload.name[0])=="ru"){
+        locations = this.LocationsRU;
+      }
+        //local locations array
+      // return locations.pipe(
+      //   map((res) => {
+      //     console.log(res.body);
 
+      //     let resArray:IPathPoint[]= res.body;
+      //     // let result = resArray.filter(s => s.includes(request[0].payload.name));
+      //     let result = resArray.filter((element) => {
+      //       return element.name.includes(request[0].payload.name);
+      //     });
+      //     const newAction =
+      //       request[0].payload.type === 'from'
+      //         // ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
+      //         // : new TripDirectionActions.SetEndPointAutocomplete(res.body);
+      //            ? new TripDirectionActions.SetStartPointAutocomplete(result)
+      //         : new TripDirectionActions.SetEndPointAutocomplete(result);
+      //     return newAction;
+      //   })
+
+      //actual http
+      
       return this.http
         .get<any>(url, { observe: 'response' })
         .pipe(

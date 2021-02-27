@@ -62,9 +62,7 @@
         <note priority="1" from="description">no page</note>
       </trans-unit>
       <trans-unit id="longslogan" datatype="html">
-        <source>Discover the cheapest way <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>to get anywhere combining
-      plane,
-      train, bus and rideshare</source>
+        
       <target>Найдите самые выгодные и необычные маршруты между городами 
       с аэропортами, сочетая самолет, поезд, автобус, паром и блаблакар.</target>
         <context-group purpose="location">
