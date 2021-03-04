@@ -16,7 +16,7 @@
       </trans-unit>
       <trans-unit id="mainSlogan" datatype="html">
         <source>CHEAP TRIP. PAY LESS, VISIT MORE!</source>
-        <target>CHEAP TRIP. Плати менше, відвідай більше</target>
+        <target>CheapTrip. Плати менше, відвідай більше!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">14</context>

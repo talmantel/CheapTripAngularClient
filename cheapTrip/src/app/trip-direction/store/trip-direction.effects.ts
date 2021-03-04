@@ -25,15 +25,18 @@ import { HttpService } from 'src/app/service/http.service';
 import {Observable} from 'rxjs';
 
 enum Icons {
-  FLIGHT = `<span class="material-icons">
-  flight
-  </span>`,
-  BUS = `<span class="material-icons">
-  directions_bus
-  </span>`,
-  TRAIN = `<span class="material-icons">
-  directions_railway
-  </span>`,
+  // FLIGHT = `<span class="material-icons">
+  // flight
+  // </span>`,
+  FLIGHT = `<img src="assets/Icons/plane-h24.svg" height="24">`,
+  // BUS = `<span class="material-icons">
+  // directions_bus
+  // </span>`,
+  BUS =  `<img src="assets/Icons/Bus-h24.svg" height="24">`,
+  // TRAIN = `<span class="material-icons">
+  // directions_railway
+  // </span>`,
+  TRAIN =  `<img src="assets/Icons/train-h24.svg" height="24">`,
   SUBWAY = `<span class="material-icons">
   directions_subway
   </span>`,
@@ -54,7 +57,12 @@ enum Icons {
   </span>`,
   FERRY = `<span class="material-icons">
   directions_boat
+  </span>`,
+  RIDESHARE = `<span class="material-icons">
+  directions_car
   </span>`
+  // FERRY =  `<img src="assets/old Icons/ferryboat.png" height="24">`,
+  // RIDESHARE =  `<img src="assets/old Icons/auto_bla.png" height="24">`,
 }
 
 const PATHMAP = new Map<string, { type: string }>();
@@ -79,7 +87,7 @@ const PATHMAPDETAILED = new Map();
 PATHMAPDETAILED.set('Bus', Icons.BUS);
 PATHMAPDETAILED.set('Flight', Icons.FLIGHT);
 PATHMAPDETAILED.set('Train', Icons.TRAIN);
-PATHMAPDETAILED.set('Ride Share', Icons.CAR);
+PATHMAPDETAILED.set('Ride Share', Icons.RIDESHARE);
 PATHMAPDETAILED.set('Car Drive', Icons.CAR);
 PATHMAPDETAILED.set('Walk', Icons.ONFOOT);
 PATHMAPDETAILED.set('Town Car', Icons.CAR);

@@ -3,23 +3,49 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { IPath } from '../../service/http.service';
 
+const TRANSPORT = new Map();
+TRANSPORT.set('Bus', $localize`Bus`);
+TRANSPORT.set('Flight', $localize`Flight`);
+TRANSPORT.set('Train',$localize`Train`);
+TRANSPORT.set('Ride Share',$localize`Ride Share`);
+TRANSPORT.set('Car Drive',$localize`Car Drive`);
+TRANSPORT.set('Walk',$localize`Walk`);
+TRANSPORT.set('Town Car', $localize`Town Car`);
+TRANSPORT.set('Car Ferry',$localize`:@@CarFerry:Car Ferry`);  // two variants for ferry
+TRANSPORT.set('Ferry', $localize`:@@CarFerry:Car Ferry`);      //
+TRANSPORT.set('Shuttle', $localize`Shuttle`);
+TRANSPORT.set('Taxi', $localize`Taxi`);
 
 @Component({
   selector: 'app-path-details',
   templateUrl: './path-details.component.html',
   styleUrls: ['./path-details.component.scss'],
 })
+
+
+
 export class PathDetailsComponent implements OnInit {
 @Input() paths: IPath[];
 @Input() startPoint: string;
 @Input() endPoint: string;
 
+
+
+
 price: number;
   constructor() {}
 
-  ngOnInit(): void {
 
+
+
+  ngOnInit(): void {
+    
   }
+
+  getTransportName(transport:string) {
+    return TRANSPORT.get(transport);
+  }
+
 
   getTransportUrl (transport:string){
     let url:string='';

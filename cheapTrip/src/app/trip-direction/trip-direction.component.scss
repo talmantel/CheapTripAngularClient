@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 @import '../../cheapTripStyles/mixins.scss';
 
 * {
@@ -14,11 +14,10 @@ div.slogan {
   p {
     font-style: italic;
     font-size: 0.9em;
-    color: rgb(64, 8, 218);
-    background-color: blueviolet;
+    color: white;
     margin: 0%;
     line-height: 1.5rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Anton", sans-serif;
     font-style: italic;
     font-weight: lighter;
     letter-spacing: 4px;

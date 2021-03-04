@@ -215,6 +215,6 @@ public getAllRuLocationsTomcat():Observable<any> {
     '&language_name=ru';
 
     return this.http.get(url, { observe: "response" });
-
+    
   }
 }

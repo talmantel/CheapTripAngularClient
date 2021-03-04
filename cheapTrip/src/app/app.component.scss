@@ -27,6 +27,16 @@ div.slogan {
   }
 }
 
+@include Desktop  {
+  div.slogan {
+    p {
+      letter-spacing: 4px;
+      font-size: 1.5em;
+    }
+  }
+
+}
+
 @include Phones {
   div.slogan {
     p {

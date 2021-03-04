@@ -3,9 +3,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header expandedHeight="*" collapsedHeight="*">
         <mat-panel-title>
-          <div class="icons" 
-          
-          >
+          <div class="icons">
             <ng-container *ngFor="let icon of rout.details['transport']"> <span [innerHTML]="icon"></span>
             </ng-container>
           </div>
@@ -29,13 +27,13 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="details"  *ngFor="let path of rout.details.direct_paths; let i=index">
-        <p class="transport" > <span class="spacer"></span>
-          {{path.transportation_type}}
-        </p>
-        <p class="rout"><span>{{path.from}}
+        <!-- <p class="transport" > <span class="spacer"></span>
+         
+        </p> -->
+        <p ><span class="rout">{{path.from}}
           <mat-icon [inline]="true">arrow_forward</mat-icon>
          {{path.to}}</span>
-         <span class="spacer"></span>
+         <span class="spacer"></span> {{getTransportName(path.transportation_type)}}
         </p>
         <p>
           

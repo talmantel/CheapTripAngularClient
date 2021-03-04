@@ -17,7 +17,7 @@ mat-option {
   height: 40px;
 }
 div.mainContainer {
-  width: 80%;
+  width: 90%;
   margin: auto;
   height: auto;
   box-sizing: border-box;
@@ -27,12 +27,12 @@ div.mainContainer {
     padding: 0;
     color:#607D8B;
 
-    h1 {
-      
+    .LongSlogan {
+      width: 100%;
       font-family:'Roboto', sans-serif;
       text-align: center;
       margin: 1rem auto;
-      font-size: 1.5rem;
+      font-size: 0.9rem;
       line-height: 2rem;
       
       
@@ -119,7 +119,21 @@ div.deliveryMode {
   }
 }
 
+@include Desktop {
+  div.mainContainer{
+    
+  div.message{
+    
+ 
+  .LongSlogan{
+    font-size: 1.6rem;
+  }
+}
+  }
+}
+
 @include Large {
+ 
   div.mainContainer {
     form {
       div.actions {
@@ -142,6 +156,7 @@ div.deliveryMode {
     div.message {
       h1 {
         margin: 1rem auto;
+       
       }
     }
   }
@@ -153,7 +168,7 @@ div.deliveryMode {
 }
 
 @include Smallphones {
-  div.searchMode {
+  div.mainContainer {
     margin: auto;
     width: 98%;
     div.message {
@@ -244,8 +259,12 @@ div.deliveryMode {
   }
 }
 
+
+
 @include Phones {
-  div.searchMode {
+
+  
+  div.mainContainer {
     margin: auto;
     width: 98%;
     div.message {
@@ -256,7 +275,7 @@ div.deliveryMode {
         display: block;
         width: 90%;
         margin: auto;
-        font-size: 1rem;
+        // font-size: 1rem;
         line-height: 1.5rem;
       }
     }

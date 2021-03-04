@@ -23,15 +23,7 @@ const routes: Routes = [
           ),
 
       },
-{
-        path: 'logo',
 
-        loadChildren: () =>
-          import('../logo/logo.component').then(
-            (m) => m.LogoComponent
-          ),
-
-      },
       {path: 'noPage', component: NoPageComponent}
       
      // {path: 'myPath1', component: SearchResultComponent}
