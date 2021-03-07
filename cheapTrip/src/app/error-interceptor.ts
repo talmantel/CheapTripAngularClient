@@ -16,7 +16,7 @@ import * as fromApp from './store/app.reducer';
 import * as TripDirectionActions from './trip-direction/store/trip-direction.actions';
 import { Store } from '@ngrx/store';
 import { AlertMessage } from './error/alertMessage.model';
-
+ 
 //import { ErrorComponent } from "./error/error.component";
 //ngimport { ErrorService } from "./error/error.service";
 
@@ -32,7 +32,10 @@ export class ErrorInterceptor implements HttpInterceptor {
       tap((evt) => {
        if (evt instanceof HttpResponse) {
           if (evt.body.length == 0) {
-            const alertMessage = new AlertMessage('warning', 'Oh no!', 'Sorry, the data we have accumulated is not enough to build a route between the indicated cities. Try changing your request.', ['Back']);
+            const alertMessage = new AlertMessage('warning', $localize`:@@oh,no:Oh no!`,
+             $localize`:@@noRoute:Sorry, the data we have accumulated is nots
+              enough to build a route between the indicated cities. Try changing your request.`, 
+              ["Close"]);
          this.dialog.open(ErrorComponent, {
               data: alertMessage,
             });
@@ -44,15 +47,21 @@ export class ErrorInterceptor implements HttpInterceptor {
        // console.log ("--==unknown error==-- "+error)
         switch (true) {
           case error.status >= 400:
-            errorData = new AlertMessage('warning', 'Oh no!', 'Sorry, the data we have accumulated is not enough to build a route between the indicated cities. Try changing your request.', ['Back']);
+            errorData = new AlertMessage('warning', $localize`:@@oh,no:Oh no!`,
+            $localize`:@@noRoute:Sorry, the data we have accumulated is not
+             enough to build a route between the indicated cities. Try changing your request.`,
+              ["Close"]);
             break;
           case error.status >= 500:
             errorData = new AlertMessage(
               'error',
-              'Oops!',
-              'Pss! Our server is sleeping now. Please come back later.',
+              $localize`:@@oops:oops`,
+              $localize`:@@serverOffline:Pss! Our server is sleeping now. Please come back later.`,
               ['Close']
             );
+            break;
+            default: errorData = new AlertMessage('error', error.name,
+            error.message, ['Close']);
             break;
         }
         this.store.dispatch(

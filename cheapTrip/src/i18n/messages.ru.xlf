@@ -238,6 +238,71 @@
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
+       <trans-unit id="noRoute" datatype="html">
+        <source>Sorry, the data we have accumulated is not
+             enough to build a route between the indicated cities. Try changing your request.</source>
+        <target>Простите. У нас пока нет информации по этому маршруту. Мы работаем над ее получением.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+        <note priority="1" from="description">noRoute</note>
+      </trans-unit>
+      <trans-unit id="oops" datatype="html">
+        <source>oops</source>
+        <target>Упс!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <note priority="1" from="description">oops</note>
+      </trans-unit>
+      <trans-unit id="serverOffline" datatype="html">
+        <source>Pss! Our server is sleeping now. Please come back later.</source>
+        <target>Тсс! Сервер отдыхает. Заходите позже.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <note priority="1" from="description">serverOffline</note>
+      </trans-unit>
+      <trans-unit id="close" datatype="html">
+        <source>Close</source>
+        <target>Закрыть</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <note priority="1" from="description">close</note>
+      </trans-unit>
+      <trans-unit id="oh,no" datatype="html">
+        <source>Oh no!</source>
+        <target>О, Нет!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="back" datatype="html">
+        <source>Back</source>
+        <target>Назад</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error-interceptor.ts</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

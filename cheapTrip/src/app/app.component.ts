@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
   
   constructor(private dialog: MatDialog) {}
   ngOnInit(): void {
+    var userLang = navigator.language;
+    console.log ("Browser language:"+userLang);
     console.log(this.myBrowser());
    console.log(this.getBrowserVersion());
 

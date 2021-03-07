@@ -25,18 +25,18 @@ import { HttpService } from 'src/app/service/http.service';
 import {Observable} from 'rxjs';
 
 enum Icons {
-  // FLIGHT = `<span class="material-icons">
-  // flight
-  // </span>`,
-  FLIGHT = `<img src="assets/Icons/plane-h24.svg" height="24">`,
-  // BUS = `<span class="material-icons">
-  // directions_bus
-  // </span>`,
-  BUS =  `<img src="assets/Icons/Bus-h24.svg" height="24">`,
-  // TRAIN = `<span class="material-icons">
-  // directions_railway
-  // </span>`,
-  TRAIN =  `<img src="assets/Icons/train-h24.svg" height="24">`,
+  FLIGHT = `<span class="material-icons">
+  flight
+  </span>`,
+  // FLIGHT = `<img src="assets/Icons/plane-h24.svg" height="24">`,
+  BUS = `<span class="material-icons">
+  directions_bus
+  </span>`,
+  // BUS =  `<img src="assets/Icons/Bus-h24.svg" height="24">`,
+  TRAIN = `<span class="material-icons">
+  directions_railway
+  </span>`,
+  // TRAIN =  `<img src="assets/Icons/train-h24.svg" height="24">`,
   SUBWAY = `<span class="material-icons">
   directions_subway
   </span>`,
@@ -58,9 +58,11 @@ enum Icons {
   FERRY = `<span class="material-icons">
   directions_boat
   </span>`,
-  RIDESHARE = `<span class="material-icons">
-  directions_car
-  </span>`
+  RIDESHARE =  `<img src="assets/Icons/rideshare_h24_30.svg" width="18">`,
+  
+  // RIDESHARE = `<span class="material-icons">
+  // directions_car
+  // </span>`
   // FERRY =  `<img src="assets/old Icons/ferryboat.png" height="24">`,
   // RIDESHARE =  `<img src="assets/old Icons/auto_bla.png" height="24">`,
 }
@@ -126,6 +128,10 @@ export class TripDirectionEffects {
       this.http.get(environment.urlTomCat+'CheapTrip/getRoute?from='+10+'&to='+20).subscribe(data => {
         console.log("received routes");
         console.log (this.LocationsRU);
+
+        var userLang = navigator.language;
+        console.log ("Browser languages:"+navigator.languages);
+        console.log ("Browser language:"+userLang);
       }
       )}
 
