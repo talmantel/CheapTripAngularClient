@@ -94,6 +94,15 @@ export class HttpService {
     private sanitizer: DomSanitizer
   ) {}
 
+
+  getUserCountry(){
+    let url="https://api.hostip.info/country.php";
+    // let url="http://ip-api.com/json/";
+    return this.http.get(url ,{responseType: 'text'});
+ 
+  }
+
+
   getAutoCompleteData(data: string, type: string): Observable<string[]> {
     const address =
       URL +

@@ -2,6 +2,7 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { IPath } from '../../service/http.service';
+import { HttpService } from 'src/app/service/http.service';
 
 const TRANSPORT = new Map();
 TRANSPORT.set('Bus', $localize`Bus`);
@@ -28,12 +29,23 @@ export class PathDetailsComponent implements OnInit {
 @Input() paths: IPath[];
 @Input() startPoint: string;
 @Input() endPoint: string;
-
+private country:string;
 
 
 
 price: number;
-  constructor() {}
+  constructor(private httpService: HttpService) {
+
+
+    this.httpService.getUserCountry().subscribe({
+      next: (data:any)=>{console.log("Got user country:"+data);
+        this.country= data},
+      error: (err:any)=>{console.log(err);
+        this.country= "undefined"}
+   })
+
+
+  }
 
 
 
@@ -56,12 +68,13 @@ price: number;
       } 
       case "Bus": { 
         //url = "http://bus.tickets.ua";
-        url = "http://bus.tutu.ru";
+        url=this.getBusUrl();
          break; 
       } 
       case "Train": { 
         //url = "http://gd.tickets.ua";
-        url = "https://www.tutu.ru/poezda";
+         url=this.getTrainUrl();
+        //url = "https://www.tutu.ru/poezda";
         break; 
       } 
       case "Car Ferry": { 
@@ -82,6 +95,31 @@ price: number;
       } 
    }
    return url;
+  }
+  getBusUrl(){
+    switch(this.country){
+      case "RU":
+      case "BY":
+      case "UA":
+        return "http://bus.tutu.ru";
+      case "IN":
+        return "https://www.makemytrip.com/bus-tickets/";
+      default:
+        return "http://www.omio.com";
+    }
+  }
+
+  getTrainUrl(){
+    switch(this.country){
+      case "RU":
+      case "BY":
+      case "UA":
+        return "https://www.tutu.ru/poezda";
+      case "IN":
+        return "https://www.makemytrip.com/railways/";
+      default:
+        return "http://www.omio.com";
+    }
   }
 
   openTransport (transport:string){

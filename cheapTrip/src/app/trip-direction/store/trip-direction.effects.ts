@@ -100,6 +100,7 @@ PATHMAPDETAILED.set('Taxi', Icons.TAXI);
 
 @Injectable()
 export class TripDirectionEffects {
+  
   private language: string;
   private checkPoints: number[];
   private checkPointsStrings: string[];
@@ -124,16 +125,17 @@ export class TripDirectionEffects {
     console.log (this.LocationsRU);
     console.log ("en loc "+this.LocationsEN);
    
+   //console.log ("init country "+this.country)
+    
+   
     //"wake up" servlet
       this.http.get(environment.urlTomCat+'CheapTrip/getRoute?from='+10+'&to='+20).subscribe(data => {
         console.log("received routes");
         console.log (this.LocationsRU);
+      })
 
-        var userLang = navigator.language;
-        console.log ("Browser languages:"+navigator.languages);
-        console.log ("Browser language:"+userLang);
-      }
-      )}
+    }
+      
 
   /*  @Effect()
   newEffect = this.actions$.pipe(
