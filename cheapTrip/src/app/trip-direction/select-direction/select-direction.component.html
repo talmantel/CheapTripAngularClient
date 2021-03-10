@@ -23,7 +23,7 @@
               (optionSelected)='optionSelected($event.option.value, "from")'>
               <!--    <mat-autocomplete #auto1="matAutocomplete"  >-->
               <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name" >
-                {{start.name}}
+                {{start.name}}<span *ngIf="start.country !== undefined">,{{start.country}}</span>
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
