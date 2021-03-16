@@ -14,6 +14,7 @@ import { Subject, Subscription } from 'rxjs';
 import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
 import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorInterceptor } from '../../error-interceptor';
 
 @Component({
   selector: 'app-select-direction',
@@ -58,6 +59,7 @@ export class SelectDirectionComponent implements OnInit {
   nameParagraph: ElementRef;
 
   constructor(
+    private errorInterceptor:ErrorInterceptor,
     private store: Store<fromApp.AppState>,
     private route: ActivatedRoute,
     private router: Router
@@ -224,16 +226,17 @@ export class SelectDirectionComponent implements OnInit {
     //deactivated due to russian lan
     this.directionForm = new FormGroup({
       startPointControl: new FormControl('', [
-        // this.patternValid({
-        //   pattern: /[a-zA-Z0-9\-\s]/,
-        //   msg: $localize`:@@onlyLatinAllowed:Sorry, only Latin names are allowed`,
-        // }),
+        this.patternValid({
+          pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
+          msg: $localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`,
+        }),
       ]),
+      
       endPointControl: new FormControl('', [
-        // this.patternValid({
-        //   pattern: /[a-zA-Z0-9\-\s]/,
-        //   msg: $localize`:@@onlyLatinAllowed:Sorry, only Latin names are allowed`,
-        // }),
+        this.patternValid({
+          pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
+          msg: $localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`,
+        }),
       ]),
     });
   }
@@ -245,6 +248,7 @@ export class SelectDirectionComponent implements OnInit {
       }
 
       if (control.value && !control.value.match(urlRegEx)) {
+        this.errorInterceptor.showError ($localize`:@@oops:Oops`,$localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`);
         return {
           invalidMsg: config.msg,
         };

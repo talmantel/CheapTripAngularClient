@@ -303,6 +303,42 @@
           <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="questions" datatype="html">
+        <source>Loading...</source>
+        <target>Загружается...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/search-result/path-map/path-map.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3da14bf69759bc406c62aa90c53053625e23f6c8" datatype="html">
+        <source>https://docs.google.com/forms/d/e/1FAIpQLSfJ4AKWMLtNdZ5rvMJC5lw8qLH0zXyjt5TLVMH17XQVsCjbJw/viewform?usp=pp_url</source>
+        <target>https://docs.google.com/forms/d/1ypZL2BFqHmlgPrzsbg3BbOK1Ns_FBYuMrsvYoUOskJM/edit?usp=sharing</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/search-result/path-map/path-map.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+       <trans-unit id="onlyRusEng" datatype="html">
+        <source>Sorry, only Latin and Russian characteres are allowed now.</source>
+        <target>Простите. Мы пока работаем только с латинскими и русскими символами.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
+          <context context-type="linenumber">231</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
+          <context context-type="linenumber">238</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
+          <context context-type="linenumber">251</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trip-direction/store/trip-direction.effects.ts</context>
+          <context context-type="linenumber">494</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

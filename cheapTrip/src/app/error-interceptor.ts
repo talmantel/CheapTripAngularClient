@@ -20,7 +20,10 @@ import { AlertMessage } from './error/alertMessage.model';
 //import { ErrorComponent } from "./error/error.component";
 //ngimport { ErrorService } from "./error/error.service";
 
-@Injectable()
+@Injectable({
+ 
+  providedIn: 'root',
+})
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private dialog: MatDialog,
@@ -72,5 +75,10 @@ export class ErrorInterceptor implements HttpInterceptor {
         return throwError(error);
       })
     );
+  }
+
+  showError (title:string,message:string){
+    const alertMessage = new AlertMessage('error', title,message, ["Close"]);
+    this.dialog.open(ErrorComponent, { data: alertMessage });
   }
 }

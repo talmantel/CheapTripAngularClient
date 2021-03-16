@@ -24,6 +24,9 @@ import { LocalizedString } from '@angular/compiler';
 import { HttpService } from 'src/app/service/http.service';
 import {Observable} from 'rxjs';
 
+
+import { ErrorInterceptor } from '../../error-interceptor';
+
 enum Icons {
   FLIGHT = `<span class="material-icons">
   flight
@@ -108,6 +111,7 @@ export class TripDirectionEffects {
   private LocationsRU:Observable<any>;
   private LocationsEN:Observable<any>;
   constructor(
+    private errorInterceptor:ErrorInterceptor,
     private localeService:LocaleService,
     private selectService:SelectService,
     private actions$: Actions,
@@ -181,7 +185,9 @@ export class TripDirectionEffects {
         //here is url for a Tomcat server
        // url = this.selectService.getUrl('from',request[0].payload.name);
       
-      
+      if (!this.checkLanguageValidity(request[0].payload.name[0])) {
+        return;
+      }
       this.language= this.getLanguage(request[0].payload.name[0]);
       //actual query
        if (environment.mainServer=="tomcat"){
@@ -477,14 +483,29 @@ export class TripDirectionEffects {
       return paths;
   }
 
-  private getLanguage (char:string){
+  private    checkLanguageValidity (char:string):boolean{
+    if ((/[а-яА-Я]/).test(char) ){
+      return true;
+    }
+    if ((/[a-zA-Z]/).test(char) ){
+      return true;
+    }
+    //error only rus eng allowed
+    this.errorInterceptor.showError ($localize`:@@oops:Oops`,$localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`);
+    return false
+  }
+
+  private getLanguage (char:string):string{
     // if ((/[a-zA-Z]/).test(char) ){
     //   return 'en';
     // }
     if ((/[а-яА-Я]/).test(char) ){
       return 'ru';
     }
-    return 'en';
+    if ((/[a-zA-Z]/).test(char) ){
+      return 'en';
+    }
+    return 'undefined';
   }
   
 }
