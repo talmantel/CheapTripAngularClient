@@ -3,7 +3,7 @@
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="mainSlogan" datatype="html">
-        <source>CheapTrip. Pay less, visit more!</source>
+        <source>CheapTrip. Pay less, <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt; "/> visit more!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">13</context>
@@ -41,7 +41,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
-          <context context-type="linenumber">251</context>
+          <context context-type="linenumber">253</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/store/trip-direction.effects.ts</context>
@@ -205,18 +205,19 @@
         <note priority="1" from="description">letsgo</note>
       </trans-unit>
       <trans-unit id="onlyRusEng" datatype="html">
-        <source>Sorry, only Latin and Russian characteres are allowed now.</source>
+        <source>Sorry,
+          For now, we support only English and Russian input.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">231,232</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">239,240</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
-          <context context-type="linenumber">251</context>
+          <context context-type="linenumber">253</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/store/trip-direction.effects.ts</context>

@@ -228,14 +228,16 @@ export class SelectDirectionComponent implements OnInit {
       startPointControl: new FormControl('', [
         this.patternValid({
           pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
-          msg: $localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`,
+          msg: $localize`:@@onlyRusEng:Sorry,
+          For now, we support only English and Russian input.`,
         }),
       ]),
       
       endPointControl: new FormControl('', [
         this.patternValid({
           pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
-          msg: $localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`,
+          msg: $localize`:@@onlyRusEng:Sorry,
+          For now, we support only English and Russian input.`,
         }),
       ]),
     });

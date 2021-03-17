@@ -15,8 +15,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="mainSlogan" datatype="html">
-        <source>CHEAP TRIP. PAY LESS, VISIT MORE!</source>
-        <target>CheapTrip. Плати меньше, посети больше!</target>
+        <source>CHEAP TRIP. PAY LESS,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt; "/> VISIT MORE!</source>
+        <target>CheapTrip. Плати меньше,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt; "/> посети больше!</target>
 
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
@@ -312,7 +312,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="3da14bf69759bc406c62aa90c53053625e23f6c8" datatype="html">
-        <source>https://docs.google.com/forms/d/e/1FAIpQLSfJ4AKWMLtNdZ5rvMJC5lw8qLH0zXyjt5TLVMH17XQVsCjbJw/viewform?usp=pp_url</source>
+        
         <target>https://docs.google.com/forms/d/1ypZL2BFqHmlgPrzsbg3BbOK1Ns_FBYuMrsvYoUOskJM/edit?usp=sharing</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-map/path-map.component.html</context>
@@ -321,7 +321,8 @@
       </trans-unit>
        <trans-unit id="onlyRusEng" datatype="html">
         <source>Sorry, only Latin and Russian characteres are allowed now.</source>
-        <target>Простите. Мы пока работаем только с латинскими и русскими символами.</target>
+        <target>Простите!
+        На данный момент мы поддерживаем только русский и английский языки ввода.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
           <context context-type="linenumber">231</context>

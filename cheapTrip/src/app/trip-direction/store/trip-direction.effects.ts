@@ -185,9 +185,9 @@ export class TripDirectionEffects {
         //here is url for a Tomcat server
        // url = this.selectService.getUrl('from',request[0].payload.name);
       
-      if (!this.checkLanguageValidity(request[0].payload.name[0])) {
-        return;
-      }
+      // if (!this.checkLanguageValidity(request[0].payload.name[0])) {
+      //   return;
+      // }
       this.language= this.getLanguage(request[0].payload.name[0]);
       //actual query
        if (environment.mainServer=="tomcat"){
