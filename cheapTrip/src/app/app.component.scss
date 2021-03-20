@@ -11,59 +11,128 @@
   flex: 1 1 auto;
 }
 
-div.slogan {
-  p {
-    
-    font-style: italic;
-    font-size: 0.9em;
-    color: white;
-    margin: 0%;
-    line-height: 1.5rem;
-    font-family:'Roboto', sans-serif;
-    // font-family: "Anton", sans-serif;
-    //font-family: "Arial Narrow", sans-serif
-    font-weight: bolder;
-    
-  }
+div.cheaptrip {
+  margin: 20px;
+  width: fit-content;
+  font-style: italic;
+  font-size: 2em;
+  color: white;
+  line-height: 2rem;
+  font-family:'Roboto', sans-serif;
+  font-weight: bolder;
 }
 
-@include Desktop  {
-  div.slogan {
-    p {
-      letter-spacing: 4px;
-      font-size: 1.5em;
-    }
-  }
+.words{
+  letter-spacing: 2px;
+  // background-color: burlywood;
+  font-style: italic;
+  color: white;
+  margin: 0%;
+  font-family:'Roboto', sans-serif;
+  font-weight: bolder;
+}
+.wordsUp {
+  
+  // background-color: aqua;
+  font-size: 1.1em;
+  line-height: 1rem;
+}
+.wordsDown {
+  font-weight: bolder;
+  margin-left: 30px;
+  // background-color: blueviolet;
+  font-size:  1.3em;
+  line-height: 0.5rem;
+}
 
+// div.slogan {
+//   p {
+    
+//     font-style: italic;
+//     font-size: 0.9em;
+//     color: white;
+//     margin: 0%;
+//     line-height: 1.5rem;
+//     font-family:'Roboto', sans-serif;
+//     // font-family: "Anton", sans-serif;
+//     //font-family: "Arial Narrow", sans-serif
+//     font-weight: bolder;
+    
+//   }
+// }
+
+@include Desktop  {
+  div.cheaptrip {
+    margin: 50px;
+    width:auto;
+    // background-color: cadetblue;
+    font-size: 2.8em;
+    line-height: 3rem;
+
+  }
+  
+  .words{
+    // background-color: burlywood;
+    font-size: 1.5em;
+    line-height: 1rem;
+  }
+ 
+  .wordsDown {
+    margin-left: 190px;
+ 
+  }
+ 
 }
 
 @include Phones {
-  div.slogan {
-    p {
-      font-style: italic;
-      font-size: 0.65em;
-      margin: 0%;
-      line-height: 1.5rem;
-      letter-spacing: 2px;
-    }
+  div.cheaptrip {
+    margin: 5px;
+    width:auto;
+    // background-color: cadetblue;
+    font-size: 1.5em;
+    line-height: 1.5rem;
+
   }
+  
+  .words{
+    // background-color: burlywood;
+    font-size: 0.8em;
+    line-height: 1rem;
+  }
+ 
+  .wordsDown {
+    margin-left: 10px;
+ 
+  }
+
 }
 
 @include Smallphones {
   mat-toolbar {
     height: fit-content;
   }
-  div.slogan {
-    
-    p {
-      white-space: pre-wrap;
-    
-      font-style: italic;
-      font-size: 0.65em;
-      margin: 0%;
-      line-height: 1.5rem;
-      letter-spacing: 2px;
-    }
+
+  div.cheaptrip {
+    margin: 5px;
+    width:auto;
+    // background-color: cadetblue;
+    font-size: 1.2em;
+    line-height: 1.5rem;
+
   }
+  
+  .words{
+    width: auto;
+    // background-color: burlywood;
+    font-size: 0.6em;
+    line-height: 0.8rem;
+  }
+ 
+  .wordsDown {
+    margin-left: 10px;
+ 
+  }
+
+
 }
 
