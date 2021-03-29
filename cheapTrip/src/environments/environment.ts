@@ -8,7 +8,10 @@ export const environment = {
   url68: 'http://3.18.167.68:8080/',
   url104:  'http://3.18.167.68:8080/',
   // urlTomCat: 'https://test2.lowcoststrip.com:8443/'
-  urlTomCat: 'http://3.64.201.17:8080/'
+  urlTomCat: 'http://3.64.201.17:8080/',
+  urlGoogleFormEng: 'https://docs.google.com/forms/d/11mnL9hPZHkbixglQNqlN-iChn4-dYidnNnQAPXakYvA/edit?usp=sharing',
+  urlGoogleFormRus: 'https://docs.google.com/forms/d/1ypZL2BFqHmlgPrzsbg3BbOK1Ns_FBYuMrsvYoUOskJM/edit?usp=sharing',
+
   // urlTomCat: 'http://ec2-3-65-40-85.eu-central-1.compute.amazonaws.com:8080/'
   // urlTomCat: 'http://ec2-3-134-113-37.us-east-2.compute.amazonaws.com:8080/'
   //  url104:  'http://18.158.89.230:8080/'  //working server

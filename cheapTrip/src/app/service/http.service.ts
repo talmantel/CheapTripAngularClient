@@ -96,9 +96,11 @@ export class HttpService {
 
 
   getUserCountry(){
-    let url="https://api.hostip.info/country.php";
+    // let url="https://api.hostip.info/country.php";
+    let url="http://api.ipstack.com/check?access_key=21c2d85bf7168d059b04bb14c15228ac";
     // let url="http://ip-api.com/json/";
-    return this.http.get(url ,{responseType: 'text'});
+    // return this.http.get(url ,{responseType: 'text'});
+    return this.http.get(url);
  
   }
 

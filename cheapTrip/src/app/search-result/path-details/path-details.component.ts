@@ -38,8 +38,8 @@ price: number;
 
 
     this.httpService.getUserCountry().subscribe({
-      next: (data:any)=>{console.log("Got user country:"+data);
-        this.country= data},
+      next: (data:any)=>{console.log("Got user country:"+data.country_code);
+        this.country= data.country_code},
       error: (err:any)=>{console.log(err);
         this.country= "undefined"}
    })
@@ -97,6 +97,7 @@ price: number;
    return url;
   }
   getBusUrl(){
+    console.log ("bus "+this.country);
     switch(this.country){
       case "RU":
       case "BY":
@@ -110,7 +111,9 @@ price: number;
   }
 
   getTrainUrl(){
+    console.log ("train "+this.country);
     switch(this.country){
+      
       case "RU":
       case "BY":
       case "UA":
