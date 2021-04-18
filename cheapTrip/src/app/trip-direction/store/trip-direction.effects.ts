@@ -155,20 +155,6 @@ export class TripDirectionEffects {
   // 'http://52.14.161.122:8080/locations?type=from&search_name=6',
   // http://3.23.159.104:3333/CheapTrip/getLocations?type=1
 
-  /*  @Effect()
-  newEffect = this.actions$.pipe(
-    ofType(TripDirectionActions.GET_AUTOCOMPLETE),
-     withLatestFrom(this.store$.select('directions')),
-     tap(state => {console.log('new effect, ', state)}),
-     mergeMap(req =>{
-       console.log('new effect,', req);
-       return of('1')
-     })
-  ) */
-
-  // 'http://52.14.161.122:8080/locations?type=from&search_name=6',
-  // http://3.23.159.104:3333/CheapTrip/getLocations?type=1
-
   @Effect()
   getAutocomplete$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_AUTOCOMPLETE),
