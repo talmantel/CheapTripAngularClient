@@ -97,8 +97,7 @@ export class HttpService {
 
   getUserCountry(){
     // let url="https://api.hostip.info/country.php";
-    // let url="http://api.ipstack.com/check?access_key=21c2d85bf7168d059b04bb14c15228ac";
-    let url="https://ipgeolocation.abstractapi.com/v1/?api_key=f75c54d6ee64403cbf9c58b1b4e5cdf0"
+    let url="http://api.ipstack.com/check?access_key=21c2d85bf7168d059b04bb14c15228ac";
     // let url="http://ip-api.com/json/";
     // return this.http.get(url ,{responseType: 'text'});
     return this.http.get(url);

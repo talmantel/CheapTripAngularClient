@@ -64,7 +64,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             );
             break;
             default: errorData = new AlertMessage('error', error.name,
-            '', ['Close']);
+            error.message, ['Close']);
             break;
         }
         this.store.dispatch(
