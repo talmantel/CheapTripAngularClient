@@ -205,6 +205,31 @@ section {
     }
   }
 }
+@include Large {
+
+}
+
+
+@include Medium{
+  section{
+  //  background-color: cadetblue;
+  }
+}
+
+@include Small{
+  section{
+    width:100%;
+  //  background-color: rgb(176, 236, 98);
+  //  border:3px solid red;
+  }
+}
+
+@include XSmall{
+  section{
+    width:100%;
+   // background-color: rgb(255, 252, 51);
+  }
+}
 
 @include Large {
 
