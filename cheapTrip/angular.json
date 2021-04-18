@@ -4,6 +4,13 @@
   "newProjectRoot": "projects",
   "projects": {
     "cheapTrip": {
+      "i18n": { 
+        "sourceLocale": "en-US", 
+        "locales": { 
+          "ru": "src/i18n/messages.ru.xlf",
+          "ua": "src/i18n/messages.ua.xlf"
+        } 
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -22,6 +29,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "localize": true,   
             "aot": true,
             "assets": [
               "src/favicon.ico",
@@ -34,6 +42,14 @@
             "scripts": []
           },
           "configurations": {
+           
+            "ru": { 
+              "localize": ["ru"] 
+            },
+            "ua": { 
+              "localize": ["ua"] 
+            },
+            
             "production": {
               "fileReplacements": [
                 {
@@ -72,6 +88,12 @@
           "configurations": {
             "production": {
               "browserTarget": "cheapTrip:build:production"
+            },
+            "ru": {
+              "browserTarget": "cheapTrip:build:ru"
+            },
+            "ua": {
+              "browserTarget": "cheapTrip:build:ua"
             }
           }
         },
@@ -123,7 +145,12 @@
               "devServerTarget": "cheapTrip:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@jefiozie/ngx-aws-deploy:deploy"
         }
+      
+      
       }
     }
   },

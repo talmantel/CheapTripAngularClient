@@ -52,6 +52,13 @@
   box-shadow: $hLength $vLength $blurR $spreadR rgba(0, 0, 0, 0.75);
 }
 
+@mixin Desktop {
+  @media screen  and (min-width: 960px) {
+    @content;
+}
+  
+}
+
 @mixin XLarge {
   @media screen  and (min-width: 1920px) {
        @content;
@@ -120,7 +127,7 @@
 }
 
 @mixin Phones {
- @media screen  and (min-width: 360px) and (max-width: 419.99px) {
+ @media screen  and (min-width: 360px) and (max-width: 500px) {
       @content;
  }
 }

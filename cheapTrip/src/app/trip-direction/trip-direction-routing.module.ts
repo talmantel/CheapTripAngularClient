@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from '../landing/landing.component';
+import { LogoComponent } from '../logo/logo.component';
 import { NoPageComponent } from '../no-page/no-page.component';
 import { SearchResultComponent } from '../search-result/search-result.component';
 import { SearchResultGuard } from '../search-result/search-result.guard';
@@ -23,8 +24,8 @@ const routes: Routes = [
 
       },
 
-      {path: 'noPage', component: NoPageComponent},
-
+      {path: 'noPage', component: NoPageComponent}
+      
      // {path: 'myPath1', component: SearchResultComponent}
     ],
   },

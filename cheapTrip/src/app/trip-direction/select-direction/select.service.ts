@@ -15,31 +15,32 @@ export class SelectService {
   server: SERVER;
 
   constructor(public http: HttpClient) {
-    // this.server = 'tomcat'; //to be fixed
-     this.server = 'appachi'
+     this.server = 'tomcat'; //to be fixed
+    // this.server = 'appachi'
   }
 
-  private getUrl(name: string, type): string {
+  public getUrl(name: string, type): string {
     if (this.server === 'tomcat') {
-      const t = type === 'start' ? '1' : '2';
+     // const t = type === 'start' ? '1' : '2';
       console.log('tomacat');
       return (
         environment.urlTomCat +
-        'CheapTrip/getLocations?type=' +
-        t +
+        'getLocations?type=' +
+        name +
         '&search_name=' +
         encodeURIComponent(name)
       );
     }
-    console.log('appachi');
-    return (
 
-      environment.urlAppachi +
-      'locations?type=' +
-      type +
-      '&search_name=' +
-      encodeURIComponent(name)
-    );
+    // console.log('appachi');
+    // return (
+
+    //   environment.urlAppachi +
+    //   'locations?type=' +
+    //   type +
+    //   '&search_name=' +
+    //   encodeURIComponent(name)
+    // );
   }
   getStartPointAutoComplete$(name: string): Observable<IPathPoint[]> {
     if (name == null) {

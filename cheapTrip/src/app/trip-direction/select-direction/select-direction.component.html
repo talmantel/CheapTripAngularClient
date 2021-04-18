@@ -1,9 +1,19 @@
+<<<<<<< HEAD
+
+
+<div class="mainContainer" [ngClass]="{'searchMode': mode === modes.SEARCH,
+'deliveryMode': mode === modes.DELIVERY}">
+  <div class="message">
+    <h1 class="LongSlogan" i18n = "Long slogan@@longslogan" @insertRemoveTrigger1>Find most beneficial and unusual routes between cities with airports,
+       combining flight, train, bus, ferry and rideshare.</h1>
+=======
 <div class="mainContainer" [ngClass]="{'searchMode': mode === modes.SEARCH,
 'deliveryMode': mode === modes.DELIVERY}">
   <div class="message">
     <h1 @insertRemoveTrigger1>Discover the cheapest way <br />to get anywhere combining
       plane,
       train, bus and rideshare</h1>
+>>>>>>> dev
 
   </div>
   <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
@@ -15,18 +25,31 @@
             [class.invalid]="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched">
             <!--   <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text" -->
             <input (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'from')" type="text"
+<<<<<<< HEAD
+              placeholder="From" i18n-placeholder aria-label="Number" matInput formControlName="startPointControl"
+=======
               placeholder="From" aria-label="Number" matInput formControlName="startPointControl"
+>>>>>>> dev
               [matAutocomplete]="auto1" #startPointInput>
 
             <mat-autocomplete class="single-autocomplete" #auto1="matAutocomplete"
               (optionSelected)='optionSelected($event.option.value, "from")'>
               <!--    <mat-autocomplete #auto1="matAutocomplete"  >-->
+<<<<<<< HEAD
+              <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name" >
+                {{start.name}}<span *ngIf="start.country !== undefined">,{{start.country}}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <span class="material-icons" (click)="onCleanInput('start')">
+=======
               <mat-option *ngFor="let start of startPointAutoComplete" [value]="start.name">
                 {{start.name}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
           <span matTooltip="Remove StartPoint" class="material-icons" (click)="onCleanInput('start')">
+>>>>>>> dev
            clear
           </span>
           <!--   <p *ngIf="directionForm.get('startPointControl').invalid && directionForm.get('startPointControl').touched"
@@ -54,7 +77,11 @@
             [class.valid]="directionForm.get('endPointControl').valid && directionForm.get('endPointControl').touched"
             [class.invalid]="directionForm.get('endPointControl').invalid && directionForm.get('endPointControl').touched">
             <input #endPointInput (focusout)="onFocusOut($event)" (input)="onInput($event.target.value, 'to')" type="text"
+<<<<<<< HEAD
+              placeholder="To" i18n-placeholder aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
+=======
               placeholder="To" aria-label="Number" matInput formControlName="endPointControl" [matAutocomplete]="auto2">
+>>>>>>> dev
             <mat-autocomplete class="single-autocomplete" #auto2="matAutocomplete"
               (optionSelected)='optionSelected($event.option.value, "to")'>
               <!--      <mat-autocomplete #auto2="matAutocomplete" > -->
@@ -64,8 +91,12 @@
             </mat-autocomplete>
 
           </mat-form-field>
+<<<<<<< HEAD
+          <span (click)="onCleanInput('end')" class="material-icons">clear
+=======
           <span matTooltip="Remove EndPoint" (click)="onCleanInput('end')" class="material-icons">
             clear
+>>>>>>> dev
           </span>
         </div>
 
@@ -77,10 +108,18 @@
       </section>
     </div>
     <div class="actions">
+<<<<<<< HEAD
+      <button mat-flat-button color="accent" type="reset" (click)="cleanForm()" i18n = "Clear form@@clearform">Clear form</button>
+      <button mat-flat-button color="primary" style="color: white;"
+       #sBtn [disabled]="endPoint.name.length < 1 || startPoint.name.length < 1"
+        type="submit" i18n = "letsgo@@letsgo">Let's go</button>
+=======
       <button mat-flat-button color="accent" type="reset" (click)="cleanForm()">Clear form</button>
       <button mat-flat-button color="primary" #sBtn [disabled]="endPoint.name.length < 1 || startPoint.name.length < 1"
         type="submit">Let's go</button>
+>>>>>>> dev
     </div>
 
   </form>
 </div>
+

@@ -1,0 +1,12 @@
+<script type="text/javascript">
+    var userLang = navigator.language || navigator.userLanguage; 
+    
+    var res = userLang.split("-");
+
+    if ((res[0]=='ru')||(res[0]=='ua')||(res[0]=='by')){
+        window.location.href = '/ru'
+    }
+    else{
+        window.location.href = '/en-US'
+    }
+    </script>  

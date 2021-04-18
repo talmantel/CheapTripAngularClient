@@ -1,4 +1,10 @@
 @import "../../../cheapTripStyles/styles.scss";
+.price{
+  background-color:var(--color-primary);
+  border-radius: 5px;
+  color: white;
+}
+
 :host {
   width: 100%;
   position: relative;
@@ -8,45 +14,142 @@
   margin: 0;
   padding: 0;
 }
+.transport {
+  color:#607D8B;
+} 
+.time{
+  color:  #757575;
+}
+ul.city {
+  // font-size: 0.8rem;
 
-p span.points {
+   width: 100%;
+   color: #212121;
+  // font-weight: bold;
+  //  font-style: italic;
+   white-space: normal;
+   line-height: 1.2;
+   padding: 1px;
+   li {
+
+     display: inline;
+
+    
+     mat-icon {
+
+       //padding: 8px 2px 0px;
+       position: relative;
+       top: 0.1rem;
+       margin-left: 5px;
+     }
+   }
+   li:last-child {
+     mat-icon {
+       display: none;
+     }
+   }
+   //  overflow: hidden;
+   //  text-overflow: ellipsis;
+ }
+li.points {
   font-style: oblique;
 }
-p span.points:after {
-  content: " > ";
-  font-weight: bold;
-  color: var(--color-primary);
-}
+// p span.points:after {
+//   font-family: "Material Icons";
+//     content: "\f054";
+ 
+//   font-weight: bold;
+//   color: var(--color-primary);
+// }
 
 p span.points:last-child:after {
   content: "";
 }
+.buy-ticket-button {
+  
+  width: max-content;
+  display: inline-flex;
+  height: 20px;
+  line-height: 20px; 
+  color: inherit;
+  font-style: initial;
+  border-color: var(--color-primary);
+  position: absolute;
+  
+  
+}
+p {
+  color: var(--color-secondary);
+  span.currency {
+    color: var(--color-primary);
+    display: inline-block;
+   
+  }
+}
+.rout {
+  text-align: left;
+  font-weight: bold;
+  color: #212121;
+  // justify-content: space-between;
+  // span{
+  //   width:40%;
+  // }
+  // span:last-child{
+  //  text-align: right;
+  //  justify-self: end;
+
+  // }
+  
+}
+
+.mat-chip{
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding: 4px 4px !important;
+  border-radius: 5px;
+  min-height: 20px !important ;
+  background-color: var(--color-primary) !important;
+  color: white !important;
+}
 
 section {
+  
   width: 100%;
   height: auto;
   margin-top: 0.2rem;
+  
   mat-accordion {
+    
     width: 100%;
     height: inherit;
     mat-expansion-panel {
+     
       padding: 0;
       .mat-expansion-panel-header-title {
-        flex-basis: 20%;
+        flex-basis: 10%;
+        min-width: 70px;
+        max-width: 70px;
       }
       .mat-expansion-panel-header-description {
+        // background-color: burlywood;
         flex-basis: 70%;
       }
       div.details {
+        
         border-top: 1px solid var(--color-accent);
-        width: 95%;
+        // background-color: blueviolet;
+        width: calc(100% - 24px);
         p:first-child {
           text-align: right;
           padding-top: 0.5rem;
         }
         p {
           display: flex;
+          justify-content: center;
           span.spacer {
+            
+            display: flex;
+            justify-content: center;
             flex: 1 1 auto;
           }
         }
@@ -55,33 +158,37 @@ section {
         height: auto !important;
         mat-panel-title {
           div.icons {
+            width: 100%;
+            // background-color: cadetblue;
             display: flex;
             @include boxSizing(border-box);
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-right: 1px solid var(--color-primary);
+          
             span {
               padding: 0.1rem 1rem;
-              color: var(--color-primary);
+              color: var(--color-accent);
               span.material-icons {
-                color: var(--color-primary);
+                color: var(--color-accent);
               }
             }
           }
         }
         mat-panel-description {
           div.description {
+            
             width: 100%;
             p:first-child {
               padding: 0.5rem 0;
-              color: var(--color-accent);
+              color: #212121;
               font-size: 0.9rem;
               margin: 0;
 
               width: 100%;
             }
             p.time {
+              color: #757575;
               margin-top: 1rem;
               display: flex;
 
@@ -98,6 +205,32 @@ section {
     }
   }
 }
+@include Large {
+
+}
+
+
+@include Medium{
+  section{
+  //  background-color: cadetblue;
+  }
+}
+
+@include Small{
+  section{
+    width:100%;
+  //  background-color: rgb(176, 236, 98);
+  //  border:3px solid red;
+  }
+}
+
+@include XSmall{
+  section{
+    width:100%;
+   // background-color: rgb(255, 252, 51);
+  }
+}
+
 @include Large {
 
 }

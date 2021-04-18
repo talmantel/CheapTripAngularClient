@@ -15,8 +15,16 @@ import { ErrorComponent } from './error/error.component';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+
+  localesList = [
+    { code: 'en-US', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code:'ua', label: 'Українська'}
+  ]
+  
   constructor(private dialog: MatDialog) {}
   ngOnInit(): void {
+  
     console.log(this.myBrowser());
    console.log(this.getBrowserVersion());
 
