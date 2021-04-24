@@ -1,9 +1,10 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Currency } from '../trip-direction/select-direction/select-direction.component';
 
 const URL = 'MY_URL';
 const PATHMAP = new Map();
@@ -103,6 +104,13 @@ export class HttpService {
     // return this.http.get(url ,{responseType: 'text'});
     return this.http.get(url);
  
+  }
+
+  getCurrencies():Observable<any> {
+    let url=  environment.urlTomCat +
+    'CheapTrip/GetCurrencyRate';
+    return this.http.get<Currency>(url, { observe: "response" });
+    
   }
 
 
