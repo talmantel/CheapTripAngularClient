@@ -21,7 +21,7 @@
               <span class="spacer"></span> <span>
               <mat-chip-list><mat-chip selected=true class="price-top">
                 
-                {{rout.details.euro_price | currency:'EUR':'symbol':'1.2-2' }} </mat-chip></mat-chip-list></span>
+                {{rout.details.euro_price*currency.oneEuroRate | currency:currency.code:'symbol':'1.2-2' }} </mat-chip></mat-chip-list></span>
             </p>
           </div>
         </mat-panel-description>
@@ -48,7 +48,8 @@
           <span class="spacer">
         </span>
           <span class="currency">
-           {{path.euro_price | currency:'EUR':'symbol-narrow':'1.2-2' }}</span>
+            {{path.euro_price*currency.oneEuroRate | currency:currency.code:'symbol-narrow':'1.2-2' }}
+           </span>
         </p>
         
         
