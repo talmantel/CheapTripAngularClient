@@ -14,14 +14,6 @@
           <context context-type="linenumber">234</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="currency" datatype="html">
-        <source>Currency</source>
-        <target>Валюта</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="mainSlogan" datatype="html">
         <source>CHEAP TRIP. PAY LESS,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt; "/> VISIT MORE!</source>
         <target>CheapTrip. Плати меньше,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt; "/> посети больше!</target>

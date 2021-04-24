@@ -54,7 +54,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
-          <context context-type="linenumber">325</context>
+          <context context-type="linenumber">253</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/store/trip-direction.effects.ts</context>
@@ -88,81 +88,81 @@
         <source> price and duration include transfer to/from airport </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.html</context>
-          <context context-type="linenumber">79,81</context>
+          <context context-type="linenumber">78,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8931291953507502185" datatype="html">
         <source>Bus</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1212257460397572482" datatype="html">
         <source>Flight</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4172345182949733528" datatype="html">
         <source>Train</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9091829797003196147" datatype="html">
         <source>Ride Share</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="147755706102959693" datatype="html">
         <source>Car Drive</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7060226449538171834" datatype="html">
         <source>Walk</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2219593163298202834" datatype="html">
         <source>Town Car</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CarFerry" datatype="html">
         <source>Car Ferry</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6785755506717537957" datatype="html">
         <source>Shuttle</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4595025460528205723" datatype="html">
         <source>Taxi</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="questions" datatype="html">
@@ -179,18 +179,11 @@
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="currency" datatype="html">
-        <source>Currency</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="longslogan" datatype="html">
         <source>Find most beneficial and unusual routes between cities with airports, combining flight, train, bus, ferry and rideshare.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.html</context>
-          <context context-type="linenumber">21,22</context>
+          <context context-type="linenumber">6,7</context>
         </context-group>
         <note priority="1" from="description">Long slogan</note>
       </trans-unit>
@@ -198,21 +191,21 @@
         <source>From</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="63c9c3aa536dbd11120ae8feab62186c47838028" datatype="html">
         <source>To</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="clearform" datatype="html">
         <source>Clear form</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <note priority="1" from="description">Clear form</note>
       </trans-unit>
@@ -220,7 +213,7 @@
         <source>Let&apos;s go</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <note priority="1" from="description">letsgo</note>
       </trans-unit>
@@ -229,15 +222,15 @@
           For now, we support only English and Russian input.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
-          <context context-type="linenumber">303,304</context>
+          <context context-type="linenumber">231,232</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
-          <context context-type="linenumber">311,312</context>
+          <context context-type="linenumber">239,240</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/select-direction/select-direction.component.ts</context>
-          <context context-type="linenumber">325</context>
+          <context context-type="linenumber">253</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trip-direction/store/trip-direction.effects.ts</context>

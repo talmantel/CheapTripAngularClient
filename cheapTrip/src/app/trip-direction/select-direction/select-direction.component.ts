@@ -7,25 +7,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import {map, startWith} from 'rxjs/operators';
+
 import * as fromApp from '../../store/app.reducer';
 import * as TripDirectionActions from '../store/trip-direction.actions';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
 import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorInterceptor } from '../../error-interceptor';
-import { HttpClient } from '@angular/common/http';
-import { HttpService } from 'src/app/service/http.service';
-import {GlobalService} from '../../global/global.service'
-
-
-export interface Currency {
-  name: string;
-  code:string;
-  oneEuroRate:number;
-  r2rSymbol: string;
-}
 
 @Component({
   selector: 'app-select-direction',
@@ -48,15 +37,7 @@ export interface Currency {
     ]),
   ],
 })
-
-
-
 export class SelectDirectionComponent implements OnInit {
-  
-  currencyControl = new FormControl();
-  filteredCurrencies: Observable<Currency[]>;
-  selectedCurrency:Currency;
-
   @ViewChild('startPointInput', { static: false })
   startPointInputEl: ElementRef;
   @ViewChild('endPointInput', { static: false })
@@ -68,7 +49,6 @@ export class SelectDirectionComponent implements OnInit {
   endPointAutoComplete: IPathPoint[];
   startPoint: IPathPoint;
   endPoint: IPathPoint;
-  currencies: Currency[];
 
   mode: Modes;
   modes = Modes;
@@ -79,50 +59,14 @@ export class SelectDirectionComponent implements OnInit {
   nameParagraph: ElementRef;
 
   constructor(
-    private http: HttpClient,
-    private httpService: HttpService,
-    private globalService: GlobalService,
     private errorInterceptor:ErrorInterceptor,
     private store: Store<fromApp.AppState>,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-
-  
-
-
-  }
+  ) {}
   ngOnDestroy(): void {}
 
-  ngOnInit() {
-    
-    this.httpService.getCurrencies().subscribe(data => {
-      console.log("received currencies");
-    
-      this.currencies=data.body;
-      
-
-      this.currencies.sort(function(a, b){
-        if (a.name=="Euro"){
-          return -1;
-        }
-        if (a.code=="ILS" && b.code!="EUR"){
-          return -1;
-        }
-        if (a.code=="USD" && b.code!="EUR"){
-          return -1;
-        }
-        if (a.code=="RUB" && b.code!="EUR"){
-          return -1;
-        }
-        return 0;
-      });
-      this.selectedCurrency = this.currencies[0];
-      this.setGlobalCurrency();
-    })
-
-    
-
+  ngOnInit(): void {
     this.mode = Modes.SEARCH;
     this.startPointAutoComplete = [];
     this.endPointAutoComplete = [];
@@ -141,24 +85,8 @@ export class SelectDirectionComponent implements OnInit {
 
     this.pointsSubscription();
     this.router.events.subscribe((res) => console.log('rout'));
-
-  
   }
 
-  setGlobalCurrency(){
-    console.log("Set global "+this.selectedCurrency);
-    this.globalService.setCurrency(this.selectedCurrency);
-  }
-
-  displayFn(currency: Currency): string {
-    return currency && currency.code ? currency.code+" "+currency.name : '';
-  }
-
-  private _filter(name: string): any[] {
-    const filterValue = name.toLowerCase();
-
-    return this.currencies.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
-  }
   // autocomplete is invoked
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };
