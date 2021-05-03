@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { TripDirectionComponent } from './trip-direction.component';
 import { TripDirectionRoutingModule } from './trip-direction-routing.module';
+// import { CurrencySelectorComponent } from '../currency-selector/currency-selector.component';
 
 
 

@@ -4,7 +4,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Currency } from '../trip-direction/select-direction/select-direction.component';
+import { Currency } from '../currency-selector/currency-selector.component';
 
 const URL = 'MY_URL';
 const PATHMAP = new Map();

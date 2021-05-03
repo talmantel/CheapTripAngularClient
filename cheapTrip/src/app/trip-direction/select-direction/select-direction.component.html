@@ -1,20 +1,5 @@
 
-<div>
-  <mat-form-field appearance="fill" >
-    <mat-label i18n="@@currency">Currency</mat-label>
-    <mat-select  (selectionChange)="setGlobalCurrency()" [(value)]="selectedCurrency">
-<!-- 
-     type="text" [(ngModel)]="selectedCurrency" 
-    (change)="setGlobalCurrency($event.target.value)"
-    matInput [formControl]="myControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">    -->
-        <mat-option *ngFor="let currency of currencies; let i = index" [value]="currency">
-          <mat-divider *ngIf="i==4"></mat-divider> 
-        {{currency.code}} {{currency.name}}
-        </mat-option>
-      </mat-select>
-  </mat-form-field>
-</div>
+<!-- <app-currency-selector></app-currency-selector> -->
 <div class="mainContainer" [ngClass]="{'searchMode': mode === modes.SEARCH,
 'deliveryMode': mode === modes.DELIVERY}">
   <div class="message">

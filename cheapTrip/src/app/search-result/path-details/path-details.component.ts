@@ -3,8 +3,8 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { IPath } from '../../service/http.service';
 import { HttpService } from 'src/app/service/http.service';
-import { Currency } from 'src/app/trip-direction/select-direction/select-direction.component';
 import { GlobalService } from 'src/app/global/global.service';
+import { Currency } from 'src/app/currency-selector/currency-selector.component';
 
 const TRANSPORT = new Map();
 TRANSPORT.set('Bus', $localize`Bus`);
@@ -32,7 +32,7 @@ export class PathDetailsComponent implements OnInit {
 @Input() startPoint: string;
 @Input() endPoint: string;
 private country:string;
-private currency:Currency;
+//private currency:Currency;
 
 
 
@@ -56,7 +56,11 @@ price: number;
 
 
   ngOnInit(): void {
-    this.currency = this.globalService.getCurrency();
+    // this.currency = this.globalService.getCurrency();
+  }
+
+  getGlobalCurrency(){
+    return this.globalService.getCurrency();
   }
 
   getTransportName(transport:string) {

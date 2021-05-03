@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Currency } from '../trip-direction/select-direction/select-direction.component';
+import { Currency } from '../currency-selector/currency-selector.component';
 
 @Injectable({
   providedIn: 'root'

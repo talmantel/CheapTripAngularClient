@@ -16,11 +16,7 @@ import { ErrorComponent } from './error/error.component';
 })
 export class AppComponent implements OnInit {
 
-  localesList = [
-    { code: 'en-US', label: 'English' },
-    { code: 'ru', label: 'Русский' },
-    { code:'ua', label: 'Українська'}
-  ]
+ 
   
   constructor(private dialog: MatDialog) {}
   ngOnInit(): void {

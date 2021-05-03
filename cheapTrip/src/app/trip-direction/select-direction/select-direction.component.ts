@@ -20,12 +20,7 @@ import { HttpService } from 'src/app/service/http.service';
 import {GlobalService} from '../../global/global.service'
 
 
-export interface Currency {
-  name: string;
-  code:string;
-  oneEuroRate:number;
-  r2rSymbol: string;
-}
+
 
 @Component({
   selector: 'app-select-direction',
@@ -53,9 +48,8 @@ export interface Currency {
 
 export class SelectDirectionComponent implements OnInit {
   
-  currencyControl = new FormControl();
-  filteredCurrencies: Observable<Currency[]>;
-  selectedCurrency:Currency;
+  
+
 
   @ViewChild('startPointInput', { static: false })
   startPointInputEl: ElementRef;
@@ -68,7 +62,6 @@ export class SelectDirectionComponent implements OnInit {
   endPointAutoComplete: IPathPoint[];
   startPoint: IPathPoint;
   endPoint: IPathPoint;
-  currencies: Currency[];
 
   mode: Modes;
   modes = Modes;
@@ -81,7 +74,6 @@ export class SelectDirectionComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private httpService: HttpService,
-    private globalService: GlobalService,
     private errorInterceptor:ErrorInterceptor,
     private store: Store<fromApp.AppState>,
     private route: ActivatedRoute,
@@ -96,30 +88,7 @@ export class SelectDirectionComponent implements OnInit {
 
   ngOnInit() {
     
-    this.httpService.getCurrencies().subscribe(data => {
-      console.log("received currencies");
-    
-      this.currencies=data.body;
-      
-
-      this.currencies.sort(function(a, b){
-        if (a.name=="Euro"){
-          return -1;
-        }
-        if (a.code=="ILS" && b.code!="EUR"){
-          return -1;
-        }
-        if (a.code=="USD" && b.code!="EUR"){
-          return -1;
-        }
-        if (a.code=="RUB" && b.code!="EUR"){
-          return -1;
-        }
-        return 0;
-      });
-      this.selectedCurrency = this.currencies[0];
-      this.setGlobalCurrency();
-    })
+   
 
     
 
@@ -145,20 +114,9 @@ export class SelectDirectionComponent implements OnInit {
   
   }
 
-  setGlobalCurrency(){
-    console.log("Set global "+this.selectedCurrency);
-    this.globalService.setCurrency(this.selectedCurrency);
-  }
+ 
 
-  displayFn(currency: Currency): string {
-    return currency && currency.code ? currency.code+" "+currency.name : '';
-  }
-
-  private _filter(name: string): any[] {
-    const filterValue = name.toLowerCase();
-
-    return this.currencies.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
-  }
+  
   // autocomplete is invoked
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };

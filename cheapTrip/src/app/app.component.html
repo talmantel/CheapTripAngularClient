@@ -19,22 +19,27 @@
       <div class="words">
 
          <p class="wordsUp" i18n="@@PayLess">
-        Pay less,
+        Pay less, 
       </p>
       <p class="wordsDown" i18n="@@VisitMore">
         visit more!
       </p>
       </div>
+      <span class="spacer"></span>
+      <div class="selector">
+       <app-currency-selector></app-currency-selector> 
+      </div>
+      
      
 
       <!-- <span class="spacer"></span> -->
       <!-- <button mat-button (click)="toHomePage()"></button> -->
-      <!-- <button  mat-icon-button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="button with a menu">
+      <!-- <button  mat-icon-button  [matMenuTriggerFor]="menu" aria-label="button with a menu">
          <mat-icon>menu</mat-icon> 
         <span class="material-icons"></span> 
         
       </button> 
-      <mat-menu #menu="matMenu">  temporary disabled
+      <mat-menu #menu="matMenu">  
         <button mat-menu-item [routerLink]="''">
           <mat-icon>home</mat-icon>
           <span i18n = "menu home@@menuHome">Home</span>

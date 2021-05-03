@@ -1,0 +1,37 @@
+<div class="currency-selector">
+    <!-- <p class="currency-selector"> -->
+        <mat-form-field appearance="outline" floatLabel="never" class ="form">
+      <!-- <mat-label i18n="@@currency">Currency</mat-label> -->
+      
+      <mat-select  (selectionChange)="setGlobalCurrency()" [(value)]="selectedCurrency" >
+        <mat-select-trigger>
+        {{selectedCurrency.code}}
+      </mat-select-trigger>
+  <!-- 
+       type="text" [(ngModel)]="selectedCurrency" 
+      (change)="setGlobalCurrency($event.target.value)"
+      matInput [formControl]="myControl" [matAutocomplete]="auto" [displayWith]="displayFn">
+        <mat-autocomplete #auto="matAutocomplete" >    -->
+           
+          <mat-option *ngFor="let currency of currencies; let i = index" [value]="currency">
+            <mat-divider *ngIf="i==4"></mat-divider> 
+          {{currency.code}} {{currency.name}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+<!-- </p> -->
+<!-- <p class="locale-selector" > -->
+        <mat-form-field appearance="outline" floatLabel="never" class="form">
+          <mat-select-trigger>
+            <span class="flag-icon flag-icon-{{selectedLocale.flag}}"></span>
+          </mat-select-trigger> 
+        <mat-select  (selectionChange)="setNewLocale()" [(value)]="selectedLocale" style="width:10px">
+    
+          <mat-option   *ngFor="let locale of localesList" [value]="locale">
+              <span class="flag-icon flag-icon-{{locale.flag}}"></span>{{locale.label}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+<!-- </p> -->
+  </div>
+  
