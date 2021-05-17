@@ -38,12 +38,13 @@ div.cheaptrip {
   font-weight: bolder;
 }
 .wordsUp {
-  
+  display: inline-block;
   // background-color: aqua;
   font-size: 1.1em;
   line-height: 1rem;
 }
 .wordsDown {
+  
   font-weight: bolder;
   margin-left: 30px;
   // background-color: blueviolet;
@@ -68,8 +69,11 @@ div.cheaptrip {
 // }
 
 @include Desktop  {
+  .mat-toolbar {
+    padding-left: 30px;
+  }
   div.cheaptrip {
-    margin: 0px;
+    padding-left: 30px;
     width:auto;
     // background-color: cadetblue;
     font-size: 2.8em;
@@ -78,14 +82,28 @@ div.cheaptrip {
   }
   
   .words{
+    
+    
+    // display: inline-flex;
+    // background-color: pink;
     margin-left: 40px;
     // background-color: burlywood;
+   
+  }
+
+  .wordsUp{
+    margin: 0 0 0 0;
     font-size: 1.5em;
-    line-height: 1rem;
+    line-height: 1.5rem;
+    
   }
  
   .wordsDown {
-    margin-left: 190px;
+    font-size: 1.5em;
+    line-height: 1.5rem;
+    margin: 0 0 0 0;
+    display: inline-flex;
+    // margin-left: 190px;
  
   }
  
@@ -93,15 +111,14 @@ div.cheaptrip {
 
 @include Phones {
   div.cheaptrip {
-    margin: 5px;
     width:auto;
-    // background-color: cadetblue;
     font-size: 1.3em;
     line-height: 1.3rem;
 
   }
   
   .words{
+ 
     // background-color: burlywood;
     font-size: 0.6em;
     line-height: 1rem;
@@ -109,37 +126,42 @@ div.cheaptrip {
  
   .wordsDown {
     margin-left: 10px;
- 
   }
 
 }
 
 @include Smallphones {
   mat-toolbar {
-    height: fit-content;
+    flex-wrap: wrap;
+    display: flex;
+    height: auto;
   }
 
   div.cheaptrip {
-    margin: 5px;
     width:auto;
     // background-color: cadetblue;
-    font-size: 1.2em;
-    line-height: 1.5rem;
+    font-size: 1em;
+    line-height: 1.2rem;
+    font-weight: lighter;
 
   }
   
   .words{
+    font-weight: lighter;
     width: auto;
     // background-color: burlywood;
-    font-size: 0.6em;
-    line-height: 0.8rem;
+    font-size: 0.5em;
+    line-height: 0.5rem;
   }
  
   .wordsDown {
     margin-left: 10px;
- 
   }
-
+  .selector{
+    font-size: 0.4em;
+    // margin: 0 0 0 0;
+    // padding: 0 0 0 0;
+  }
 
 }
 

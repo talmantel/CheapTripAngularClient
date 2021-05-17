@@ -1,5 +1,12 @@
+@import '../../cheapTripStyles/mixins.scss';
+
 .mat-form-field {
-    width: 60px !important;
+  
+}
+::ng-deep {
+  .mat-form-field .mat-form-field-flex{
+    // background-color:palevioletred;
+  }
 }
 // ::ng-deep .mat-toolbar-row, .mat-toolbar-single-row{
 //    padding: 0 0 0 0 !important;
@@ -7,15 +14,27 @@
 // ::ng-deep .mat-body p, .mat-body-1 p, .mat-typography p{
 //    margin: 0 0 0 0 !important;
 // }
-.form{
+.spacer {
+   flex: 1 1 auto;
+ }
+.form-currency{
+   width: 70px !important;
+   color: white;
    height: 100%;
    margin-top: 10%;
-   vertical-align: middle;
+   
+}
+.form-locale{
+    width: 50px !important;
+   color: white;
+   height: 100%;
+   margin-top: 10%;
 }
 .locale-selector ::ng-deep .mat-form-field-underline {
     display: none;
   }
 .currency-selector ::ng-deep .mat-form-field-underline {
+   // color: red;
     display: none;
     height: 100%;
     width: fit-content;
@@ -37,7 +56,7 @@
 //     font-size: 0.9em;
 //   }
   .locale-selector{
-     width: 20px !important;
+   //   width: 20px !important;
    //   font-size: 1.1em;
   }
 //   ::ng-deep .mat-select-value{
@@ -46,3 +65,17 @@
 //   ::ng-deep .mat-form-field-infix{
 //      width: 50px !important;
 //   }
+@include Smallphones {
+  
+  .form-currency{
+    width: 50px !important;
+//  color: palevioletred;
+    
+ }
+ .form-locale{
+  //  color: pink;
+     width: 30px !important;
+  
+ }
+
+}

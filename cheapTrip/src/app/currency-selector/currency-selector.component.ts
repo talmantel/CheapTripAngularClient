@@ -69,7 +69,8 @@ export class CurrencySelectorComponent implements OnInit {
         }
         return 0;
       });
-      this.selectedCurrency = this.currencies[0];
+      this.setSelectedCurrency()
+      
       this.setGlobalCurrency();
     })
   }
@@ -84,8 +85,24 @@ export class CurrencySelectorComponent implements OnInit {
     window.location.assign(document.location.protocol+'//'+document.location.host+'/'+this.selectedLocale.code+'/#/'+href);
   }
 
+  private setSelectedCurrency(){
+    let savedCurrencyCode = this.globalService.getCurrencyFromLocalStorage();
+    console.log("got from local "+savedCurrencyCode);
+    this.selectedCurrency=this.currencies[0];//euro is first
+
+    this.currencies.forEach(element => {
+      if (element.code==savedCurrencyCode){
+        //found match
+        this.selectedCurrency=element;
+        console.log("found match "+this.selectedCurrency.name);
+        return;
+      }
+    
+    });
+  }
+
   setGlobalCurrency(){
-    console.log("Set global "+this.selectedCurrency);
+    console.log("Set global "+this.selectedCurrency.name);
     this.globalService.setCurrency(this.selectedCurrency);
   }
 

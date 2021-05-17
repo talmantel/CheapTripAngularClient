@@ -16,5 +16,15 @@ export class GlobalService {
 
   setCurrency(currency:Currency){
     this.currency=currency;
+    this.setCurrencyToLocalStorage();
+  }
+
+  setCurrencyToLocalStorage(){
+    localStorage.setItem('currency',this.currency.code);
+  }
+
+  getCurrencyFromLocalStorage(){
+    console.log("Local stored currency "+localStorage.getItem('currency'));
+    return localStorage.getItem('currency');//null if none present
   }
 }

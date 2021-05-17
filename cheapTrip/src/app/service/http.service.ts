@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Currency } from '../currency-selector/currency-selector.component';
+import { IPathPoint } from '../trip-direction/trip-direction.model';
 
 const URL = 'MY_URL';
 const PATHMAP = new Map();
@@ -67,8 +68,8 @@ interface IRout {
   euro_price: string;
   duration_minutes: string;
   transportation_type: string;
-  from: string;
-  to: string;
+  from: IPathPoint;
+  to: IPathPoint;
 }
 
 interface IDetails {

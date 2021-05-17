@@ -295,6 +295,7 @@ export class TripDirectionEffects {
            // next is for timing... obsolete
           // this.checkPoints.push(Date.now());
           // this.checkPointsStrings.push("received request");
+          
           console.log(res);
           let resultPathArr = null;
 

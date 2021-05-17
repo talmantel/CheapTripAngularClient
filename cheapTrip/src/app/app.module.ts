@@ -33,7 +33,8 @@ registerLocaleData(localeRu, 'ru');
 registerLocaleData(localeUa, 'ua');
 @NgModule({
   
-  declarations: [AppComponent, HeaderComponent,  CurrencySelectorComponent,
+  declarations: [AppComponent, HeaderComponent,  
+    CurrencySelectorComponent,
      NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent, 
      LinksComponent, LogoComponent],
   imports: [
