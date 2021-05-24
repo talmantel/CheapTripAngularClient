@@ -6,7 +6,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AlertMessage } from './error/alertMessage.model';
+import { AlertMessage, Button } from './error/alertMessage.model';
 import { ErrorComponent } from './error/error.component';
 
 @Component({
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
         'warning',
         'Unsupported!',
         'Sorry, we did not have time to adapt our application for the type of web browser you are using. But we managed to optimize it for Google Chrome ver. 86 or newest. We recommend trying it!',
-        ['Close', 'Download']
+        [new Button("Close",$localize`:@@Close:Close`)]
       );
      /*  this.dialog.open(ErrorComponent, {
         data: alertMessage,

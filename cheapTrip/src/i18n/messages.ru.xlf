@@ -113,8 +113,8 @@
         <note priority="1" from="description">letsgo</note>
       </trans-unit>
        <trans-unit id="priceAndDurationForFlight" datatype="html">
-        <source>price and duration include transfer to/from airport</source>
-        <target>цена и продолжительность включают трансфер в / из аэропорта</target>
+        <source>duration include transfer to/from airport</source>
+        <target>продолжительность включает трансфер в / из аэропорта</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-details/path-details.component.html</context>
           <context context-type="linenumber">31</context>
@@ -363,6 +363,10 @@
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">25,26</context>
         </context-group>
+      </trans-unit>
+         <trans-unit id="Close" datatype="html">
+        <source>Close</source>
+        <target>Закрыть</target>
       </trans-unit>
     </body>
   </file>

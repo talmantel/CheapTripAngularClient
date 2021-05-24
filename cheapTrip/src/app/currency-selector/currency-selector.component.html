@@ -1,4 +1,4 @@
-<div class="currency-selector">
+<div class="currency-selector" *ngIf="currencies">
     <!-- <p class="currency-selector"> -->
         <mat-form-field appearance="fill" floatLabel="never" class ="form-currency" >
       <!-- <mat-label i18n="@@currency">Currency</mat-label> -->
@@ -14,7 +14,8 @@
         <mat-autocomplete #auto="matAutocomplete" >    -->
            
           <mat-option  *ngFor="let currency of currencies; let i = index" [value]="currency">
-            <mat-divider *ngIf="i==4"></mat-divider> 
+            <!-- <mat-divider *ngIf="i==5"></mat-divider>  -->
+            <hr *ngIf="i==5">
           {{currency.code}} {{currency.name}}
           </mat-option>
         </mat-select>

@@ -110,7 +110,7 @@ price: number;
   getBusUrl(rout :IRout){
     // console.log ("bus "+this.country);
     // if((from == 545 OR to == 545) AND (transportation_type == 2))
-    console.log("bus new "+JSON.stringify(rout));
+    // console.log("bus new "+JSON.stringify(rout));
     if (rout.from=="Донецк"||rout.from=="Donetsk"||
     rout.to=="Донецк"||rout.to=="Donetsk"  ){
       //right way is to use ID of city, but current server is not build for that

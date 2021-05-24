@@ -21,7 +21,7 @@ export class CurrencySelectorComponent implements OnInit {
   localesList = [
     { code: 'en-US', label: 'English', flag : 'us' },
     { code: 'ru', label: 'Русский' , flag : 'ru'},
-    // { code:'ua', label: 'Українська', flag : ''}
+    { code:'ua', label: 'Українська', flag : 'ua'}
   ]
   selectedLocale:any;
   selectedCurrency:Currency;
@@ -65,6 +65,9 @@ export class CurrencySelectorComponent implements OnInit {
           return -1;
         }
         if (a.code=="RUB" && b.code!="EUR"){
+          return -1;
+        }
+        if (a.code=="INR" && b.code!="EUR"){
           return -1;
         }
         return 0;

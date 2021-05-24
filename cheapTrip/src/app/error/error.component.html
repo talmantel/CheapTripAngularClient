@@ -4,7 +4,7 @@
     <p class="mat-body-1">{{ data.text }}</p>
   </div>
   <div mat-dialog-actions>
-    <button *ngFor="let btn of data.buttons" mat-button mat-dialog-close [ngClass]='btn'>{{btn}}</button>
+    <button *ngFor="let btn of data.buttons" mat-button mat-dialog-close [ngClass]='btn.buttonType'>{{btn.buttonText}}</button>
 
   </div>
 
