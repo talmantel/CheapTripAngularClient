@@ -91,7 +91,7 @@ export class SelectDirectionComponent implements OnInit {
    
 
     
-
+    console.log ("NG ON init start!");
     this.mode = Modes.SEARCH;
     this.startPointAutoComplete = [];
     this.endPointAutoComplete = [];
@@ -110,7 +110,7 @@ export class SelectDirectionComponent implements OnInit {
 
     this.pointsSubscription();
     this.router.events.subscribe((res) => console.log('rout'));
-
+    console.log ("NG oninit end!");
   
   }
 
@@ -138,6 +138,7 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log ("SUBMITTED!");
     this.store.dispatch(new TripDirectionActions.GetRouts());
   }
 
@@ -332,6 +333,7 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   private pointsSubscription() {
+    console.log ("Points!");
     this.startSubj.subscribe((res) => {
       if (typeof res == 'string') {
         this.startPoint = this.startPointAutoComplete.filter(

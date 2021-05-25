@@ -60,7 +60,9 @@ export class SetEndPointAutocomplete implements Action {
 
 export class GetRouts implements Action {
   readonly type = GET_ROUTS;
-  constructor() {}
+  constructor() {
+    // console.log("GEt ROUTS Constructor");
+  }
 }
 
 export class SetRouts implements Action {
