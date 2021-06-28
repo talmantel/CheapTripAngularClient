@@ -124,10 +124,10 @@ export class TripDirectionEffects {
     //   this.server = 'tomcat'; //to be fixed
     // this.server = Server.SERVER104;
     console.log ("constructor inoked");
-    this.LocationsEN = httpService.getAllEnLocationsTomcat();
-    this.LocationsRU = httpService.getAllRuLocationsTomcat();
-    console.log (this.LocationsRU);
-    console.log ("en loc "+this.LocationsEN);
+    // this.LocationsEN = httpService.getAllEnLocationsTomcat();
+    // this.LocationsRU = httpService.getAllRuLocationsTomcat();
+    // console.log (this.LocationsRU);
+    // console.log ("en loc "+this.LocationsEN);
    
    //console.log ("init country "+this.country)
     

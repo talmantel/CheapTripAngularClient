@@ -110,6 +110,7 @@ export class SelectDirectionComponent implements OnInit {
 
     this.pointsSubscription();
     this.router.events.subscribe((res) => console.log('rout'));
+    
     console.log ("NG oninit end!");
   
   }
@@ -254,7 +255,7 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   private setForm() {
-    //deactivated due to russian lan
+    
     this.directionForm = new FormGroup({
       startPointControl: new FormControl('', [
         this.patternValid({

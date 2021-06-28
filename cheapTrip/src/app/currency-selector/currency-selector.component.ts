@@ -48,7 +48,7 @@ export class CurrencySelectorComponent implements OnInit {
     });
     console.log("code found "+this.selectedLocale.code);
     this.httpService.getCurrencies().subscribe(data => {
-
+      console.log(data);
       console.log("received currencies");
     
       this.currencies=data.body;
@@ -68,6 +68,9 @@ export class CurrencySelectorComponent implements OnInit {
           return -1;
         }
         if (a.code=="INR" && b.code!="EUR"){
+          return -1;
+        }
+        if (a.code=="UAH" && b.code!="EUR"){
           return -1;
         }
         return 0;

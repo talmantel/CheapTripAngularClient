@@ -36,7 +36,10 @@ mat-divider {
    margin-top: 10%;
 }
 .locale-selector ::ng-deep .mat-form-field-underline {
-    display: none;
+  display: none;
+  height: 100%;
+  width: fit-content;
+  vertical-align: middle;
   }
 .currency-selector ::ng-deep .mat-form-field-underline {
    // color: red;
@@ -56,11 +59,11 @@ mat-divider {
 //  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix{
 //     padding: 0 0 0 0 !important;
 //  }
-//  .currency-selector {
-//     margin: 0 0 0 0;
-//     font-size: 0.9em;
-//   }
+ .currency-selector {
+  display: inline;
+  }
   .locale-selector{
+    display: inline;
    //   width: 20px !important;
    //   font-size: 1.1em;
   }
