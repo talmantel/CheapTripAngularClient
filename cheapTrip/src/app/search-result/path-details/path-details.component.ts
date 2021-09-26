@@ -74,7 +74,8 @@ price: number;
     
     switch(rout.transportation_type) { 
       case "Flight": { 
-        url = "http://Skyscanner.com";
+        //url = "http://Skyscanner.com";
+        url= this.getSkyScannerUrl(rout);
          break; 
       } 
       case "Bus": { 
@@ -147,8 +148,19 @@ price: number;
     //function for opening site of corresponding transportation type
      let url = this.getTransportUrl(rout);
     if (url!=''){
-      // window.open(url, "_blank");
       window.open(url, "_blank");
     }
   }
+  getSkyScannerUrl (rout:IRout){
+let from=this.httpService.getSkyScannerCode(rout.from);
+
+let to = this.httpService.getSkyScannerCode(rout.to);
+
+      if (from==""||to==""){
+      return "http://Skyscanner.com";
+      }
+      return "http://Skyscanner.com/transport/flights/"+from+"/"+to;
+
+  }
 }
+
