@@ -3,10 +3,18 @@
     
     var res = userLang.split("-");
 
-    if ((res[0]=='ru')||(res[0]=='ua')||(res[0]=='by')){
-        window.location.href = '/ru'
-    }
-    else{
-        window.location.href = '/en-US'
-    }
+    switch(res[0]) {
+  case 'ru':
+    window.location.href = '/ru'
+    break;
+  case 'by':
+    window.location.href = '/ru'  
+    break;
+  case 'ua':
+    window.location.href = '/ua'
+    break;
+  default:
+    window.location.href = '/en-US'
+}
+
     </script>  

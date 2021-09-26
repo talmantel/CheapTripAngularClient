@@ -21,7 +21,7 @@
               <span class="spacer"></span> <span>
               <mat-chip-list><mat-chip selected=true class="price-top">
                 
-                {{rout.details.euro_price | currency:'EUR':'symbol':'1.2-2' }} </mat-chip></mat-chip-list></span>
+                {{rout.details.euro_price*getGlobalCurrency().oneEuroRate | currency:getGlobalCurrency().code:'symbol':'1.2-2' }} </mat-chip></mat-chip-list></span>
             </p>
           </div>
         </mat-panel-description>
@@ -38,17 +38,18 @@
         <p>
           
             <button class = "buy-ticket-button" 
-          *ngIf="getTransportUrl(path.transportation_type)!=''" 
+          *ngIf="getTransportUrl(path)!=''" 
           mat-stroked-button color="primary"
            i18n = "Buy ticket@@BuyTicket" 
-          (click)="openTransport(path.transportation_type)" >Buy ticket</button>
+          (click)="openTransport(path)" >Buy ticket</button>
           
           <span class="time">{{path.duration_minutes}}</span>
           
           <span class="spacer">
         </span>
           <span class="currency">
-           {{path.euro_price | currency:'EUR':'symbol-narrow':'1.2-2' }}</span>
+            {{path.euro_price*getGlobalCurrency().oneEuroRate | currency:getGlobalCurrency().code:'symbol-narrow':'1.2-2' }}
+           </span>
         </p>
         
         
@@ -75,7 +76,7 @@
         </p> -->
        <p  style="justify-content:center; "
         *ngIf="path.transportation_type=='Flight'" i18n="@@priceAndDurationForFlight">
-          price and duration include transfer to/from airport
+        duration includes transfer to/from airport
          
       </p>
     </div>

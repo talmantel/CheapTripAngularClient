@@ -11,11 +11,17 @@
   flex: 1 1 auto;
 }
 
+.selector{
+  font-size: 0.6em;
+  // margin: 0 0 0 0;
+  // padding: 0 0 0 0;
+}
+
 div.cheaptrip {
-  margin: 20px;
+  margin: 0px;
   width: fit-content;
   font-style: italic;
-  font-size: 2em;
+  font-size: 1.8em;
   color: white;
   line-height: 2rem;
   font-family:'Roboto', sans-serif;
@@ -32,16 +38,17 @@ div.cheaptrip {
   font-weight: bolder;
 }
 .wordsUp {
-  
+  display: inline-block;
   // background-color: aqua;
   font-size: 1.1em;
   line-height: 1rem;
 }
 .wordsDown {
+  
   font-weight: bolder;
   margin-left: 30px;
   // background-color: blueviolet;
-  font-size:  1.3em;
+  font-size:  1.1em;
   line-height: 0.5rem;
 }
 
@@ -62,8 +69,11 @@ div.cheaptrip {
 // }
 
 @include Desktop  {
+  .mat-toolbar {
+    padding-left: 30px;
+  }
   div.cheaptrip {
-    margin: 50px;
+    padding-left: 30px;
     width:auto;
     // background-color: cadetblue;
     font-size: 2.8em;
@@ -72,13 +82,28 @@ div.cheaptrip {
   }
   
   .words{
+    
+    
+    // display: inline-flex;
+    // background-color: pink;
+    margin-left: 40px;
     // background-color: burlywood;
-    font-size: 1.5em;
-    line-height: 1rem;
+   
+  }
+
+  .wordsUp{
+    margin: 0 0 0 0;
+    font-size: 1.63em;
+    line-height: 1.63rem;
+    
   }
  
   .wordsDown {
-    margin-left: 190px;
+    font-size: 1.63em;
+    line-height: 1.63rem;
+    margin: 0 0 0 0;
+    display: inline-flex;
+    margin-left: 8px;
  
   }
  
@@ -86,53 +111,57 @@ div.cheaptrip {
 
 @include Phones {
   div.cheaptrip {
-    margin: 5px;
     width:auto;
-    // background-color: cadetblue;
-    font-size: 1.5em;
-    line-height: 1.5rem;
+    font-size: 1.3em;
+    line-height: 1.3rem;
 
   }
   
   .words{
+ 
     // background-color: burlywood;
-    font-size: 0.8em;
+    font-size: 0.6em;
     line-height: 1rem;
   }
  
   .wordsDown {
     margin-left: 10px;
- 
   }
 
 }
 
 @include Smallphones {
   mat-toolbar {
-    height: fit-content;
+    flex-wrap: wrap;
+    display: flex;
+    height: auto;
   }
 
   div.cheaptrip {
-    margin: 5px;
     width:auto;
     // background-color: cadetblue;
-    font-size: 1.2em;
-    line-height: 1.5rem;
+    font-size: 1em;
+    line-height: 1.2rem;
+    font-weight: lighter;
 
   }
   
   .words{
+    font-weight: lighter;
     width: auto;
     // background-color: burlywood;
-    font-size: 0.6em;
-    line-height: 0.8rem;
+    font-size: 0.5em;
+    line-height: 0.5rem;
   }
  
   .wordsDown {
     margin-left: 10px;
- 
   }
-
+  .selector{
+    font-size: 0.4em;
+    // margin: 0 0 0 0;
+    // padding: 0 0 0 0;
+  }
 
 }
 

@@ -124,19 +124,19 @@ export class TripDirectionEffects {
     //   this.server = 'tomcat'; //to be fixed
     // this.server = Server.SERVER104;
     console.log ("constructor inoked");
-    this.LocationsEN = httpService.getAllEnLocationsTomcat();
-    this.LocationsRU = httpService.getAllRuLocationsTomcat();
-    console.log (this.LocationsRU);
-    console.log ("en loc "+this.LocationsEN);
+    // this.LocationsEN = httpService.getAllEnLocationsTomcat();
+    // this.LocationsRU = httpService.getAllRuLocationsTomcat();
+    // console.log (this.LocationsRU);
+    // console.log ("en loc "+this.LocationsEN);
    
    //console.log ("init country "+this.country)
     
    
     //"wake up" servlet
-      this.http.get(environment.urlTomCat+'CheapTrip/getRoute?from='+10+'&to='+20).subscribe(data => {
-        console.log("received routes");
-        console.log (this.LocationsRU);
-      })
+      // this.http.get(environment.urlTomCat+'CheapTrip/getRoute?from='+10+'&to='+20).subscribe(data => {
+      //   console.log("received routes");
+      //   console.log (this.LocationsRU);
+      // })
 
     }
       
@@ -257,21 +257,21 @@ export class TripDirectionEffects {
       this.checkPointsStrings=new Array;
       let url = '';
       // lower is url for a spring server
-      if (request[1].currentServer === 'server68') {
-        url =
-          environment.url68 +
-          'routes?from=' +
-          request[1].startPoint.id +
-          '&to=' +
-          request[1].endPoint.id;
-      } else {
-        url =
-          environment.url104 +
-          'routes?from=' +
-          request[1].startPoint.id +
-          '&to=' +
-          request[1].endPoint.id;
-      }
+      // if (request[1].currentServer === 'server68') {
+      //   url =
+      //     environment.url68 +
+      //     'routes?from=' +
+      //     request[1].startPoint.id +
+      //     '&to=' +
+      //     request[1].endPoint.id;
+      // } else {
+      //   url =
+      //     environment.url104 +
+      //     'routes?from=' +
+      //     request[1].startPoint.id +
+      //     '&to=' +
+      //     request[1].endPoint.id;
+      // }
 
       //here is url for a Tomcat server to be fixed
      // url = this.selectService.getUrl('from','to')
@@ -295,6 +295,7 @@ export class TripDirectionEffects {
            // next is for timing... obsolete
           // this.checkPoints.push(Date.now());
           // this.checkPointsStrings.push("received request");
+          
           console.log(res);
           let resultPathArr = null;
 

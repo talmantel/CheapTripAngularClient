@@ -3,6 +3,9 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { IPath } from '../../service/http.service';
 import { HttpService } from 'src/app/service/http.service';
+import { GlobalService } from 'src/app/global/global.service';
+import { Currency } from 'src/app/currency-selector/currency-selector.component';
+import { IRout } from 'src/app/trip-direction/trip-direction.model';
 
 const TRANSPORT = new Map();
 TRANSPORT.set('Bus', $localize`Bus`);
@@ -30,11 +33,14 @@ export class PathDetailsComponent implements OnInit {
 @Input() startPoint: string;
 @Input() endPoint: string;
 private country:string;
+//private currency:Currency;
 
 
 
 price: number;
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService,
+              private globalService: GlobalService
+    ) {
 
 
     this.httpService.getUserCountry().subscribe({
@@ -51,7 +57,11 @@ price: number;
 
 
   ngOnInit(): void {
-    
+    // this.currency = this.globalService.getCurrency();
+  }
+
+  getGlobalCurrency(){
+    return this.globalService.getCurrency();
   }
 
   getTransportName(transport:string) {
@@ -59,21 +69,23 @@ price: number;
   }
 
 
-  getTransportUrl (transport:string){
+  getTransportUrl (rout:IRout){
     let url:string='';
-    switch(transport) { 
+    
+    switch(rout.transportation_type) { 
       case "Flight": { 
-        url = "http://Skyscanner.com";
+        //url = "http://Skyscanner.com";
+        url= this.getSkyScannerUrl(rout);
          break; 
       } 
       case "Bus": { 
         //url = "http://bus.tickets.ua";
-        url=this.getBusUrl();
+        url=this.getBusUrl(rout);
          break; 
       } 
       case "Train": { 
         //url = "http://gd.tickets.ua";
-         url=this.getTrainUrl();
+         url=this.getTrainUrl(rout);
         //url = "https://www.tutu.ru/poezda";
         break; 
       } 
@@ -96,8 +108,15 @@ price: number;
    }
    return url;
   }
-  getBusUrl(){
-    console.log ("bus "+this.country);
+  getBusUrl(rout :IRout){
+    // console.log ("bus "+this.country);
+    // if((from == 545 OR to == 545) AND (transportation_type == 2))
+    // console.log("bus new "+JSON.stringify(rout));
+    if (rout.from=="Донецк"||rout.from=="Donetsk"||
+    rout.to=="Донецк"||rout.to=="Donetsk"  ){
+      //right way is to use ID of city, but current server is not build for that
+      return "http://bustravel.dn.ua/";
+    }
     switch(this.country){
       case "RU":
       case "BY":
@@ -110,7 +129,7 @@ price: number;
     }
   }
 
-  getTrainUrl(){
+  getTrainUrl(rout:IRout){
     console.log ("train "+this.country);
     switch(this.country){
       
@@ -125,12 +144,23 @@ price: number;
     }
   }
 
-  openTransport (transport:string){
+  openTransport (rout: IRout){
     //function for opening site of corresponding transportation type
-     let url = this.getTransportUrl(transport);
+     let url = this.getTransportUrl(rout);
     if (url!=''){
-      // window.open(url, "_blank");
       window.open(url, "_blank");
     }
   }
+  getSkyScannerUrl (rout:IRout){
+let from=this.httpService.getSkyScannerCode(rout.from);
+
+let to = this.httpService.getSkyScannerCode(rout.to);
+
+      if (from==""||to==""){
+      return "http://Skyscanner.com";
+      }
+      return "http://Skyscanner.com/transport/flights/"+from+"/"+to;
+
+  }
 }
+
