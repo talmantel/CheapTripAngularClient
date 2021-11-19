@@ -22,8 +22,6 @@ const SKYCODEMAP = new Map([
   ["Chiba", ""], ["Kyoto", ""], ["Osaka", "osaa"], ["Jerusalem", ""], ["Batam", "bth"], ["Kolkatta", "ccu"],
   ["Jaipur", "jai"], ["Chennai", "maa"], ["Hurgada", "hrg"], ["Beijing", "any"],
   ["Zhuhai", "zuh"], ["Guilin", "kwl"], ["Vancouver", "yvra"], ["Toronto", "ytoa"],
-
-
   ["Rio de Janeiro", "rioa"], ["Buenos Aires", "buea"], ["Bangalore", "blr"], ["Krabi", "kbv"],
   ["Jeju", "cju"], ["Abu Dhabi", "auha"], ["Auckland", "akl"], ["Cebu", "ceb"], ["Sydney", "syd"],
   ["Melbourne", "mela"], ["Marrakech", "rak"], ["Penang Island", "pen"],
@@ -178,7 +176,6 @@ const SKYCODEMAP = new Map([
   ["Palm Springs	", "pspa"], ["Sedona", ""], ["Branson	", "bkg"], ["Montreal	", "ymqa"],
 
 
-
   [" Calgary", "yyc"], [" Edmonton", "yeg"], [" Ottawa", "yowa"], [" Winnipeg", "ywg"],
   ["Quebec City	", "yqba"], ["Hamilton	", "hm"], ["Kitchener", "ykf"], ["Victoria	", "yyja"],
   [" Halifax", "yhza"], [" Oshawa", ""], ["Windsor", "yqg"], ["Saskatoon", "yxe"], [" St. Catharines", ""],
@@ -187,7 +184,7 @@ const SKYCODEMAP = new Map([
   [" Kanyakumari", ""], [" Buddh Gaya", ""], [" Sarnath", ""], [" Kushinagar", ""],
   [" Shrawasti", ""], [" Rajgir", ""], ["Sankasya", ""], ["Tirumala", ""], ["Badrinath", ""], ["Kedarnath", ""],
   [" Prayagraj", ""], ["Mathura", ""], [" Vrindavan", ""], ["Somnath", ""], ["Dwarka", ""], ["Jammu", ""],
-  [" Ujjain", ""], [" Shirdi", ""], ["Palolem", ""], ["Varkala", ""], ["Alwar", ""], ["Amritapuri", ""]
+  [" Ujjain", ""], [" Shirdi", ""], ["Palolem", ""], ["Varkala", ""], ["Alwar", ""], ["Amritapuri", ""],
 
 ]);
 
