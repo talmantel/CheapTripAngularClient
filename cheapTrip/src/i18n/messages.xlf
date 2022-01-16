@@ -193,7 +193,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="questions" datatype="html">
-        <source>https://docs.google.com/forms/d/11mnL9hPZHkbixglQNqlN-iChn4-dYidnNnQAPXakYvA/edit?usp=sharing</source>
+        <source>https://docs.google.com/forms/d/11mnL9hPZHkbixglQNqlN-iChn4-dYidnNnQAPXakYvA/viewform</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search-result/path-map/path-map.component.html</context>
           <context context-type="linenumber">4</context>
