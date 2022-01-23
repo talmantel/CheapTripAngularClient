@@ -7,34 +7,24 @@
   </li>
 </ul> -->
 
-  <div>
-    <mat-toolbar color="primary" role="heading" style="padding: 0 0 0 0;">
-      <!-- <div class="slogan">
-        <p i18n = "main slogan@@mainSlogan">CheapTrip. Pay less, <br> visit more!</p>
+<div>
+  <mat-toolbar color="primary" role="heading" style="padding: 0 0 0 0">
+    <!-- <div class="slogan">
+        <p>CheapTrip. Pay less, <br> visit more!</p>
       </div> -->
-      <div class="cheaptrip" i18n="@@Cheaptrip">
-        CheapTrip
+    <div class="cheaptrip">CheapTrip</div>
+    <div class="words">
+      <p class="wordsUp">Pay less,</p>
+      <p class="wordsDown">visit more!</p>
+    </div>
+    <span class="spacer"></span>
+    <div class="selector">
+      <app-currency-selector></app-currency-selector>
+    </div>
 
-      </div> 
-      <div class="words">
-
-         <p class="wordsUp" i18n="@@PayLess">
-        Pay less, 
-      </p>
-      <p class="wordsDown" i18n="@@VisitMore">
-        visit more!
-      </p>
-      </div>
-      <span class="spacer"></span>
-      <div class="selector">
-       <app-currency-selector></app-currency-selector> 
-      </div>
-      
-     
-
-      <!-- <span class="spacer"></span> -->
-      <!-- <button mat-button (click)="toHomePage()"></button> -->
-      <!-- <button  mat-icon-button  [matMenuTriggerFor]="menu" aria-label="button with a menu">
+    <!-- <span class="spacer"></span> -->
+    <!-- <button mat-button (click)="toHomePage()"></button> -->
+    <!-- <button  mat-icon-button  [matMenuTriggerFor]="menu" aria-label="button with a menu">
          <mat-icon>menu</mat-icon> 
         <span class="material-icons"></span> 
         
@@ -42,18 +32,18 @@
       <mat-menu #menu="matMenu">  
         <button mat-menu-item [routerLink]="''">
           <mat-icon>home</mat-icon>
-          <span i18n = "menu home@@menuHome">Home</span>
+          <span>Home</span>
         </button>
         <button mat-menu-item [routerLink]="'/links'">
           <mat-icon>link icon</mat-icon>
-          <span i18n = "menu links@@menuLinks">Useful links</span>
+          <span>Useful links</span>
         </button>
         <button mat-menu-item [routerLink]="'/contacts'">
           <mat-icon>contacts icon</mat-icon>
-          <span i18n = "menu contacts@@menuContacts">Contacts</span>
+          <span>Contacts</span>
         </button>
       </mat-menu> -->
-    </mat-toolbar>
-  </div>
-  
+  </mat-toolbar>
+</div>
+
 <router-outlet></router-outlet>

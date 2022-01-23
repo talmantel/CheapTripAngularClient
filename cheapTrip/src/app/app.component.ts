@@ -15,28 +15,22 @@ import { ErrorComponent } from './error/error.component';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
- 
-  
   constructor(private dialog: MatDialog) {}
   ngOnInit(): void {
-  
     console.log(this.myBrowser());
-   console.log(this.getBrowserVersion());
+    console.log(this.getBrowserVersion());
 
-   if (this.getBrowserVersion() == 'Opera 72') {
+    if (this.getBrowserVersion() == 'Opera 72') {
       const alertMessage = new AlertMessage(
         'warning',
         'Unsupported!',
         'Sorry, we did not have time to adapt our application for the type of web browser you are using. But we managed to optimize it for Google Chrome ver. 86 or newest. We recommend trying it!',
-        [new Button("Close",$localize`:@@Close:Close`)]
+        [new Button('Close', 'Close')]
       );
-     /*  this.dialog.open(ErrorComponent, {
+      /*  this.dialog.open(ErrorComponent, {
         data: alertMessage,
       }); */
     }
-
-
   }
 
   myBrowser() {

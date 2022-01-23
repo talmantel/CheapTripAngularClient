@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import {map, startWith} from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import * as fromApp from '../../store/app.reducer';
 import * as TripDirectionActions from '../store/trip-direction.actions';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -17,10 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorInterceptor } from '../../error-interceptor';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from 'src/app/service/http.service';
-import {GlobalService} from '../../global/global.service'
-
-
-
+import { GlobalService } from '../../global/global.service';
 
 @Component({
   selector: 'app-select-direction',
@@ -43,14 +40,7 @@ import {GlobalService} from '../../global/global.service'
     ]),
   ],
 })
-
-
-
 export class SelectDirectionComponent implements OnInit {
-  
-  
-
-
   @ViewChild('startPointInput', { static: false })
   startPointInputEl: ElementRef;
   @ViewChild('endPointInput', { static: false })
@@ -74,24 +64,15 @@ export class SelectDirectionComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private httpService: HttpService,
-    private errorInterceptor:ErrorInterceptor,
+    private errorInterceptor: ErrorInterceptor,
     private store: Store<fromApp.AppState>,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-
-  
-
-
-  }
+  ) {}
   ngOnDestroy(): void {}
 
   ngOnInit() {
-    
-   
-
-    
-    console.log ("NG ON init start!");
+    console.log('NG ON init start!');
     this.mode = Modes.SEARCH;
     this.startPointAutoComplete = [];
     this.endPointAutoComplete = [];
@@ -110,14 +91,10 @@ export class SelectDirectionComponent implements OnInit {
 
     this.pointsSubscription();
     this.router.events.subscribe((res) => console.log('rout'));
-    
-    console.log ("NG oninit end!");
-  
+
+    console.log('NG oninit end!');
   }
 
- 
-
-  
   // autocomplete is invoked
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };
@@ -139,7 +116,7 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log ("SUBMITTED!");
+    console.log('SUBMITTED!');
     this.store.dispatch(new TripDirectionActions.GetRouts());
   }
 
@@ -255,21 +232,18 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   private setForm() {
-    
     this.directionForm = new FormGroup({
       startPointControl: new FormControl('', [
         this.patternValid({
           pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
-          msg: $localize`:@@onlyRusEng:Sorry,
-          For now, we support only English and Russian input.`,
+          msg: 'Sorry, For now, we support only English and Russian input.',
         }),
       ]),
-      
+
       endPointControl: new FormControl('', [
         this.patternValid({
           pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
-          msg: $localize`:@@onlyRusEng:Sorry,
-          For now, we support only English and Russian input.`,
+          msg: 'Sorry, For now, we support only English and Russian input.',
         }),
       ]),
     });
@@ -282,7 +256,10 @@ export class SelectDirectionComponent implements OnInit {
       }
 
       if (control.value && !control.value.match(urlRegEx)) {
-        this.errorInterceptor.showError ($localize`:@@oops:Oops`,$localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`);
+        this.errorInterceptor.showError(
+          'Oops',
+          'Sorry, only Latin and Russian characteres are allowed now.'
+        );
         return {
           invalidMsg: config.msg,
         };
@@ -334,7 +311,7 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   private pointsSubscription() {
-    console.log ("Points!");
+    console.log('Points!');
     this.startSubj.subscribe((res) => {
       if (typeof res == 'string') {
         this.startPoint = this.startPointAutoComplete.filter(
