@@ -108,12 +108,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.getPathsSubscription.unsubscribe();
   }
 
-  @HostListener('window:keyup', ['$event'])
-  keyEvent(event: KeyboardEvent) {
-    let el = document.getElementById('map').getBoundingClientRect();
-
-  }
-
   private getIFrameSize(obs: BreakpointObserver) {
     if (obs.isMatched('(max-width: 361px)')) {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.SmallPhones);

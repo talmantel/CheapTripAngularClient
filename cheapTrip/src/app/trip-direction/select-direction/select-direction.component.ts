@@ -1,18 +1,11 @@
 import { trigger, style, transition, animate } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map, startWith } from 'rxjs/operators';
 import * as fromApp from '../../store/app.reducer';
 import * as TripDirectionActions from '../store/trip-direction.actions';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
-import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorInterceptor } from '../../error-interceptor';
 import { HttpClient } from '@angular/common/http';

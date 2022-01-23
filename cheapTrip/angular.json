@@ -23,9 +23,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": ["src/assets"],
             "styles": [
-              "node_modules/flag-icon-css/css/flag-icon.min.css",
               "src/cheapTripStyles/cheapTrip-Theme.scss",
               "src/styles.scss"
             ],

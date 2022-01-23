@@ -3,7 +3,6 @@ import {
   IPath,
   IPathPoint,
   IPoint,
-  IPoints,
   Modes,
 } from '../trip-direction.model';
 
