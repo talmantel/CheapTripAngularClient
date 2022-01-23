@@ -4,7 +4,6 @@ import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header/header.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,8 +16,6 @@ import { SearchResultModule } from './search-result/search-result.module';
 import { NoPageComponent } from './no-page/no-page.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
-import { LandingComponent } from './landing/landing.component';
-import { DataTableComponent } from './authors/data-table/data-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -29,11 +26,8 @@ import { LogoComponent } from './logo/logo.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     NoPageComponent,
     ErrorComponent,
-    LandingComponent,
-    DataTableComponent,
     LinksComponent,
     LogoComponent,
   ],
