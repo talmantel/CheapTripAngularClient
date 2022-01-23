@@ -15,7 +15,7 @@ import { TripDirectionEffects } from './trip-direction/store/trip-direction.effe
 import { EffectsModule } from '@ngrx/effects';
 import { SearchResultModule } from './search-result/search-result.module';
 import { NoPageComponent } from './no-page/no-page.component';
-import { ErrorInterceptor } from "./error-interceptor";
+import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { LandingComponent } from './landing/landing.component';
 import { DataTableComponent } from './authors/data-table/data-table.component';
@@ -23,20 +23,22 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { LinksComponent } from './links/links.component';
-import localeRu from '@angular/common/locales/ru';
-import localeUa from '@angular/common/locales/uk';
-import { registerLocaleData } from '@angular/common';
+
 import { LogoComponent } from './logo/logo.component';
 import { CurrencySelectorComponent } from './currency-selector/currency-selector.component';
-// the second parameter 'fr-FR' is optional
-registerLocaleData(localeRu, 'ru');
-registerLocaleData(localeUa, 'ua');
+
 @NgModule({
-  
-  declarations: [AppComponent, HeaderComponent,  
+  declarations: [
+    AppComponent,
+    HeaderComponent,
     CurrencySelectorComponent,
-     NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent, 
-     LinksComponent, LogoComponent],
+    NoPageComponent,
+    ErrorComponent,
+    LandingComponent,
+    DataTableComponent,
+    LinksComponent,
+    LogoComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -54,11 +56,9 @@ registerLocaleData(localeUa, 'ua');
     MatSortModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true
-    }
-
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent]
+  entryComponents: [ErrorComponent],
 })
 export class AppModule {}
