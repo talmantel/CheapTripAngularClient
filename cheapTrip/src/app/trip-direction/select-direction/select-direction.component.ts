@@ -17,7 +17,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorInterceptor } from '../../error-interceptor';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from 'src/app/service/http.service';
-import { GlobalService } from '../../global/global.service';
 
 @Component({
   selector: 'app-select-direction',

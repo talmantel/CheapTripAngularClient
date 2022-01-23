@@ -2,8 +2,6 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { IPath } from '../../service/http.service';
 import { HttpService } from 'src/app/service/http.service';
-import { GlobalService } from 'src/app/global/global.service';
-import { Currency } from 'src/app/currency-selector/currency-selector.component';
 import { IRout } from 'src/app/trip-direction/trip-direction.model';
 
 const TRANSPORT = new Map();
@@ -29,13 +27,11 @@ export class PathDetailsComponent implements OnInit {
   @Input() startPoint: string;
   @Input() endPoint: string;
   private country: string;
-  //private currency:Currency;
 
   price: number;
-  constructor(
-    private httpService: HttpService,
-    private globalService: GlobalService
-  ) {
+
+
+  constructor(private httpService: HttpService) {
     this.httpService.getUserCountry().subscribe({
       next: (data: any) => {
         console.log('Got user country:' + data.country_code);
@@ -49,11 +45,6 @@ export class PathDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.currency = this.globalService.getCurrency();
-  }
-
-  getGlobalCurrency() {
-    return this.globalService.getCurrency();
   }
 
   getTransportName(transport: string) {
@@ -99,6 +90,7 @@ export class PathDetailsComponent implements OnInit {
     }
     return url;
   }
+
   getBusUrl(rout: IRout) {
     // console.log ("bus "+this.country);
     // if((from == 545 OR to == 545) AND (transportation_type == 2))
@@ -145,6 +137,7 @@ export class PathDetailsComponent implements OnInit {
       window.open(url, '_blank');
     }
   }
+
   getSkyScannerUrl(rout: IRout) {
     let from = this.httpService.getSkyScannerCode(rout.from);
 

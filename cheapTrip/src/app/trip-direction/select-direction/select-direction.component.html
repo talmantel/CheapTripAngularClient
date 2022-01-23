@@ -1,4 +1,3 @@
-<!-- <app-currency-selector></app-currency-selector> -->
 <div
   class="mainContainer"
   [ngClass]="{
@@ -8,11 +7,12 @@
 >
   <div class="message">
     <h1 class="LongSlogan" @insertRemoveTrigger1>
-      Find most beneficial and unusual routes between cities with airports,
-      combining flight, train, bus, ferry and rideshare.
+      Find most beneficial and unusual routes between cities with airports, combining flight, train, bus, ferry and rideshare.
     </h1>
   </div>
+
   <form [formGroup]="directionForm" novalidate (ngSubmit)="onSubmit()">
+    
     <div class="formInfo">
       <section>
         <div class="input">
@@ -79,11 +79,14 @@
           </p>
         </div>
       </section>
+
+
       <!--   <span class="material-icons arrows" (click)="changeDirection()">
         sync_alt
       </span> -->
 
       <span class="material-icons arrows"> double_arrow </span>
+
       <section>
         <div class="input">
           <mat-form-field
@@ -144,6 +147,7 @@
         </div>
       </section>
     </div>
+
     <div class="actions">
       <button mat-flat-button color="accent" type="reset" (click)="cleanForm()">
         Clear form

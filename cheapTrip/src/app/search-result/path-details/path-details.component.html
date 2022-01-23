@@ -25,8 +25,7 @@
                 <mat-chip-list
                   ><mat-chip selected="true" class="price-top">
                     {{
-                      rout.details.euro_price * getGlobalCurrency().oneEuroRate
-                        | currency: getGlobalCurrency().code:"symbol":"1.2-2"
+                      rout.details.euro_price | currency: "EUR":"symbol":"1.2-2"
                     }}
                   </mat-chip></mat-chip-list
                 ></span
@@ -35,6 +34,7 @@
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
+
       <div
         class="details"
         *ngFor="let path of rout.details.direct_paths; let i = index"
@@ -66,31 +66,10 @@
 
           <span class="spacer"> </span>
           <span class="currency">
-            {{
-              path.euro_price * getGlobalCurrency().oneEuroRate
-                | currency: getGlobalCurrency().code:"symbol-narrow":"1.2-2"
-            }}
+            {{ path.euro_price | currency: "EUR":"symbol":"1.2-2" }}
           </span>
         </p>
 
-        <!-- <p><span>{{path.from}} {{path.to}} </span><span class="spacer"></span>
-          <span class="transport-name">{{path.transportation_type}}</span></p>
-        <p> <span>{{path.duration_minutes}}</span>
-       
-          <button class = "buy-ticket-button" 
-          style="height: 20px;
-           line-height: 20px; 
-           color: inherit;
-           font-style: initial;
-           border-color: var(--color-primary);
-          "
-          *ngIf="getTransportUrl(path.transportation_type)!=''" 
-          mat-stroked-button color="primary"
-          (click)="openTransport(path.transportation_type)" >Buy ticket</button>
-          <span class="spacer"></span>
-          <span class="price-in-details">{{path.euro_price | currency:'EUR':'symbol':'1.2-2' }}</span> 
-          
-        </p> -->
         <p
           style="justify-content: center"
           *ngIf="path.transportation_type == 'Flight'"

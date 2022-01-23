@@ -4,7 +4,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Currency } from '../currency-selector/currency-selector.component';
 import { IPathPoint } from '../trip-direction/trip-direction.model';
 
 const URL = 'MY_URL';
@@ -623,14 +622,6 @@ export class HttpService {
     return code;
 
   }
-
-  getCurrencies():Observable<any> {
-    let url=  environment.urlTomCat +
-    'CheapTrip/GetCurrencyRate';
-    return this.http.get<Currency>(url, { observe: "response" });
-    
-  }
-
 
   getAutoCompleteData(data: string, type: string): Observable<string[]> {
     const address =

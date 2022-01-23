@@ -25,13 +25,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { LinksComponent } from './links/links.component';
 
 import { LogoComponent } from './logo/logo.component';
-import { CurrencySelectorComponent } from './currency-selector/currency-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CurrencySelectorComponent,
     NoPageComponent,
     ErrorComponent,
     LandingComponent,
