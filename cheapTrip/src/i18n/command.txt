@@ -1,2 +1,0 @@
-ng extract-i18n --output-path src/i18n --ivy
-ng s --configuration ru

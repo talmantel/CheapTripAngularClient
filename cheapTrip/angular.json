@@ -4,13 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "cheapTrip": {
-      "i18n": { 
-        "sourceLocale": "en-US", 
-        "locales": { 
-          "ru": "src/i18n/messages.ru.xlf",
-          "ua": "src/i18n/messages.ua.xlf"
-        } 
-      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -29,12 +22,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "localize": true,   
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/flag-icon-css/css/flag-icon.min.css",
               "src/cheapTripStyles/cheapTrip-Theme.scss",
@@ -43,14 +32,6 @@
             "scripts": []
           },
           "configurations": {
-           
-            "ru": { 
-              "localize": ["ru"] 
-            },
-            "ua": { 
-              "localize": ["ua"] 
-            },
-            
             "production": {
               "fileReplacements": [
                 {
@@ -63,7 +44,7 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "extractLicenses": true,
+              "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
@@ -89,19 +70,7 @@
           "configurations": {
             "production": {
               "browserTarget": "cheapTrip:build:production"
-            },
-            "ru": {
-              "browserTarget": "cheapTrip:build:ru"
-            },
-            "ua": {
-              "browserTarget": "cheapTrip:build:ua"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "cheapTrip:build"
           }
         },
         "test": {
@@ -111,10 +80,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
@@ -130,9 +96,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -150,8 +114,6 @@
         "deploy": {
           "builder": "@jefiozie/ngx-aws-deploy:deploy"
         }
-      
-      
       }
     }
   },
