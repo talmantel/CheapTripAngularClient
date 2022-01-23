@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NoPageComponent } from '../no-page/no-page.component';
-import { SearchResultGuard } from '../search-result/search-result.guard';
 import { TripDirectionComponent } from './trip-direction.component';
 
 const routes: Routes = [
