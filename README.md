@@ -1,3 +1,4 @@
+# This is lightweight version do not merge with other branhes
 # CheapTripAngularClient
 
 <b>Versioning conventions</b><br>
