@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { switchMap, map, withLatestFrom } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-import { LocaleService } from '../../service/locale.service';
 
 import * as TripDirectionActions from './trip-direction.actions';
 import {
@@ -24,46 +23,25 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import { SelectService } from '../select-direction/select.service';
-import { LocalizedString } from '@angular/compiler';
 import { HttpService } from 'src/app/service/http.service';
 import { Observable } from 'rxjs';
 
 import { ErrorInterceptor } from '../../error-interceptor';
 
 enum Icons {
-  FLIGHT = `<span class="material-icons">
-  flight
-  </span>`,
+  FLIGHT = `<span class="material-icons">flight</span>`,
   // FLIGHT = `<img src="assets/Icons/plane-h24.svg" height="24">`,
-  BUS = `<span class="material-icons">
-  directions_bus
-  </span>`,
+  BUS = `<span class="material-icons">directions_bus</span>`,
   // BUS =  `<img src="assets/Icons/Bus-h24.svg" height="24">`,
-  TRAIN = `<span class="material-icons">
-  directions_railway
-  </span>`,
+  TRAIN = `<span class="material-icons">directions_railway</span>`,
   // TRAIN =  `<img src="assets/Icons/train-h24.svg" height="24">`,
-  SUBWAY = `<span class="material-icons">
-  directions_subway
-  </span>`,
-  SHIP = `<span class="material-icons">
-  directions_boat
-  </span>`,
-  ONFOOT = `<span class="material-icons">
-  directions_walk
-  </span>`,
-  CAR = `<span class="material-icons">
-  directions_car
-  </span>`,
-  TAXI = `<span class="material-icons">
-  local_taxi
-  </span>`,
-  SHUTTLE = `<span class="material-icons">
-  shuttle
-  </span>`,
-  FERRY = `<span class="material-icons">
-  directions_boat
-  </span>`,
+  SUBWAY = `<span class="material-icons">directions_subway</span>`,
+  SHIP = `<span class="material-icons">directions_boat</span>`,
+  ONFOOT = `<span class="material-icons">directions_walk</span>`,
+  CAR = `<span class="material-icons">directions_car</span>`,
+  TAXI = `<span class="material-icons">local_taxi</span>`,
+  SHUTTLE = `<span class="material-icons">shuttle</span>`,
+  FERRY = `<span class="material-icons">directions_boat</span>`,
   RIDESHARE = `<img src="assets/Icons/rideshare_h24_30.svg" width="18">`,
 
   // RIDESHARE = `<span class="material-icons">
@@ -114,7 +92,6 @@ export class TripDirectionEffects {
   private LocationsEN: Observable<any>;
   constructor(
     private errorInterceptor: ErrorInterceptor,
-    private localeService: LocaleService,
     private selectService: SelectService,
     private actions$: Actions,
     private sanitizer: DomSanitizer,
@@ -320,8 +297,6 @@ export class TripDirectionEffects {
           // next is for timing... obsolete
           // this.checkPoints.push(Date.now());
           // this.checkPointsStrings.push("after nav, before return");
-          //can be used to determine user locale
-          // console.log('User locale -------'+this.localeService.getUsersLocale('en'));
 
           // next is for timing... obsolete
           // for (let index = 1; index < this.checkPoints.length; index++) {
