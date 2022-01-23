@@ -1,8 +1,6 @@
-
-@import '../cheapTripStyles/mixins.scss';
+@import "../cheapTripStyles/mixins.scss";
 
 * {
-  
   padding: 0;
   margin: 0;
 }
@@ -11,10 +9,8 @@
   flex: 1 1 auto;
 }
 
-.selector{
+.selector {
   font-size: 0.6em;
-  // margin: 0 0 0 0;
-  // padding: 0 0 0 0;
 }
 
 div.cheaptrip {
@@ -24,110 +20,74 @@ div.cheaptrip {
   font-size: 1.8em;
   color: white;
   line-height: 2rem;
-  font-family:'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bolder;
 }
+div.cheaptrip a {
+  color: white;
+  text-decoration: none;
+}
 
-.words{
+.words {
   letter-spacing: 2px;
-  // background-color: burlywood;
   font-style: italic;
   color: white;
   margin: 0%;
-  font-family:'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bolder;
 }
 .wordsUp {
   display: inline-block;
-  // background-color: aqua;
   font-size: 1.1em;
   line-height: 1rem;
 }
 .wordsDown {
-  
   font-weight: bolder;
   margin-left: 30px;
-  // background-color: blueviolet;
-  font-size:  1.1em;
+  font-size: 1.1em;
   line-height: 0.5rem;
 }
 
-// div.slogan {
-//   p {
-    
-//     font-style: italic;
-//     font-size: 0.9em;
-//     color: white;
-//     margin: 0%;
-//     line-height: 1.5rem;
-//     font-family:'Roboto', sans-serif;
-//     // font-family: "Anton", sans-serif;
-//     //font-family: "Arial Narrow", sans-serif
-//     font-weight: bolder;
-    
-//   }
-// }
-
-@include Desktop  {
+@include Desktop {
   .mat-toolbar {
     padding-left: 30px;
   }
   div.cheaptrip {
     padding-left: 30px;
-    width:auto;
-    // background-color: cadetblue;
+    width: auto;
     font-size: 2.8em;
     line-height: 3rem;
-
   }
-  
-  .words{
-    
-    
-    // display: inline-flex;
-    // background-color: pink;
+  .words {
     margin-left: 40px;
-    // background-color: burlywood;
-   
   }
-
-  .wordsUp{
+  .wordsUp {
     margin: 0 0 0 0;
     font-size: 1.63em;
     line-height: 1.63rem;
-    
   }
- 
   .wordsDown {
     font-size: 1.63em;
     line-height: 1.63rem;
     margin: 0 0 0 0;
     display: inline-flex;
     margin-left: 8px;
- 
   }
- 
 }
 
 @include Phones {
   div.cheaptrip {
-    width:auto;
+    width: auto;
     font-size: 1.3em;
     line-height: 1.3rem;
-
   }
-  
-  .words{
- 
-    // background-color: burlywood;
+  .words {
     font-size: 0.6em;
     line-height: 1rem;
   }
- 
   .wordsDown {
     margin-left: 10px;
   }
-
 }
 
 @include Smallphones {
@@ -138,30 +98,27 @@ div.cheaptrip {
   }
 
   div.cheaptrip {
-    width:auto;
+    width: auto;
     // background-color: cadetblue;
     font-size: 1em;
     line-height: 1.2rem;
     font-weight: lighter;
-
   }
-  
-  .words{
+
+  .words {
     font-weight: lighter;
     width: auto;
     // background-color: burlywood;
     font-size: 0.5em;
     line-height: 0.5rem;
   }
- 
+
   .wordsDown {
     margin-left: 10px;
   }
-  .selector{
+  .selector {
     font-size: 0.4em;
     // margin: 0 0 0 0;
     // padding: 0 0 0 0;
   }
-
 }
-

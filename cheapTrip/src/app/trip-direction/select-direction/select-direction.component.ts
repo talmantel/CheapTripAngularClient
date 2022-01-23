@@ -8,8 +8,6 @@ import { Subject, Subscription } from 'rxjs';
 import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorInterceptor } from '../../error-interceptor';
-import { HttpClient } from '@angular/common/http';
-import { HttpService } from 'src/app/service/http.service';
 
 @Component({
   selector: 'app-select-direction',
@@ -54,8 +52,6 @@ export class SelectDirectionComponent implements OnInit {
   nameParagraph: ElementRef;
 
   constructor(
-    private http: HttpClient,
-    private httpService: HttpService,
     private errorInterceptor: ErrorInterceptor,
     private store: Store<fromApp.AppState>,
     private route: ActivatedRoute,

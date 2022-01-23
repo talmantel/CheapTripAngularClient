@@ -11,7 +11,6 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="description">
-            <!-- <p><span class="points" *ngFor="let point of rout.details['points']">{{point}}</span></p> -->
             <ul class="city">
               <li class="points" *ngFor="let point of rout.details['points']">
                 {{ point }}<mat-icon [inline]="true">arrow_forward</mat-icon>
@@ -39,9 +38,6 @@
         class="details"
         *ngFor="let path of rout.details.direct_paths; let i = index"
       >
-        <!-- <p class="transport" > <span class="spacer"></span>
-         
-        </p> -->
         <p>
           <span class="rout"
             >{{ path.from }}

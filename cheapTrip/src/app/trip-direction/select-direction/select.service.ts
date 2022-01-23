@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { IPathPoint } from '../trip-direction.model';
@@ -15,13 +15,13 @@ export class SelectService {
   server: SERVER;
 
   constructor(public http: HttpClient) {
-     this.server = 'tomcat'; //to be fixed
+    this.server = 'tomcat'; //to be fixed
     // this.server = 'appachi'
   }
 
   public getUrl(name: string, type): string {
     if (this.server === 'tomcat') {
-     // const t = type === 'start' ? '1' : '2';
+      // const t = type === 'start' ? '1' : '2';
       console.log('tomacat');
       return (
         environment.urlTomCat +
@@ -51,7 +51,6 @@ export class SelectService {
       .get<IPathPoint[]>(this.getUrl(name, 'start'))
       .pipe(tap((arr) => console.log('form server', arr)));
   }
-
 
   getEndPointAutoComplete$(name: string): Observable<IPathPoint[]> {
     if (name == null) {

@@ -8,16 +8,11 @@ import * as TripDirectionActions from './trip-direction.actions';
 import {
   IDetails,
   IPath,
-  IPathPoint,
   IRecievedRouts,
   IRout,
 } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -30,11 +25,11 @@ import { ErrorInterceptor } from '../../error-interceptor';
 
 enum Icons {
   FLIGHT = `<span class="material-icons">flight</span>`,
-  // FLIGHT = `<img src="assets/Icons/plane-h24.svg" height="24">`,
+  // FLIGHT = `<img src="assets/icons/plane.svg" height="24">`,
   BUS = `<span class="material-icons">directions_bus</span>`,
-  // BUS =  `<img src="assets/Icons/Bus-h24.svg" height="24">`,
+  // BUS =  `<img src="assets/icons/bus.svg" height="24">`,
   TRAIN = `<span class="material-icons">directions_railway</span>`,
-  // TRAIN =  `<img src="assets/Icons/train-h24.svg" height="24">`,
+  // TRAIN =  `<img src="assets/icons/train.svg" height="24">`,
   SUBWAY = `<span class="material-icons">directions_subway</span>`,
   SHIP = `<span class="material-icons">directions_boat</span>`,
   ONFOOT = `<span class="material-icons">directions_walk</span>`,
@@ -42,32 +37,15 @@ enum Icons {
   TAXI = `<span class="material-icons">local_taxi</span>`,
   SHUTTLE = `<span class="material-icons">shuttle</span>`,
   FERRY = `<span class="material-icons">directions_boat</span>`,
-  RIDESHARE = `<img src="assets/Icons/rideshare_h24_30.svg" width="18">`,
-
-  // RIDESHARE = `<span class="material-icons">
-  // directions_car
-  // </span>`
-  // FERRY =  `<img src="assets/old Icons/ferryboat.png" height="24">`,
-  // RIDESHARE =  `<img src="assets/old Icons/auto_bla.png" height="24">`,
+  RIDESHARE = `<img src="assets/icons/rideshare1.svg" width="18">`,
 }
 
 const PATHMAP = new Map<string, { type: string }>();
-PATHMAP.set('mixed_routes', {
-  type: 'Mixed Trip',
-});
-PATHMAP.set('flying_routes', {
-  type: 'Air Trip',
-});
-PATHMAP.set('ground_routes', {
-  type: 'Ground Trip',
-});
-
-PATHMAP.set('fixed_routes_without_ride_share', {
-  type: 'Fixed trip without ride share',
-});
-PATHMAP.set('routes_without_ride_share', {
-  type: 'Trip without ride share',
-});
+PATHMAP.set('mixed_routes', { type: 'Mixed Trip' });
+PATHMAP.set('flying_routes', { type: 'Air Trip' });
+PATHMAP.set('ground_routes', { type: 'Ground Trip' });
+PATHMAP.set('fixed_routes_without_ride_share', {type: 'Fixed trip without ride share'});
+PATHMAP.set('routes_without_ride_share', { type: 'Trip without ride share' });
 
 const PATHMAPDETAILED = new Map();
 PATHMAPDETAILED.set('Bus', Icons.BUS);
@@ -78,7 +56,7 @@ PATHMAPDETAILED.set('Car Drive', Icons.CAR);
 PATHMAPDETAILED.set('Walk', Icons.ONFOOT);
 PATHMAPDETAILED.set('Town Car', Icons.CAR);
 PATHMAPDETAILED.set('Car Ferry', Icons.FERRY); // two variants for ferry
-PATHMAPDETAILED.set('Ferry', Icons.FERRY); //
+PATHMAPDETAILED.set('Ferry', Icons.FERRY);
 PATHMAPDETAILED.set('Shuttle', Icons.SHUTTLE);
 PATHMAPDETAILED.set('Taxi', Icons.TAXI);
 
@@ -411,19 +389,6 @@ export class TripDirectionEffects {
     return result;
   }
 
-  private handleError(err: HttpErrorResponse): void {
-    let errorMessage = '';
-
-    if (err.error instanceof ErrorEvent) {
-      // client-side error
-      //  errorMessage = `Error: ${err.error.message}`;
-    } else {
-      // server-side error
-      //   errorMessage = `Error Code: ${err.status}\nMessage: ${err.message}`;
-    }
-    //  window.alert(errorMessage);
-  }
-
   private getPoints(paths: IRout[]): Set<string> {
     const transformedArr = paths.map((item) => [item.from, item.to]);
     const result = new Set(transformedArr.reduce((a, b) => a.concat(b), []));
@@ -454,21 +419,6 @@ export class TripDirectionEffects {
     this.checkPoints.push(Date.now());
     this.checkPointsStrings.push('after filter');
     return paths;
-  }
-
-  private checkLanguageValidity(char: string): boolean {
-    if (/[а-яА-Я]/.test(char)) {
-      return true;
-    }
-    if (/[a-zA-Z]/.test(char)) {
-      return true;
-    }
-    //error only rus eng allowed
-    this.errorInterceptor.showError(
-      'Oops',
-      'Sorry, only Latin and Russian characteres are allowed now.'
-    );
-    return false;
   }
 
   private getLanguage(char: string): string {

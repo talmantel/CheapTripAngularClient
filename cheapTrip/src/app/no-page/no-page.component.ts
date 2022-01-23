@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-no-page',
   templateUrl: './no-page.component.html',
-  styleUrls: ['./no-page.component.scss']
+  styleUrls: ['./no-page.component.scss'],
 })
 export class NoPageComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

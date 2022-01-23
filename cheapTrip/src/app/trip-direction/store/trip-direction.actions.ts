@@ -1,10 +1,5 @@
 import { Action } from '@ngrx/store/src';
-import {
-  IPath,
-  IPathPoint,
-  IPoint,
-  Modes,
-} from '../trip-direction.model';
+import { IPath, IPathPoint, IPoint, Modes } from '../trip-direction.model';
 
 export const SET_START_POINT = '[TripDirection] Set startPoint';
 export const SET_END_POINT = '[TripDirection] Set endPoint';
@@ -60,14 +55,17 @@ export class SetEndPointAutocomplete implements Action {
 export class GetRouts implements Action {
   readonly type = GET_ROUTS;
   constructor() {
-    console.log("GEt ROUTS Constructor");
+    console.log('GEt ROUTS Constructor');
   }
 }
 
 export class SetRouts implements Action {
   readonly type = SET_ROUTS;
   constructor(
-    public payload: { paths: IPath[]; endPoints: { from: IPathPoint; to: IPathPoint} }
+    public payload: {
+      paths: IPath[];
+      endPoints: { from: IPathPoint; to: IPathPoint };
+    }
   ) {}
 }
 

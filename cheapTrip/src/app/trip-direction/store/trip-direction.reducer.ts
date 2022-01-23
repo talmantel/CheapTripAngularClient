@@ -28,7 +28,7 @@ const initialState: ITripDirectionState = {
   isLoading: false,
   reset: false,
   currentServer: 'server104',
- serverChanged: false
+  serverChanged: false,
 };
 
 export function tripDirectionReducer(
@@ -117,13 +117,13 @@ export function tripDirectionReducer(
 
     case TripDirectionActions.AUTOCOMPLETE_FAIL:
       let server = 'server68';
-      if (state.currentServer == 'server104' ){
-      //  server = Server.SERVER104;
+      if (state.currentServer == 'server104') {
+        //  server = Server.SERVER104;
       }
       return {
         ...state,
-     //   currentServer: server,
-     //   serverChanged: true
+        //   currentServer: server,
+        //   serverChanged: true
       };
 
     case TripDirectionActions.CLEAN_DATA:

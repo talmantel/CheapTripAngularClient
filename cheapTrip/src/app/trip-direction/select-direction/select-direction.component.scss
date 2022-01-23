@@ -1,5 +1,4 @@
 @import "../../../cheapTripStyles/styles.scss";
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -25,17 +24,15 @@ div.mainContainer {
   div.message {
     margin: 0.5rem auto 0.5rem;
     padding: 0;
-    color:#607D8B;
+    color: #607d8b;
 
     .LongSlogan {
       width: 100%;
-      font-family:'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       text-align: center;
       margin: 1rem auto;
       font-size: 0.9rem;
       line-height: 2rem;
-      
-      
     }
   }
 
@@ -67,7 +64,7 @@ div.mainContainer {
 
           display: flex;
           span {
-           // align-self: center;
+            // align-self: center;
             color: grey;
             cursor: pointer;
           }
@@ -75,7 +72,7 @@ div.mainContainer {
           mat-form-field {
             width: 100%;
             @include boxSizing(border-box);
-            
+
             padding-left: 0.5rem;
 
             input {
@@ -120,20 +117,16 @@ div.deliveryMode {
 }
 
 @include Desktop {
-  div.mainContainer{
-    
-  div.message{
-    
- 
-  .LongSlogan{
-    font-size: 1.6rem;
-  }
-}
+  div.mainContainer {
+    div.message {
+      .LongSlogan {
+        font-size: 1.6rem;
+      }
+    }
   }
 }
 
 @include Large {
- 
   div.mainContainer {
     form {
       div.actions {
@@ -156,7 +149,6 @@ div.deliveryMode {
     div.message {
       h1 {
         margin: 1rem auto;
-       
       }
     }
   }
@@ -259,11 +251,7 @@ div.deliveryMode {
   }
 }
 
-
-
 @include Phones {
-
-  
   div.mainContainer {
     margin: auto;
     width: 98%;

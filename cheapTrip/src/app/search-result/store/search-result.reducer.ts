@@ -3,9 +3,9 @@ import * as SearchResultActions from './search-result.actions';
 export interface ISearchResultState {
   someVal: any;
 }
-const initialState: ISearchResultState = {
 
-  someVal: 'some attribute'
+const initialState: ISearchResultState = {
+  someVal: 'some attribute',
 };
 
 export function searchResultReducer(

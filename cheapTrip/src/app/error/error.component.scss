@@ -7,28 +7,24 @@ div.main {
       width: 6rem;
       color: white;
     }
-    button.Back{
+    button.Back {
       background-color: var(--color-primary);
     }
-    button.Close{
+    button.Close {
       background-color: var(--color-accent);
     }
-    button.Download{
+    button.Download {
       background-color: var(--color-success);
     }
-
   }
 }
 .error {
   h1 {
     color: var(--color-primary);
   }
-
 }
-
 .warning {
   h1 {
     color: var(--color-accent);
   }
-
 }

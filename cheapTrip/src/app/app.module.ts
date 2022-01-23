@@ -16,10 +16,6 @@ import { SearchResultModule } from './search-result/search-result.module';
 import { NoPageComponent } from './no-page/no-page.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { LinksComponent } from './links/links.component';
 
 import { LogoComponent } from './logo/logo.component';
 
@@ -28,7 +24,6 @@ import { LogoComponent } from './logo/logo.component';
     AppComponent,
     NoPageComponent,
     ErrorComponent,
-    LinksComponent,
     LogoComponent,
   ],
   imports: [
@@ -43,9 +38,6 @@ import { LogoComponent } from './logo/logo.component';
     SearchResultModule,
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([TripDirectionEffects]),
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

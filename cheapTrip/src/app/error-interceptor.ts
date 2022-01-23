@@ -18,9 +18,6 @@ import { Store } from '@ngrx/store';
 import { AlertMessage } from './error/alertMessage.model';
 import { Button } from './error/alertMessage.model';
 
-//import { ErrorComponent } from "./error/error.component";
-//ngimport { ErrorService } from "./error/error.service";
-
 @Injectable({
   providedIn: 'root',
 })

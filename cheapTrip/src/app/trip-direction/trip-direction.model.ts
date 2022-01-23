@@ -5,18 +5,12 @@ export interface IPoints {
   endPoint: string;
 }
 
-enum PointType {
-  START = 'startPoint',
-  END = 'endPoint',
-}
-
 export enum Modes {
   SEARCH,
   DELIVERY,
 }
 
-export  type Server = 'server68'| 'server104';
-
+export type Server = 'server68' | 'server104';
 
 export interface IPoint {
   name: string;
@@ -39,12 +33,11 @@ export interface IDetails {
   transport: SafeHtml[];
 }
 
-export interface IRecievedRouts{
+export interface IRecievedRouts {
   routeType: string;
   euro_price: number;
   duration_minutes: number;
   direct_paths: IRout[];
-
 }
 
 export interface IPath {

@@ -67,7 +67,7 @@ export class PathDetailsComponent implements OnInit {
       }
       case 'Train': {
         //url = "http://gd.tickets.ua";
-        url = this.getTrainUrl(rout);
+        url = this.getTrainUrl();
         //url = "https://www.tutu.ru/poezda";
         break;
       }
@@ -116,7 +116,7 @@ export class PathDetailsComponent implements OnInit {
     }
   }
 
-  getTrainUrl(rout: IRout) {
+  getTrainUrl() {
     console.log('train ' + this.country);
     switch (this.country) {
       case 'RU':
