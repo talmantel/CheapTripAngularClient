@@ -6,10 +6,8 @@ export const SET_END_POINT = '[TripDirection] Set endPoint';
 export const GET_START_POINT = '[TripDirection] Get startPoint';
 export const GET_END_POINT = '[TripDirection] Get endPoint';
 export const GET_AUTOCOMPLETE = '[TripDirection] Get Autocomplete';
-export const SET_START_POINT_AUTOCOMPLETE =
-  '[TripDirection] Set startPointAutocomplete';
-export const SET_END_POINT_AUTOCOMPLETE =
-  '[TripDirection] Set endPointAutocomplete';
+export const SET_START_POINT_AUTOCOMPLETE = '[TripDirection] Set startPointAutocomplete';
+export const SET_END_POINT_AUTOCOMPLETE ='[TripDirection] Set endPointAutocomplete';
 export const GET_ROUTS = '[TripDirection] Get Routs';
 export const SET_ROUTS = '[TripDirection] Set Routs';
 export const AUTOCOMPLETE_FAIL = '[TripDirection] Autocomplete Fail';
