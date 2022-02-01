@@ -17,14 +17,12 @@ import { NoPageComponent } from './no-page/no-page.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 
-import { LogoComponent } from './logo/logo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NoPageComponent,
     ErrorComponent,
-    LogoComponent,
   ],
   imports: [
     BrowserModule,

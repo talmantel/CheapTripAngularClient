@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NoPageComponent } from './no-page/no-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/search/myPath/logo', pathMatch: 'full' },
+  { path: '', redirectTo: '/search/myPath', pathMatch: 'full' },
   {
     path: 'search',
     loadChildren: () =>
