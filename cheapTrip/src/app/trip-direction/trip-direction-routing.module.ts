@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NoPageComponent } from '../no-page/no-page.component';
 import { TripDirectionComponent } from './trip-direction.component';
 
 const routes: Routes = [
@@ -16,7 +15,6 @@ const routes: Routes = [
             (m) => m.SearchResultModule
           ),
       },
-      { path: 'noPage', component: NoPageComponent },
     ],
   },
 ];

@@ -13,7 +13,6 @@ import { TripDirectionModule } from './trip-direction/trip-direction.module';
 import { TripDirectionEffects } from './trip-direction/store/trip-direction.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { SearchResultModule } from './search-result/search-result.module';
-import { NoPageComponent } from './no-page/no-page.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 
@@ -21,7 +20,6 @@ import { ErrorComponent } from './error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NoPageComponent,
     ErrorComponent,
   ],
   imports: [

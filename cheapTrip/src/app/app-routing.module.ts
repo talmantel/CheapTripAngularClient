@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NoPageComponent } from './no-page/no-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/search/myPath', pathMatch: 'full' },
@@ -12,7 +11,7 @@ const routes: Routes = [
       ),
   },
 
-  { path: '**', component: NoPageComponent },
+  { path: '**', redirectTo: '/search/myPath' },
 ];
 
 @NgModule({
