@@ -17,7 +17,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
-import { SelectService } from '../select-direction/select.service';
 import { HttpService } from 'src/app/service/http.service';
 import { Observable } from 'rxjs';
 
@@ -70,7 +69,6 @@ export class TripDirectionEffects {
   private LocationsEN: Observable<any>;
   constructor(
     private errorInterceptor: ErrorInterceptor,
-    private selectService: SelectService,
     private actions$: Actions,
     private sanitizer: DomSanitizer,
     private http: HttpClient,
