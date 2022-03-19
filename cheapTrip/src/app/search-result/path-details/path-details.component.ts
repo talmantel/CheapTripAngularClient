@@ -125,7 +125,7 @@ price: number;
       case "IN":
         return "https://www.makemytrip.com/bus-tickets/";
       default:
-        return "http://www.omio.com";
+        return "https://omio.sjv.io/XxEWmb";
     }
   }
 
@@ -140,7 +140,7 @@ price: number;
       case "IN":
         return "https://www.makemytrip.com/railways/";
       default:
-        return "http://www.omio.com";
+        return "https://omio.sjv.io/XxEWmb";
     }
   }
 
