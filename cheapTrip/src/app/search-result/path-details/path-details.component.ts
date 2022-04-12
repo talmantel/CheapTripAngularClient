@@ -120,12 +120,13 @@ price: number;
     switch(this.country){
       case "RU":
       case "BY":
-      case "UA":
+      
         return "http://bus.tutu.ru";
       case "IN":
         return "https://www.makemytrip.com/bus-tickets/";
+      case "UA":
       default:
-        return "http://www.omio.com";
+        return "https://omio.sjv.io/XxEWmb";
     }
   }
 
@@ -135,12 +136,13 @@ price: number;
       
       case "RU":
       case "BY":
-      case "UA":
+      
         return "https://www.tutu.ru/poezda";
       case "IN":
         return "https://www.makemytrip.com/railways/";
+      case "UA":
       default:
-        return "http://www.omio.com";
+        return "https://omio.sjv.io/XxEWmb";
     }
   }
 
