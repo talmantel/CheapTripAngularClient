@@ -6,7 +6,7 @@ div.mainContainer {
   width: 98%;
   margin: auto;
   position: relative;
-  justify-content: stretch;
+  justify-content: center;
   align-items: flex-start;
 
   mat-spinner {
@@ -14,20 +14,20 @@ div.mainContainer {
   }
 
   div.aside {
-    flex-basis: 49%;
-    flex-grow: 1;
+    // flex-basis: 49%;
+    flex-grow: 0.67;
   }
-  div.map {
-    flex-basis: 50%;
-    display: flex;
-    justify-content: space-around;
-    border-left: 1px solid var(--color-accent);
-  }
+  // div.map {
+  //   flex-basis: 50%;
+  //   display: flex;
+  //   justify-content: space-around;
+  //   border-left: 1px solid var(--color-accent);
+  // }
 }
 @include Large {
-  div.map {
-   // border-left: 1px solid var(--color-accent);
-  }
+  // div.map {
+  //  // border-left: 1px solid var(--color-accent);
+  // }
 }
 
 @include Medium {

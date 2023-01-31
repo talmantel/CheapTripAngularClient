@@ -154,14 +154,14 @@ price: number;
     }
   }
   getSkyScannerUrl (rout:IRout){
-let from=this.httpService.getSkyScannerCode(rout.from);
+// let from=this.httpService.getSkyScannerCode(rout.from);
 
-let to = this.httpService.getSkyScannerCode(rout.to);
+// let to = this.httpService.getSkyScannerCode(rout.to);
 
-      if (from==""||to==""){
-      return "http://Skyscanner.com";
-      }
-      return "http://Skyscanner.com/transport/flights/"+from+"/"+to;
+      // if (from==""||to==""){
+      return "https://omio.sjv.io/XxEWmb";
+      // }
+      // return "https://omio.sjv.io/XxEWmb"+from+"/"+to;
 
   }
 }

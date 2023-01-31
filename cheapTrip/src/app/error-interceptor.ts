@@ -50,19 +50,27 @@ export class ErrorInterceptor implements HttpInterceptor {
         let errorData: AlertMessage;
        // console.log ("--==unknown error==-- "+error)
         switch (true) {
-          case error.status >= 400:
-            errorData = new AlertMessage('warning', $localize`:@@oh,no:Oh no!`,
-            $localize`:@@noRoute:Sorry, the data we have accumulated is not
-             enough to build a route between the indicated cities. Try changing your request.`,
-             [new Button("Close",$localize`:@@Close:Close`)]);
+           case error.status === 500:
+            errorData = new AlertMessage(
+              'error',
+              $localize`:@@oops:oops`,
+              $localize`:@@serverOffline:Sorry. We are currently working only with Latin characters. But we promise to fix it soon.`,
+              [new Button("Close",$localize`:@@Close:Close`)]
+            );
             break;
-          case error.status >= 500:
+         case error.status >= 500:
             errorData = new AlertMessage(
               'error',
               $localize`:@@oops:oops`,
               $localize`:@@serverOffline:Pss! Our server is sleeping now. Please come back later.`,
               [new Button("Close",$localize`:@@Close:Close`)]
             );
+            break;
+            case error.status >= 400:
+            errorData = new AlertMessage('warning', $localize`:@@oh,no:Oh no!`,
+            $localize`:@@noRoute:Sorry, the data we have accumulated is not
+             enough to build a route between the indicated cities. Try changing your request.`,
+             [new Button("Close",$localize`:@@Close:Close`)]);
             break;
             default: errorData = new AlertMessage('error', error.name,
             'Unknown error', [new Button("Close",$localize`:@@Close:Close`)]);
