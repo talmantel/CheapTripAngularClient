@@ -6,11 +6,12 @@ import { Currency } from '../currency-selector/currency-selector.component';
 })
 export class GlobalService {
 
-  currency:Currency;
+  currency:Currency=JSON.parse('{"code":"EUR", "name":"Euro", "oneEuroRate":"1", "r2rSymbol":"€"}');
 
   constructor() { }
 
-  getCurrency(){
+  getCurrency() {
+    // console.log(this.currency)
     return this.currency;
   }
 

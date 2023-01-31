@@ -629,6 +629,7 @@ export class HttpService {
     let url=  environment.urlTomCat +
     'CheapTrip/GetCurrencyRate';
     return this.http.get<Currency>(url, { observe: "response" });
+    // return
     
   }
 

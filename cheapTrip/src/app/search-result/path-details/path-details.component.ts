@@ -60,7 +60,8 @@ price: number;
     // this.currency = this.globalService.getCurrency();
   }
 
-  getGlobalCurrency(){
+  getGlobalCurrency() {
+    // console.log(this.globalService.getCurrency())
     return this.globalService.getCurrency();
   }
 
