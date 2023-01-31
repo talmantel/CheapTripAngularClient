@@ -269,7 +269,7 @@ export class SelectDirectionComponent implements OnInit {
         this.patternValid({
           pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
           msg: $localize`:@@onlyRusEng:Sorry,
-          For now, we support only English and Russian input.`,
+          For now, we support only English input.`,
         }),
       ]),
     });
@@ -282,7 +282,7 @@ export class SelectDirectionComponent implements OnInit {
       }
 
       if (control.value && !control.value.match(urlRegEx)) {
-        this.errorInterceptor.showError ($localize`:@@oops:Oops`,$localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`);
+        this.errorInterceptor.showError ($localize`:@@oops:Oops`,$localize`:@@onlyRusEng:Sorry. We are currently working only with Latin characters. But we promise to fix it soon.`);
         return {
           invalidMsg: config.msg,
         };
