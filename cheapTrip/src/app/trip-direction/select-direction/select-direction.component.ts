@@ -259,15 +259,15 @@ export class SelectDirectionComponent implements OnInit {
     this.directionForm = new FormGroup({
       startPointControl: new FormControl('', [
         this.patternValid({
-          pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
+          pattern: /[a-zA-Z0-9\-\s]/,
           msg: $localize`:@@onlyRusEng:Sorry,
-          For now, we support only English and Russian input.`,
+          For now, we support only English input.`,
         }),
       ]),
       
       endPointControl: new FormControl('', [
         this.patternValid({
-          pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
+          pattern: /[a-zA-Z0-9\-\s]/,
           msg: $localize`:@@onlyRusEng:Sorry,
           For now, we support only English input.`,
         }),
