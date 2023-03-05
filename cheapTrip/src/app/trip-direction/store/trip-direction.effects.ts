@@ -14,16 +14,19 @@ import {
   IRout,
 } from '../trip-direction.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
-import {SelectService} from "../select-direction/select.service"
+import { SelectService } from '../select-direction/select.service';
 import { LocalizedString } from '@angular/compiler';
 import { HttpService } from 'src/app/service/http.service';
-import {Observable} from 'rxjs';
-
+import { Observable } from 'rxjs';
 
 import { ErrorInterceptor } from '../../error-interceptor';
 
@@ -61,8 +64,8 @@ enum Icons {
   FERRY = `<span class="material-icons">
   directions_boat
   </span>`,
-  RIDESHARE =  `<img src="assets/Icons/rideshare_h24_30.svg" width="18">`,
-  
+  RIDESHARE = `<img src="assets/Icons/rideshare_h24_30.svg" width="18">`,
+
   // RIDESHARE = `<span class="material-icons">
   // directions_car
   // </span>`
@@ -81,11 +84,11 @@ PATHMAP.set('ground_routes', {
   type: 'Ground Trip',
 });
 
-PATHMAP.set('fixed_routes_without_ride_share',{
-  type:'Fixed trip without ride share'
+PATHMAP.set('fixed_routes_without_ride_share', {
+  type: 'Fixed trip without ride share',
 });
-PATHMAP.set('routes_without_ride_share',{
-  type:'Trip without ride share'
+PATHMAP.set('routes_without_ride_share', {
+  type: 'Trip without ride share',
 });
 
 const PATHMAPDETAILED = new Map();
@@ -96,24 +99,23 @@ PATHMAPDETAILED.set('Ride Share', Icons.RIDESHARE);
 PATHMAPDETAILED.set('Car Drive', Icons.CAR);
 PATHMAPDETAILED.set('Walk', Icons.ONFOOT);
 PATHMAPDETAILED.set('Town Car', Icons.CAR);
-PATHMAPDETAILED.set('Car Ferry', Icons.FERRY);  // two variants for ferry
-PATHMAPDETAILED.set('Ferry', Icons.FERRY);      //
+PATHMAPDETAILED.set('Car Ferry', Icons.FERRY); // two variants for ferry
+PATHMAPDETAILED.set('Ferry', Icons.FERRY); //
 PATHMAPDETAILED.set('Shuttle', Icons.SHUTTLE);
 PATHMAPDETAILED.set('Taxi', Icons.TAXI);
 
 @Injectable()
 export class TripDirectionEffects {
-  
   private language: string;
   private checkPoints: number[];
   private checkPointsStrings: string[];
   private Locations: string[];
-  private LocationsRU:Observable<any>;
-  private LocationsEN:Observable<any>;
+  private LocationsRU: Observable<any>;
+  private LocationsEN: Observable<any>;
   constructor(
-    private errorInterceptor:ErrorInterceptor,
-    private localeService:LocaleService,
-    private selectService:SelectService,
+    private errorInterceptor: ErrorInterceptor,
+    private localeService: LocaleService,
+    private selectService: SelectService,
     private actions$: Actions,
     private sanitizer: DomSanitizer,
     private http: HttpClient,
@@ -123,23 +125,20 @@ export class TripDirectionEffects {
   ) {
     //   this.server = 'tomcat'; //to be fixed
     // this.server = Server.SERVER104;
-    console.log ("constructor inoked");
+    console.log('constructor inoked');
     // this.LocationsEN = httpService.getAllEnLocationsTomcat();
     // this.LocationsRU = httpService.getAllRuLocationsTomcat();
     // console.log (this.LocationsRU);
     // console.log ("en loc "+this.LocationsEN);
-   
-   //console.log ("init country "+this.country)
-    
-   
-    //"wake up" servlet
-      // this.http.get(environment.urlTomCat+'CheapTrip/getRoute?from='+10+'&to='+20).subscribe(data => {
-      //   console.log("received routes");
-      //   console.log (this.LocationsRU);
-      // })
 
-    }
-      
+    //console.log ("init country "+this.country)
+
+    //"wake up" servlet
+    // this.http.get(environment.urlTomCat+'CheapTrip/getRoute?from='+10+'&to='+20).subscribe(data => {
+    //   console.log("received routes");
+    //   console.log (this.LocationsRU);
+    // })
+  }
 
   /*  @Effect()
   newEffect = this.actions$.pipe(
@@ -162,8 +161,7 @@ export class TripDirectionEffects {
     switchMap((request: Array<any>) => {
       let url = '';
 
-  
-//this is url for spring server
+      //this is url for spring server
       if (request[1].currentServer === 'server68') {
         url =
           environment.url68 +
@@ -173,7 +171,6 @@ export class TripDirectionEffects {
           '&search_name=' +
           encodeURIComponent(request[0].payload.name);
       } else {
-
         url =
           environment.url104 +
           'locations?type=' +
@@ -182,31 +179,32 @@ export class TripDirectionEffects {
           '&search_name=' +
           encodeURIComponent(request[0].payload.name);
       }
-        //here is url for a Tomcat server
-       // url = this.selectService.getUrl('from',request[0].payload.name);
-      
+      //here is url for a Tomcat server
+      // url = this.selectService.getUrl('from',request[0].payload.name);
+
       // if (!this.checkLanguageValidity(request[0].payload.name[0])) {
       //   return;
       // }
-      this.language= this.getLanguage(request[0].payload.name[0]);
+      this.language = this.getLanguage(request[0].payload.name[0]);
       //actual query
-       if (environment.mainServer=="tomcat"){
-        url=  environment.urlTomCat +
-        'CheapTrip/getLocations?type=' +
-        '0' +
-        '&search_name=' +
-       encodeURIComponent(request[0].payload.name);
-        '';
-        if (this.language=='ru'){
-          url+='&language_name=ru';
+      if (environment.mainServer == 'tomcat') {
+        url =
+          environment.urlTomCat +
+          'CheapTrip/getLocations?type=' +
+          '0' +
+          '&search_name=' +
+          encodeURIComponent(request[0].payload.name);
+        ('');
+        if (this.language == 'ru') {
+          url += '&language_name=ru';
         }
       }
-      
+
       let locations = this.LocationsEN;
-      if (this.getLanguage(request[0].payload.name[0])=="ru"){
+      if (this.getLanguage(request[0].payload.name[0]) == 'ru') {
         locations = this.LocationsRU;
       }
-        //local locations array
+      //local locations array
       // return locations.pipe(
       //   map((res) => {
       //     console.log(res.body);
@@ -226,25 +224,23 @@ export class TripDirectionEffects {
       //   })
 
       //actual http
-      
-      return this.http
-        .get<any>(url, { observe: 'response' })
-        .pipe(
-          map((res) => {
-            console.log(res);
-            const newAction =
-              request[0].payload.type === 'from'
-                ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
-                : new TripDirectionActions.SetEndPointAutocomplete(res.body);
-            return newAction;
-          })
-          /*  catchError((error) => {
+
+      return this.http.get<any>(url, { observe: 'response' }).pipe(
+        map((res) => {
+          console.log(res);
+          const newAction =
+            request[0].payload.type === 'from'
+              ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
+              : new TripDirectionActions.SetEndPointAutocomplete(res.body);
+          return newAction;
+        })
+        /*  catchError((error) => {
           console.log('error', error);
           this.handleError(error);
 
           return of(new TripDirectionActions.AutoCompleteFail(error));
         }) */
-        );
+      );
     })
   );
 
@@ -253,8 +249,8 @@ export class TripDirectionEffects {
     ofType(TripDirectionActions.GET_ROUTS),
     withLatestFrom(this.store$.select('directions')),
     switchMap((request: Array<any>) => {
-      this.checkPoints=new Array;
-      this.checkPointsStrings=new Array;
+      this.checkPoints = new Array();
+      this.checkPointsStrings = new Array();
       let url = '';
       // lower is url for a spring server
       // if (request[1].currentServer === 'server68') {
@@ -274,35 +270,37 @@ export class TripDirectionEffects {
       // }
 
       //here is url for a Tomcat server to be fixed
-     // url = this.selectService.getUrl('from','to')
-     if (environment.mainServer=="tomcat"){
-     url=  environment.urlTomCat +
-     'CheapTrip/getRoute?from=' +
-     request[1].startPoint.id +
-     '&to=' +
-     request[1].endPoint.id;
-     }
-    //  this.checkPoints.push(Date.now());
-    //  this.checkPointsStrings.push("Before request");
+      // url = this.selectService.getUrl('from','to')
+      if (environment.mainServer == 'tomcat') {
+        url =
+          environment.urlTomCat +
+          'CheapTrip/getRoute?from=' +
+          request[1].startPoint.id +
+          '&to=' +
+          request[1].endPoint.id;
+      }
+      //  this.checkPoints.push(Date.now());
+      //  this.checkPointsStrings.push("Before request");
 
-     if (this.language=='ru')
-     {
-       url+='&language_name=ru'
-     }
+      if (this.language == 'ru') {
+        url += '&language_name=ru';
+      }
 
       return this.http.get(url, { observe: 'response' }).pipe(
         map((res) => {
-           // next is for timing... obsolete
+          // next is for timing... obsolete
           // this.checkPoints.push(Date.now());
           // this.checkPointsStrings.push("received request");
-          
+
           console.log(res);
           let resultPathArr = null;
 
           resultPathArr = this.transformObject(res.body as IRecievedRouts[]);
-          
-          resultPathArr.sort((a, b) => (a.details.euro_price > b.details.euro_price) ? 1 : -1);
-          
+
+          resultPathArr.sort((a, b) =>
+            a.details.euro_price > b.details.euro_price ? 1 : -1
+          );
+
           const endPoints = {
             from: request[1].startPoint,
             to: request[1].endPoint,
@@ -313,25 +311,25 @@ export class TripDirectionEffects {
             to: request[1].endPoint.name,
             toID: request[1].endPoint.id,
           };
-           // next is for timing... obsolete
+          // next is for timing... obsolete
           // this.checkPoints.push(Date.now());
           // this.checkPointsStrings.push("Before navigation to mypath");
           this.router.navigate(['/search/myPath'], {
             queryParams,
           });
-           // next is for timing... obsolete
+          // next is for timing... obsolete
           // this.checkPoints.push(Date.now());
           // this.checkPointsStrings.push("after nav, before return");
           //can be used to determine user locale
-         // console.log('User locale -------'+this.localeService.getUsersLocale('en'));
+          // console.log('User locale -------'+this.localeService.getUsersLocale('en'));
 
           // next is for timing... obsolete
           // for (let index = 1; index < this.checkPoints.length; index++) {
           //   console.log (this.checkPointsStrings[index-1]+" -> "+this.checkPointsStrings[index]
           //   +" elapsed "+(this.checkPoints[index]-this.checkPoints[index-1])+" ms");
-            
+
           // }
-          
+
           return new TripDirectionActions.SetRouts({
             paths: resultPathArr,
             endPoints: endPoints,
@@ -408,7 +406,7 @@ export class TripDirectionEffects {
     const hours = Math.floor(minutes / 60 - days * 24);
     const hourStr = hours < 1 ? '' : hours + $localize`:@@hours_letter:h`;
     const min = minutes - days * 24 * 60 - hours * 60;
-    const minStr = min +$localize`:@@minutes_letters:min`;
+    const minStr = min + $localize`:@@minutes_letters:min`;
 
     return dayStr + ' ' + hourStr + ' ' + minStr;
   }
@@ -458,55 +456,56 @@ export class TripDirectionEffects {
   }
 
   private reducedPaths(paths: IPath[]): IPath[] {
-     // console.log("-=Paths=- "+paths.length);
-     this.checkPoints.push(Date.now());
-     this.checkPointsStrings.push("Before filter");
-      let stringifyArr;
-      
-      let duplicateIndex;
-      do{
-        stringifyArr = paths.map((p) => JSON.stringify(p.details));
-        duplicateIndex=-1;//means no duplicate 
-          for (let j = 0; j < paths.length; j++) {
-                  
-            for (let i = 0; i < paths.length; i++) {
-              if ((stringifyArr[j] == stringifyArr[i])&&(i!=j)) {
-                duplicateIndex = i;
-              }
-            }
+    // console.log("-=Paths=- "+paths.length);
+    this.checkPoints.push(Date.now());
+    this.checkPointsStrings.push('Before filter');
+    let stringifyArr;
+
+    let duplicateIndex;
+    do {
+      stringifyArr = paths.map((p) => JSON.stringify(p.details));
+      duplicateIndex = -1; //means no duplicate
+      for (let j = 0; j < paths.length; j++) {
+        for (let i = 0; i < paths.length; i++) {
+          if (stringifyArr[j] == stringifyArr[i] && i != j) {
+            duplicateIndex = i;
           }
-          paths= paths.filter((_path, index) => {
-            return index != duplicateIndex;
-          });
-        } while(duplicateIndex!=-1) //do... while there is duplicates
-        this.checkPoints.push(Date.now());
-        this.checkPointsStrings.push("after filter");
-      return paths;
+        }
+      }
+      paths = paths.filter((_path, index) => {
+        return index != duplicateIndex;
+      });
+    } while (duplicateIndex != -1); //do... while there is duplicates
+    this.checkPoints.push(Date.now());
+    this.checkPointsStrings.push('after filter');
+    return paths;
   }
 
-  private    checkLanguageValidity (char:string):boolean{
-    if ((/[а-яА-Я]/).test(char) ){
+  private checkLanguageValidity(char: string): boolean {
+    if (/[а-яА-Я]/.test(char)) {
       return true;
     }
-    if ((/[a-zA-Z]/).test(char) ){
+    if (/[a-zA-Z]/.test(char)) {
       return true;
     }
     //error only rus eng allowed
-    this.errorInterceptor.showError ($localize`:@@oops:Oops`,$localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`);
-    return false
+    this.errorInterceptor.showError(
+      $localize`:@@oops:Oops`,
+      $localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`
+    );
+    return false;
   }
 
-  private getLanguage (char:string):string{
+  private getLanguage(char: string): string {
     // if ((/[a-zA-Z]/).test(char) ){
     //   return 'en';
     // }
-    if ((/[а-яА-Я]/).test(char) ){
+    if (/[а-яА-Я]/.test(char)) {
       return 'ru';
     }
-    if ((/[a-zA-Z]/).test(char) ){
+    if (/[a-zA-Z]/.test(char)) {
       return 'en';
     }
     return 'undefined';
   }
-  
 }
