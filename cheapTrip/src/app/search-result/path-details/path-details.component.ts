@@ -164,15 +164,24 @@ export class PathDetailsComponent implements OnInit {
     // }
     // return "https://omio.sjv.io/XxEWmb"+from+"/"+to;
   }
-  linkToBooking(): void {
+
+  onSubmitBooking(): void {
+    console.log("SUBMITTED!");
     window.open(
       'https://www.booking.com/searchresults.en.html?aid=7920152',
       '_blank'
     );
-    // if there is city
-    // https://www.booking.com/searchresults.en.html?aid=7920152&city=-1353149&lang=en&selected_currency=EUR
   }
-  linkToHostelworld(): void {
+  // linkToBooking(): void {
+  //   window.open(
+  //     'https://www.booking.com/searchresults.en.html?aid=7920152',
+  //     '_blank'
+  //   );
+  // if there is city
+  // https://www.booking.com/searchresults.en.html?aid=7920152&city=-1353149&lang=en&selected_currency=EUR
+
+  onSubmitHostelworld(): void {
+    console.log("SUBMITTED!");
     window.open(
       'https://hostelworld.prf.hn/click/camref:1101lmmsq/[p_id:1011l441771]',
       '_blank'
