@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\38096\Desktop\IT\react angular\ang\CheapTripAngularClient-dev-mini-all\cheapTrip\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! C:\Users\38096\Desktop\cheapTrip-lika\CheapTripAngularClient\cheapTrip\src\polyfills.ts */"hN/g");
 
 
 /***/ }),

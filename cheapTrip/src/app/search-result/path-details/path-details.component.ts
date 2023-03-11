@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/service/http.service';
 import { GlobalService } from 'src/app/global/global.service';
 import { Currency } from 'src/app/currency-selector/currency-selector.component';
 import { IRout } from 'src/app/trip-direction/trip-direction.model';
+import { FormBuilder } from '@angular/forms';
 
 const TRANSPORT = new Map();
 TRANSPORT.set('Bus', $localize`Bus`);
@@ -165,23 +166,33 @@ export class PathDetailsComponent implements OnInit {
     // return "https://omio.sjv.io/XxEWmb"+from+"/"+to;
   }
 
-  onSubmitBooking(): void {
-    console.log("SUBMITTED!");
+  onSubmitBooking($event: any): void {
+    $event.preventDefault();
+    // console.log('SUBMITTED!');
+    // window.open(
+    //   'https://www.booking.com/searchresults.en.html?aid=7920152',
+    //   '_blank'
+    // );
+  }
+  linkToBooking(): void {
+    console.log('linkToBooking!');
     window.open(
       'https://www.booking.com/searchresults.en.html?aid=7920152',
       '_blank'
     );
+    //if there is city
+    //https://www.booking.com/searchresults.en.html?aid=7920152&city=-1353149&lang=en&selected_currency=EUR
   }
-  // linkToBooking(): void {
-  //   window.open(
-  //     'https://www.booking.com/searchresults.en.html?aid=7920152',
-  //     '_blank'
-  //   );
-  // if there is city
-  // https://www.booking.com/searchresults.en.html?aid=7920152&city=-1353149&lang=en&selected_currency=EUR
-
-  onSubmitHostelworld(): void {
-    console.log("SUBMITTED!");
+  onSubmitHostelworld($event: any): void {
+    $event.preventDefault();
+    console.log('SUBMITTED!');
+    // window.open(
+    //   'https://hostelworld.prf.hn/click/camref:1101lmmsq/[p_id:1011l441771]',
+    //   '_blank'
+    // );
+  }
+  linkTohostelworld(): void {
+    console.log('linkToBooking!');
     window.open(
       'https://hostelworld.prf.hn/click/camref:1101lmmsq/[p_id:1011l441771]',
       '_blank'

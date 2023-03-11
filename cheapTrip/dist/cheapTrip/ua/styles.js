@@ -80,9 +80,9 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".flag-icon-background{background-size:c
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\38096\Desktop\IT\react angular\ang\CheapTripAngularClient-dev-mini-all\cheapTrip\node_modules\flag-icon-css\css\flag-icon.min.css */"q9u+");
-__webpack_require__(/*! C:\Users\38096\Desktop\IT\react angular\ang\CheapTripAngularClient-dev-mini-all\cheapTrip\src\cheapTripStyles\cheapTrip-Theme.scss */"J9g1");
-module.exports = __webpack_require__(/*! C:\Users\38096\Desktop\IT\react angular\ang\CheapTripAngularClient-dev-mini-all\cheapTrip\src\styles.scss */"+EN/");
+__webpack_require__(/*! C:\Users\38096\Desktop\cheapTrip-lika\CheapTripAngularClient\cheapTrip\node_modules\flag-icon-css\css\flag-icon.min.css */"q9u+");
+__webpack_require__(/*! C:\Users\38096\Desktop\cheapTrip-lika\CheapTripAngularClient\cheapTrip\src\cheapTripStyles\cheapTrip-Theme.scss */"J9g1");
+module.exports = __webpack_require__(/*! C:\Users\38096\Desktop\cheapTrip-lika\CheapTripAngularClient\cheapTrip\src\styles.scss */"+EN/");
 
 
 /***/ }),

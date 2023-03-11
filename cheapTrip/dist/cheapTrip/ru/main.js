@@ -129,7 +129,7 @@ CurrencySelectorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\38096\Desktop\IT\react angular\ang\CheapTripAngularClient-dev-mini-all\cheapTrip\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\38096\Desktop\cheapTrip-lika\CheapTripAngularClient\cheapTrip\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -1613,11 +1613,11 @@ function PathDetailsComponent_section_0_li_10_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("inline", true);
 } }
-function PathDetailsComponent_section_0_div_20_button_15_Template(rf, ctx) { if (rf & 1) {
+function PathDetailsComponent_section_0_div_20_button_16_Template(rf, ctx) { if (rf & 1) {
     const _r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PathDetailsComponent_section_0_div_20_button_15_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); const path_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r10.openTransport(path_r7); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵi18n"](1, 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PathDetailsComponent_section_0_div_20_button_16_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); const path_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r10.openTransport(path_r7); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵi18n"](1, 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function PathDetailsComponent_section_0_div_20_Template(rf, ctx) { if (rf & 1) {
@@ -1639,19 +1639,23 @@ function PathDetailsComponent_section_0_div_20_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "div", 16);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "button", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PathDetailsComponent_section_0_div_20_Template_button_click_13_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r13.linkToBooking(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, " Booking.com ");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, PathDetailsComponent_section_0_div_20_button_15_Template, 2, 0, "button", 18);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "button", 19);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PathDetailsComponent_section_0_div_20_Template_button_click_16_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r15.linkToHostelworld(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](17, " Hostelworld ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "form", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "button", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PathDetailsComponent_section_0_div_20_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r13.linkToBooking(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, " Booking.com ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "span", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](20, "currency");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, PathDetailsComponent_section_0_div_20_button_16_Template, 2, 0, "button", 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "form", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PathDetailsComponent_section_0_div_20_Template_button_click_18_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r15.linkTohostelworld(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, " Hostelworld ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "span", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](22, "currency");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1668,10 +1672,14 @@ function PathDetailsComponent_section_0_div_20_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r4.getTransportName(path_r7.transportation_type), " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](path_r7.duration_minutes);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroup", ctx_r4.booking - ctx_r4.button);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r4.getTransportUrl(path_r7) != "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroup", ctx_r4.hostelworld - ctx_r4.button);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind4"](20, 7, path_r7.euro_price * ctx_r4.getGlobalCurrency().oneEuroRate, ctx_r4.getGlobalCurrency().code, "symbol-narrow", "1.2-2"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind4"](22, 9, path_r7.euro_price * ctx_r4.getGlobalCurrency().oneEuroRate, ctx_r4.getGlobalCurrency().code, "symbol-narrow", "1.2-2"), " ");
 } }
 function PathDetailsComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
@@ -1705,7 +1713,7 @@ function PathDetailsComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, PathDetailsComponent_section_0_div_20_Template, 21, 12, "div", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, PathDetailsComponent_section_0_div_20_Template, 23, 14, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1853,12 +1861,30 @@ class PathDetailsComponent {
         // }
         // return "https://omio.sjv.io/XxEWmb"+from+"/"+to;
     }
-    linkToBooking() {
-        window.open('https://www.booking.com/searchresults.en.html?aid=7920152', '_blank');
-        // if there is city
-        // https://www.booking.com/searchresults.en.html?aid=7920152&city=-1353149&lang=en&selected_currency=EUR
+    onSubmitBooking($event) {
+        $event.preventDefault();
+        // console.log('SUBMITTED!');
+        // window.open(
+        //   'https://www.booking.com/searchresults.en.html?aid=7920152',
+        //   '_blank'
+        // );
     }
-    linkToHostelworld() {
+    linkToBooking() {
+        console.log('linkToBooking!');
+        window.open('https://www.booking.com/searchresults.en.html?aid=7920152', '_blank');
+        //if there is city
+        //https://www.booking.com/searchresults.en.html?aid=7920152&city=-1353149&lang=en&selected_currency=EUR
+    }
+    onSubmitHostelworld($event) {
+        $event.preventDefault();
+        console.log('SUBMITTED!');
+        // window.open(
+        //   'https://hostelworld.prf.hn/click/camref:1101lmmsq/[p_id:1011l441771]',
+        //   '_blank'
+        // );
+    }
+    linkTohostelworld() {
+        console.log('linkToBooking!');
         window.open('https://hostelworld.prf.hn/click/camref:1101lmmsq/[p_id:1011l441771]', '_blank');
     }
 }
@@ -1872,7 +1898,7 @@ PathDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
     }
     else {
         i18n_0 = "\u041A\u0443\u043F\u0438\u0442\u044C \u0431\u0438\u043B\u0435\u0442";
-    } return [[4, "ngFor", "ngForOf"], ["expandedHeight", "*", "collapsedHeight", "*"], [1, "icons"], [1, "description"], [1, "city"], ["class", "points", 4, "ngFor", "ngForOf"], [1, "time"], [1, "spacer"], ["selected", "true", 1, "price-top"], ["class", "details", 4, "ngFor", "ngForOf"], [3, "innerHTML"], [1, "points"], [3, "inline"], [1, "details"], [1, "rout"], [1, "time-links-price"], [1, "buttons-links"], ["mat-stroked-button", "", "color", "accent", "id", "booking-button", "target", "_blank", "title", "https://www.booking.com/searchresults.en.html?aid=7920152", "type", "submit", 3, "click"], ["class", "buy-ticket-button", "mat-stroked-button", "", "color", "primary", 3, "click", 4, "ngIf"], ["id", "hostelworld-button", "mat-stroked-button", "", "color", "accent", "target", "_blank", "title", "https://hostelworld.prf.hn/click/camref:1101lmmsq/[p_id:1011l441771]", "type", "submit", 3, "click"], [1, "currency"], ["mat-stroked-button", "", "color", "primary", 1, "buy-ticket-button", 3, "click"], i18n_0]; }, template: function PathDetailsComponent_Template(rf, ctx) { if (rf & 1) {
+    } return [[4, "ngFor", "ngForOf"], ["expandedHeight", "*", "collapsedHeight", "*"], [1, "icons"], [1, "description"], [1, "city"], ["class", "points", 4, "ngFor", "ngForOf"], [1, "time"], [1, "spacer"], ["selected", "true", 1, "price-top"], ["class", "details", 4, "ngFor", "ngForOf"], [3, "innerHTML"], [1, "points"], [3, "inline"], [1, "details"], [1, "rout"], [1, "time-links-price"], [1, "buttons-links"], ["novalidate", "", "ngSubmit", "onSubmitBooking($event)", 3, "formGroup"], ["mat-stroked-button", "", "color", "accent", "id", "booking-button", "type", "submit", 3, "click"], ["class", "buy-ticket-button", "mat-stroked-button", "", "color", "primary", 3, "click", 4, "ngIf"], ["novalidate", "", "ngSubmit", "onSubmitHostelworld($event)", 3, "formGroup"], ["id", "hostelworld-button", "mat-stroked-button", "", "color", "accent", "type", "submit", 3, "click"], [1, "currency"], ["mat-stroked-button", "", "color", "primary", 1, "buy-ticket-button", 3, "click"], i18n_0]; }, template: function PathDetailsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, PathDetailsComponent_section_0_Template, 21, 10, "section", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.paths);
