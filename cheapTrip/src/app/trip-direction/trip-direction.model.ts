@@ -15,8 +15,7 @@ export enum Modes {
   DELIVERY,
 }
 
-export  type Server = 'server68'| 'server104';
-
+export type Server = 'server68' | 'server104';
 
 export interface IPoint {
   name: string;
@@ -31,6 +30,15 @@ export interface IRout {
   to: string;
 }
 
+export interface IJsonTravelData {
+  euro_price: number;
+  from: number;
+  id: number;
+  time_in_minutes: number;
+  to: number;
+  transportation_type: number;
+}
+
 export interface IDetails {
   euro_price: number;
   duration_minutes: string;
@@ -39,12 +47,11 @@ export interface IDetails {
   transport: SafeHtml[];
 }
 
-export interface IRecievedRouts{
+export interface IRecievedRouts {
   routeType: string;
   euro_price: number;
   duration_minutes: number;
   direct_paths: IRout[];
-
 }
 
 export interface IPath {

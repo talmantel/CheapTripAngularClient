@@ -31,7 +31,20 @@
       alert('Sorry,  application does not support the type of web browser you are using.');
 
   </script>
+  <script type="text/javascript">
+    fetch('assets/new_json/transportation_types.json')
+    .then(res => res.json())
+    .then(data => sessionStorage.setItem('transportationTypes', JSON.stringify(data)))
+  </script>
 
+<script type="text/javascript">
+   if ('caches' in window) {
+    console.log('CACHES')
+     const jsonUrl = 'assets/new_json/travel_data.json'; 
+     caches.open('fileCache').then((cache)=> { cache.add(jsonUrl); });
+     caches.open('fileCache').then((cache)=> { cache.add('assets/new_json/fixed_routes.json'); });
+   }
+  </script>
 </head>
 
 <body class="mat-typography">
@@ -57,6 +70,7 @@
   <!-- /Yandex.Metrika counter -->
   <a href="\assets\seo\seo.docx"></a>
   <a href="\assets\seo\seo.txt"></a>
+
 </body>
 
 </html>
