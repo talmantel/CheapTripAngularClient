@@ -140,6 +140,7 @@ export class SelectDirectionComponent implements OnInit {
 
   onSubmit(): void {
     console.log ("SUBMITTED!");
+    console.log(this.endPoint.id, 'path.to');
     this.store.dispatch(new TripDirectionActions.GetRouts());
   }
 

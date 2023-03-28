@@ -1,11 +1,16 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { IPath } from '../../service/http.service';
+import { BOOKING_IDS, IPath, LOCATIONS } from '../../service/http.service';
 import { HttpService } from 'src/app/service/http.service';
 import { GlobalService } from 'src/app/global/global.service';
 import { Currency } from 'src/app/currency-selector/currency-selector.component';
-import { IRout } from 'src/app/trip-direction/trip-direction.model';
+import {
+  IPathPoint,
+  IRecievedRouts,
+  IRout,
+} from 'src/app/trip-direction/trip-direction.model';
 import { FormBuilder } from '@angular/forms';
+import { SelectDirectionComponent } from 'src/app/trip-direction/select-direction/select-direction.component';
 
 const TRANSPORT = new Map();
 TRANSPORT.set('Bus', $localize`Bus`);
@@ -37,6 +42,7 @@ export class PathDetailsComponent implements OnInit {
   //private currency:Currency;
 
   price: number;
+  locationId: number;
   constructor(
     private httpService: HttpService,
     private globalService: GlobalService
@@ -174,14 +180,26 @@ export class PathDetailsComponent implements OnInit {
     //   '_blank'
     // );
   }
-  linkToBooking(): void {
-    console.log('linkToBooking!');
+  linkToBooking(path: any) {
+    var a = path.to;
+    const b = JSON.parse(LOCATIONS);
+    const res = Object.keys(b).map((key) => ({
+      name: key,
+      ...b[key],
+    }));
+
+    res.forEach((r) => (r.name == a ? (this.locationId = r.id) : '-'));
+    console.log(this.locationId);
+    console.log(BOOKING_IDS[this.locationId], 'book');
+    
     window.open(
-      'https://www.booking.com/searchresults.en.html?aid=7920152',
+      'https://www.booking.com/searchresults.en.html?aid=7920152&city=' +
+        BOOKING_IDS[this.locationId] +
+        '&lang=en&selected_currency=EUR',
       '_blank'
     );
     //if there is city
-    //https://www.booking.com/searchresults.en.html?aid=7920152&city=-1353149&lang=en&selected_currency=EUR
+    //https://www.booking.com/searchresults.en.html?aid=7920152&city=-73635&lang=en&selected_currency=EUR
   }
   onSubmitHostelworld($event: any): void {
     $event.preventDefault();

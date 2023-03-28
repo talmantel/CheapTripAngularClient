@@ -59,7 +59,7 @@
           <span class="time">{{ path.duration_minutes }}</span>
           <div class="buttons-links">
             <form
-              [formGroup]="booking-button"
+              [formGroup]="booking - button"
               novalidate
               ngSubmit="onSubmitBooking($event)"
             >
@@ -67,8 +67,8 @@
                 mat-stroked-button
                 color="accent"
                 id="booking-button"
-                type="submit"
-                (click)="linkToBooking()"
+                type="button"
+                (click)="linkToBooking(path)"
               >
                 Booking.com
               </button>
@@ -84,7 +84,7 @@
               Buy ticket
             </button>
             <form
-              [formGroup]="hostelworld-button"
+              [formGroup]="hostelworld - button"
               novalidate
               ngSubmit="onSubmitHostelworld($event)"
             >
@@ -92,7 +92,7 @@
                 id="hostelworld-button"
                 mat-stroked-button
                 color="accent"
-                type="submit"
+                type="button"
                 (click)="linkTohostelworld()"
               >
                 Hostelworld
