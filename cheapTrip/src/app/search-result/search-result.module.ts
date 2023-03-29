@@ -9,6 +9,7 @@ import { CapitalFirstLetterPipe } from './path-details/capitalFirstLetter.pipe';
 import { SearchResultRoutingModule } from './search-result-routing.module';
 import { LogoComponent } from '../logo/logo.component';
 
+
 @NgModule({
   declarations: [
     SearchResultComponent,

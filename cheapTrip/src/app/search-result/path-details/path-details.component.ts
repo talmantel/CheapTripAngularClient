@@ -1,6 +1,6 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { BOOKING_IDS, IPath, LOCATIONS } from '../../service/http.service';
+import { IPath } from '../../service/http.service';
 import { HttpService } from 'src/app/service/http.service';
 import { GlobalService } from 'src/app/global/global.service';
 import { Currency } from 'src/app/currency-selector/currency-selector.component';
@@ -11,6 +11,8 @@ import {
 } from 'src/app/trip-direction/trip-direction.model';
 import { FormBuilder } from '@angular/forms';
 import { SelectDirectionComponent } from 'src/app/trip-direction/select-direction/select-direction.component';
+import * as Locations from 'src/assets/json_files/Locations.json';
+import * as Booking_ids from 'src/assets/json_files/Booking_ids.json';
 
 const TRANSPORT = new Map();
 TRANSPORT.set('Bus', $localize`Bus`);
@@ -43,6 +45,8 @@ export class PathDetailsComponent implements OnInit {
 
   price: number;
   locationId: number;
+  locations_data: any = Locations;
+  booking_data: any = Booking_ids;
   constructor(
     private httpService: HttpService,
     private globalService: GlobalService
@@ -182,22 +186,22 @@ export class PathDetailsComponent implements OnInit {
   }
   linkToBooking(path: any) {
     var a = path.to;
-    const b = JSON.parse(LOCATIONS);
-    const res = Object.keys(b).map((key) => ({
-      name: key,
-      ...b[key],
-    }));
-
-    res.forEach((r) => (r.name == a ? (this.locationId = r.id) : '-'));
-    console.log(this.locationId);
-    console.log(BOOKING_IDS[this.locationId], 'book');
+    //console.log('booking data', this.booking_data);
     
-    window.open(
-      'https://www.booking.com/searchresults.en.html?aid=7920152&city=' +
-        BOOKING_IDS[this.locationId] +
-        '&lang=en&selected_currency=EUR',
-      '_blank'
-    );
+     const res = Object.keys(this.locations_data.default).map((key) => ({
+       name: key,
+       ...this.locations_data.default[key],
+     }));
+
+     res.forEach((r) => (r.name == a ? (this.locationId = r.id) : '-'));
+     //console.log(this.locationId);
+     
+     window.open(
+       'https://www.booking.com/searchresults.en.html?aid=7920152&city=' +
+         this.booking_data.default[this.locationId] +
+         '&lang=en&selected_currency=EUR',
+       '_blank'
+     );
     //if there is city
     //https://www.booking.com/searchresults.en.html?aid=7920152&city=-73635&lang=en&selected_currency=EUR
   }
