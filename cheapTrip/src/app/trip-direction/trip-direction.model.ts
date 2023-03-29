@@ -31,12 +31,30 @@ export interface IRout {
 }
 
 export interface IJsonTravelData {
+  price: number;
+  from: number;
+  id: number;
+  duration: number;
+  to: number;
+  transport: number;
+}
+
+export interface IJsonPath {
   euro_price: number;
   from: number;
   id: number;
-  time_in_minutes: number;
   to: number;
-  transportation_type: number;
+  travel_data: IJsonTravelData[];
+  trip_duration: number;
+}
+
+export interface IJsonRoutData {
+  euro_price: number;
+  from: number;
+  id: number;
+  to: number;
+  travel_data: any;
+  trip_duration: number;
 }
 
 export interface IDetails {

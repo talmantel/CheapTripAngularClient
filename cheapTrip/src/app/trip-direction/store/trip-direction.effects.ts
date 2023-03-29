@@ -27,7 +27,7 @@ import { SelectService } from '../select-direction/select.service';
 import { LocalizedString } from '@angular/compiler';
 import { HttpService } from 'src/app/service/http.service';
 import { Observable, of } from 'rxjs';
-import { DataService } from '../../getTravelData';
+import { DataService } from '../../route-service/getTravelData';
 
 import { ErrorInterceptor } from '../../error-interceptor';
 
@@ -375,17 +375,15 @@ export class TripDirectionEffects {
         url += '&language_name=ru';
       }
 
+      console.time('Effects');
+
       // Вызываем getTravelData и устанавливаем значение this.body в ответ
       return this.dataService
-        .getTravelData(
-          request[1].startPoint.id,
-          request[1].startPoint.name,
-          request[1].endPoint.id,
-          request[1].endPoint.name
-        )
+        .getPathMap(request[1].startPoint.id, request[1].endPoint.id)
         .pipe(
           tap(path => {
             this.body = path;
+            console.log(path);
           }),
           switchMap(() => {
             // Создаем новый HttpResponse с установленным значением this.body
@@ -408,6 +406,7 @@ export class TripDirectionEffects {
             );
 
             console.log('RESULT', resultPathArr, request);
+            console.timeEnd('Effects');
 
             const endPoints = {
               from: request[1].startPoint,
