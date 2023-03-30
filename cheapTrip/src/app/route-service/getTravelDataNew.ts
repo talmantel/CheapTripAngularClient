@@ -6,6 +6,7 @@
 //   IJsonRoutData,
 //   IRecievedRouts,
 // } from '../trip-direction/trip-direction.model';
+// import { HttpClient } from '@angular/common/http';
 
 // @Injectable({ providedIn: 'root' })
 // export class DataServiceNew {
@@ -13,7 +14,7 @@
 //   private locations: {};
 //   private directRoutes: {};
 
-//   constructor() {
+//   constructor(private http: HttpClient) {
 //     this.transportType = JSON.parse(
 //       sessionStorage.getItem('transportationTypes')
 //     );
@@ -23,81 +24,28 @@
 //     // вызываем инициализацию при создании экземпляра класса
 //     this.initDirectRoutes();
 //   }
-//   async initDirectRoutes() {
+//   initDirectRoutes() {
 //     try {
-//       if (Object.keys(this.directRoutes).length === 0) {
-//         // проверка, что объект не пустой
-//         const response = await caches.match(
-//           new Request('assets/new_json/direct_routes.json')
-//         );
-//         const data = await response.json();
-//         this.directRoutes = data;
-//         console.log('Direct routes initialized');
+//       console.time('CACHEEEEEEEEEEEEEEE');
+
+// if (Object.keys(this.directRoutes).length === 0) {
+// caches.open('fileCache').then(cache => {
+//   cache.match('direct_routes').then(response => {
+//     if (response) {
+//       response.json().then(json => {
+//         console.log(json);
+//         this.directRoutes = json;
+//       });
+//     }
+//   });
+// });
+//         console.timeEnd('CACHEEEEEEEEEEEEEEE');
+
+//         console.log('Direct routes initialized', this.directRoutes);
 //       }
 //     } catch (err) {
 //       console.error('Error initializing direct routes', err);
 //     }
-//   }
-
-//   getGroundFilterJson({
-//     startPoint,
-//     endPoint,
-//   }: {
-//     startPoint: string;
-//     endPoint: string;
-//   }): Promise<any> {
-//     const pathData: IJsonTravelData[] = [];
-//     console.time('Get_Ground_Routes');
-//     return caches
-//       .match(new Request('assets/new_json/fixed_routes.json'))
-//       .then(response => {
-//         if (response) {
-//           return response.json();
-//         }
-//       })
-//       .then(fixedData => {
-//         console.timeEnd('Get_Ground_Routes');
-
-//         const filterData = fixedData[`${startPoint}0${endPoint}`];
-//         if (!filterData) return [];
-//         const path = filterData.direct_routes.split(',');
-//         path.forEach((id: string): void => {
-//           pathData.push(this.directRoutes[id]);
-//         });
-//         filterData.travel_data = pathData;
-
-//         return filterData;
-//       });
-//   }
-
-//   async getGroundData(startPoint: string, endPoint: string): Promise<any> {
-//     // return [];
-
-//     console.time('Ground-Routes');
-
-//     return this.getGroundFilterJson({ startPoint, endPoint }).then(data => {
-//       if (data.length !== 0) {
-//         const result = [];
-//         const directPaths = data.travel_data.map(el => ({
-//           duration_minutes: el.duration,
-//           euro_price: el.price,
-//           from: this.locations[el.from].name,
-//           to: this.locations[el.to].name,
-//           transportation_type: this.transportType[el.transport].name,
-//         }));
-//         result.push({
-//           duration_minutes: data.duration,
-//           euro_price: data.price,
-//           route_type: 'ground_routes',
-//           direct_paths: directPaths,
-//         });
-//         console.timeEnd('Ground-Routes');
-
-//         return result;
-//       } else {
-//         return [];
-//       }
-//     });
 //   }
 
 //   async getDirectFilterJson(
@@ -122,13 +70,6 @@
 //     startPoint: string;
 //     endPoint: string;
 //   }): Promise<any> {
-//     // console.time('GetTransportAndLocation');
-//     // const transportType: {} = JSON.parse(
-//     //   sessionStorage.getItem('transportationTypes')
-//     // );
-//     // const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
-//     // console.timeEnd('GetTransportAndLocation');
-
 //     console.time('GetFilterJson Travel_data');
 
 //     return this.getDirectFilterJson(startPoint, endPoint).then(data => {
@@ -160,6 +101,61 @@
 //     });
 //   }
 
+//   getGroundFilterJson({
+//     startPoint,
+//     endPoint,
+//   }: {
+//     startPoint: string;
+//     endPoint: string;
+//   }): Promise<any> {
+//     const pathData: IJsonTravelData[] = [];
+//     console.time('Get_Ground_Routes');
+//     return this.http
+//       .get<any>(`assets/new_json/partly/fixed_routes/${startPoint}.json`)
+//       .toPromise()
+//       .then(fixedData => {
+//         const filterData = fixedData[`${endPoint}`];
+//         console.timeEnd('Get_Ground_Routes');
+
+//         if (!filterData) return [];
+//         const path = filterData.direct_routes.split(',');
+//         path.forEach((id: string): void => {
+//           pathData.push(this.directRoutes[id]);
+//         });
+//         filterData.travel_data = pathData;
+
+//         return filterData;
+//       });
+//   }
+
+//   async getGroundData(startPoint: string, endPoint: string): Promise<any> {
+//     console.time('Ground-Routes');
+//     return this.getGroundFilterJson({ startPoint, endPoint }).then(data => {
+//       console.log(data);
+//       if (data.length !== 0) {
+//         const result = [];
+//         const directPaths = data.travel_data.map(el => ({
+//           duration_minutes: el.duration,
+//           euro_price: el.price,
+//           from: this.locations[el.from].name,
+//           to: this.locations[el.to].name,
+//           transportation_type: this.transportType[el.transport].name,
+//         }));
+//         result.push({
+//           duration_minutes: data.duration,
+//           euro_price: data.price,
+//           route_type: 'ground_routes',
+//           direct_paths: directPaths,
+//         });
+//         console.timeEnd('Ground-Routes');
+
+//         return result;
+//       } else {
+//         return [];
+//       }
+//     });
+//   }
+
 //   getFlyingFilterJson({
 //     startPoint,
 //     endPoint,
@@ -170,47 +166,26 @@
 //     const pathData: IJsonTravelData[] = [];
 //     console.time('GetFilterJson Flying_Data');
 
-//     return caches
-//       .match(new Request('assets/new_json/flying_routes.json'))
-//       .then(response => {
-//         if (response) {
-//           return response.json();
-//         }
-//       })
+//     return this.http
+//       .get<any>(`assets/new_json/partly/flying_routes/${startPoint}.json`)
+//       .toPromise()
 //       .then(flyingData => {
-//         const filterData = flyingData[`${startPoint}0${endPoint}`];
+//         const filterData = flyingData[`${endPoint}`];
 
 //         if (!filterData) return [];
 //         const path: [] = filterData.direct_routes.split(',');
-//         return caches
-//           .match(new Request('assets/new_json/direct_routes.json'))
-//           .then(response => {
-//             if (response) {
-//               return response.json();
-//             }
-//           })
-//           .then(data => {
-//             // console.log(data);
-//             path.forEach((id: string): void => {
-//               pathData.push(data[id]);
-//             });
-//             filterData.travel_data = pathData;
-//             console.timeEnd('GetFilterJson Flying_Data');
 
-//             return filterData;
-//           });
+//         path.forEach((id: string): void => {
+//           pathData.push(this.directRoutes[id]);
+//         });
+//         filterData.travel_data = pathData;
+//         console.timeEnd('GetFilterJson Flying_Data');
+
+//         return filterData;
 //       });
 //   }
 
 //   async getFlyingData(startPoint: string, endPoint: string): Promise<any> {
-//     // return [];
-//     console.time('GetTransportAndLocationFlying');
-//     const transportType: {} = JSON.parse(
-//       sessionStorage.getItem('transportationTypes')
-//     );
-//     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
-//     console.timeEnd('GetTransportAndLocationFlying');
-
 //     return this.getFlyingFilterJson({ startPoint, endPoint }).then(data => {
 //       if (data.length !== 0) {
 //         const result = [];
@@ -218,9 +193,9 @@
 //         const directPaths = data.travel_data.map(el => ({
 //           duration_minutes: el.duration,
 //           euro_price: el.price,
-//           from: locations[el.from].name,
-//           to: locations[el.to].name,
-//           transportation_type: transportType[el.transport].name,
+//           from: this.locations[el.from].name,
+//           to: this.locations[el.to].name,
+//           transportation_type: this.transportType[el.transport].name,
 //         }));
 //         result.push({
 //           duration_minutes: data.duration,
@@ -245,39 +220,23 @@
 //   }): Promise<any> {
 //     const pathData: IJsonTravelData[] = [];
 
-//     return caches
-//       .match(new Request('assets/new_json/routes.json'))
-//       .then(response => {
-//         if (response) {
-//           return response.json();
-//         }
-//       })
+//     return this.http
+//       .get<any>(`assets/new_json/partly/routes/${startPoint}.json`)
+//       .toPromise()
 //       .then(mixedData => {
-//         const filterData = mixedData[`${startPoint}0${endPoint}`];
+//         const filterData = mixedData[`${endPoint}`];
 //         if (!filterData) return [];
 //         const paths = filterData.direct_routes.split(',');
-//         return caches
-//           .match(new Request('assets/new_json/direct_routes.json'))
-//           .then(response => {
-//             if (response) {
-//               return response.json();
-//             }
-//           })
-//           .then(data => {
-//             paths.forEach((id: string): void => {
-//               pathData.push(data[id]);
-//             });
-//             filterData.travel_data = pathData;
-//             return filterData;
-//           });
+
+//         paths.forEach((id: string): void => {
+//           pathData.push(this.directRoutes[id]);
+//         });
+//         filterData.travel_data = pathData;
+//         return filterData;
 //       });
 //   }
 
 //   async getMixedlData(startPoint: string, endPoint: string): Promise<any> {
-//     const transportType: {} = JSON.parse(
-//       sessionStorage.getItem('transportationTypes')
-//     );
-//     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
 //     console.time('Get_Mixed_Routes');
 
 //     return this.getMixedFilterJson({ startPoint, endPoint }).then(data => {
@@ -287,9 +246,9 @@
 //         const directPaths = data.travel_data.map(el => ({
 //           duration_minutes: el.duration,
 //           euro_price: el.price,
-//           from: locations[el.from].name,
-//           to: locations[el.to].name,
-//           transportation_type: transportType[el.transport].name,
+//           from: this.locations[el.from].name,
+//           to: this.locations[el.to].name,
+//           transportation_type: this.transportType[el.transport].name,
 //         }));
 //         result.push({
 //           duration_minutes: data.duration,
@@ -308,23 +267,28 @@
 //   }
 
 //   getPathMap(startPoint: string, endPoint: string): Observable<any> {
-//     if (Object.keys(this.directRoutes).length !== 0)
-//       return forkJoin([
-//         this.getDirectData({ startPoint, endPoint }),
-//         this.getFlyingData(startPoint, endPoint),
-//         this.getGroundData(startPoint, endPoint),
-//         this.getMixedlData(startPoint, endPoint),
-//       ]).pipe(
-//         map(([travelData, flyingData, groundData, mixedData]) => {
-//           const pathMap = [
-//             ...travelData,
-//             ...flyingData,
-//             ...groundData,
-//             ...mixedData,
-//           ];
-//           console.log(pathMap);
-//           return pathMap;
-//         })
-//       );
+//     if (Object.keys(this.directRoutes).length === 0) {
+//       setTimeout(() => {
+//         this.getPathMap(startPoint, endPoint);
+//       }, 100);
+//       return;
+//     }
+//     return forkJoin([
+//       this.getDirectData({ startPoint, endPoint }),
+//       this.getFlyingData(startPoint, endPoint),
+//       this.getGroundData(startPoint, endPoint),
+//       this.getMixedlData(startPoint, endPoint),
+//     ]).pipe(
+//       map(([travelData, flyingData, groundData, mixedData]) => {
+//         const pathMap = [
+//           ...travelData,
+//           ...flyingData,
+//           ...groundData,
+//           ...mixedData,
+//         ];
+//         console.log(pathMap);
+//         return pathMap;
+//       })
+//     );
 //   }
 // }

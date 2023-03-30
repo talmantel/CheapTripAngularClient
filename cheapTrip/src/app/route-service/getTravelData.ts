@@ -25,7 +25,7 @@ export class DataService {
   ): Promise<IJsonTravelData[]> {
     console.time('-------------------------- Travel_data');
     return caches
-      .match(new Request('assets/new_json/direct_routes.json'))
+      .match(new Request('direct_routes'))
       .then(response => {
         if (response) {
           return response.json();

@@ -3,12 +3,53 @@ import {
   IJsonTravelData,
   IJsonRoutData,
 } from '../trip-direction/trip-direction.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroundRoutes {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  // getFilterJson({
+  //   startPoint,
+  //   endPoint,
+  // }: {
+  //   startPoint: string;
+  //   endPoint: string;
+  // }): Promise<any> {
+  //   const pathData: IJsonTravelData[] = [];
+  //   console.time('Get_Ground_Routes');
+  //   return caches
+  //     .match(new Request('assets/new_json/fixed_routes.json'))
+  //     .then(response => {
+  //       if (response) {
+  //         return response.json();
+  //       }
+  //     })
+  //     .then(fixedData => {
+  //       console.timeEnd('Get_Ground_Routes');
+
+  //       const filterData = fixedData[`${startPoint}0${endPoint}`];
+  //       if (!filterData) return [];
+  //       const path = filterData.direct_routes.split(',');
+  //       return caches
+  //         .match(new Request('assets/new_json/direct_routes.json'))
+  //         .then(response => {
+  //           if (response) {
+  //             return response.json();
+  //           }
+  //         })
+  //         .then(data => {
+  //           path.forEach((id: string): void => {
+  //             pathData.push(data[id]);
+  //           });
+  //           filterData.travel_data = pathData;
+
+  //           return filterData;
+  //         });
+  //     });
+  // }
 
   getFilterJson({
     startPoint,
@@ -18,35 +59,30 @@ export class GroundRoutes {
     endPoint: string;
   }): Promise<any> {
     const pathData: IJsonTravelData[] = [];
-    console.time('Get_Ground_Routes');
-    return caches
-      .match(new Request('assets/new_json/fixed_routes.json'))
-      .then(response => {
-        if (response) {
-          return response.json();
-        }
-      })
-      .then(fixedData => {
-        console.timeEnd('Get_Ground_Routes');
+    console.time('GetFilterJson Ground_Data');
 
-        const filterData = fixedData[`${startPoint}0${endPoint}`];
+    return this.http
+      .get<any>(`assets/new_json/partly/fixed_routes/${startPoint}.json`)
+      .toPromise()
+      .then(flyingData => {
+        const filterData = flyingData[`${endPoint}`];
         if (!filterData) return [];
-        const path = filterData.direct_routes.split(',');
-        return caches
-          .match(new Request('assets/new_json/direct_routes.json'))
-          .then(response => {
-            if (response) {
-              return response.json();
-            }
-          })
-          .then(data => {
-            path.forEach((id: string): void => {
-              pathData.push(data[id]);
+        const path: [] = filterData.direct_routes.split(',');
+        return caches.match('direct_routes').then(response => {
+          if (response) {
+            return response.json().then(data => {
+              path.forEach((id: string): void => {
+                pathData.push(data[id]);
+              });
+              filterData.travel_data = pathData;
+              console.timeEnd('GetFilterJson Ground_Data');
+              return filterData;
             });
-            filterData.travel_data = pathData;
-
-            return filterData;
-          });
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
       });
   }
 
@@ -55,11 +91,10 @@ export class GroundRoutes {
       sessionStorage.getItem('transportationTypes')
     );
     console.time('Location');
-
     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
     console.timeEnd('Location');
-    console.time('Ground-Routes');
 
+    console.time('Ground-Routes');
     return this.getFilterJson({ startPoint, endPoint }).then(data => {
       if (data.length !== 0) {
         const result = [];
