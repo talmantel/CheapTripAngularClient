@@ -110,8 +110,18 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    let el = document.getElementById('map').getBoundingClientRect();
-
+    if (document.getElementById('map') === null) {
+      console.log(
+        'document.getElementById(map)',
+        document.getElementById('map')
+      );
+    } else {
+      console.log(
+        'document.getElementById(map)',
+        document.getElementById('map')
+      );
+      let el = document.getElementById('map').getBoundingClientRect();
+    }
   }
 
   private getIFrameSize(obs: BreakpointObserver) {
@@ -138,20 +148,17 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
 
-
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.WebLandscape)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebLandscape);
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
 
-
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.WebPortrait)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebPortrait);
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.HandsetLandscape)) {
@@ -161,7 +168,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
 
-
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.HandsetPortrait)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(
@@ -169,7 +175,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       );
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.TabletLandscape)) {
@@ -179,7 +184,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
 
-
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.TabletPortrait)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(
@@ -188,7 +192,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-
 
       this.isDesktop = true;
     }
