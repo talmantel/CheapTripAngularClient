@@ -45,3 +45,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#JSON_files
+/src/assets/json_files
