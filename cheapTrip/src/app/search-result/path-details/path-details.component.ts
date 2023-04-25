@@ -143,7 +143,7 @@ export class PathDetailsComponent implements OnInit {
   }
 
   getTrainUrl(rout: IRout) {
-    console.log('train ' + this.country);
+    // console.log('train ' + this.country);
     switch (this.country) {
       case 'RU':
       case 'BY':

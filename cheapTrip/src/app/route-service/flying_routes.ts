@@ -64,31 +64,39 @@ export class FlyingRoutes {
   }): Promise<any> {
     const pathData: IJsonTravelData[] = [];
     console.time('GetFilterJson Flying_Data');
-
-    return this.http
-      .get<any>(`assets/new_json/partly/flying_routes/${startPoint}.json`)
-      .toPromise()
-      .then(flyingData => {
-        const filterData = flyingData[`${endPoint}`];
-        if (!filterData) return [];
-        const path: [] = filterData.direct_routes.split(',');
-        return caches.match('direct_routes').then(response => {
-          if (response) {
-            return response.json().then(data => {
-              path.forEach((id: string): void => {
-                pathData.push(data[id]);
+    const a: any = `assets/new_json/partly/flying_routes/${startPoint}.json`;
+    if (!a.onload) {
+      console.log('not exists');
+      return;
+    }
+    if (a.onload) {
+      return this.http
+        .get<any>(`assets/new_json/partly/flying_routes/${startPoint}.json`)
+        .toPromise()
+        .then(flyingData => {
+          const filterData = flyingData[`${endPoint}`];
+         
+          if (!filterData) return [];
+          const path: [] = filterData.direct_routes.split(',');
+          return caches.match('direct_routes').then(response => {
+            if (response) {
+              return response.json().then(data => {
+                path.forEach((id: string): void => {
+                  pathData.push(data[id]);
+                });
+                filterData.travel_data = pathData;
+                console.timeEnd('GetFilterJson Flying_Data');
+                 console.log('filterData', filterData);
+                return filterData;
+                
               });
-              filterData.travel_data = pathData;
-              console.timeEnd('GetFilterJson Flying_Data');
-              console.log(filterData);
-              return filterData;
-            });
-          }
+            }
+          });
+        })
+        .catch(error => {
+          console.error('Error Fly:', error);
         });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    }
   }
 
   async getTravelData(startPoint: string, endPoint: string): Promise<any> {
@@ -101,7 +109,8 @@ export class FlyingRoutes {
     console.timeEnd('GetTransportAndLocationFlying');
 
     return this.getFilterJson({ startPoint, endPoint }).then(data => {
-      if (data.length !== 0) {
+      console.log('data', data);
+      if (data && data.length !== 0) {
         const result = [];
 
         const directPaths = data.travel_data.map(el => ({
