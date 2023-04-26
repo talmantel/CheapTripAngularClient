@@ -3,18 +3,14 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [ "node" ],
+    "types": ["node"],
     /* Experimental Options */
-    "experimentalDecorators": true, 
-    "emitDecoratorMetadata": true, 
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     /* Advanced Options */
-    "forceConsistentCasingInFileNames": true 
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.d.ts"]
 }
