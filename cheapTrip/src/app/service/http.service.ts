@@ -730,11 +730,7 @@ export class HttpService {
       '&search_name=' +
       '';
     let locations;
-<<<<<<< HEAD
-    this.http.get(url).subscribe((data) => {
-=======
     this.http.get(url).subscribe(data => {
->>>>>>> budget_travel_tips
       locations = data;
     });
     return locations;

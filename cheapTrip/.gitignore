@@ -46,10 +46,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-<<<<<<< HEAD
-#JSON_files
-/src/assets/json_files
-=======
 # Assets
 /assets
->>>>>>> budget_travel_tips

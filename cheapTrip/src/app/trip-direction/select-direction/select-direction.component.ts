@@ -18,11 +18,7 @@ import { ErrorInterceptor } from '../../error-interceptor';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from 'src/app/service/http.service';
 import { GlobalService } from '../../global/global.service';
-<<<<<<< HEAD
-import * as Locations from '../../../assets/json_files/Locations.json';
-=======
 import * as Locations from '../../../assets/new_json/locations.json';
->>>>>>> budget_travel_tips
 
 @Component({
   selector: 'app-select-direction',
@@ -65,8 +61,6 @@ export class SelectDirectionComponent implements OnInit {
   locations_data: any = Locations;
   searchedPoint: any = [];
 
-  locations_data: any = Locations;
-  searchedPoint: any = [];
 
   @ViewChild('nameText', { static: false })
   nameParagraph: ElementRef;
@@ -100,11 +94,7 @@ export class SelectDirectionComponent implements OnInit {
       });
 
     this.pointsSubscription();
-<<<<<<< HEAD
-    this.router.events.subscribe((res) => console.log('rout'));
-=======
     this.router.events.subscribe(res => console.log('rout'));
->>>>>>> budget_travel_tips
 
     console.log('NG oninit end!');
   }
@@ -113,27 +103,12 @@ export class SelectDirectionComponent implements OnInit {
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };
 
-<<<<<<< HEAD
-    const resLoc = Object.keys(this.locations_data.default).map((key) => ({
-=======
     const resLoc = Object.keys(this.locations_data.default).map(key => ({
->>>>>>> budget_travel_tips
       name: key,
       ...this.locations_data.default[key],
     }));
     this.searchedPoint = [];
     let list = [];
-<<<<<<< HEAD
-    resLoc.forEach((r) => {
-      if (
-        r.name.toLowerCase().indexOf(point.name.toLowerCase()) === 0 &&
-        list.length <= 9
-      ) { list.push({ id: r.id, name: r.name }); }
-    
-      this.searchedPoint = list.sort((a, b) => a.name.localeCompare(b.name));
-    
-    });
-=======
     resLoc.forEach(r => {
       if (
         r.name.toLowerCase().indexOf(point.name.toLowerCase()) === 0 &&
@@ -155,7 +130,6 @@ export class SelectDirectionComponent implements OnInit {
         }
       });
     }
->>>>>>> budget_travel_tips
 
     if (
       type === 'from' &&
@@ -182,10 +156,6 @@ export class SelectDirectionComponent implements OnInit {
 
   onSubmit(): void {
     console.log('SUBMITTED!');
-<<<<<<< HEAD
-    console.log(this.endPoint.id, 'path.to');
-=======
->>>>>>> budget_travel_tips
     this.store.dispatch(new TripDirectionActions.GetRouts());
   }
 
@@ -383,11 +353,7 @@ export class SelectDirectionComponent implements OnInit {
 
   private pointsSubscription() {
     console.log('Points!');
-<<<<<<< HEAD
-    this.startSubj.subscribe((res) => {
-=======
     this.startSubj.subscribe(res => {
->>>>>>> budget_travel_tips
       if (typeof res == 'string') {
         this.startPoint = this.startPointAutoComplete.filter(
           p => p.name === res

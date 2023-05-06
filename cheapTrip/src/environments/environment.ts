@@ -3,11 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-<<<<<<< HEAD
-  production: true,
-=======
   production: false,
->>>>>>> budget_travel_tips
   mainServer: 'tomcat', // "tomcat "or "spring"
   url68: 'http://3.18.167.68:8080/',
   url104: 'http://3.18.167.68:8080/',

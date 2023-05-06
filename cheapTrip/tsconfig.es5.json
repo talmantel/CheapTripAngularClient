@@ -1,13 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-<<<<<<< HEAD
-      "target": "es5",
-   }
- }
-=======
     "target": "es5",
     "resolveJsonModule": true
   }
 }
->>>>>>> budget_travel_tips

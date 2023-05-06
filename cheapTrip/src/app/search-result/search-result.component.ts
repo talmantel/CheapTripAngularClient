@@ -111,22 +111,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-<<<<<<< HEAD
-    if (document.getElementById('map') === null) {
-      console.log(
-        'document.getElementById(map)',
-        document.getElementById('map')
-      );
-    } else {
-      console.log(
-        'document.getElementById(map)',
-        document.getElementById('map')
-      );
-      let el = document.getElementById('map').getBoundingClientRect();
-    }
-=======
     // let el = document.getElementById('map').getBoundingClientRect();
->>>>>>> budget_travel_tips
   }
 
   private getIFrameSize(obs: BreakpointObserver) {

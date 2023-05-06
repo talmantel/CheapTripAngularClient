@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<section *ngFor="let rout of paths">
-=======
 <!-- <section *ngFor="let rout  of paths">
->>>>>>> budget_travel_tips
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header expandedHeight="*" collapsedHeight="*">
@@ -14,19 +10,10 @@
           </div>
         </mat-panel-title>
         <mat-panel-description>
-<<<<<<< HEAD
-          <div class="description">
-            <!-- <p><span class="points" *ngFor="let point of rout.details['points']">{{point}}</span></p> -->
-            <ul class="city">
-              <li class="points" *ngFor="let point of rout.details['points']">
-                {{ point }}<mat-icon [inline]="true">arrow_forward</mat-icon>
-              </li>
-=======
           <div class="description" > -->
 <!-- <p><span class="points" *ngFor="let point of rout.details['points']">{{point}}</span></p> -->
 <!-- <ul class="city">
               <li class="points" *ngFor="let point of rout.details['points']">{{point}}<mat-icon [inline]="true">arrow_forward</mat-icon></li>
->>>>>>> budget_travel_tips
             </ul>
 
             <p class="time">
@@ -56,9 +43,6 @@
         <!-- <p class="transport" > <span class="spacer"></span>
          
         </p> -->
-<<<<<<< HEAD
-        <p>
-=======
 <!-- <p ><span class="rout">{{path.from}}
           <mat-icon [inline]="true">arrow_forward</mat-icon>
          {{path.to}}</span>
@@ -158,7 +142,6 @@
          
         </p> -->
         <p>
->>>>>>> budget_travel_tips
           <span class="rout"
             >{{ path.from }}
             <mat-icon [inline]="true">arrow_forward</mat-icon>
@@ -218,13 +201,8 @@
               path.euro_price * getGlobalCurrency().oneEuroRate
                 | currency
                   : getGlobalCurrency().code
-<<<<<<< HEAD
-                  : "symbol-narrow"
-                  : "1.2-2"
-=======
                   : 'symbol-narrow'
                   : '1.2-2'
->>>>>>> budget_travel_tips
             }}
           </span>
         </div>

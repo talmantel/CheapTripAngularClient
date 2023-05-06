@@ -11,13 +11,8 @@ import {
 } from 'src/app/trip-direction/trip-direction.model';
 import { FormBuilder } from '@angular/forms';
 import { SelectDirectionComponent } from 'src/app/trip-direction/select-direction/select-direction.component';
-<<<<<<< HEAD
-import * as Locations from 'src/assets/json_files/Locations.json';
-import * as Booking_ids from 'src/assets/json_files/Booking_ids.json';
-=======
 import * as Locations from 'src/assets/new_json/locations.json';
 import * as Booking_ids from 'src/assets/new_json/booking_ids.json';
->>>>>>> budget_travel_tips
 
 const TRANSPORT = new Map();
 TRANSPORT.set('Bus', $localize`Bus`);
@@ -148,11 +143,7 @@ export class PathDetailsComponent implements OnInit {
   }
 
   getTrainUrl(rout: IRout) {
-<<<<<<< HEAD
-    console.log('train ' + this.country);
-=======
     // console.log('train ' + this.country);
->>>>>>> budget_travel_tips
     switch (this.country) {
       case 'RU':
       case 'BY':
@@ -196,23 +187,6 @@ export class PathDetailsComponent implements OnInit {
   linkToBooking(path: any) {
     var a = path.to;
     //console.log('booking data', this.booking_data);
-<<<<<<< HEAD
-    
-     const res = Object.keys(this.locations_data.default).map((key) => ({
-       name: key,
-       ...this.locations_data.default[key],
-     }));
-
-     res.forEach((r) => (r.name == a ? (this.locationId = r.id) : '-'));
-     //console.log(this.locationId);
-     
-     window.open(
-       'https://www.booking.com/searchresults.en.html?aid=7920152&city=' +
-         this.booking_data.default[this.locationId] +
-         '&lang=en&selected_currency=EUR',
-       '_blank'
-     );
-=======
 
     const res = Object.keys(this.locations_data.default).map(key => ({
       name: key,
@@ -228,7 +202,6 @@ export class PathDetailsComponent implements OnInit {
         '&lang=en&selected_currency=EUR',
       '_blank'
     );
->>>>>>> budget_travel_tips
     //if there is city
     //https://www.booking.com/searchresults.en.html?aid=7920152&city=-73635&lang=en&selected_currency=EUR
   }
