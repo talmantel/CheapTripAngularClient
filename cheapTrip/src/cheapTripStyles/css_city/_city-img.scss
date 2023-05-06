@@ -1,0 +1,16 @@
+.img-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.city-img {
+  min-width: 100%;
+  margin-top: 32px;
+
+  @media (min-width: $bp-md) {
+    max-width: 33%;
+    min-width: 33%;
+    margin: 32px auto 0;
+  }
+}

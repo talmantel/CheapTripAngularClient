@@ -566,7 +566,6 @@ const PATHS = `{"mixed_routes":
 "euro_price":31.0,
 "duration_minutes":3869
 },
-
 "flying_routes":{"direct_paths":[{"transportation_type":"Flight","euro_price":76.0,"duration_minutes":347,"from":"Bournemouth","to":"Alicante"},{"transportation_type":"Flight","euro_price":47.8124,"duration_minutes":361,"from":"Alicante","to":"Budapest"}],"euro_price":123.0,"duration_minutes":708},"ground_routes":{"direct_paths":[{"transportation_type":"Bus","euro_price":19.3951,"duration_minutes":3360,"from":"Bournemouth","to":"Bucharest"},{"transportation_type":"Bus","euro_price":12.5216,"duration_minutes":509,"from":"Bucharest","to":"Budapest"}],"euro_price":31.0,"duration_minutes":3869}}`;
 
 interface IRout {
@@ -671,7 +670,7 @@ export class HttpService {
   }
 
   private transformDetails(obj: IDetails): IDetails {
-    const newPaths = obj.direct_paths.map((item) => {
+    const newPaths = obj.direct_paths.map(item => {
       return {
         ...item,
         duration_minutes: this.transformTime(+obj.duration_minutes),
@@ -709,7 +708,7 @@ export class HttpService {
   private mapSanitazing(): Map<string, { type: string; icon: SafeHtml[] }> {
     const newMap = new Map<string, { type: string; icon: SafeHtml[] }>();
     PATHMAP.forEach((value, key, map) => {
-      const sanitizedArr = value.icon.map((icon) =>
+      const sanitizedArr = value.icon.map(icon =>
         this.sanitizer.bypassSecurityTrustHtml(icon)
       );
       const val = {
@@ -731,7 +730,11 @@ export class HttpService {
       '&search_name=' +
       '';
     let locations;
+<<<<<<< HEAD
     this.http.get(url).subscribe((data) => {
+=======
+    this.http.get(url).subscribe(data => {
+>>>>>>> budget_travel_tips
       locations = data;
     });
     return locations;

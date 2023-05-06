@@ -1,6 +1,6 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { switchMap, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, map, withLatestFrom, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { LocaleService } from '../../service/locale.service';
@@ -27,7 +27,12 @@ import * as fromApp from '../../store/app.reducer';
 import { SelectService } from '../select-direction/select.service';
 import { LocalizedString } from '@angular/compiler';
 import { HttpService } from 'src/app/service/http.service';
+<<<<<<< HEAD
 import { Observable } from 'rxjs';
+=======
+import { Observable, of } from 'rxjs';
+import { DataService } from '../../route-service/getTravelData';
+>>>>>>> budget_travel_tips
 
 import { ErrorInterceptor } from '../../error-interceptor';
 
@@ -113,6 +118,10 @@ export class TripDirectionEffects {
   private Locations: string[];
   private LocationsRU: Observable<any>;
   private LocationsEN: Observable<any>;
+<<<<<<< HEAD
+=======
+  private body: IRecievedRouts;
+>>>>>>> budget_travel_tips
   constructor(
     private errorInterceptor: ErrorInterceptor,
     private localeService: LocaleService,
@@ -122,7 +131,8 @@ export class TripDirectionEffects {
     private http: HttpClient,
     private router: Router,
     private store$: Store<fromApp.AppState>,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private dataService: DataService
   ) {
     //   this.server = 'tomcat'; //to be fixed
     // this.server = Server.SERVER104;
@@ -155,7 +165,11 @@ export class TripDirectionEffects {
   // 'http://52.14.161.122:8080/locations?type=from&search_name=6',
   // http://3.23.159.104:3333/CheapTrip/getLocations?type=1
 
+<<<<<<< HEAD
   // @Effect()
+=======
+  //@Effect()
+>>>>>>> budget_travel_tips
   // getAutocomplete$ = this.actions$.pipe(
   //   ofType(TripDirectionActions.GET_AUTOCOMPLETE),
   //   withLatestFrom(this.store$.select('directions')),
@@ -171,7 +185,10 @@ export class TripDirectionEffects {
   //         // request[0].payload.type +
   //         '&search_name=' +
   //         encodeURIComponent(request[0].payload.name);
+<<<<<<< HEAD
   //       console.log('request', request[0].payload.name);
+=======
+>>>>>>> budget_travel_tips
   //     } else {
   //       url =
   //         environment.url104 +
@@ -180,7 +197,10 @@ export class TripDirectionEffects {
   //         // request[0].payload.type +
   //         '&search_name=' +
   //         encodeURIComponent(request[0].payload.name);
+<<<<<<< HEAD
   //       console.log('request', request[0].payload.name);
+=======
+>>>>>>> budget_travel_tips
   //     }
   //     //here is url for a Tomcat server
   //     // url = this.selectService.getUrl('from',request[0].payload.name);
@@ -229,8 +249,13 @@ export class TripDirectionEffects {
   //     //actual http
 
   //     return this.http.get<any>(url, { observe: 'response' }).pipe(
+<<<<<<< HEAD
   //       map((res) => {
   //         console.log('res', res);
+=======
+  //       map(res => {
+  //         console.log(res);
+>>>>>>> budget_travel_tips
   //         const newAction =
   //           request[0].payload.type === 'from'
   //             ? new TripDirectionActions.SetStartPointAutocomplete(res.body)
@@ -246,9 +271,120 @@ export class TripDirectionEffects {
   //     );
   //   })
   // );
+<<<<<<< HEAD
   
+=======
+>>>>>>> budget_travel_tips
 
   @Effect()
+  // getRouts$ = this.actions$.pipe(
+  //   ofType(TripDirectionActions.GET_ROUTS),
+  //   withLatestFrom(this.store$.select('directions')),
+  //   switchMap((request: Array<any>) => {
+  //     this.checkPoints = new Array();
+  //     this.checkPointsStrings = new Array();
+  //     let url = '';
+  //     // lower is url for a spring server
+  //     // if (request[1].currentServer === 'server68') {
+  //     //   url =
+  //     //     environment.url68 +
+  //     //     'routes?from=' +
+  //     //     request[1].startPoint.id +
+  //     //     '&to=' +
+  //     //     request[1].endPoint.id;
+  //     // } else {
+  //     //   url =
+  //     //     environment.url104 +
+  //     //     'routes?from=' +
+  //     //     request[1].startPoint.id +
+  //     //     '&to=' +
+  //     //     request[1].endPoint.id;
+  //     // }
+
+  //     //here is url for a Tomcat server to be fixed
+  //     // url = this.selectService.getUrl('from','to')
+  //     if (environment.mainServer == 'tomcat') {
+  //       url =
+  //         environment.urlTomCat +
+  //         'CheapTrip/getRoute?from=' +
+  //         request[1].startPoint.id +
+  //         '&to=' +
+  //         request[1].endPoint.id;
+  //     }
+  //     //  this.checkPoints.push(Date.now());
+  //     //  this.checkPointsStrings.push("Before request");
+
+  //     if (this.language == 'ru') {
+  //       url += '&language_name=ru';
+  //     }
+
+  //
+  //       console.log(
+  //         'URL',
+  //         typeof request[1].startPoint.id,
+  //         request[1].endPoint.id
+  //       );
+
+  // return this.http.get(url, { observe: 'response' }).pipe(
+  //       map((res: any) => {
+  //         // next is for timing... obsolete
+  //         // this.checkPoints.push(Date.now());
+  //         // this.checkPointsStrings.push("received request");
+
+  //         console.log(res);
+  //         let resultPathArr = null;
+
+  //         resultPathArr = this.transformObject(res.body as IRecievedRouts[]);
+
+  //         resultPathArr.sort((a, b) =>
+  //           a.details.euro_price > b.details.euro_price ? 1 : -1
+  //         );
+
+  //         console.log('RESULT', resultPathArr, request);
+
+  //         const endPoints = {
+  //           from: request[1].startPoint,
+  //           to: request[1].endPoint,
+  //         };
+  //         const queryParams = {
+  //           from: request[1].startPoint.name,
+  //           fromID: request[1].startPoint.id,
+  //           to: request[1].endPoint.name,
+  //           toID: request[1].endPoint.id,
+  //         };
+  //         // next is for timing... obsolete
+  //         // this.checkPoints.push(Date.now());
+  //         // this.checkPointsStrings.push("Before navigation to mypath");
+  //         this.router.navigate(['/search/myPath'], {
+  //           queryParams,
+  //         });
+  //         // next is for timing... obsolete
+  //         // this.checkPoints.push(Date.now());
+  //         // this.checkPointsStrings.push("after nav, before return");
+  //         //can be used to determine user locale
+  //         // console.log('User locale -------'+this.localeService.getUsersLocale('en'));
+
+  //         // next is for timing... obsolete
+  //         // for (let index = 1; index < this.checkPoints.length; index++) {
+  //         //   console.log (this.checkPointsStrings[index-1]+" -> "+this.checkPointsStrings[index]
+  //         //   +" elapsed "+(this.checkPoints[index]-this.checkPoints[index-1])+" ms");
+
+  //         // }
+
+  //         return new TripDirectionActions.SetRouts({
+  //           paths: resultPathArr,
+  //           endPoints: endPoints,
+  //         });
+  //       })
+  //       /* atchError((error) => {
+  //           const errorMessage = 'An unknown error occured!';
+  //           this.handleError(error);
+  //           return of(new TripDirectionActions.AutoCompleteFail(error));
+
+  //         }) )*/
+  //     );
+  //   })
+  // );
   getRouts$ = this.actions$.pipe(
     ofType(TripDirectionActions.GET_ROUTS),
     withLatestFrom(this.store$.select('directions')),
@@ -256,23 +392,19 @@ export class TripDirectionEffects {
       this.checkPoints = new Array();
       this.checkPointsStrings = new Array();
       let url = '';
-      // lower is url for a spring server
-      // if (request[1].currentServer === 'server68') {
-      //   url =
-      //     environment.url68 +
-      //     'routes?from=' +
-      //     request[1].startPoint.id +
-      //     '&to=' +
-      //     request[1].endPoint.id;
-      // } else {
-      //   url =
-      //     environment.url104 +
-      //     'routes?from=' +
-      //     request[1].startPoint.id +
-      //     '&to=' +
-      //     request[1].endPoint.id;
-      // }
+      if (environment.mainServer == 'tomcat') {
+        url =
+          environment.urlTomCat +
+          'CheapTrip/getRoute?from=' +
+          request[1].startPoint.id +
+          '&to=' +
+          request[1].endPoint.id;
+      }
+      if (this.language == 'ru') {
+        url += '&language_name=ru';
+      }
 
+<<<<<<< HEAD
       //here is url for a Tomcat server to be fixed
       // url = this.selectService.getUrl('from','to')
       if (environment.mainServer == 'tomcat') {
@@ -345,6 +477,60 @@ export class TripDirectionEffects {
             return of(new TripDirectionActions.AutoCompleteFail(error));
           }) */
       );
+=======
+      console.time('Effects');
+
+      // Вызываем getTravelData и устанавливаем значение this.body в ответ
+      return this.dataService
+        .getPathMap(request[1].startPoint.id, request[1].endPoint.id)
+        .pipe(
+          tap(path => {
+            this.body = path;
+            console.log('path', path);
+          }),
+          switchMap(() => {
+            // Создаем новый HttpResponse с установленным значением this.body
+            return of(
+              new HttpResponse({
+                status: 200,
+                body: this.body,
+              })
+            );
+          }),
+          tap(data => console.log(data)),
+          map((res: any) => {
+            console.log(res);
+            let resultPathArr = null;
+
+            resultPathArr = this.transformObject(res.body as IRecievedRouts[]);
+
+            resultPathArr.sort((a, b) =>
+              a.details.euro_price > b.details.euro_price ? 1 : -1
+            );
+
+            console.log('RESULT', resultPathArr, request);
+            console.timeEnd('Effects');
+
+            const endPoints = {
+              from: request[1].startPoint,
+              to: request[1].endPoint,
+            };
+            const queryParams = {
+              from: request[1].startPoint.name,
+              fromID: request[1].startPoint.id,
+              to: request[1].endPoint.name,
+              toID: request[1].endPoint.id,
+            };
+            this.router.navigate(['/search/myPath'], {
+              queryParams,
+            });
+            return new TripDirectionActions.SetRouts({
+              paths: resultPathArr,
+              endPoints: endPoints,
+            });
+          })
+        );
+>>>>>>> budget_travel_tips
     })
   );
 
@@ -360,10 +546,9 @@ export class TripDirectionEffects {
     }
     return this.reducedPaths(objArr);
   } */
-
   private transformObject(routs: IRecievedRouts[]): IPath[] {
     const objArr: IPath[] = [];
-    routs.forEach((rout) => {
+    routs.forEach(rout => {
       const details = {
         euro_price: rout.euro_price,
         duration_minutes: rout.duration_minutes,
@@ -385,7 +570,7 @@ export class TripDirectionEffects {
 
     const points = this.getPoints(obj.direct_paths);
 
-    const newPaths = obj.direct_paths.map((item) => {
+    const newPaths = obj.direct_paths.map(item => {
       return {
         ...item,
         duration_minutes: this.transformTime(+item.duration_minutes),
@@ -432,7 +617,7 @@ export class TripDirectionEffects {
   private getTransport(paths: IRout[]): SafeHtml[] {
     const sanitisedMap = this.mapSanitazingDetaled();
     const result = [];
-    paths.map((item) => {
+    paths.map(item => {
       const smth = sanitisedMap.get(item.transportation_type);
       result.push(smth);
     });
@@ -454,7 +639,7 @@ export class TripDirectionEffects {
   }
 
   private getPoints(paths: IRout[]): Set<string> {
-    const transformedArr = paths.map((item) => [item.from, item.to]);
+    const transformedArr = paths.map(item => [item.from, item.to]);
     const result = new Set(transformedArr.reduce((a, b) => a.concat(b), []));
     return result;
   }
@@ -467,7 +652,11 @@ export class TripDirectionEffects {
 
     let duplicateIndex;
     do {
+<<<<<<< HEAD
       stringifyArr = paths.map((p) => JSON.stringify(p.details));
+=======
+      stringifyArr = paths.map(p => JSON.stringify(p.details));
+>>>>>>> budget_travel_tips
       duplicateIndex = -1; //means no duplicate
       for (let j = 0; j < paths.length; j++) {
         for (let i = 0; i < paths.length; i++) {

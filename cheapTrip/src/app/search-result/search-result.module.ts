@@ -15,7 +15,8 @@ import { LogoComponent } from '../logo/logo.component';
     SearchResultComponent,
     PathDetailsComponent,
     CapitalFirstLetterPipe,
-    PathMapComponent],
+    PathMapComponent,
+  ],
   imports: [CommonModule, MaterialModule, SearchResultRoutingModule],
 })
 export class SearchResultModule {}

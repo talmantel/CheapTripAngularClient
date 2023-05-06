@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 @import "../../../cheapTripStyles/styles.scss";
 @import "../../../cheapTripStyles/mixins.scss";
+=======
+@import '../../../cheapTripStyles/styles.scss';
+@import '../../../cheapTripStyles/mixins.scss';
+>>>>>>> budget_travel_tips
 
 .price {
   background-color: var(--color-primary);
@@ -19,7 +24,11 @@
 }
 
 .transport {
+<<<<<<< HEAD
   color: #607D8B;
+=======
+  color: #607d8b;
+>>>>>>> budget_travel_tips
 }
 
 .time {
@@ -38,12 +47,18 @@ ul.city {
   padding: 1px;
 
   li {
+<<<<<<< HEAD
 
     display: inline;
 
 
     mat-icon {
 
+=======
+    display: inline;
+
+    mat-icon {
+>>>>>>> budget_travel_tips
       //padding: 8px 2px 0px;
       position: relative;
       top: 0.1rem;
@@ -74,7 +89,11 @@ li.points {
 // }
 
 p span.points:last-child:after {
+<<<<<<< HEAD
   content: "";
+=======
+  content: '';
+>>>>>>> budget_travel_tips
 }
 
 p {
@@ -100,7 +119,10 @@ p {
   //  justify-self: end;
 
   // }
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
 }
 
 .mat-chip {
@@ -114,18 +136,27 @@ p {
 }
 
 section {
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
   width: 100%;
   height: auto;
   margin-top: 0.2rem;
 
   mat-accordion {
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
     width: 100%;
     height: inherit;
 
     mat-expansion-panel {
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
       padding: 0;
 
       .mat-expansion-panel-header-title {
@@ -140,7 +171,10 @@ section {
       }
 
       div.details {
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
         border-top: 1px solid var(--color-accent);
         // background-color: blueviolet;
         width: calc(100% - 24px);
@@ -155,7 +189,10 @@ section {
           justify-content: center;
 
           span.spacer {
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
             display: flex;
             justify-content: center;
             flex: 1 1 auto;
@@ -189,7 +226,10 @@ section {
 
         mat-panel-description {
           div.description {
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
             width: 100%;
 
             p:first-child {
@@ -220,16 +260,25 @@ section {
   }
 }
 
+<<<<<<< HEAD
 @include Large {}
 
 
+=======
+@include Large {
+}
+
+>>>>>>> budget_travel_tips
 @include Medium {
   section {
     //  background-color: cadetblue;
   }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
 @include Small {
   section {
     width: 100%;
@@ -247,7 +296,10 @@ section {
   }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> budget_travel_tips
 @include XSmall {
   section {
     width: 100%;
@@ -273,6 +325,7 @@ section {
 
     .buttons-links {
       order: 2;
+<<<<<<< HEAD
         width: 100%;
     }
 
@@ -280,6 +333,11 @@ section {
   
   
 
+=======
+      width: 100%;
+    }
+  }
+>>>>>>> budget_travel_tips
 }
 @include Smallphones {
   section {
@@ -297,6 +355,51 @@ section {
           }
         }
 
+<<<<<<< HEAD
+=======
+        div.details {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .time-links-price {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .time {
+      width: 40%;
+      order: 0;
+    }
+
+    .currency {
+      width: 40%;
+      order: 1;
+    }
+
+    .buttons-links {
+      order: 2;
+      width: 100%;
+    }
+  }
+
+  section {
+    width: 100%;
+
+    mat-accordion {
+      mat-expansion-panel {
+        mat-expansion-panel-header {
+          mat-panel-description {
+            div.description {
+              p:first-child {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+
+>>>>>>> budget_travel_tips
         div.details {
           font-size: 1rem;
         }
@@ -375,6 +478,34 @@ section {
   }
 }
 
+<<<<<<< HEAD
+=======
+.time-links-price {
+  //width: 230px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+
+  .time {
+    width: 100px;
+  }
+
+  .currency {
+    width: 80px;
+    text-align: right;
+  }
+
+  .buttons-links {
+    //width: 60%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+>>>>>>> budget_travel_tips
 #booking-button,
 #hostelworld-button,
 .buy-ticket-button {
@@ -383,12 +514,21 @@ section {
   color: rgb(0, 0, 0);
   padding: 3px;
   font-size: 12px;
+<<<<<<< HEAD
   font-family: Roboto, "Helvetica Neue", sans-serif;
 cursor: pointer;
+=======
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+>>>>>>> budget_travel_tips
   border: 1px solid #ff5722;
 }
 
 .buy-ticket-button {
   font-weight: 800;
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> budget_travel_tips

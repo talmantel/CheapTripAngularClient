@@ -15,7 +15,11 @@
     }
   ],
   "compilerOptions": {
+<<<<<<< HEAD
    
+=======
+    "resolveJsonModule": true,
+>>>>>>> budget_travel_tips
     "experimentalDecorators": true,
     "allowJs": true,
    

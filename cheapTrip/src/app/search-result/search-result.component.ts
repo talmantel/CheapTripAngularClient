@@ -98,10 +98,11 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getPathsSubscription = this.store
       .select('directions')
-      .subscribe((state) => {
+      .subscribe(state => {
         this.paths = state.paths;
         this.isLoading = state.isLoading;
       });
+    console.log('SEARCH RESULT');
   }
 
   ngOnDestroy(): void {
@@ -110,6 +111,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
+<<<<<<< HEAD
     if (document.getElementById('map') === null) {
       console.log(
         'document.getElementById(map)',
@@ -122,6 +124,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       );
       let el = document.getElementById('map').getBoundingClientRect();
     }
+=======
+    // let el = document.getElementById('map').getBoundingClientRect();
+>>>>>>> budget_travel_tips
   }
 
   private getIFrameSize(obs: BreakpointObserver) {
