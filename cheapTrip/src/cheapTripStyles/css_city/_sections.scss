@@ -1,0 +1,29 @@
+.section {
+  min-width: $min-content;
+  background-color: $color-back-main;
+  margin: 2rem auto 0;
+  @media (min-width: $bp-sm) {
+    margin: 4rem auto 0;
+    max-width: 33vw;
+  }
+}
+
+.section--search {
+  margin: 1rem auto 0;
+  @media (min-width: $bp-sm) {
+    margin: 2rem auto 0;
+  }
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: $color-font-main;
+  margin-bottom: 20px;
+  @media (min-width: $bp-sm) {
+    font-size: 1.6rem;
+  }
+  @media (min-width: $bp-md) {
+    font-size: 2.1rem;
+  }
+}

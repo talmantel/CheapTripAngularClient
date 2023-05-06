@@ -42,8 +42,7 @@ export class DataService {
     endPoint: string,
     endPointName: string
   ): Observable<any> {
-    const transportType: {} = JSON.parse(
-      sessionStorage.getItem('transportationTypes')
+    const transportType: {} = JSON.parse(sessionStorage.getItem('transportationTypes')
     );
 
     console.log(transportType['1']);
