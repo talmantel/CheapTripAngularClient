@@ -23,8 +23,8 @@ export class BudgetTravelComponent implements OnInit {
   cities: City[] = [
     {
       name: 'Paris',
-      imageUrl: '../../assets/images/images_budget/paris.jpg',
-      imageUrlW: '../../assets/images/images_budget/paris.webp',
+      imageUrl: 'assets/images/images_budget/paris.jpg',
+      imageUrlW: 'assets/images/images_budget/paris.webp',
       description: 'Paris is the capital and most populous city of France.',
       facts: [
         'France Is the Most-Visited Country in the World',
@@ -37,8 +37,8 @@ export class BudgetTravelComponent implements OnInit {
     },
     {
       name: 'London',
-      imageUrl: '../../assets/images/images_budget/london.jpg',
-      imageUrlW: '../../assets/images/images_budget/london.webp',
+      imageUrl: 'assets/images/images_budget/london.jpg',
+      imageUrlW: 'assets/images/images_budget/london.webp',
       description:
         ' Great Britain is an island in the North Atlantic Ocean off the north-west coast of continental Europe. With an area of 209,331 km2 (80,823 sq mi), it is the largest of the British Isles, the largest European island and the ninth-largest island in the world. It is dominated by a maritime climate with narrow temperature differences between seasons.',
       facts: [''],
