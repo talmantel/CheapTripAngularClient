@@ -9,51 +9,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class FlyingRoutes {
-  // pathData: IJsonTravelData[];
-
   constructor(private http: HttpClient) {}
-
-  // getFilterJson({
-  //   startPoint,
-  //   endPoint,
-  // }: {
-  //   startPoint: string;
-  //   endPoint: string;
-  // }): Promise<any> {
-  //   const pathData: IJsonTravelData[] = [];
-  //   console.time('GetFilterJson Flying_Data');
-
-  //   return caches
-  //     .match(new Request('assets/new_json/flying_routes.json'))
-  //     .then(response => {
-  //       if (response) {
-  //         return response.json();
-  //       }
-  //     })
-  //     .then(flyingData => {
-  //       const filterData = flyingData[`${startPoint}0${endPoint}`];
-
-  //       if (!filterData) return [];
-  //       const path: [] = filterData.direct_routes.split(',');
-  //       return caches
-  //         .match(new Request('assets/new_json/direct_routes.json'))
-  //         .then(response => {
-  //           if (response) {
-  //             return response.json();
-  //           }
-  //         })
-  //         .then(data => {
-  //           // console.log(data);
-  //           path.forEach((id: string): void => {
-  //             pathData.push(data[id]);
-  //           });
-  //           filterData.travel_data = pathData;
-  //           console.timeEnd('GetFilterJson Flying_Data');
-
-  //           return filterData;
-  //         });
-  //     });
-  // }
 
   getFilterJson({
     startPoint,
