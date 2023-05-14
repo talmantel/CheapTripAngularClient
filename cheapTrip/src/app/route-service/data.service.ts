@@ -1,23 +1,16 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { of, Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import {
   IJsonTravelData,
-  IJsonRoutData,
-  IRecievedRouts,
+  IJsonPartlyRoute,
+  IJsonPartlyRouteItem,
 } from '../trip-direction/trip-direction.model';
-import { FlyingRoutesService } from './flying-routes.service';
-import { GroundRoutesService } from './ground-routes.service';
-import { MixedRoutesService } from './mixed-routes.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
-  // private mergedData: IJsonTravelData[];
-  constructor(
-    private flyingData: FlyingRoutesService,
-    private groundData: GroundRoutesService,
-    private mixedData: MixedRoutesService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   async getFilterJson(
     startPoint: string,
@@ -62,7 +55,9 @@ export class DataService {
     return this.getFilterJson(startPoint, endPoint).then(data => {
       if (data.length > 0) {
         console.log(data);
+
         let result = [];
+
         for (let i = 0; i < data.length; i++) {
           result.push({
             duration_minutes: data[i].duration,
@@ -82,18 +77,18 @@ export class DataService {
         console.timeEnd('GetFilterJson Travel_data');
 
         return result;
-      } else {
-        return [];
       }
+
+      return [];
     });
   }
 
   getPathMap(startPoint: string, endPoint: string): Observable<any> {
     return forkJoin([
       this.getTravelData({ startPoint, endPoint }),
-      this.flyingData.getTravelData(startPoint, endPoint),
-      this.groundData.getTravelData(startPoint, endPoint),
-      this.mixedData.getTravelData(startPoint, endPoint),
+      this.getRouteTravelData(startPoint, endPoint, 'flying'),
+      this.getRouteTravelData(startPoint, endPoint, 'fixed'),
+      this.getRouteTravelData(startPoint, endPoint, 'direct'),
     ]).pipe(
       map(([travelData, flyingData, groundData, mixedData]) => {
         const pathMap = [
@@ -102,9 +97,128 @@ export class DataService {
           ...groundData,
           ...mixedData,
         ];
-        console.log(pathMap);
+
+        console.log('pathMap: ', pathMap);
+
         return pathMap;
       })
     );
+  }
+
+  private getRouteTravelData(
+    startPoint: string,
+    endPoint: string,
+    type: 'flying' | 'fixed' | 'direct'
+  ) {
+    console.time(
+      'route-service/data.service.ts ~ DataService ~ getRouteTravelData'
+    );
+
+    const transportType: {} = JSON.parse(
+      sessionStorage.getItem('transportationTypes')
+    );
+
+    const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
+
+    console.timeEnd(
+      'route-service/data.service.ts ~ DataService ~ getRouteTravelData'
+    );
+
+    return this.getRouteData({ startPoint, endPoint, type }).then(data => {
+      console.log(
+        'route-service/data.service.ts ~ DataService ~ getRouteTravelData ~ data:',
+        data
+      );
+
+      const result = [];
+
+      if (!data || data === null) return result;
+
+      const directPaths = data.travel_data.map(travelData => ({
+        duration_minutes: travelData.duration,
+        euro_price: travelData.price,
+        from: locations[travelData.from].name,
+        to: locations[travelData.to].name,
+        transportation_type: transportType[travelData.transport].name,
+      }));
+
+      result.push({
+        duration_minutes: data.duration,
+        euro_price: data.price,
+        route_type: `${type}_routes`,
+        direct_paths: directPaths,
+      });
+
+      return result;
+    });
+  }
+
+  private getRouteData({
+    startPoint,
+    endPoint,
+    type,
+  }: {
+    startPoint: string;
+    endPoint: string;
+    type: 'flying' | 'fixed' | 'direct';
+  }): Promise<IJsonPartlyRouteItem | null> {
+    console.log('getRouteData, type: ', type);
+
+    const pathData: IJsonTravelData[] = [];
+
+    console.time('route-service/data.service.ts ~ DataService ~ getRouteData');
+
+    return this.http
+      .get<IJsonPartlyRoute>(
+        `assets/json/partly/${type}_routes/${startPoint}.json`
+      )
+      .toPromise()
+      .then((routes): Promise<IJsonPartlyRouteItem | null> => {
+        console.log(routes);
+        const routeWithLink = routes[`${endPoint}`];
+
+        if (routeWithLink == undefined) {
+          return null;
+        }
+
+        const filterData: IJsonPartlyRouteItem = JSON.parse(
+          JSON.stringify(routes[`${endPoint}`])
+        );
+
+        console.log(routes);
+        console.log(filterData, 'endPoint:', endPoint);
+
+        return caches.match('direct_routes').then(response => {
+          if (response) {
+            return response.json().then(data => {
+              console.log('routes:', routes, 'data:', data);
+
+              filterData.direct_routes.forEach((id: string): void => {
+                const travelData = data[id];
+
+                if (travelData !== undefined) {
+                  pathData.push(data[id]);
+                }
+              });
+
+              filterData.travel_data = pathData;
+
+              console.timeEnd(
+                'route-service/data.service.ts ~ DataService ~ getRouteData'
+              );
+
+              return filterData;
+            });
+          }
+
+          console.error(`caches.match('direct_routes') error`);
+          return null;
+        });
+      })
+      .catch(error => {
+        console.error(`Error ${type}`, error);
+
+        return null;
+      });
   }
 }
