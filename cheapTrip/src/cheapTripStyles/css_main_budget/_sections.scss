@@ -15,13 +15,27 @@
 }
 
 .section-title {
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.3rem;
+  font-weight: 500;
   color: $color-font-main;
+  margin-bottom: 20px;
   @media (min-width: $bp-sm) {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   @media (min-width: $bp-md) {
     font-size: 2.1rem;
+  }
+}
+
+.flex-container {
+  @media (min-width: $bp-md) {
+    display: flex;
+    margin: 10vh 10vw;
+  }
+}
+
+.flex-container-reverse {
+  @media (min-width: $bp-md) {
+    flex-direction: row-reverse;
   }
 }

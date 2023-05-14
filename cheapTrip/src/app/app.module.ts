@@ -30,6 +30,7 @@ import { LogoComponent } from './logo/logo.component';
 import { CurrencySelectorComponent } from './currency-selector/currency-selector.component';
 import { TipCityComponent } from './budget-travel/tip-city/tip-city.component';
 import { BudgetTravelComponent } from './budget-travel/budget-travel.component';
+import {SelectCityComponent} from '../app/budget-travel/select-city/select-city.component'
 // the second parameter 'fr-FR' is optional
 registerLocaleData(localeRu, 'ru');
 registerLocaleData(localeUa, 'ua');
@@ -46,6 +47,7 @@ registerLocaleData(localeUa, 'ua');
     LogoComponent,
     TipCityComponent,
     BudgetTravelComponent,
+    SelectCityComponent,
   ],
   imports: [
     BrowserModule,

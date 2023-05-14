@@ -1,5 +1,6 @@
+<app-select-city (cityDetect)="onCityDetect($event)"></app-select-city>
 <main class="pb-5">
-  <section class="container section section--search">
+  <!-- <section class="container section section--search">
     <form class="search-form">
       <div class="row justify-content-between search-group">
         <div class="col-12 col-md-6 mb-3 mb-md-0 search-item">
@@ -25,7 +26,123 @@
         </div>
       </div>
     </form>
-  </section>
+  </section> -->
+  <!-- <div>------{{ cityData | json }}--------</div> -->
+  <ng-template [ngIf]="cityData">
+    <div class="flex-container">
+      <div class="img-container">
+        <img
+          src="{{ cityData.content.city.images[0] | json }}"
+          alt="City"
+          class="city-img"
+        />
+      </div>
+
+      <section class="container section">
+        <h2 class="section-title">{{ cityEndPoint }}</h2>
+        <p class="city-details__text">
+          {{ cityData.content.city.description | json }}
+        </p>
+      </section>
+    </div>
+    <div class="flex-container flex-container-reverse">
+      <div class="img-container">
+        <img
+          src="{{ cityData.content.city.images[1] | json }}"
+          alt="City"
+          class="city-img"
+        />
+      </div>
+
+      <section class="container section">
+        <h3 class="city-details__title">Attractions</h3>
+        <p class="city-details__text">
+          {{ cityData.content.attractions.description | json }}
+        </p>
+        <ul class="city-details__list">
+          <li
+            class="city-details__li"
+            *ngFor="
+              let option of cityData.content.attractions.options | slice : 0 : 2
+            "
+          >
+            <span class="city-details__subtitle">{{ option.name | json }}</span>
+            <p class="city-details__li-text">
+              {{ option.description | json }}
+            </p>
+            <a
+              class="city-details__map-view"
+              href="{{ option.location | json }}"
+              >View on map</a
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
+    <div class="flex-container">
+      <div class="img-container">
+        <img
+          src="https://images.pexels.com/photos/234315/pexels-photo-234315.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+          alt="City"
+          class="city-img"
+        />
+      </div>
+      <section class="container section">
+        <h3 class="city-details__title">Routes</h3>
+        <p class="city-details__text">
+          Looking to explore Europe on a budget? Start your adventure by
+          travelling from Berlin to some of the most captivating cities on the
+          continent! Check out our list of the most popular routes from Berlin
+          to other attractive destinations, perfect for every budget traveller.
+          Marvel at the stunning architecture of Prague, delve into the historic
+          streets of Warsaw, and soak up the vibrant atmosphere of Budapest.
+          From the glittering canals of Amsterdam to the sparkling beaches of
+          Barcelona, discover the best European destinations without breaking
+          the bank. Let your journey begin!
+        </p>
+        <ul class="city-details__list">
+          <li class="city-details__li">
+            <span class="city-details__subtitle">Amsterdam</span>
+            <p class="city-details__li-text">
+              Amsterdam is the perfect destination for budget travelers looking
+              to experience culture, history and a vibrant nightlife. With
+              affordable flights available throughout the year, exploring the
+              city's famous museums, parks and canals won't break the bank. Take
+              advantage of the many free walking tours and budget-friendly
+              eateries to make the most of your Amsterdam adventure.
+            </p>
+            <a
+              class="city-details__map-view"
+              href="https://cheaptrip.guru/en-US/#/search/myPath?from=Berlin&fromID=124&to=Amsterdam&toID=111"
+              >See the route</a
+            >
+          </li>
+          <li class="city-details__li">
+            <span class="city-details__subtitle">Prague</span>
+            <p class="city-details__li-text">
+              Prague is a top pick for budget-conscious travelers with its
+              affordable prices for accommodation, food and drink. This charming
+              city boasts a rich history, stunning Gothic architecture and a
+              vibrant nightlife scene. Flights to Prague can be found at great
+              prices throughout the year, with even more savings available
+              during the off-season.
+            </p>
+            <a
+              class="city-details__map-view"
+              href="https://cheaptrip.guru/en-US/#/search/myPath?from=Berlin&fromID=124&to=Prague&toID=297"
+              >See the route</a
+            >
+          </li>
+        </ul>
+        <a href="#" class="city-details__button">Booking.com</a>
+        <a
+          href="https://www.hostelworld.com/?source=affiliate-PHG-1101lmmsq&affiliate=PHG&ref_id=1101lwISQRVm"
+          class="city-details__button"
+          >Hostelworld</a
+        >
+      </section>
+    </div>
+  </ng-template>
 
   <ng-template [ngIf]="!selectedCity">
     <section class="container section">
@@ -205,6 +322,7 @@
       </div>
     </section>
   </ng-template> -->
+
   <div *ngIf="selectedCity">
     <main class="pb-5">
       <div class="img-container">
