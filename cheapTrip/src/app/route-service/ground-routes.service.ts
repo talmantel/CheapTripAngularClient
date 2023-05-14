@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class MixedRoutes {
+export class GroundRoutesService {
   constructor(private http: HttpClient) {}
 
   getFilterJson({
@@ -21,15 +21,17 @@ export class MixedRoutes {
   }): Promise<IJsonPartlyRouteItem | null> {
     const pathData: IJsonTravelData[] = [];
     const JSON_FOLDER_NAME = 'json';
-    console.time('GetFilterJson Mixed_Data');
+
+    console.time('GetFilterJson Ground_Data');
 
     return this.http
       .get<IJsonPartlyRoute>(
-        `assets/${JSON_FOLDER_NAME}/partly/routes/${startPoint}.json`
+        `assets/${JSON_FOLDER_NAME}/partly/fixed_routes/${startPoint}.json`
       )
       .toPromise<IJsonPartlyRoute>()
       .then((flyingData): Promise<IJsonPartlyRouteItem | null> => {
         const filterData = flyingData[`${endPoint}`];
+
         if (!filterData) return null;
 
         const path: string[] = filterData.direct_routes;
@@ -42,17 +44,18 @@ export class MixedRoutes {
               });
 
               filterData.travel_data = pathData;
-              console.timeEnd('GetFilterJson Mixed_Data');
+              console.timeEnd('GetFilterJson Ground_Data');
 
               return filterData;
             });
           }
-        });
 
-        return null;
+          return null;
+        });
       })
       .catch(error => {
         console.error('Error:', error);
+
         return null;
       });
   }
@@ -61,13 +64,14 @@ export class MixedRoutes {
     const transportType: {} = JSON.parse(
       sessionStorage.getItem('transportationTypes')
     );
+    console.time('Location');
     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
-    console.time('Get_Mixed_Routes');
+    console.timeEnd('Location');
 
+    console.time('Ground-Routes');
     return this.getFilterJson({ startPoint, endPoint }).then(data => {
       if (data !== null) {
         const result = [];
-
         const directPaths = data.travel_data.map(el => ({
           duration_minutes: el.duration,
           euro_price: el.price,
@@ -75,19 +79,20 @@ export class MixedRoutes {
           to: locations[el.to].name,
           transportation_type: transportType[el.transport].name,
         }));
+
         result.push({
           duration_minutes: data.duration,
           euro_price: data.price,
-          route_type: 'mixed_routes',
+          route_type: 'ground_routes',
           direct_paths: directPaths,
         });
 
-        console.timeEnd('Get_Mixed_Routes');
+        console.timeEnd('Ground-Routes');
 
         return result;
-      } else {
-        return [];
       }
+
+      return [];
     });
   }
 }

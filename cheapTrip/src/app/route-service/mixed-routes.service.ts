@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class FlyingRoutes {
+export class MixedRoutesService {
   constructor(private http: HttpClient) {}
 
   getFilterJson({
@@ -21,22 +21,18 @@ export class FlyingRoutes {
   }): Promise<IJsonPartlyRouteItem | null> {
     const pathData: IJsonTravelData[] = [];
     const JSON_FOLDER_NAME = 'json';
-
-    console.time('GetFilterJson Flying_Data');
+    console.time('GetFilterJson Mixed_Data');
 
     return this.http
       .get<IJsonPartlyRoute>(
-        `assets/${JSON_FOLDER_NAME}/partly/flying_routes/${startPoint}.json`
+        `assets/${JSON_FOLDER_NAME}/partly/routes/${startPoint}.json`
       )
       .toPromise<IJsonPartlyRoute>()
       .then((flyingData): Promise<IJsonPartlyRouteItem | null> => {
         const filterData = flyingData[`${endPoint}`];
-
-        if (!filterData) return Promise.resolve(null);
+        if (!filterData) return null;
 
         const path: string[] = filterData.direct_routes;
-
-        console.log('%c⧭', 'color: #f1f1f6', path);
 
         return caches.match('direct_routes').then(response => {
           if (response) {
@@ -46,37 +42,30 @@ export class FlyingRoutes {
               });
 
               filterData.travel_data = pathData;
-
-              console.timeEnd('GetFilterJson Flying_Data');
-              console.log('filterData', filterData);
+              console.timeEnd('GetFilterJson Mixed_Data');
 
               return filterData;
             });
           }
-
-          return null;
         });
+
+        return null;
       })
       .catch(error => {
-        console.error('Error Fly:', error);
-
+        console.error('Error:', error);
         return null;
       });
   }
 
-  async getTravelData(startPoint: string, endPoint: string) {
-    console.time('GetTransportAndLocationFlying');
+  async getTravelData(startPoint: string, endPoint: string): Promise<any> {
     const transportType: {} = JSON.parse(
       sessionStorage.getItem('transportationTypes')
     );
-
     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
-    console.timeEnd('GetTransportAndLocationFlying');
+    console.time('Get_Mixed_Routes');
 
     return this.getFilterJson({ startPoint, endPoint }).then(data => {
-      console.log('data', data);
-
-      if (data && data !== null) {
+      if (data !== null) {
         const result = [];
 
         const directPaths = data.travel_data.map(el => ({
@@ -86,18 +75,19 @@ export class FlyingRoutes {
           to: locations[el.to].name,
           transportation_type: transportType[el.transport].name,
         }));
-
         result.push({
           duration_minutes: data.duration,
           euro_price: data.price,
-          route_type: 'flying_routes',
+          route_type: 'mixed_routes',
           direct_paths: directPaths,
         });
 
-        return result;
-      }
+        console.timeEnd('Get_Mixed_Routes');
 
-      return [];
+        return result;
+      } else {
+        return [];
+      }
     });
   }
 }

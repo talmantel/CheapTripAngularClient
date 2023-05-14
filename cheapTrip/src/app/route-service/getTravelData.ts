@@ -6,17 +6,17 @@ import {
   IJsonRoutData,
   IRecievedRouts,
 } from '../trip-direction/trip-direction.model';
-import { GroundRoutes } from './ground_routes';
-import { FlyingRoutes } from './flying_routes';
-import { MixedRoutes } from './mixed_routes';
+import { FlyingRoutesService } from './flying-routes.service';
+import { GroundRoutesService } from './ground-routes.service';
+import { MixedRoutesService } from './mixed-routes.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
   // private mergedData: IJsonTravelData[];
   constructor(
-    private flyingData: FlyingRoutes,
-    private groundData: GroundRoutes,
-    private mixedData: MixedRoutes
+    private flyingData: FlyingRoutesService,
+    private groundData: GroundRoutesService,
+    private mixedData: MixedRoutesService
   ) {}
 
   async getFilterJson(
