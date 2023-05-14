@@ -34,17 +34,16 @@
 
   </script>
   <script type="text/javascript">  
-   console.time('location.json');
+    console.time('location.json');
+
     fetch('assets/new_json/locations.json')
       .then(res => res.json())
       .then(data => {
-        const newData = {};
-        Object.keys(data).forEach(key => {
-          newData[data[key].id] = data[key];
-        });
-        sessionStorage.setItem('locations', JSON.stringify(newData));
+        sessionStorage.setItem('locations', JSON.stringify(data));
       });
-    console.timeEnd('location.json');</script>
+
+    console.timeEnd('location.json');
+	</script>
 
    <script type="text/javascript">
       console.time('Transport.json');
