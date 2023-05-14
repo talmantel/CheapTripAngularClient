@@ -89,4 +89,4 @@ export interface IJsonPartlyRouteItem {
   travel_data?: IJsonTravelData[];
 }
 
-export type IJsonPartlyRoute = Record<string, IJsonPartlyRouteItem>;
+export type IJsonPartlyRoute = Record<number, IJsonPartlyRouteItem>;
