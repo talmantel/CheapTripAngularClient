@@ -102,54 +102,58 @@ export class SelectDirectionComponent implements OnInit {
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };
 
-    const resLoc = Object.keys(this.locations_data.default).map(key => ({
-      name: key,
-      ...this.locations_data.default[key],
-    }));
     this.searchedPoint = [];
-    let list = [];
-    resLoc.forEach(r => {
-      if (
-        r.name.toLowerCase().indexOf(point.name.toLowerCase()) === 0 &&
-        list.length <= 9
-      ) {
-        list.push({ id: r.id, name: r.name });
-      }
+    const list = [];
 
-      this.searchedPoint = list.sort((a, b) => a.name.localeCompare(b.name));
-    });
-    if (this.searchedPoint.length <= 9) {
-      console.log('this.searchedPoint <= 9', 'yes');
-      resLoc.forEach(r => {
+    Object.entries(this.locations_data.default).forEach(
+      ([id, location]: [string, any]) => {
         if (
-          r.name.toLowerCase().indexOf(point.name.toLowerCase()) > 0 &&
+          location.name.toLowerCase().indexOf(point.name.toLowerCase()) === 0 &&
           list.length <= 9
         ) {
-          list.push({ id: r.id, name: r.name });
+          list.push({ id: id, name: location.name });
         }
-      });
+
+        this.searchedPoint = list.sort((a, b) => a.name.localeCompare(b.name));
+      }
+    );
+
+    if (this.searchedPoint.length <= 9) {
+      console.log('this.searchedPoint <= 9', 'yes');
+      Object.entries(this.locations_data.default).forEach(
+        ([id, location]: [string, any]) => {
+          if (
+            location.name.toLowerCase().indexOf(point.name.toLowerCase()) > 0 &&
+            list.length <= 9
+          ) {
+            list.push({ id: id, name: location.name });
+          }
+        }
+      );
     }
 
-    if (
-      type === 'from' &&
-      this.directionForm.get('startPointControl').valid &&
-      str.length > 0
-    ) {
+    if (str.length < 0) return;
+
+    if (type === 'from' && this.directionForm.get('startPointControl').valid) {
       this.startPoint = { id: 0, name: '' };
+
       this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
+
       this.store.dispatch(
         new TripDirectionActions.SetStartPointAutocomplete(this.searchedPoint)
       );
-    } else if (
-      type === 'to' &&
-      this.directionForm.get('endPointControl').valid &&
-      str.length > 0
-    ) {
+
+      return;
+    }
+
+    if (type === 'to' && this.directionForm.get('endPointControl').valid) {
       this.endPoint = { id: 0, name: '' };
+
+      this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
+
       this.store.dispatch(
         new TripDirectionActions.SetEndPointAutocomplete(this.searchedPoint)
       );
-      this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
     }
   }
 
@@ -159,6 +163,12 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   optionSelected(point: any, type: string) {
+    console.log(
+      '🚀 ~ file: select-direction.component.ts:172 ~ SelectDirectionComponent ~ optionSelected ~ point:',
+      point,
+      type
+    );
+
     if (type == 'from') {
       this.startSubj.next(point);
     } else if (type === 'to') {
@@ -364,6 +374,12 @@ export class SelectDirectionComponent implements OnInit {
           startPointControl: this.startPoint.name,
         });
       }
+
+      console.log(
+        '🚀 ~ file: select-direction.component.ts:378 ~ SelectDirectionComponent ~ pointsSubscription ~ startPoint:',
+        this.startPoint
+      );
+
       this.store.dispatch(
         new TripDirectionActions.SetStartPoint({ ...this.startPoint })
       );
