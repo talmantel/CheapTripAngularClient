@@ -5,6 +5,7 @@ import { IPathPoint } from '../trip-direction/trip-direction.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
+
 interface Cities {
   name: string;
   imageUrl: string;

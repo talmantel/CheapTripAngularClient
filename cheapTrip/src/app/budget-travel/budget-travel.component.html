@@ -32,9 +32,12 @@
     <div class="flex-container">
       <div class="img-container">
         <img
-          src="{{ cityData.content.city.images[0] | json }}"
+          src="assets/images/Pictures/Berlin/image_of_Berlin.jpg"
           alt="City"
           class="city-img"
+          width="375"
+          height="250"
+          loading="lazy"
         />
       </div>
 
@@ -90,15 +93,7 @@
       <section class="container section">
         <h3 class="city-details__title">Routes</h3>
         <p class="city-details__text">
-          Looking to explore Europe on a budget? Start your adventure by
-          travelling from Berlin to some of the most captivating cities on the
-          continent! Check out our list of the most popular routes from Berlin
-          to other attractive destinations, perfect for every budget traveller.
-          Marvel at the stunning architecture of Prague, delve into the historic
-          streets of Warsaw, and soak up the vibrant atmosphere of Budapest.
-          From the glittering canals of Amsterdam to the sparkling beaches of
-          Barcelona, discover the best European destinations without breaking
-          the bank. Let your journey begin!
+          {{ cityData.content.routes.description | json }}
         </p>
         <ul class="city-details__list">
           <li class="city-details__li">
