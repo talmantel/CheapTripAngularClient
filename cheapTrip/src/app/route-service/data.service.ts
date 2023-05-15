@@ -170,7 +170,7 @@ export class DataService {
 
     return this.http
       .get<IJsonPartlyRoute>(
-        `assets/json/partly/${type}_routes/${startPoint}.json`
+        `assets/new_json/partly/${type}_routes/${startPoint}.json`
       )
       .toPromise()
       .then((routes): Promise<IJsonPartlyRouteItem | null> => {
