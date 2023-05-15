@@ -1,0 +1,121 @@
+.header {
+  min-width: $min-content;
+  background-color: $color-primary;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px .5rem 2px 1rem;
+}
+
+.headline {
+  display: flex;
+  align-items: center;
+}
+
+.headline__logo {
+  font-style: italic;
+  font-weight: bolder;
+  font-size: 1.6rem;
+  color: $color-font-second;
+  @media (min-width: $bp-xs) {
+    font-size: 2rem;
+  }
+  @media (min-width: $bp-sm) {
+    font-size: 2.3rem;
+  }
+  @media (min-width: $bp-md) {
+    font-size: 3.3rem;
+  }
+}
+
+.headline__slogan {
+  margin-left: 40px;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: bolder;
+  color: $color-font-second;
+  display: none;
+  @media (min-width: $bp-s) {
+    display: inline;
+  }
+  @media (min-width: $bp-sm) {
+    font-size: 1.4rem;
+  }
+  @media (min-width: $bp-md) {
+    font-size: 2.1rem;
+  }
+}
+
+.menu {
+  margin-left: 2px;
+}
+
+.menu__btn {
+  border: none;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  background-color: $color-primary;
+  color: $color-font-second;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.services {
+  width: 200px;
+  height: 100vh;
+  box-shadow: 0px 6px 7px #000;
+  border-radius: 0;
+  background-color: $color-primary;
+  @media (min-width: $min-content) {
+    top: 50% !important;
+    left: 100% !important;
+    transform: translate(-100%, -50%) !important;
+  }
+}
+
+.services__item {
+  color: $color-font-second;
+  border-radius: 0 !important;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  &:hover,
+  &:focus {
+    outline: none;
+    color: $color-font-second;
+    background-color: rgba(0, 0, 0, 0.04) !important;
+  }
+}
+
+.services__item--close {
+  width: auto;
+  height: auto;
+  border-radius: 50% !important;
+}
+
+.services-title-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 5px 35px 10px;
+}
+
+.services-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: $color-font-second;
+}
+
+.item-text {
+  font-size: 1rem;
+  font-weight: 400;
+  padding-left: 8px; 
+  display: inline-block;
+}
