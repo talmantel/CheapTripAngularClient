@@ -1,3 +1,35 @@
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+  
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px; 
+   
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 16px;
+  }
+  
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55px; 
+    padding-bottom: 40px;
+    margin-bottom: 30px
+  }
+}
+
+
 button,
 input {
   border: 0;
@@ -35,9 +67,6 @@ a:active {
   }
 }
 
-.section--search {
-  margin: 1rem auto 0;
-}
 @media (min-width: 576px) {
   .section--search {
     margin: 2rem auto 0;
@@ -366,7 +395,7 @@ a:active {
 
 .city-img {
   min-width: 100%;
-  margin-top: 32px;
+  margin-top: 4px;
 }
 @media (min-width: 768px) {
   .city-img {
