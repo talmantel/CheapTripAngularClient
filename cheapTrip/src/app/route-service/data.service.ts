@@ -54,7 +54,7 @@ export class DataService {
 
     return this.getFilterJson(startPoint, endPoint).then(data => {
       if (data.length > 0) {
-        console.log(data);
+        console.log('getTravelData data:', data);
 
         let result = [];
 
@@ -174,7 +174,6 @@ export class DataService {
       )
       .toPromise()
       .then((routes): Promise<IJsonPartlyRouteItem | null> => {
-        console.log(routes);
         const routeWithLink = routes[`${endPoint}`];
 
         if (routeWithLink == undefined) {
@@ -185,14 +184,9 @@ export class DataService {
           JSON.stringify(routes[`${endPoint}`])
         );
 
-        console.log(routes);
-        console.log(filterData, 'endPoint:', endPoint);
-
         return caches.match('direct_routes').then(response => {
           if (response) {
             return response.json().then(data => {
-              console.log('routes:', routes, 'data:', data);
-
               filterData.direct_routes.forEach((id: string): void => {
                 const travelData = data[id];
 
