@@ -184,26 +184,28 @@ export class PathDetailsComponent implements OnInit {
     //   '_blank'
     // );
   }
+
   linkToBooking(path: any) {
-    var a = path.to;
-    //console.log('booking data', this.booking_data);
+    Object.entries(this.locations_data.default).forEach(
+      ([id, location]: [any, any]) => {
+        if (location.name == path.to) {
+          this.locationId = id;
+        }
+      }
+    );
 
-    const res = Object.keys(this.locations_data.default).map(key => ({
-      name: key,
-      ...this.locations_data.default[key],
-    }));
-
-    res.forEach(r => (r.name == a ? (this.locationId = r.id) : '-'));
-    //console.log(this.locationId);
-
+    /*
+			Examples:
+			https://www.booking.com/searchresults.en.html?aid=7920152&city=-73635&lang=en&selected_currency=EUR
+			or if city not exists
+			https://www.booking.com/searchresults.en.html?aid=7920152&city=&lang=en&selected_currency=EUR
+		*/
     window.open(
       'https://www.booking.com/searchresults.en.html?aid=7920152&city=' +
-        this.booking_data.default[this.locationId] +
-        '&lang=en&selected_currency=EUR',
+        this.booking_data.default[this.locationId] ||
+        '' + '&lang=en&selected_currency=EUR',
       '_blank'
     );
-    //if there is city
-    //https://www.booking.com/searchresults.en.html?aid=7920152&city=-73635&lang=en&selected_currency=EUR
   }
   onSubmitHostelworld($event: any): void {
     $event.preventDefault();
