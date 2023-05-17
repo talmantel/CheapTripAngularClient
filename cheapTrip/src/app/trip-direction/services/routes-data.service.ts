@@ -9,7 +9,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
-export class DataService {
+export class RoutesDataService {
   constructor(private http: HttpClient) {}
 
   async getFilterJson(
