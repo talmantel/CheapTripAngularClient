@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertMessage, Button } from './error/alertMessage.model';
+import { CacheService } from './service/cache.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,13 @@ import { AlertMessage, Button } from './error/alertMessage.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private cacheService: CacheService) {}
+
   ngOnInit(): void {
     console.log(this.myBrowser());
     console.log(this.getBrowserVersion());
+
+    this.cacheService.initialize();
 
     if (this.getBrowserVersion() == 'Opera 72') {
       const alertMessage = new AlertMessage(
