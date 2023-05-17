@@ -105,7 +105,7 @@ export class RoutesDataService {
     );
   }
 
-  private getRouteTravelData(
+  private async getRouteTravelData(
     startPoint: string,
     endPoint: string,
     type: 'flying' | 'fixed' | 'direct'
@@ -124,44 +124,60 @@ export class RoutesDataService {
       'route-service/data.service.ts ~ DataService ~ getRouteTravelData'
     );
 
-    return this.getRouteData({ startPoint, endPoint, type }).then(data => {
-      console.log(
-        'route-service/data.service.ts ~ DataService ~ getRouteTravelData ~ data:',
-        data
-      );
+    let directRoutes = null;
 
-      const result = [];
+    try {
+      const directRoutesResponse = await caches.match('direct_routes');
 
-      if (!data || data === null) return result;
+      directRoutes = await directRoutesResponse.json();
+    } catch (error) {
+      console.error(`caches.match('direct_routes') error`);
+      return null;
+    }
 
-      const directPaths = data.travel_data.map(travelData => ({
-        duration_minutes: travelData.duration,
-        euro_price: travelData.price,
-        from: locations[travelData.from].name,
-        to: locations[travelData.to].name,
-        transportation_type: transportType[travelData.transport].name,
-      }));
+    return this.getRouteData({ startPoint, endPoint, type }, directRoutes).then(
+      data => {
+        console.log(
+          'route-service/data.service.ts ~ DataService ~ getRouteTravelData ~ data:',
+          data
+        );
 
-      result.push({
-        duration_minutes: data.duration,
-        euro_price: data.price,
-        route_type: `${type}_routes`,
-        direct_paths: directPaths,
-      });
+        const result = [];
 
-      return result;
-    });
+        if (!data || data === null) return result;
+
+        const directPaths = data.travel_data.map(travelData => ({
+          duration_minutes: travelData.duration,
+          euro_price: travelData.price,
+          from: locations[travelData.from].name,
+          to: locations[travelData.to].name,
+          transportation_type: transportType[travelData.transport].name,
+        }));
+
+        result.push({
+          duration_minutes: data.duration,
+          euro_price: data.price,
+          route_type: `${type}_routes`,
+          direct_paths: directPaths,
+        });
+
+        return result;
+      }
+    );
   }
 
-  private getRouteData({
-    startPoint,
-    endPoint,
-    type,
-  }: {
-    startPoint: string;
-    endPoint: string;
-    type: 'flying' | 'fixed' | 'direct';
-  }): Promise<IJsonPartlyRouteItem | null> {
+  private getRouteData(
+    {
+      startPoint,
+      endPoint,
+      type,
+    }: {
+      startPoint: string;
+      endPoint: string;
+      type: 'flying' | 'fixed' | 'direct';
+    },
+    directRoutes: any
+  ): Promise<IJsonPartlyRouteItem | null> {
     console.log('getRouteData, type: ', type);
 
     const pathData: IJsonTravelData[] = [];
@@ -184,35 +200,21 @@ export class RoutesDataService {
           JSON.stringify(routes[`${endPoint}`])
         );
 
-        return caches.match('direct_routes').then(response => {
-          if (response) {
-            return response.json().then(data => {
-              filterData.direct_routes.forEach((id: string): void => {
-                const travelData = data[id];
+        filterData.direct_routes.forEach((id: string): void => {
+          const travelData = directRoutes[id];
 
-                if (travelData !== undefined) {
-                  pathData.push(data[id]);
-                }
-              });
-
-              filterData.travel_data = pathData;
-
-              console.timeEnd(
-                'route-service/data.service.ts ~ DataService ~ getRouteData'
-              );
-
-              return filterData;
-            });
+          if (travelData !== undefined) {
+            pathData.push(directRoutes[id]);
           }
-
-          console.error(`caches.match('direct_routes') error`);
-          return null;
         });
-      })
-      .catch(error => {
-        console.error(`Error ${type}`, error);
 
-        return null;
+        filterData.travel_data = pathData;
+
+        console.timeEnd(
+          'route-service/data.service.ts ~ DataService ~ getRouteData'
+        );
+
+        return Promise.resolve(filterData);
       });
   }
 }
