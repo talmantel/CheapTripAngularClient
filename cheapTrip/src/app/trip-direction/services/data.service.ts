@@ -5,7 +5,7 @@ import {
   IJsonTravelData,
   IJsonPartlyRoute,
   IJsonPartlyRouteItem,
-} from '../trip-direction/trip-direction.model';
+} from '../trip-direction.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })

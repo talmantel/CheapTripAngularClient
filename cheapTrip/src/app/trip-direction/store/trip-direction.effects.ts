@@ -27,7 +27,7 @@ import { SelectService } from '../select-direction/select.service';
 import { LocalizedString } from '@angular/compiler';
 import { HttpService } from 'src/app/service/http.service';
 import { Observable, of } from 'rxjs';
-import { DataService } from '../../route-service/data.service';
+import { DataService } from '../services/data.service';
 
 import { ErrorInterceptor } from '../../error-interceptor';
 
