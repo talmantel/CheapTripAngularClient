@@ -1,12 +1,12 @@
-import { IPath, IPathPoint, Modes, Server } from '../trip-direction.model';
+import {ILocation, IPath, IPathPoint, IRoute, Modes, Server} from '../trip-direction.model';
 import * as TripDirectionActions from './trip-direction.actions';
 
 export interface ITripDirectionState {
-  startPoint: IPathPoint;
-  endPoint: IPathPoint;
-  startPointAutoComplete: Array<IPathPoint>;
-  endPointAutoComplete: Array<IPathPoint>;
-  paths: IPath[];
+  startPoint: ILocation;
+  endPoint: ILocation;
+  startPointAutoComplete: ILocation;
+  endPointAutoComplete: ILocation;
+  paths: IRoute[];
   mode: Modes;
   errorMessage: string;
   pathsAmount: number;
@@ -17,10 +17,14 @@ export interface ITripDirectionState {
 }
 
 const initialState: ITripDirectionState = {
-  startPoint: { id: 0, name: '' },
-  endPoint: { id: 0, name: '' },
-  startPointAutoComplete: [],
-  endPointAutoComplete: [],
+  startPoint: { id: 0, name: '', country_name: '', longitude: 0, latitude: 0 },
+  endPoint: { id: 0, name: '', country_name: '', longitude: 0, latitude: 0 },
+  startPointAutoComplete: {
+    id: 0, name: '', country_name: '', longitude: 0, latitude: 0
+  },
+  endPointAutoComplete: {
+    id: 0, name: '', country_name: '', longitude: 0, latitude: 0
+  },
   paths: [],
   mode: Modes.SEARCH,
   errorMessage: '',
@@ -49,27 +53,28 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.SET_START_POINT_AUTOCOMPLETE:
-      let newStartAutocompleteList = [];
-      if (action.payload.length === 0) {
-        newStartAutocompleteList = [...state.startPointAutoComplete];
-      } else {
-        newStartAutocompleteList = action.payload;
-      }
+      // let newStartAutocompleteList = [];
+      // if (action.payload.length === 0) {
+      //   newStartAutocompleteList = [...state.startPointAutoComplete];
+      // // } else {
+      // //   newStartAutocompleteList = action.payload;
+      // }
       return {
         ...state,
-        startPointAutoComplete: newStartAutocompleteList,
+        startPointAutoComplete: action.payload,
       };
 
     case TripDirectionActions.SET_END_POINT_AUTOCOMPLETE:
-      let newEndAutocompleteList = [];
-      if (action.payload.length === 0) {
-        newEndAutocompleteList = [...state.endPointAutoComplete];
-      } else {
-        newEndAutocompleteList = action.payload;
-      }
+      // let newEndAutocompleteList = [];
+      // if (action.payload.length === 0) {
+      //   newEndAutocompleteList = [...state.endPointAutoComplete];
+      // }
+      // else {
+      //   newEndAutocompleteList = action.payload;
+      // }
       return {
         ...state,
-        endPointAutoComplete: newEndAutocompleteList,
+        endPointAutoComplete: action.payload,
       };
 
     case TripDirectionActions.GET_START_POINT:
@@ -99,41 +104,41 @@ export function tripDirectionReducer(
       };
 
     case TripDirectionActions.SET_ROUTS:
-      const pathsAmount = action.payload.paths.length;
-      const length1 = action.payload.paths.reduce((sum, current) => {
-        return sum + current.details.direct_paths.length;
-      }, 0);
+      // const pathsAmount = action.payload.paths.length;
+      // const length1 = action.payload.paths.reduce((sum, current) => {
+      //   return sum + current.details.direct_paths.length;
+      // }, 0);
 
-      const res = length1 + pathsAmount;
+      // const res = length1 + pathsAmount;
       return {
         ...state,
         paths: [...action.payload.paths],
         startPoint: action.payload.endPoints.from,
         endPoint: action.payload.endPoints.to,
         mode: Modes.DELIVERY,
-        pathsAmount: res,
+        // pathsAmount: res,
         isLoading: false,
       };
 
-    case TripDirectionActions.AUTOCOMPLETE_FAIL:
-      let server = 'server68';
-      if (state.currentServer == 'server104' ){
-      //  server = Server.SERVER104;
-      }
-      return {
-        ...state,
-     //   currentServer: server,
-     //   serverChanged: true
-      };
+    // case TripDirectionActions.AUTOCOMPLETE_FAIL:
+    //   let server = 'server68';
+    //   if (state.currentServer == 'server104' ){
+    //   //  server = Server.SERVER104;
+    //   }
+    //   return {
+    //     ...state,
+    //  //   currentServer: server,
+    //  //   serverChanged: true
+    //   };
 
     case TripDirectionActions.CLEAN_DATA:
-      const empty = { id: 0, name: '' };
+      const empty = { id: 0, name: '', country_name: '', longitude: 0, latitude: 0 };
       return {
         ...state,
         startPoint: empty,
         endPoint: empty,
-        startPointAutoComplete: [],
-        endPointAutoComplete: [],
+        startPointAutoComplete: {id: 0, name: '', country_name: '', longitude: 0, latitude: 0},
+        endPointAutoComplete: {id: 0, name: '', country_name: '', longitude: 0, latitude: 0},
         errorMessage: '',
         //  toHome: action.payload,
       };
@@ -148,10 +153,10 @@ export function tripDirectionReducer(
     case TripDirectionActions.GO_HOME:
       return {
         ...state,
-        startPoint: { id: 0, name: '' },
-        endPoint: { id: 0, name: '' },
-        startPointAutoComplete: [],
-        endPointAutoComplete: [],
+        startPoint: { id: 0, name: '', country_name: '', longitude: 0, latitude: 0 },
+        endPoint: { id: 0, name: '', country_name: '', longitude: 0, latitude: 0 },
+        startPointAutoComplete: {id: 0, name: '', country_name: '', longitude: 0, latitude: 0},
+        endPointAutoComplete: {id: 0, name: '', country_name: '', longitude: 0, latitude: 0},
         paths: [],
         mode: Modes.SEARCH,
         errorMessage: '',

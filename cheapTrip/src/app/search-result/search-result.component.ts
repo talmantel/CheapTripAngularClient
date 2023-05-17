@@ -10,7 +10,8 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import * as fromApp from '../store/app.reducer';
-import { IPath } from '../trip-direction/trip-direction.model';
+import {ILocation, IPath, IRoute} from '../trip-direction/trip-direction.model';
+import {PageEvent} from "@angular/material/paginator";
 
 // reference information: available resolutions
 enum VIEWPORTS {
@@ -58,10 +59,16 @@ iframeSizeMap.set(VIEWPORTS.SmallPhones, { width: 360, height: 2000 });
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
-  paths: IPath[];
+  paths: IRoute[];
+  endPoint: ILocation;
+  startPoint: ILocation;
   isDesktop = false;
   getPathsSubscription: Subscription;
   isLoading: boolean;
+
+  // Pagination
+  lowValue = 0;
+  highValue = 20;
 
   // for UIw
   iframeWidth: number;
@@ -100,18 +107,25 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       .select('directions')
       .subscribe((state) => {
         this.paths = state.paths;
-        this.isLoading = state.isLoading;
+        this.endPoint = state.endPoint;
+        this.startPoint = state.startPoint;
       });
+    console.log(this.store);
   }
 
   ngOnDestroy(): void {
     this.getPathsSubscription.unsubscribe();
   }
 
-  @HostListener('window:keyup', ['$event'])
-  keyEvent(event: KeyboardEvent) {
-    let el = document.getElementById('map').getBoundingClientRect();
-
+  // @HostListener('window:keyup', ['$event'])
+  // keyEvent(event: KeyboardEvent) {
+  //   let el = document.getElementById('map').getBoundingClientRect();
+  //
+  // }
+  public getPaginatorData(event: PageEvent): PageEvent {
+    this.lowValue = event.pageIndex * event.pageSize;
+    this.highValue = this.lowValue + event.pageSize;
+    return event;
   }
 
   private getIFrameSize(obs: BreakpointObserver) {

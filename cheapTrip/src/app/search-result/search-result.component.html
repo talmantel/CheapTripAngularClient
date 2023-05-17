@@ -1,9 +1,19 @@
 <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
 <div *ngIf="!isLoading" class="mainContainer">
   <div class="aside">
-    <app-path-details [paths]="paths"></app-path-details>
+    <app-path-details class="path-details" *ngFor="let path of paths"
+                      [path]="path" [endPoint]="endPoint"
+                      [startPoint]="startPoint">
+    </app-path-details>
+<!--    <div class="paginator" [ngClass]="{'hidden': paths.length === 0 || paths.length === 1}">-->
+<!--      <mat-paginator [length]="paths.length"-->
+<!--                     [pageSize]="10"-->
+<!--                     [pageSizeOptions]="[10, 20, 30]"-->
+<!--      (page)="getPaginatorData($event)">-->
+<!--      </mat-paginator>-->
+<!--    </div>-->
   </div>
-  <div class="map" id="map">
-    <app-path-map [isDeskTop]="isDesktop" [frameWidth]="iframeWidth" [frameHeight]="iframeHeight"></app-path-map>
-  </div>
+<!--  <div class="map" id="map">-->
+<!--    <app-path-map [isDeskTop]="isDesktop" [frameWidth]="iframeWidth" [frameHeight]="iframeHeight"></app-path-map>-->
+<!--  </div>-->
 </div>

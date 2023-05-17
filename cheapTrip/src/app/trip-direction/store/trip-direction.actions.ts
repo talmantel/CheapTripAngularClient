@@ -1,9 +1,10 @@
 import { Action } from '@ngrx/store/src';
 import {
+  ILocation,
   IPath,
   IPathPoint,
   IPoint,
-  IPoints,
+  IPoints, IRoute, ITravelData,
   Modes,
 } from '../trip-direction.model';
 
@@ -25,12 +26,12 @@ export const GO_HOME = '[TripDirection] Go Home';
 
 export class SetStartPoint implements Action {
   readonly type = SET_START_POINT;
-  constructor(public payload: IPathPoint) {}
+  constructor(public payload: ILocation) {}
 }
 
 export class SetEndPoint implements Action {
   readonly type = SET_END_POINT;
-  constructor(public payload: IPathPoint) {}
+  constructor(public payload: ILocation) {}
 }
 
 export class GetStartPoint implements Action {
@@ -50,12 +51,12 @@ export class GetAutocomplete implements Action {
 
 export class SetStartPointAutocomplete implements Action {
   readonly type = SET_START_POINT_AUTOCOMPLETE;
-  constructor(public payload: IPathPoint[]) {}
+  constructor(public payload: ILocation) {}
 }
 
 export class SetEndPointAutocomplete implements Action {
   readonly type = SET_END_POINT_AUTOCOMPLETE;
-  constructor(public payload: IPathPoint[]) {}
+  constructor(public payload: ILocation) {}
 }
 
 export class GetRouts implements Action {
@@ -68,7 +69,7 @@ export class GetRouts implements Action {
 export class SetRouts implements Action {
   readonly type = SET_ROUTS;
   constructor(
-    public payload: { paths: IPath[]; endPoints: { from: IPathPoint; to: IPathPoint} }
+    public payload: { paths: IRoute[]; endPoints: { from: ILocation; to: ILocation} }
   ) {}
 }
 

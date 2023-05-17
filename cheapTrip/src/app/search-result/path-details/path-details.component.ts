@@ -5,7 +5,7 @@ import { IPath } from '../../service/http.service';
 import { HttpService } from 'src/app/service/http.service';
 import { GlobalService } from 'src/app/global/global.service';
 import { Currency } from 'src/app/currency-selector/currency-selector.component';
-import { IRout } from 'src/app/trip-direction/trip-direction.model';
+import {ILocation, IRout, IRoute} from 'src/app/trip-direction/trip-direction.model';
 
 const TRANSPORT = new Map();
 TRANSPORT.set('Bus', $localize`Bus`);
@@ -29,9 +29,10 @@ TRANSPORT.set('Taxi', $localize`Taxi`);
 
 
 export class PathDetailsComponent implements OnInit {
-@Input() paths: IPath[];
-@Input() startPoint: string;
-@Input() endPoint: string;
+@Input() path: IRoute;
+@Input() startPoint: ILocation;
+@Input() endPoint: ILocation;
+
 private country:string;
 //private currency:Currency;
 
@@ -43,12 +44,12 @@ price: number;
     ) {
 
 
-    this.httpService.getUserCountry().subscribe({
-      next: (data:any)=>{console.log("Got user country:"+data.country_code);
-        this.country= data.country_code},
-      error: (err:any)=>{console.log(err);
-        this.country= "undefined"}
-   })
+   //  this.httpService.getUserCountry().subscribe({
+   //    next: (data:any)=>{console.log("Got user country:"+data.country_code);
+   //      this.country= data.country_code},
+   //    // error: (err:any)=>{console.log(err);
+   //    //   this.country= "undefined"}
+   // })
 
 
   }
@@ -71,40 +72,40 @@ price: number;
 
   getTransportUrl (rout:IRout){
     let url:string='';
-    
-    switch(rout.transportation_type) { 
-      case "Flight": { 
+
+    switch(rout.transportation_type) {
+      case "Flight": {
         //url = "http://Skyscanner.com";
         url= this.getSkyScannerUrl(rout);
-         break; 
-      } 
-      case "Bus": { 
+         break;
+      }
+      case "Bus": {
         //url = "http://bus.tickets.ua";
         url=this.getBusUrl(rout);
-         break; 
-      } 
-      case "Train": { 
+         break;
+      }
+      case "Train": {
         //url = "http://gd.tickets.ua";
          url=this.getTrainUrl(rout);
         //url = "https://www.tutu.ru/poezda";
-        break; 
-      } 
-      case "Car Ferry": { 
+        break;
+      }
+      case "Car Ferry": {
         url = "http://www.aferry.com";
-         break; 
-      } 
-      case "Ferry": { 
+         break;
+      }
+      case "Ferry": {
         url = "http://www.aferry.com";
-         break; 
-      } 
-       case "Ride Share": { 
+         break;
+      }
+       case "Ride Share": {
         url = "http://BlaBlaCar.com";
-         break; 
-      } 
-      default: { 
+         break;
+      }
+      default: {
          url='';
-         break; 
-      } 
+         break;
+      }
    }
    return url;
   }
@@ -120,7 +121,7 @@ price: number;
     switch(this.country){
       case "RU":
       case "BY":
-      
+
         return "http://bus.tutu.ru";
       case "IN":
         return "https://www.makemytrip.com/bus-tickets/";
@@ -133,10 +134,10 @@ price: number;
   getTrainUrl(rout:IRout){
     console.log ("train "+this.country);
     switch(this.country){
-      
+
       case "RU":
       case "BY":
-      
+
         return "https://www.tutu.ru/poezda";
       case "IN":
         return "https://www.makemytrip.com/railways/";

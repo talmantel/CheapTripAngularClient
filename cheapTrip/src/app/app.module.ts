@@ -32,10 +32,10 @@ import { CurrencySelectorComponent } from './currency-selector/currency-selector
 registerLocaleData(localeRu, 'ru');
 registerLocaleData(localeUa, 'ua');
 @NgModule({
-  
-  declarations: [AppComponent, HeaderComponent,  
+
+  declarations: [AppComponent, HeaderComponent,
     CurrencySelectorComponent,
-     NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent, 
+     NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent,
      LinksComponent, LogoComponent],
   imports: [
     BrowserModule,
