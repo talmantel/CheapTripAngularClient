@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, Subscription } from 'rxjs';
 import {
   IJsonTravelData,
   IJsonPartlyRoute,
@@ -20,7 +20,9 @@ export class RoutesDataService {
     return new Promise(resolve => {
       console.time('RoutesDataService ~ getFilterJson');
 
-      const directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
+      let directRoutesSubscribe = new Subscription();
+
+      directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
         directRoutes => {
           if (directRoutes === null) return;
 
@@ -126,7 +128,9 @@ export class RoutesDataService {
     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
 
     return new Promise(async resolve => {
-      const directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
+      let directRoutesSubscribe = new Subscription();
+
+      directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
         directRoutes => {
           if (directRoutes === null) return;
 
