@@ -18,7 +18,7 @@ export class RoutesDataService {
     endPoint: string
   ): Promise<IJsonTravelData[]> {
     return new Promise(resolve => {
-      console.time('-------------------------- Travel_data');
+      console.time('RoutesDataService ~ getFilterJson');
 
       const directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
         directRoutes => {
@@ -29,7 +29,7 @@ export class RoutesDataService {
             (el: IJsonTravelData) =>
               el.from === +startPoint && el.to === +endPoint
           );
-          console.timeEnd('-------------------------- Travel_data');
+          console.timeEnd('RoutesDataService ~ getFilterJson');
 
           directRoutesSubscribe.unsubscribe();
 
@@ -46,14 +46,16 @@ export class RoutesDataService {
     startPoint: string;
     endPoint: string;
   }): Promise<any> {
-    console.time('GetTransportAndLocation');
+    console.time('RoutesDataService ~ getTravelData ~ GetTransportAndLocation');
     const transportType: {} = JSON.parse(
       sessionStorage.getItem('transportationTypes')
     );
     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
-    console.timeEnd('GetTransportAndLocation');
+    console.timeEnd(
+      'RoutesDataService ~ getTravelData ~ GetTransportAndLocation'
+    );
 
-    console.time('GetFilterJson Travel_data');
+    console.time('RoutesDataService ~ getTravelData');
 
     return this.getFilterJson(startPoint, endPoint).then(data => {
       if (data.length > 0) {
@@ -77,7 +79,7 @@ export class RoutesDataService {
             ],
           });
         }
-        console.timeEnd('GetFilterJson Travel_data');
+        console.timeEnd('RoutesDataService ~ getTravelData');
 
         return result;
       }
@@ -114,7 +116,7 @@ export class RoutesDataService {
     type: 'flying' | 'fixed' | 'direct'
   ): Promise<any[]> {
     console.time(
-      'route-service/data.service.ts ~ DataService ~ getRouteTravelData'
+      `trip-direction/data.service.ts ~ DataService ~ getRouteTravelData ${type}`
     );
 
     const transportType: {} = JSON.parse(
@@ -123,11 +125,7 @@ export class RoutesDataService {
 
     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
 
-    console.timeEnd(
-      'route-service/data.service.ts ~ DataService ~ getRouteTravelData'
-    );
-
-    return new Promise(async (resolve, rejects) => {
+    return new Promise(async resolve => {
       const directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
         directRoutes => {
           if (directRoutes === null) return;
@@ -136,11 +134,6 @@ export class RoutesDataService {
             { startPoint, endPoint, type },
             directRoutes
           ).then(data => {
-            console.log(
-              'route-service/data.service.ts ~ DataService ~ getRouteTravelData ~ data:',
-              data
-            );
-
             const result = [];
 
             if (!data || data === null) return result;
@@ -163,6 +156,10 @@ export class RoutesDataService {
             return result;
           });
 
+          console.timeEnd(
+            `trip-direction/data.service.ts ~ DataService ~ getRouteTravelData ${type}`
+          );
+
           resolve(result);
 
           directRoutesSubscribe.unsubscribe();
@@ -183,43 +180,51 @@ export class RoutesDataService {
     },
     directRoutes: any
   ): Promise<IJsonPartlyRouteItem | null> {
-    console.log('getRouteData, type: ', type);
-
-    const pathData: IJsonTravelData[] = [];
-
-    console.time('route-service/data.service.ts ~ DataService ~ getRouteData');
-
+    console.time(
+      `trip-direction/data.service.ts ~ DataService ~ getRouteData ~ ${type}`
+    );
     return this.http
       .get<IJsonPartlyRoute>(
         `assets/new_json/partly/${type}_routes/${startPoint}.json`
       )
       .toPromise()
-      .then((routes): Promise<IJsonPartlyRouteItem | null> => {
-        const routeWithLink = routes[`${endPoint}`];
+      .then((routes): IJsonPartlyRouteItem | undefined => {
+        const route = routes[`${endPoint}`];
+        if (route == undefined) return;
 
-        if (routeWithLink == undefined) {
-          return null;
-        }
+        const clonedRoute: IJsonPartlyRouteItem = this.deepObjectClone(route);
 
-        const filterData: IJsonPartlyRouteItem = JSON.parse(
-          JSON.stringify(routes[`${endPoint}`])
+        clonedRoute.travel_data = this.getRouteInnerTravelData(
+          clonedRoute.direct_routes,
+          directRoutes
         );
-
-        filterData.direct_routes.forEach((id: string): void => {
-          const travelData = directRoutes[id];
-
-          if (travelData !== undefined) {
-            pathData.push(directRoutes[id]);
-          }
-        });
-
-        filterData.travel_data = pathData;
 
         console.timeEnd(
-          'route-service/data.service.ts ~ DataService ~ getRouteData'
+          `trip-direction/data.service.ts ~ DataService ~ getRouteData ~ ${type}`
         );
 
-        return Promise.resolve(filterData);
+        return clonedRoute;
       });
+  }
+
+  private getRouteInnerTravelData(
+    routeDirectRoutes: IJsonPartlyRouteItem['direct_routes'],
+    directRoutes: any
+  ) {
+    const pathData: IJsonTravelData[] = [];
+
+    routeDirectRoutes.forEach((id: string): void => {
+      const travelData = directRoutes[id];
+
+      if (travelData !== undefined) {
+        pathData.push(directRoutes[id]);
+      }
+    });
+
+    return pathData;
+  }
+
+  private deepObjectClone<T extends Object>(value: T): T {
+    return JSON.parse(JSON.stringify(value));
   }
 }
