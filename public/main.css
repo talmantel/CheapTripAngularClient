@@ -474,6 +474,28 @@ a:active {
   padding-top: 60px;
 }
 
+.location-item {
+  margin-bottom: 10px;
+  
+}
 
+.location-title {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
 
+.location-address,
+.location-website,
+.location-description {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.city-details__title,
+.location-title,
+.location-address,
+.location-website,
+.location-description {
+  color: black;
+}
 /*# sourceMappingURL=main.css.map */
