@@ -7,33 +7,36 @@ import {
   IJsonPartlyRouteItem,
 } from '../trip-direction.model';
 import { HttpClient } from '@angular/common/http';
+import { CacheService } from '../../service/cache.service';
 
 @Injectable({ providedIn: 'root' })
 export class RoutesDataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cacheService: CacheService) {}
 
   async getFilterJson(
     startPoint: string,
     endPoint: string
   ): Promise<IJsonTravelData[]> {
-    console.time('-------------------------- Travel_data');
-    return caches
-      .match(new Request('direct_routes'))
-      .then(response => {
-        if (response) {
-          return response.json();
-        }
-      })
-      .then(data => {
-        const objArray: IJsonTravelData[] = Object.values(data);
-        const filterData: IJsonTravelData[] = objArray.filter(
-          (el: IJsonTravelData) =>
-            el.from === +startPoint && el.to === +endPoint
-        );
-        console.timeEnd('-------------------------- Travel_data');
+    return new Promise(resolve => {
+      console.time('-------------------------- Travel_data');
 
-        return filterData;
-      });
+      const directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
+        directRoutes => {
+          if (directRoutes === null) return;
+
+          const objArray: IJsonTravelData[] = Object.values(directRoutes);
+          const filterData: IJsonTravelData[] = objArray.filter(
+            (el: IJsonTravelData) =>
+              el.from === +startPoint && el.to === +endPoint
+          );
+          console.timeEnd('-------------------------- Travel_data');
+
+          directRoutesSubscribe.unsubscribe();
+
+          resolve(filterData);
+        }
+      );
+    });
   }
 
   async getTravelData({
@@ -109,7 +112,7 @@ export class RoutesDataService {
     startPoint: string,
     endPoint: string,
     type: 'flying' | 'fixed' | 'direct'
-  ) {
+  ): Promise<any[]> {
     console.time(
       'route-service/data.service.ts ~ DataService ~ getRouteTravelData'
     );
@@ -124,46 +127,48 @@ export class RoutesDataService {
       'route-service/data.service.ts ~ DataService ~ getRouteTravelData'
     );
 
-    let directRoutes = null;
+    return new Promise(async (resolve, rejects) => {
+      const directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
+        directRoutes => {
+          if (directRoutes === null) return;
 
-    try {
-      const directRoutesResponse = await caches.match('direct_routes');
+          const result = this.getRouteData(
+            { startPoint, endPoint, type },
+            directRoutes
+          ).then(data => {
+            console.log(
+              'route-service/data.service.ts ~ DataService ~ getRouteTravelData ~ data:',
+              data
+            );
 
-      directRoutes = await directRoutesResponse.json();
-    } catch (error) {
-      console.error(`caches.match('direct_routes') error`);
-      return null;
-    }
+            const result = [];
 
-    return this.getRouteData({ startPoint, endPoint, type }, directRoutes).then(
-      data => {
-        console.log(
-          'route-service/data.service.ts ~ DataService ~ getRouteTravelData ~ data:',
-          data
-        );
+            if (!data || data === null) return result;
 
-        const result = [];
+            const directPaths = data.travel_data.map(travelData => ({
+              duration_minutes: travelData.duration,
+              euro_price: travelData.price,
+              from: locations[travelData.from].name,
+              to: locations[travelData.to].name,
+              transportation_type: transportType[travelData.transport].name,
+            }));
 
-        if (!data || data === null) return result;
+            result.push({
+              duration_minutes: data.duration,
+              euro_price: data.price,
+              route_type: `${type}_routes`,
+              direct_paths: directPaths,
+            });
 
-        const directPaths = data.travel_data.map(travelData => ({
-          duration_minutes: travelData.duration,
-          euro_price: travelData.price,
-          from: locations[travelData.from].name,
-          to: locations[travelData.to].name,
-          transportation_type: transportType[travelData.transport].name,
-        }));
+            return result;
+          });
 
-        result.push({
-          duration_minutes: data.duration,
-          euro_price: data.price,
-          route_type: `${type}_routes`,
-          direct_paths: directPaths,
-        });
+          resolve(result);
 
-        return result;
-      }
-    );
+          directRoutesSubscribe.unsubscribe();
+        }
+      );
+    });
   }
 
   private getRouteData(
