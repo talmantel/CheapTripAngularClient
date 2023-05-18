@@ -5,75 +5,81 @@ import {
   IJsonTravelData,
   IJsonPartlyRoute,
   IJsonPartlyRouteItem,
+  IRecievedRouts,
 } from '../trip-direction.model';
 import { HttpClient } from '@angular/common/http';
 import { CacheService } from '../../service/cache.service';
+import { IRout } from '../trip-direction.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoutesDataService {
   constructor(private http: HttpClient, private cacheService: CacheService) {}
 
-  async getFilterJson(
-    startPoint: string,
-    endPoint: string
+  private async getDirectRoutesByPoints(
+    startPoint: number,
+    endPoint: number
   ): Promise<IJsonTravelData[]> {
     return new Promise(resolve => {
-      console.time('RoutesDataService ~ getFilterJson');
-
       let directRoutesSubscribe = new Subscription();
 
       directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
         directRoutes => {
           if (directRoutes === null) return;
 
-          const objArray: IJsonTravelData[] = Object.values(directRoutes);
-          const filterData: IJsonTravelData[] = objArray.filter(
-            (el: IJsonTravelData) =>
-              el.from === +startPoint && el.to === +endPoint
-          );
-          console.timeEnd('RoutesDataService ~ getFilterJson');
+          console.time('RoutesDataService ~ getDirectRoutesByPoints');
+
+          const directRoutesValues: IJsonTravelData[] =
+            Object.values(directRoutes);
+
+          const directRoutesForOutput: IJsonTravelData[] =
+            directRoutesValues.filter(
+              (el: IJsonTravelData) =>
+                el.from === Number(startPoint) && el.to === Number(endPoint)
+            );
+
+          console.timeEnd('RoutesDataService ~ getDirectRoutesByPoints');
 
           directRoutesSubscribe.unsubscribe();
 
-          resolve(filterData);
+          resolve(directRoutesForOutput);
         }
       );
     });
   }
 
-  async getTravelData({
-    startPoint,
-    endPoint,
-  }: {
-    startPoint: string;
-    endPoint: string;
-  }): Promise<any> {
+  async getTravelData(
+    startPoint: number,
+    endPoint: number
+  ): Promise<IRecievedRouts[]> {
     console.time('RoutesDataService ~ getTravelData ~ GetTransportAndLocation');
+
     const transportType: {} = JSON.parse(
       sessionStorage.getItem('transportationTypes')
     );
+
     const locations: {} = JSON.parse(sessionStorage.getItem('locations'));
+
     console.timeEnd(
       'RoutesDataService ~ getTravelData ~ GetTransportAndLocation'
     );
 
     console.time('RoutesDataService ~ getTravelData');
 
-    return this.getFilterJson(startPoint, endPoint).then(data => {
+    return this.getDirectRoutesByPoints(startPoint, endPoint).then(data => {
       if (data.length > 0) {
         console.log('getTravelData data:', data);
 
-        let result = [];
+        let result: IRecievedRouts[] = [];
 
         for (let i = 0; i < data.length; i++) {
           result.push({
             duration_minutes: data[i].duration,
             euro_price: data[i].price,
-            route_type: 'direct_routes',
+            routeType: 'direct_routes',
             direct_paths: [
               {
-                duration_minutes: data[i].duration,
-                euro_price: +data[i].price,
+                duration_minutes: String(data[i].duration),
+                euro_price: data[i].price,
                 from: locations[data[i].from].name,
                 to: locations[data[i].to].name,
                 transportation_type: transportType[data[i].transport].name,
@@ -90,9 +96,15 @@ export class RoutesDataService {
     });
   }
 
-  getPathMap(startPoint: string, endPoint: string): Observable<any> {
+  getPathMap(
+    startPoint: string,
+    endPoint: string
+  ): Observable<IRecievedRouts[]> {
+    const startPointNumber = Number(startPoint);
+    const endPointNumber = Number(endPoint);
+
     return forkJoin([
-      this.getTravelData({ startPoint, endPoint }),
+      this.getTravelData(startPointNumber, endPointNumber),
       this.getRouteTravelData(startPoint, endPoint, 'flying'),
       this.getRouteTravelData(startPoint, endPoint, 'fixed'),
       this.getRouteTravelData(startPoint, endPoint, 'direct'),
@@ -116,7 +128,7 @@ export class RoutesDataService {
     startPoint: string,
     endPoint: string,
     type: 'flying' | 'fixed' | 'direct'
-  ): Promise<any[]> {
+  ): Promise<IRecievedRouts[]> {
     console.time(
       `trip-direction/data.service.ts ~ DataService ~ getRouteTravelData ${type}`
     );
@@ -138,12 +150,12 @@ export class RoutesDataService {
             { startPoint, endPoint, type },
             directRoutes
           ).then(data => {
-            const result = [];
+            const result: IRecievedRouts[] = [];
 
             if (!data || data === null) return result;
 
-            const directPaths = data.travel_data.map(travelData => ({
-              duration_minutes: travelData.duration,
+            const directPaths: IRout[] = data.travel_data.map(travelData => ({
+              duration_minutes: String(travelData.duration),
               euro_price: travelData.price,
               from: locations[travelData.from].name,
               to: locations[travelData.to].name,
@@ -153,7 +165,7 @@ export class RoutesDataService {
             result.push({
               duration_minutes: data.duration,
               euro_price: data.price,
-              route_type: `${type}_routes`,
+              routeType: `${type}_routes`,
               direct_paths: directPaths,
             });
 
@@ -182,7 +194,7 @@ export class RoutesDataService {
       endPoint: string;
       type: 'flying' | 'fixed' | 'direct';
     },
-    directRoutes: any
+    directRoutes: Record<number, IJsonTravelData>
   ): Promise<IJsonPartlyRouteItem | null> {
     console.time(
       `trip-direction/data.service.ts ~ DataService ~ getRouteData ~ ${type}`
@@ -213,7 +225,7 @@ export class RoutesDataService {
 
   private getRouteInnerTravelData(
     routeDirectRoutes: IJsonPartlyRouteItem['direct_routes'],
-    directRoutes: any
+    directRoutes: Record<number, IJsonTravelData>
   ) {
     const pathData: IJsonTravelData[] = [];
 
