@@ -113,7 +113,7 @@ export class TripDirectionEffects {
   private Locations: string[];
   private LocationsRU: Observable<any>;
   private LocationsEN: Observable<any>;
-  private body: IRecievedRouts;
+  private body: IRecievedRouts[];
   constructor(
     private errorInterceptor: ErrorInterceptor,
     private localeService: LocaleService,
