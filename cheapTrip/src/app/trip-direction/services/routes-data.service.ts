@@ -15,36 +15,32 @@ import { IRout } from '../trip-direction.model';
 export class RoutesDataService {
   constructor(private http: HttpClient, private cacheService: CacheService) {}
 
-  private async getDirectRoutesByPoints(
-    startPoint: number,
-    endPoint: number
-  ): Promise<IJsonTravelData[]> {
-    return new Promise(resolve => {
-      let directRoutesSubscribe = new Subscription();
+  getPathMap(
+    startPoint: string,
+    endPoint: string
+  ): Observable<IRecievedRouts[]> {
+    const startPointNumber = Number(startPoint);
+    const endPointNumber = Number(endPoint);
 
-      directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
-        directRoutes => {
-          if (directRoutes === null) return;
+    return forkJoin([
+      this.getTravelData(startPointNumber, endPointNumber),
+      this.getRouteTravelData(startPoint, endPoint, 'flying'),
+      this.getRouteTravelData(startPoint, endPoint, 'fixed'),
+      this.getRouteTravelData(startPoint, endPoint, 'direct'),
+    ]).pipe(
+      map(([travelData, flyingData, groundData, mixedData]) => {
+        const pathMap = [
+          ...travelData,
+          ...flyingData,
+          ...groundData,
+          ...mixedData,
+        ];
 
-          console.time('RoutesDataService ~ getDirectRoutesByPoints');
+        console.log('pathMap: ', pathMap);
 
-          const directRoutesValues: IJsonTravelData[] =
-            Object.values(directRoutes);
-
-          const directRoutesForOutput: IJsonTravelData[] =
-            directRoutesValues.filter(
-              (el: IJsonTravelData) =>
-                el.from === Number(startPoint) && el.to === Number(endPoint)
-            );
-
-          console.timeEnd('RoutesDataService ~ getDirectRoutesByPoints');
-
-          directRoutesSubscribe.unsubscribe();
-
-          resolve(directRoutesForOutput);
-        }
-      );
-    });
+        return pathMap;
+      })
+    );
   }
 
   async getTravelData(
@@ -94,34 +90,6 @@ export class RoutesDataService {
 
       return [];
     });
-  }
-
-  getPathMap(
-    startPoint: string,
-    endPoint: string
-  ): Observable<IRecievedRouts[]> {
-    const startPointNumber = Number(startPoint);
-    const endPointNumber = Number(endPoint);
-
-    return forkJoin([
-      this.getTravelData(startPointNumber, endPointNumber),
-      this.getRouteTravelData(startPoint, endPoint, 'flying'),
-      this.getRouteTravelData(startPoint, endPoint, 'fixed'),
-      this.getRouteTravelData(startPoint, endPoint, 'direct'),
-    ]).pipe(
-      map(([travelData, flyingData, groundData, mixedData]) => {
-        const pathMap = [
-          ...travelData,
-          ...flyingData,
-          ...groundData,
-          ...mixedData,
-        ];
-
-        console.log('pathMap: ', pathMap);
-
-        return pathMap;
-      })
-    );
   }
 
   private async getRouteTravelData(
@@ -179,6 +147,38 @@ export class RoutesDataService {
           resolve(result);
 
           directRoutesSubscribe.unsubscribe();
+        }
+      );
+    });
+  }
+
+  private async getDirectRoutesByPoints(
+    startPoint: number,
+    endPoint: number
+  ): Promise<IJsonTravelData[]> {
+    return new Promise(resolve => {
+      let directRoutesSubscribe = new Subscription();
+
+      directRoutesSubscribe = this.cacheService.directRoutes.subscribe(
+        directRoutes => {
+          if (directRoutes === null) return;
+
+          console.time('RoutesDataService ~ getDirectRoutesByPoints');
+
+          const directRoutesValues: IJsonTravelData[] =
+            Object.values(directRoutes);
+
+          const directRoutesForOutput: IJsonTravelData[] =
+            directRoutesValues.filter(
+              (el: IJsonTravelData) =>
+                el.from === Number(startPoint) && el.to === Number(endPoint)
+            );
+
+          console.timeEnd('RoutesDataService ~ getDirectRoutesByPoints');
+
+          directRoutesSubscribe.unsubscribe();
+
+          resolve(directRoutesForOutput);
         }
       );
     });
