@@ -56,3 +56,30 @@ export interface IPathPoint {
   id: number;
   name: string;
 }
+
+export interface ILocation {
+   id: number;
+   name: string;
+   country_name: string;
+   latitude: number;
+   longitude: number;
+}
+
+export interface IRoute {
+  id: number;
+  from: number;
+  to: number;
+  euro_price: number;
+  trip_duration: number;
+  travel_data: number[];
+}
+
+export interface ITravelData {
+  id: number;
+  from: number;
+  to: number;
+  transportation_type: number;
+  euro_price: number;
+  time_in_minutes: number;
+}
+

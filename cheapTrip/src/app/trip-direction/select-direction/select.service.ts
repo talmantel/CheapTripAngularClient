@@ -4,7 +4,7 @@ import { from, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-import { IPathPoint } from '../trip-direction.model';
+import { IPathPoint} from '../trip-direction.model';
 
 type SERVER = 'tomcat' | 'appachi';
 

@@ -508,7 +508,7 @@ const SKYCODEMAP = new Map([
   ["Ahmedabad", "amd"],
   ["Aizawl", "ajl"],
   ["Allahabad", "ixd"]
-]); 
+]);
 
 
 enum Icons {
@@ -599,6 +599,7 @@ export class HttpService {
   ) {}
 
 
+
   getUserCountry(){
     // let url="https://api.hostip.info/country.php";
     // let url="http://api.ipstack.com/check?access_key=21c2d85bf7168d059b04bb14c15228ac";
@@ -606,20 +607,20 @@ export class HttpService {
     // let url="http://ip-api.com/json/";
     // return this.http.get(url ,{responseType: 'text'});
     return this.http.get(url);
- 
+
   }
 
-  
+
 
 
   getSkyScannerCode(locationName:string){
     let code="";
 
     if (SKYCODEMAP.has(locationName)){
-     
+
       return SKYCODEMAP.get(locationName);
     }
-  
+
     return code;
 
   }
@@ -628,7 +629,7 @@ export class HttpService {
     let url=  environment.urlTomCat +
     'CheapTrip/GetCurrencyRate';
     return this.http.get<Currency>(url, { observe: "response" });
-    
+
   }
 
 
@@ -751,6 +752,6 @@ public getAllRuLocationsTomcat():Observable<any> {
     '&language_name=ru';
 
     return this.http.get(url, { observe: "response" });
-    
+
   }
 }

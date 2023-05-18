@@ -17,12 +17,11 @@ import * as TripDirectionActions from './trip-direction/store/trip-direction.act
 import { Store } from '@ngrx/store';
 import { AlertMessage } from './error/alertMessage.model';
 import { Button } from './error/alertMessage.model';
- 
-//import { ErrorComponent } from "./error/error.component";
-//ngimport { ErrorService } from "./error/error.service";
+
+
 
 @Injectable({
- 
+
   providedIn: 'root',
 })
 export class ErrorInterceptor implements HttpInterceptor {
@@ -38,7 +37,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           if (evt.body.length == 0) {
             const alertMessage = new AlertMessage('warning', $localize`:@@oh,no:Oh no!`,
              $localize`:@@noRoute:Sorry, the data we have accumulated is nots
-              enough to build a route between the indicated cities. Try changing your request.`, 
+              enough to build a route between the indicated cities. Try changing your request.`,
               [new Button("Close",$localize`:@@Close:Close`)]);
          this.dialog.open(ErrorComponent, {
               data: alertMessage,
