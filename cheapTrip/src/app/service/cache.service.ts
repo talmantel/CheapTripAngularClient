@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
+import { IJsonTravelData } from '../trip-direction/trip-direction.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CacheService {
-  public directRoutes = new ReplaySubject();
+  public directRoutes = new ReplaySubject<Record<number, IJsonTravelData>>();
 
   async initialize() {
     console.time('[Cache] CacheService initialize');
