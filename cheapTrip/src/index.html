@@ -33,31 +33,6 @@
       alert('Sorry,  application does not support the type of web browser you are using.');
 
   </script>
-  <script type="text/javascript">  
-    console.time('location.json');
-
-    fetch('assets/new_json/locations.json')
-      .then(res => res.json())
-      .then(data => {
-        sessionStorage.setItem('locations', JSON.stringify(data));
-      });
-
-    console.timeEnd('location.json');
-	</script>
-
-   <script type="text/javascript">
-      console.time('Transport.json');
-    fetch('assets/new_json/transport.json')
-      .then(res => res.json())
-      .then(data =>
-        sessionStorage.setItem('transportationTypes', JSON.stringify(data))
-      );
-    console.timeEnd('Transport.json');
-   </script>
-  
-  
-
-
 
 <!-- <script>
 Promise.all([

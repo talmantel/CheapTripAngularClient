@@ -6,16 +6,30 @@ import { IJsonTravelData } from '../trip-direction/trip-direction.model';
   providedIn: 'root',
 })
 export class CacheService {
+  public loaded = new ReplaySubject<boolean>();
   public directRoutes = new ReplaySubject<Record<number, IJsonTravelData>>();
+  public locations = new ReplaySubject<any>();
+  public trasport = new ReplaySubject<any>();
 
   async initialize() {
     console.time('[Cache] CacheService initialize');
 
+    await Promise.all([
+      this.initializeDirectRoutes(),
+      this.loadLocations(),
+      this.loadTransport(),
+    ]).then(() => {
+      this.loaded.next(true);
+    });
+
+    console.timeEnd('[Cache] CacheService initialize');
+  }
+
+  private async initializeDirectRoutes() {
     const cache = await caches.open('fileCache');
     const response = await cache.match('direct_routes');
 
     if (response) {
-      this.log('Cache found!');
       this.directRoutes.next(await response.json());
 
       return;
@@ -31,14 +45,28 @@ export class CacheService {
     );
 
     this.directRoutes.next(newDirectRoutes);
-
-    console.timeEnd('[Cache] CacheService initialize');
   }
 
   private async loadDirectRoutes() {
     const response = await fetch('assets/new_json/direct_routes.json');
 
     return await response.json();
+  }
+
+  private async loadLocations() {
+    const response = await fetch('assets/new_json/locations.json');
+    const responseJson = await response.json();
+
+    sessionStorage.setItem('locations', JSON.stringify(responseJson));
+    this.locations.next(responseJson);
+  }
+
+  private async loadTransport() {
+    const response = await fetch('assets/new_json/transport.json');
+    const responseJson = await response.json();
+
+    sessionStorage.setItem('transportationTypes', JSON.stringify(responseJson));
+    this.trasport.next(responseJson);
   }
 
   private log(...messages: unknown[]) {
