@@ -1,4 +1,5 @@
-[ {
+[
+  {
     "@context": "https://schema.org",
     "@type": "City",
     "name": "London",
@@ -22,150 +23,149 @@
       "longitude": "0.1276"
     }
   },
-   {
-        "@context": "https://schema.org",
-        "@type": "TouristAttraction",
-        "name": "British Museum",
-        "description": "The British Museum: A Budget Traveller's Dream Come True! Hey there, fellow budget travellers! I'm CheapTrip.Guru, and I'm here to share with you my latest discovery in London - the British Museum. Now, I know what you're thinking - museums are boring and expensive. But trust me, this one is different. First of all, let's talk about the price. The best part? It's completely free! That's right, you can explore the wonders of the British Museum without spending a single penny. And let me tell you, there are plenty of wonders to explore. From the Rosetta Stone to the Egyptian mummies, the British Museum is home to some of the most fascinating artefacts in the world. And the best part? You don't have to be a history buff to appreciate them. Even if you're not particularly interested in ancient civilisations, you'll still find yourself in awe of the sheer scale and beauty of these artefacts. But the British Museum isn't just about the past. It's also a hub of contemporary art and culture. There are always new exhibitions and events taking place, so be sure to check out their website before you go. And let's not forget about the building itself. The British Museum is housed in a stunning neoclassical building that is a work of art in itself. You could spend hours just admiring the architecture and the beautiful courtyard. So, if you're looking for a budget-friendly activity in London that is both educational and entertaining, look no further than the British Museum. And if you see me there, be sure to say hi - I'll be the one geeking out over the Rosetta Stone. Until next time, happy travels!",
-        "image": "https://images.pexels.com/photos/7884210/pexels-photo-7884210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Great Russell St",
-        "addressLocality": "London",
-        "postalCode": "WC1B 3DG",
-        "addressCountry": "United Kingdom"
-        },
-        "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 51.5194,
-        "longitude": -0.1269
-        },
-        "url": "https://www.britishmuseum.org/",
-        "sameAs": [
-        "https://www.facebook.com/britishmuseum",
-        "https://www.twitter.com/britishmuseum",
-        "https://www.instagram.com/britishmuseum",
-        "https://www.youtube.com/britishmuseum"
-        ],
-        "keywords": [
-        "CheapTripGuru",
-        "BudgetTravel",
-        "London",
-        "BudgetTravelTips",
-        "LondonMuseums",
-        "FreeActivities"
-        ]
-     }, 
-        {
- "@context": "https://schema.org",
-      "@type": "TouristAttraction",
-      "name": "National Gallery",
-      "description": "The National Gallery: A Masterpiece of Art and Budget Travel! Hey there, fellow budget travellers! I'm CheapTrip.Guru, your go-to guide for affordable adventures. Today, I want to share with you my experience at the National Gallery in London. \nNow, I know what you're thinking. \"Art museums? That's not exactly budget-friendly.\" But hear me out. The National Gallery is not only a cultural gem, but it's also completely free to enter. That's right, folks. You can soak up some of the world's most famous art without spending a single penny. \nBut wait, there's more! The National Gallery also offers free guided tours and audio guides. So, not only will you save money, but you'll also get a more in-depth understanding of the art and its history. \nNow, I'm not an art expert by any means, but even I was blown away by the collection at the National Gallery. From Van Gogh to Da Vinci, there's something for everyone. And the best part? You don't have to be an art connoisseur to appreciate it. \nBut let's get real for a second. We all know that art museums can be a bit stuffy and boring. That's where the National Gallery breaks the mold. The building itself is a work of art, with stunning architecture and a beautiful central courtyard. And if you're feeling peckish, there's a caf\u00e9 on site that won't break the bank. \nSo, what are you waiting for? Add the National Gallery to your London itinerary and experience the beauty of art without breaking the bank. And don't forget to snap some pics for the 'gram using #budgettravel and #NationalGalleryLondon. \nUntil next time, happy travels! \n- CheapTrip.Guru",
-      "image": "https://example.com/national-gallery.jpg",
-        
- "address": {
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "British Museum",
+    "description": "The British Museum: A Budget Traveller's Dream Come True! Hey there, fellow budget travellers! I'm CheapTrip.Guru, and I'm here to share with you my latest discovery in London - the British Museum. Now, I know what you're thinking - museums are boring and expensive. But trust me, this one is different. First of all, let's talk about the price. The best part? It's completely free! That's right, you can explore the wonders of the British Museum without spending a single penny. And let me tell you, there are plenty of wonders to explore. From the Rosetta Stone to the Egyptian mummies, the British Museum is home to some of the most fascinating artefacts in the world. And the best part? You don't have to be a history buff to appreciate them. Even if you're not particularly interested in ancient civilisations, you'll still find yourself in awe of the sheer scale and beauty of these artefacts. But the British Museum isn't just about the past. It's also a hub of contemporary art and culture. There are always new exhibitions and events taking place, so be sure to check out their website before you go. And let's not forget about the building itself. The British Museum is housed in a stunning neoclassical building that is a work of art in itself. You could spend hours just admiring the architecture and the beautiful courtyard. So, if you're looking for a budget-friendly activity in London that is both educational and entertaining, look no further than the British Museum. And if you see me there, be sure to say hi - I'll be the one geeking out over the Rosetta Stone. Until next time, happy travels!",
+    "image": "https://images.pexels.com/photos/7884210/pexels-photo-7884210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Great Russell St",
+      "addressLocality": "London",
+      "postalCode": "WC1B 3DG",
+      "addressCountry": "United Kingdom"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 51.5194,
+      "longitude": -0.1269
+    },
+    "url": "https://www.britishmuseum.org/",
+    "sameAs": [
+      "https://www.facebook.com/britishmuseum",
+      "https://www.twitter.com/britishmuseum",
+      "https://www.instagram.com/britishmuseum",
+      "https://www.youtube.com/britishmuseum"
+    ],
+    "keywords": [
+      "CheapTripGuru",
+      "BudgetTravel",
+      "London",
+      "BudgetTravelTips",
+      "LondonMuseums",
+      "FreeActivities"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "National Gallery",
+    "description": "The National Gallery: A Masterpiece of Art and Budget Travel! Hey there, fellow budget travellers! I'm CheapTrip.Guru, your go-to guide for affordable adventures. Today, I want to share with you my experience at the National Gallery in London. \nNow, I know what you're thinking. \"Art museums? That's not exactly budget-friendly.\" But hear me out. The National Gallery is not only a cultural gem, but it's also completely free to enter. That's right, folks. You can soak up some of the world's most famous art without spending a single penny. \nBut wait, there's more! The National Gallery also offers free guided tours and audio guides. So, not only will you save money, but you'll also get a more in-depth understanding of the art and its history. \nNow, I'm not an art expert by any means, but even I was blown away by the collection at the National Gallery. From Van Gogh to Da Vinci, there's something for everyone. And the best part? You don't have to be an art connoisseur to appreciate it. \nBut let's get real for a second. We all know that art museums can be a bit stuffy and boring. That's where the National Gallery breaks the mold. The building itself is a work of art, with stunning architecture and a beautiful central courtyard. And if you're feeling peckish, there's a caf\u00e9 on site that won't break the bank. \nSo, what are you waiting for? Add the National Gallery to your London itinerary and experience the beauty of art without breaking the bank. And don't forget to snap some pics for the 'gram using #budgettravel and #NationalGalleryLondon. \nUntil next time, happy travels! \n- CheapTrip.Guru",
+    "image": "https://example.com/national-gallery.jpg",
+    "address": {
       "@type": "PostalAddress",
       "streetAddress": "Trafalgar Square",
       "addressLocality": "London",
       "postalCode": "WC2N 5DN",
       "addressCountry": "UK"
-},
-  "geo": {
-     "@type": "GeoCoordinates",
-     "latitude": 51.5089,
-    "longitude": -0.1283
-}
-} , 
-
-{
-  "@context": "https://schema.org",
-  "@type": "TouristAttraction",
-  "name": "British Museum",
-  "description": "The British Museum: A Budget Traveller's Dream Come True! Hey there, fellow budget travellers! I'm CheapTrip.Guru, and I'm here to share with you my latest discovery in London - the British Museum. Now, I know what you're thinking - museums are boring and expensive. But trust me, this one is different. First of all, let's talk about the price. The best part? It's completely free! That's right, you can explore the wonders of the British Museum without spending a single penny. And let me tell you, there are plenty of wonders to explore. From the Rosetta Stone to the Egyptian mummies, the British Museum is home to some of the most fascinating artefacts in the world. And the best part? You don't have to be a history buff to appreciate them. Even if you're not particularly interested in ancient civilisations, you'll still find yourself in awe of the sheer scale and beauty of these artefacts. But the British Museum isn't just about the past. It's also a hub of contemporary art and culture. There are always new exhibitions and events taking place, so be sure to check out their website before you go. And let's not forget about the building itself. The British Museum is housed in a stunning neoclassical building that is a work of art in itself. You could spend hours just admiring the architecture and the beautiful courtyard. So, if you're looking for a budget-friendly activity in London that is both educational and entertaining, look no further than the British Museum. And if you see me there, be sure to say hi - I'll be the one geeking out over the Rosetta Stone. Until next time, happy travels!",
-  "image": "https://images.pexels.com/photos/7884210/pexels-photo-7884210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  "address": {
-  "@type": "PostalAddress",
-  "streetAddress": "Great Russell St",
-  "addressLocality": "London",
-  "postalCode": "WC1B 3DG",
-  "addressCountry": "United Kingdom"
-  },
-  "geo": {
-  "@type": "GeoCoordinates",
-  "latitude": 51.5194,
-  "longitude": -0.1269
-  },
-  "url": "https://www.britishmuseum.org/",
-  "sameAs": [
-  "https://www.facebook.com/britishmuseum",
-  "https://www.twitter.com/britishmuseum",
-  "https://www.instagram.com/britishmuseum",
-  "https://www.youtube.com/britishmuseum"
-  ],
-  "keywords": [
-  "CheapTripGuru",
-  "BudgetTravel",
-  "London",
-  "BudgetTravelTips",
-  "LondonMuseums",
-  "FreeActivities"
-  ]
-}, {
-"@context": "https://schema.org",
-"@type": "ItemList",
-"name": "Attractions for Kids in London",
-"itemListElement": [
-  {
-    "@type": "ListItem",
-    "position": 1,
-    "item": {
-      "@type": "TouristAttraction",
-      "name": "The Diana Memorial Playground",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Broad Walk, Kensington Gardens",
-        "addressLocality": "London",
-        "postalCode": "W2 4RU",
-        "addressCountry": "United Kingdom"
-      },
-      "description": "This playground is inspired by Peter Pan and is designed for kids up to the age of 12. It features a pirate ship, teepees, and a sensory trail.",
-      "url": "https://www.royalparks.org.uk/parks/kensington-gardens/things-to-see-and-do/diana-memorial-playground"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 51.5089,
+      "longitude": -0.1283
     }
   },
   {
-    "@type": "ListItem",
-    "position": 2,
-    "item": {
-      "@type": "TouristAttraction",
-      "name": "SEA LIFE London Aquarium",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "County Hall, Riverside Building, Westminster Bridge Rd, Bishop's",
-        "addressLocality": "London",
-        "postalCode": "SE1 7PB",
-        "addressCountry": "United Kingdom"
-      },
-      "description": "The SEA LIFE London Aquarium has over 600 species of marine life, including sharks, turtles, and penguins. It also features interactive exhibits and a glass walkway over the shark tank.",
-      "url": "https://www.visitsealife.com/london/"
-    }
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "British Museum",
+    "description": "The British Museum: A Budget Traveller's Dream Come True! Hey there, fellow budget travellers! I'm CheapTrip.Guru, and I'm here to share with you my latest discovery in London - the British Museum. Now, I know what you're thinking - museums are boring and expensive. But trust me, this one is different. First of all, let's talk about the price. The best part? It's completely free! That's right, you can explore the wonders of the British Museum without spending a single penny. And let me tell you, there are plenty of wonders to explore. From the Rosetta Stone to the Egyptian mummies, the British Museum is home to some of the most fascinating artefacts in the world. And the best part? You don't have to be a history buff to appreciate them. Even if you're not particularly interested in ancient civilisations, you'll still find yourself in awe of the sheer scale and beauty of these artefacts. But the British Museum isn't just about the past. It's also a hub of contemporary art and culture. There are always new exhibitions and events taking place, so be sure to check out their website before you go. And let's not forget about the building itself. The British Museum is housed in a stunning neoclassical building that is a work of art in itself. You could spend hours just admiring the architecture and the beautiful courtyard. So, if you're looking for a budget-friendly activity in London that is both educational and entertaining, look no further than the British Museum. And if you see me there, be sure to say hi - I'll be the one geeking out over the Rosetta Stone. Until next time, happy travels!",
+    "image": "https://images.pexels.com/photos/7884210/pexels-photo-7884210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Great Russell St",
+      "addressLocality": "London",
+      "postalCode": "WC1B 3DG",
+      "addressCountry": "United Kingdom"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 51.5194,
+      "longitude": -0.1269
+    },
+    "url": "https://www.britishmuseum.org/",
+    "sameAs": [
+      "https://www.facebook.com/britishmuseum",
+      "https://www.twitter.com/britishmuseum",
+      "https://www.instagram.com/britishmuseum",
+      "https://www.youtube.com/britishmuseum"
+    ],
+    "keywords": [
+      "CheapTripGuru",
+      "BudgetTravel",
+      "London",
+      "BudgetTravelTips",
+      "LondonMuseums",
+      "FreeActivities"
+    ]
   },
   {
-    "@type": "ListItem",
-    "position": 3,
-    "item": {
-      "@type": "TouristAttraction",
-      "name": "London Zoo",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Regent's Park",
-        "addressLocality": "London",
-        "postalCode": "NW1 4RY",
-        "addressCountry": "United Kingdom"
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Attractions for Kids in London",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "TouristAttraction",
+          "name": "The Diana Memorial Playground",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Broad Walk, Kensington Gardens",
+            "addressLocality": "London",
+            "postalCode": "W2 4RU",
+            "addressCountry": "United Kingdom"
+          },
+          "description": "This playground is inspired by Peter Pan and is designed for kids up to the age of 12. It features a pirate ship, teepees, and a sensory trail.",
+          "url": "https://www.royalparks.org.uk/parks/kensington-gardens/things-to-see-and-do/diana-memorial-playground"
+        }
       },
-      "description": "London Zoo is home to over 750 species of animals, including gorillas, tigers, and penguins. It also features interactive exhibits, a children's zoo, and a playground.",
-      "url": "https://www.zsl.org/zsl-london-zoo"
-    }
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "TouristAttraction",
+          "name": "SEA LIFE London Aquarium",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "County Hall, Riverside Building, Westminster Bridge Rd, Bishop's",
+            "addressLocality": "London",
+            "postalCode": "SE1 7PB",
+            "addressCountry": "United Kingdom"
+          },
+          "description": "The SEA LIFE London Aquarium has over 600 species of marine life, including sharks, turtles, and penguins. It also features interactive exhibits and a glass walkway over the shark tank.",
+          "url": "https://www.visitsealife.com/london/"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "TouristAttraction",
+          "name": "London Zoo",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Regent's Park",
+            "addressLocality": "London",
+            "postalCode": "NW1 4RY",
+            "addressCountry": "United Kingdom"
+          },
+          "description": "London Zoo is home to over 750 species of animals, including gorillas, tigers, and penguins. It also features interactive exhibits, a children's zoo, and a playground.",
+          "url": "https://www.zsl.org/zsl-london-zoo"
+        }
+      }
+    ]
   }
-]
-}
 ]
