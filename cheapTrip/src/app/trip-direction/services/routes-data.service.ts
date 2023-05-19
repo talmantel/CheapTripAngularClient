@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, forkJoin, Subscription } from 'rxjs';
+import { CacheService } from 'src/app/service/cache.service';
 import {
   IJsonTravelData,
   IJsonPartlyRoute,
   IJsonPartlyRouteItem,
   IRecievedRouts,
 } from '../trip-direction.model';
-import { HttpClient } from '@angular/common/http';
-import { CacheService } from '../../service/cache.service';
 import { IRout } from '../trip-direction.model';
 
 @Injectable({ providedIn: 'root' })
