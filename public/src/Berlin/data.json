@@ -1,0 +1,42 @@
+{
+  "@context": "https://schema.org",
+  "@type": "City",
+  "name": "Berlin",
+  "description": "Berlin, Germany's capital, is a dynamic city that caters to budget travellers seeking history, culture, and entertainment. The city is popular for its fascinating landmarks, such as the iconic Brandenburg Gate and the breath-taking Berlin Wall, which vividly symbolize the city's turbulent past. Visitors can also explore world-class museums and art galleries, such as the Pergamon Museum and the Berlinische Gallery, which boast extensive collections of historical and contemporary artworks. Berlin's vibrant nightlife also makes it a hotspot for budget travelers, with highlights such as the legendary techno club Berghain, as well as eclectic bars and cafes in the vibrant neighborhood of Kreuzberg. When it comes to food, Berlin has a diverse culinary scene, with affordable street food such as the famous Currywurst, as well as hip modern restaurants and ethnic eateries. With its unique blend of history, art, music, and cuisine, Berlin is a must-visit destination for budget travelers.",
+  "touristAttraction": [
+    {
+      "@type": "TouristAttraction",
+      "name": "Brandenburg Gate",
+      "description": "The Brandenburg Gate is a Berlin landmark that should not be missed by budget travellers. This historic gate has seen centuries of events and now stands as a symbol of peace and unity. Visitors can take a stroll through the gate and admire its impressive architecture without spending a penny. Don't forget to snap a photo with this monumental landmark in the background!",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pariser Platz 1",
+        "addressRegion": "Berlin",
+        "postalCode": "10117",
+        "addressCountry": "Germany"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.5163,
+        "longitude": 13.3777
+      }
+    },
+    {
+      "@type": "TouristAttraction",
+      "name": "Berlin Wall Memorial and Documentation Centre",
+      "description": "The Berlin Wall Memorial and Documentation Centre is a must-visit for any budget traveller. Explore the remnants of the wall and learn about the history of its construction and division of the city. The centre also offers free guided tours, making it an excellent choice for those looking for an educational and wallet-friendly experience. Don't miss this opportunity to delve into one of Berlin's most iconic and significant monuments without breaking the bank.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bernauer Str. 111",
+        "addressRegion": "Berlin",
+        "postalCode": "13355",
+        "addressCountry": "Germany"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.5367,
+        "longitude": 13.3986
+      }
+    }
+  ]
+}
