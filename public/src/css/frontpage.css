@@ -425,6 +425,59 @@ a:active {
   }
 
 
+  .city-item__image-small {
+    width: 150px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+  }
+  
+  .city-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .city-item {
+    flex: 1;
+  }
 
+  
+  .city-item__image-large {
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+  }
 
+  /* Existing CSS code */
+
+/* Adjust carousel size for different screen sizes */
+
+.city-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.city-item {
+  flex: 0 0 auto;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
+.city-item__link {
+  display: block;
+  text-align: center;
+}
+
+.city-item__image {
+  width: 100%;
+  height: auto;
+  max-height: 200px; /* Adjust the maximum height as desired */
+  object-fit: cover;
+}
+
+.city-item__name {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+  
 /*# sourceMappingURL=main.css.map */
