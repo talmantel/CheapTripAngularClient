@@ -480,3 +480,11 @@ a:active {
 .owl-carousel .owl-nav [class*=owl-] {
   font-size: 50px !important;
 }
+
+ .section--search {
+    max-width: 300px; /* Adjust the width as needed */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  
