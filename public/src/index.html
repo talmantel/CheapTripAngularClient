@@ -20,58 +20,58 @@
   <link rel="stylesheet" href="../src/css/frontpage.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+  <style>
+
+  </style>
 </head>
 
 <body>
   <header class="container-fluid header">
-    <header class="container-fluid header">
-      <div class="headline">
-        <a aria-current="page" href="/">
-          <h1 class="headline__logo">CheapTrip</h1>
-        </a>
-        <span class="headline__slogan">
-          <span>Pay less,</span>
-          <span> visit more!</span>
-        </span>
-      </div>
-      <nav class="menu">
-        <button class="menu__btn" id="navbarDropdown" data-mdb-toggle="dropdown" aria-expanded="false">
-          <i class="material-icons-outlined">menu</i>
-        </button>
-        <ul class="dropdown-menu services" aria-labelledby="navbarDropdown">
-          <li class="services-title-wrap">
-            <h3 class="services-title">Our services</h3>
-            <button class="menu__btn">
-              <i class="material-icons-outlined">close</i>
-            </button>
-          </li>
-          <li>
-            <a class="dropdown-item services__item" href="/">
-              <i class="material-icons-outlined">airplane_ticket</i>
-              <span class="item-text">CheapTrip</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item services__item" href="#">
-              <i class="material-icons-outlined" style="transform: scaleX(-1)">book</i>
-              <span class="item-text">BudgetTravelTips</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item services__item" href="#">
-              <i class="material-icons-outlined">call</i>
-              <span class="item-text">Contacts</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <div class="headline">
+      <a aria-current="page" href="/">
+        <h1 class="headline__logo">CheapTrip</h1>
+      </a>
+      <span class="headline__slogan">
+        <span>Pay less,</span>
+        <span> visit more!</span>
+      </span>
+    </div>
+    <nav class="menu">
+      <button class="menu__btn" id="navbarDropdown" data-mdb-toggle="dropdown" aria-expanded="false">
+        <i class="material-icons-outlined">menu</i>
+      </button>
+      <ul class="dropdown-menu services" aria-labelledby="navbarDropdown">
+        <li class="services-title-wrap">
+          <h3 class="services-title">Our services</h3>
+          <button class="menu__btn">
+            <i class="material-icons-outlined">close</i>
+          </button>
+        </li>
+        <li>
+          <a class="dropdown-item services__item" href="/">
+            <i class="material-icons-outlined">airplane_ticket</i>
+            <span class="item-text">CheapTrip</span>
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item services__item" href="#">
+            <i class="material-icons-outlined" style="transform: scaleX(-1)">book</i>
+            <span class="item-text">BudgetTravelTips</span>
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item services__item" href="#">
+            <i class="material-icons-outlined">call</i>
+            <span class="item-text">Contacts</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </header>
 
-  <section class="container section">
+  <section class="container section section--popular-cities">
     <h2 class="section-title">The most popular cities</h2>
     <div class="city-details">
-      
       <p class="city-details__text">
         Explore the most popular cities around the world and experience their unique charm and attractions.
       </p>
@@ -105,7 +105,7 @@
       $('.city-carousel').owlCarousel({
         items: 1,
         loop: true,
-        margin: 10,
+        margin: 30, /* Adjust the margin as desired */
         nav: true
       });
     });
