@@ -414,20 +414,20 @@ a:active {
     border: 1px solid #ff5722;
     color: #fff;
     background-color: #ff5722;
-    padding: 0.5rem 0.8rem; /* Adjust the padding values to increase button size */
-    font-size: 1rem; /* Adjust the font-size value to increase button size */
+    padding: 0.5rem 0.8rem; 
+    font-size: 1rem; 
     font-weight: 400;
     min-width: 8rem;
   }
 
   .action-btn:first-child {
-    margin-right: 0.5rem; /* Adjust the margin value to control the space between buttons */
+    margin-right: 0.5rem; 
   }
 
 
   .city-item__image-small {
-    width: 150px; /* Adjust the width as needed */
-    height: 100px; /* Adjust the height as needed */
+    width: 150px; 
+    height: 100px; 
   }
   
   .city-list {
@@ -436,28 +436,47 @@ a:active {
   }
   
   .city-item__image-large {
-    width: 300px; /* Adjust the width as needed */
-    height: 200px; /* Adjust the height as needed */
+    width: 300px; 
+    height: 200px; 
   }
 
-  /* Existing CSS code */
-
-/* Adjust carousel size for different screen sizes */
-
-
-  
-/*# sourceMappingURL=main.css.map */
 
 .city-carousel {
   width: 100%;
 }
 
-.city-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .city-item__image {
-  max-height: 450px; /* Adjust the image height as desired */
+  max-height: 450px; 
+}
+
+.city-details {
+  text-align: center;
+}
+
+.city-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.city-item__name {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.city-item__name:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+.owl-carousel .owl-nav [class*=owl-] {
+  font-size: 50px !important;
 }

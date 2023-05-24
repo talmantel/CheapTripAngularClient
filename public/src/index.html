@@ -21,82 +21,126 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
   <style>
-
+    .city-carousel {
+      width: 100%;
+    }
+    
+    .city-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .city-item__image {
+      max-height: 450px; /* Adjust the image height as desired */
+    }
+    
+    .buttons-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 0 10px;
+    }
   </style>
 </head>
 
 <body>
   <header class="container-fluid header">
-    <div class="headline">
-      <a aria-current="page" href="/">
-        <h1 class="headline__logo">CheapTrip</h1>
-      </a>
-      <span class="headline__slogan">
-        <span>Pay less,</span>
-        <span> visit more!</span>
-      </span>
-    </div>
-    <nav class="menu">
-      <button class="menu__btn" id="navbarDropdown" data-mdb-toggle="dropdown" aria-expanded="false">
-        <i class="material-icons-outlined">menu</i>
-      </button>
-      <ul class="dropdown-menu services" aria-labelledby="navbarDropdown">
-        <li class="services-title-wrap">
-          <h3 class="services-title">Our services</h3>
-          <button class="menu__btn">
-            <i class="material-icons-outlined">close</i>
-          </button>
-        </li>
-        <li>
-          <a class="dropdown-item services__item" href="/">
-            <i class="material-icons-outlined">airplane_ticket</i>
-            <span class="item-text">CheapTrip</span>
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item services__item" href="#">
-            <i class="material-icons-outlined" style="transform: scaleX(-1)">book</i>
-            <span class="item-text">BudgetTravelTips</span>
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item services__item" href="#">
-            <i class="material-icons-outlined">call</i>
-            <span class="item-text">Contacts</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <header class="container-fluid header">
+      <div class="headline">
+        <a aria-current="page" href="/">
+          <h1 class="headline__logo">CheapTrip</h1>
+        </a>
+        <span class="headline__slogan">
+          <span>Pay less,</span>
+          <span> visit more!</span>
+        </span>
+      </div>
+      <nav class="menu">
+        <button class="menu__btn" id="navbarDropdown" data-mdb-toggle="dropdown" aria-expanded="false">
+          <i class="material-icons-outlined">menu</i>
+        </button>
+        <ul class="dropdown-menu services" aria-labelledby="navbarDropdown">
+          <li class="services-title-wrap">
+            <h3 class="services-title">Our services</h3>
+            <button class="menu__btn">
+              <i class="material-icons-outlined">close</i>
+            </button>
+          </li>
+          <li>
+            <a class="dropdown-item services__item" href="/">
+              <i class="material-icons-outlined">airplane_ticket</i>
+              <span class="item-text">CheapTrip</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item services__item" href="#">
+              <i class="material-icons-outlined" style="transform: scaleX(-1)">book</i>
+              <span class="item-text">BudgetTravelTips</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item services__item" href="#">
+              <i class="material-icons-outlined">call</i>
+              <span class="item-text">Contacts</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
   </header>
 
-  <section class="container section section--popular-cities">
-    <h2 class="section-title">The most popular cities</h2>
-    <div class="city-details">
-      <p class="city-details__text">
-        Explore the most popular cities around the world and experience their unique charm and attractions.
-      </p>
-      <div class="city-carousel owl-carousel">
-        <div class="city-item">
-          <a href="#" class="city-item__link">
-            <img src="../src/images/image_of_London_1.jpg" alt="London" class="city-item__image" />
-            <span class="city-item__name">London</span>
-          </a>
-        </div>
-        <div class="city-item">
-          <a href="#" class="city-item__link">
-            <img src="../src/images/paris.jpeg" alt="Paris" class="city-item__image" />
-            <span class="city-item__name">Paris</span>
-          </a>
-        </div>
-        <div class="city-item">
-          <a href="#" class="city-item__link">
-            <img src="../src/images/image_of_Berlin_2.jpg" alt="Berlin" class="city-item__image" />
-            <span class="city-item__name">Berlin</span>
-          </a>
-        </div>
+
+
+  
+  <section class="container section section--search">
+    <div class="col-12 col-md-6 mb-3 mb-md-0 search-item">
+      <div class="action-btn-container">
+        <button class="action-btn mr-1" type="button" aria-label="Find routes">Find routes</button>
+        <button class="action-btn" type="button" aria-label="Budget Travel Tips">Budget Travel Tips</button>
       </div>
     </div>
-  </section>
+    <div class="row justify-content-between search-group">
+      <div class="col-12 col-md-6 mb-3 mb-md-0 search-item">
+        <label for="cityfrom" class="search-item__label">Find a city</label>
+        <input class="search-item__input" type="text" id="find_city" placeholder="Enter city name" maxlength="50" />
+      </div>
+      
+    </div>
+
+    <section class="container section">
+      <h2 class="section-title">The most popular cities</h2>
+      <div class="city-details">
+        <p class="city-details__text">
+          Explore the most popular cities around the world and experience their unique charm and attractions.
+        </p>
+        <div class="city-carousel owl-carousel">
+          <div class="city-item">
+            <a href="#" class="city-item__link">
+              <img src="../src/images/image_of_London_1.jpg" alt="London" class="city-item__image" />
+              <span class="city-item__name">London</span>
+            </a>
+          </div>
+          <div class="city-item">
+            <a href="#" class="city-item__link">
+              <img src="../src/images/paris.jpeg" alt="Paris" class="city-item__image" />
+              <span class="city-item__name">Paris</span>
+            </a>
+          </div>
+          <div class="city-item">
+            <a href="#" class="city-item__link">
+              <img src="../src/images/image_of_Berlin_2.jpg" alt="Berlin" class="city-item__image" />
+              <span class="city-item__name">Berlin</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -105,7 +149,7 @@
       $('.city-carousel').owlCarousel({
         items: 1,
         loop: true,
-        margin: 30, /* Adjust the margin as desired */
+        margin: 0,
         nav: true
       });
     });
