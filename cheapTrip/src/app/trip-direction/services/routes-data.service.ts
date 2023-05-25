@@ -13,6 +13,7 @@ import { IRout } from '../trip-direction.model';
 
 import { combineLatest } from 'rxjs';
 import { throwError } from 'rxjs';
+import { deepObjectClone } from '../helpers/deep-object-clone.helper';
 
 @Injectable({ providedIn: 'root' })
 export class RoutesDataService {
@@ -239,7 +240,7 @@ export class RoutesDataService {
         const route = routes[`${endPoint}`];
         if (route == undefined) return;
 
-        const clonedRoute: IJsonPartlyRouteItem = this.deepObjectClone(route);
+        const clonedRoute: IJsonPartlyRouteItem = deepObjectClone(route);
 
         clonedRoute.travel_data = this.getRouteInnerTravelData(
           clonedRoute.direct_routes,
@@ -272,9 +273,5 @@ export class RoutesDataService {
     });
 
     return pathData;
-  }
-
-  private deepObjectClone<T extends Object>(value: T): T {
-    return JSON.parse(JSON.stringify(value));
   }
 }
