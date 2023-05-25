@@ -59,6 +59,7 @@ a:active {
     min-width: 200px;
     background-color: #fff;
     margin: 2rem auto 0;
+    width: 50%;
 }
 
 @media (min-width: 576px) {
@@ -412,9 +413,10 @@ a:active {
 }
 
 .img-container {
-    width: 100%;
+    width: 50%;
     display: flex;
     justify-content: center;
+      margin-right: 2rem;
 }
 
 
@@ -426,7 +428,7 @@ a:active {
 .city-img {
     min-width: 80%;
     max-width: 120%;
-
+height: auto;
 
 }
 
