@@ -17,14 +17,14 @@
         padding: 16px;
     }
 
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 55px;
-    padding-bottom: 40px;
-    margin-bottom: 30px
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 55px;
+        padding-bottom: 40px;
+        margin-bottom: 30px
     }
 }
 
@@ -417,11 +417,17 @@ a:active {
     justify-content: center;
 }
 
+
+.img-container:last-child img,
+.img-container:last-child+section img {
+    width: 70%;
+}
+
 .city-img {
     min-width: 80%;
     max-width: 120%;
-   
-   
+
+
 }
 
 @media (min-width: 768px) {
@@ -453,27 +459,27 @@ a:active {
 
 @media (max-width: 768px) {
     .places__img:first-child {
-      order: 1;
-      margin-bottom: 20px;
+        order: 1;
+        margin-bottom: 20px;
     }
-  
+
     .places__img:last-child,
-    .places__img:last-child ~ .places__img {
-      grid-column: span 2;
-      margin-bottom: 20px;
+    .places__img:last-child~.places__img {
+        grid-column: span 2;
+        margin-bottom: 20px;
     }
-  
+
     .places__item:nth-child(3) {
-      grid-column: span 2;
-      margin-top: 20px;
+        grid-column: span 2;
+        margin-top: 20px;
     }
-  }
-  
-    .places__item:nth-child(3) {
-      grid-column: 1 / span 2;
-    }
-  
-  
+}
+
+.places__item:nth-child(3) {
+    grid-column: 1 / span 2;
+}
+
+
 
 .city-details__text {
     color: #000;
@@ -572,13 +578,18 @@ a:active {
 
 @media (max-width: 480px) {
     .places__img:first-child {
-      order: 1;
-      margin-bottom: 20px;
+        order: 1;
+        margin-bottom: 20px;
     }
-  
+
     .places__img:last-child,
-    .places__img:last-child ~ .places__img {
-      grid-column: span 2;
-      margin-bottom: 20px;
+    .places__img:last-child~.places__img {
+        grid-column: span 2;
+        margin-bottom: 20px;
     }
-  }
+}
+
+.img-container:last-child img,
+.img-container:last-child + section img {
+  width: 70%;
+}
