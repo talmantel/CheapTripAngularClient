@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
 import { Observable, forkJoin, Subscription } from 'rxjs';
 import { CacheService } from 'src/app/service/cache.service';
 import {
@@ -12,6 +12,7 @@ import {
 import { IRout } from '../trip-direction.model';
 
 import { combineLatest } from 'rxjs';
+import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RoutesDataService {
@@ -28,7 +29,7 @@ export class RoutesDataService {
       this.getTravelData(startPointNumber, endPointNumber),
       this.getRouteTravelData(startPoint, endPoint, 'flying'),
       this.getRouteTravelData(startPoint, endPoint, 'fixed'),
-      this.getRouteTravelData(startPoint, endPoint, 'direct'),
+      this.getRouteTravelData(startPoint, endPoint, 'mixed'),
     ]).pipe(
       map(([travelData, flyingData, groundData, mixedData]) => {
         const pathMap = [
@@ -104,7 +105,7 @@ export class RoutesDataService {
   private async getRouteTravelData(
     startPoint: string,
     endPoint: string,
-    type: 'flying' | 'fixed' | 'direct'
+    type: 'flying' | 'fixed' | 'mixed'
   ): Promise<IRecievedRouts[]> {
     console.time(
       `trip-direction/data.service.ts ~ DataService ~ getRouteTravelData ${type}`
@@ -131,6 +132,12 @@ export class RoutesDataService {
         ).then(data => {
           const result: IRecievedRouts[] = [];
 
+          console.log(
+            '🚀 ~ file: routes-data.service.ts:136 ~ RoutesDataService ~ ).subscribe ~ data:',
+            type,
+            data
+          );
+
           if (!data || data === null) return result;
 
           const directPaths: IRout[] = data.travel_data.map(travelData => ({
@@ -148,6 +155,7 @@ export class RoutesDataService {
             direct_paths: directPaths,
           });
 
+          console.log(result);
           return result;
         });
 
@@ -202,17 +210,30 @@ export class RoutesDataService {
     }: {
       startPoint: string;
       endPoint: string;
-      type: 'flying' | 'fixed' | 'direct';
+      type: 'flying' | 'fixed' | 'mixed';
     },
     directRoutes: Record<number, IJsonTravelData>
   ): Promise<IJsonPartlyRouteItem | null> {
     console.time(
       `trip-direction/data.service.ts ~ DataService ~ getRouteData ~ ${type}`
     );
-    return this.http
-      .get<IJsonPartlyRoute>(
-        `assets/new_json/partly/${type}_routes/${startPoint}.json`
-      )
+
+    const folderName = type === 'mixed' ? 'routes' : `${type}_routes`;
+    const link = `assets/new_json/partly/${folderName}/${startPoint}.json`;
+
+    const get = this.http.get<IJsonPartlyRoute>(link).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log('error');
+
+        if (error.status === 404) return Promise.reject();
+
+        return throwError(
+          () => new Error('Something bad happened; please try again later.')
+        );
+      })
+    );
+
+    return get
       .toPromise()
       .then((routes): IJsonPartlyRouteItem | undefined => {
         const route = routes[`${endPoint}`];
@@ -230,6 +251,9 @@ export class RoutesDataService {
         );
 
         return clonedRoute;
+      })
+      .catch(() => {
+        return null;
       });
   }
 
