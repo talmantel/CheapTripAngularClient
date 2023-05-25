@@ -19,12 +19,50 @@
         "@type": "GeoCoordinates",
         "latitude": 52.5163,
         "longitude": 13.3777
-      }
+      },
+      "keywords": [
+        "Brandenburg Gate",
+        "Berlin",
+        "iconic landmark",
+        "budget travellers",
+        "German history",
+        "fall of the Berlin Wall",
+        "reunification of Germany",
+        "symbol of hope",
+        "freedom",
+        "unity",
+        "grand entrance",
+        "King Frederick William II",
+        "Carl Gotthard Langhans",
+        "sandstone",
+        "Doric columns",
+        "quadriga",
+        "US President John F. Kennedy",
+        "speech",
+        "tourist attraction",
+        "rich history",
+        "culture",
+        "stunning views",
+        "top of the gate",
+        "photos",
+        "selfies",
+        "street performers",
+        "musicians",
+        "guided tours",
+        "Tiergarten park",
+        "relaxation",
+        "beautiful scenery",
+        "unforgettable experience",
+        "history buff",
+        "photography enthusiast",
+        "unique",
+        "memorable experience."
+    ]
     },
     {
       "@type": "TouristAttraction",
       "name": "Berlin Wall Memorial and Documentation Centre",
-      "description": "The Berlin Wall Memorial and Documentation Centre is a must-visit for any budget traveller. Explore the remnants of the wall and learn about the history of its construction and division of the city. The centre also offers free guided tours, making it an excellent choice for those looking for an educational and wallet-friendly experience. Don't miss this opportunity to delve into one of Berlin's most iconic and significant monuments without breaking the bank.",
+      "description": "Berlin Wall Memorial: A Journey Through History\nBerlin, the capital city of Germany, is a city that is steeped in history. One of the most significant historical landmarks in Berlin is the Berlin Wall Memorial. This iconic attraction is a must-visit for budget travellers who want to experience the rich history of Berlin.\nThe Berlin Wall Memorial is a 1.4-kilometre stretch of the Berlin Wall that has been preserved as a memorial to the division of Germany. The wall was built in 1961 to separate East and West Germany, and it stood as a symbol of the Cold War for almost three decades. The Berlin Wall Memorial is a reminder of the struggles and sacrifices that the people of Berlin endured during this time.\nThe memorial is located in the heart of Berlin and is easily accessible by public transport. Visitors can explore the various exhibits and displays that tell the story of the Berlin Wall and its impact on the people of Berlin. The memorial also features a visitor centre, a documentation centre, and a viewing platform that offers stunning views of the city.\nOne of the main highlights of the Berlin Wall Memorial is the Chapel of Reconciliation. This beautiful chapel was built on the site of a former church that was destroyed during the construction of the wall. The chapel is a symbol of hope and reconciliation and is a powerful reminder of the resilience of the human spirit.\nVisitors to the Berlin Wall Memorial can also take part in guided tours, which provide a deeper insight into the history and significance of the wall. The tours are led by knowledgeable guides who are passionate about sharing their knowledge and experiences with visitors.\nA visit to the Berlin Wall Memorial is an emotional and thought-provoking experience. It is a reminder of the power of human determination and the importance of freedom and democracy. The memorial is a must-visit for anyone who wants to understand the history of Berlin and the impact of the Cold War on the city and its people.\nIn conclusion, the Berlin Wall Memorial is a powerful and moving attraction that offers a unique insight into the history of Berlin. It is a must-visit for budget travellers who want to experience the rich history and culture of this vibrant city. So, if you are planning a trip to Berlin, make sure to add the Berlin Wall Memorial to your itinerary. You won't regret it!",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Bernauer Str. 111",
@@ -36,7 +74,30 @@
         "@type": "GeoCoordinates",
         "latitude": 52.5367,
         "longitude": 13.3986
-      }
+      },
+      "keywords": [
+        "Berlin Wall Memorial",
+        "history",
+        "Berlin",
+        "landmark",
+        "budget travellers",
+        "division of Germany",
+        "Cold War",
+        "struggles",
+        "sacrifices",
+        "exhibits",
+        "displays",
+        "visitor centre",
+        "documentation centre",
+        "viewing platform",
+        "Chapel of Reconciliation",
+        "guided tours",
+        "human determination",
+        "freedom",
+        "democracy",
+        "culture",
+        "itinerary."
+    ]
     }
   ]
 }
