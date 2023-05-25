@@ -418,8 +418,10 @@ a:active {
 }
 
 .city-img {
-    min-width: 100%;
-    margin-top: 4px;
+    min-width: 80%;
+    max-width: 120%;
+   
+   
 }
 
 @media (min-width: 768px) {
@@ -448,6 +450,30 @@ a:active {
         font-size: 1.9rem;
     }
 }
+
+@media (max-width: 768px) {
+    .places__img:first-child {
+      order: 1;
+      margin-bottom: 20px;
+    }
+  
+    .places__img:last-child,
+    .places__img:last-child ~ .places__img {
+      grid-column: span 2;
+      margin-bottom: 20px;
+    }
+  
+    .places__item:nth-child(3) {
+      grid-column: span 2;
+      margin-top: 20px;
+    }
+  }
+  
+    .places__item:nth-child(3) {
+      grid-column: 1 / span 2;
+    }
+  
+  
 
 .city-details__text {
     color: #000;
@@ -544,4 +570,15 @@ a:active {
     text-decoration: underline;
 }
 
-/*# sourceMappingURL=main.css.map */
+@media (max-width: 480px) {
+    .places__img:first-child {
+      order: 1;
+      margin-bottom: 20px;
+    }
+  
+    .places__img:last-child,
+    .places__img:last-child ~ .places__img {
+      grid-column: span 2;
+      margin-bottom: 20px;
+    }
+  }
