@@ -348,10 +348,10 @@
   }
   
  .places {
-  margin-top: 16px; /* Adjust the top margin of the places list */
-  display: flex; /* Use flexbox to align the items */
-  justify-content: center; /* Center the items horizontally */
-  flex-wrap: wrap; /* Wrap the items to stack them on smaller screens */
+  margin-top: 16px; 
+  display: flex; 
+  justify-content: center; 
+  flex-wrap: wrap; 
 }
   
   .places__img {
@@ -420,11 +420,14 @@
   @media (min-width: 768px) {
      .city-details {
     margin: 32px auto 0;
-    max-width: 70%; /* Decreased from 100% to make it 30% smaller */
+    max-width: 70%;
   }
   }
   .city-details__text {
     color: #000;
+    text-align: justify;
+    line-height: 1.5; 
+    max-width: 800px; 
   }
   .city-details__list {
     list-style: inside;
@@ -462,7 +465,10 @@
     }
   }
   .city-details__li-text {
-    padding-left: 20px;
+    color: #000;
+    text-align: justify; 
+    line-height: 1.5; 
+    max-width: 800px; 
   }
   .city-details__map-view {
     display: inline-block;
@@ -512,31 +518,31 @@
   
 
 .square-img img {
-  max-width: 100%; /* Set the maximum width of the images to 100% */
-  height: auto; /* Let the height adjust automatically */
+  max-width: 100%; 
+  height: auto; 
 }
 
 
 .places {
-  margin-top: 16px; /* Adjust the top margin of the places list */
-  display: flex; /* Use flexbox to align the items */
-  justify-content: center; /* Center the items horizontally */
-  flex-wrap: wrap; /* Wrap the items to stack them on smaller screens */
+  margin-top: 16px; 
+  display: flex; 
+  justify-content: center; 
+  flex-wrap: wrap; 
 }
 
 .card--additional {
-  width: 30%; /* Decrease the width of the card */
-  margin: 0 8px; /* Add margin between the cards */
+  width: 30%; 
+  margin: 0 8px; 
 }
 
 .city-details__title {
-  text-align: center; /* Center align the section title */
+  text-align: center; 
 }
 
 @media (max-width: 768px) {
   .card--additional {
-    width: 100%; /* Set the width to 100% on smaller screens */
-    margin: 8px 0; /* Add margin for spacing */
+    width: 100%; 
+    margin: 8px 0; 
   }
 }
 
