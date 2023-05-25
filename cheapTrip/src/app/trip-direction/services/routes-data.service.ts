@@ -14,6 +14,7 @@ import { IRout } from '../trip-direction.model';
 import { combineLatest } from 'rxjs';
 import { throwError } from 'rxjs';
 import { deepObjectClone } from '../helpers/deep-object-clone.helper';
+import { getDataFromObjectByKeys } from '../helpers/get-data-from-object-by-keys.helper';
 
 @Injectable({ providedIn: 'root' })
 export class RoutesDataService {
@@ -242,7 +243,7 @@ export class RoutesDataService {
 
         const clonedRoute: IJsonPartlyRouteItem = deepObjectClone(route);
 
-        clonedRoute.travel_data = this.getRouteInnerTravelData(
+        clonedRoute.travel_data = getDataFromObjectByKeys(
           clonedRoute.direct_routes,
           directRoutes
         );
@@ -256,22 +257,5 @@ export class RoutesDataService {
       .catch(() => {
         return null;
       });
-  }
-
-  private getRouteInnerTravelData(
-    routeDirectRoutes: IJsonPartlyRouteItem['direct_routes'],
-    directRoutes: Record<number, IJsonTravelData>
-  ) {
-    const pathData: IJsonTravelData[] = [];
-
-    routeDirectRoutes.forEach((id: string): void => {
-      const travelData = directRoutes[id];
-
-      if (travelData !== undefined) {
-        pathData.push(directRoutes[id]);
-      }
-    });
-
-    return pathData;
   }
 }
