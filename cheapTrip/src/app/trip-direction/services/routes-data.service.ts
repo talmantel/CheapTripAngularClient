@@ -15,6 +15,7 @@ import { combineLatest } from 'rxjs';
 import { throwError } from 'rxjs';
 import { deepObjectClone } from '../helpers/deep-object-clone.helper';
 import { getDataFromObjectByKeys } from '../helpers/get-data-from-object-by-keys.helper';
+import config from '../config/trip-direction.config';
 
 @Injectable({ providedIn: 'root' })
 export class RoutesDataService {
@@ -220,20 +221,19 @@ export class RoutesDataService {
       `trip-direction/data.service.ts ~ DataService ~ getRouteData ~ ${type}`
     );
 
-    const folderName = type === 'mixed' ? 'routes' : `${type}_routes`;
-    const link = `assets/new_json/partly/${folderName}/${startPoint}.json`;
+    const get = this.http
+      .get<IJsonPartlyRoute>(this.getRouteDataLink(type, startPoint))
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log('error');
 
-    const get = this.http.get<IJsonPartlyRoute>(link).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log('error');
+          if (error.status === 404) return Promise.reject();
 
-        if (error.status === 404) return Promise.reject();
-
-        return throwError(
-          () => new Error('Something bad happened; please try again later.')
-        );
-      })
-    );
+          return throwError(
+            () => new Error('Something bad happened; please try again later.')
+          );
+        })
+      );
 
     return get
       .toPromise()
@@ -249,7 +249,7 @@ export class RoutesDataService {
         );
 
         console.timeEnd(
-          `trip-direction/data.service.ts ~ DataService ~ getRouteData ~ ${type}`
+          `trROUTE_FOLDERip-direction/data.service.ts ~ DataService ~ getRouteData ~ ${type}`
         );
 
         return clonedRoute;
@@ -257,5 +257,12 @@ export class RoutesDataService {
       .catch(() => {
         return null;
       });
+  }
+
+  private getRouteDataLink(
+    type: 'flying' | 'fixed' | 'mixed',
+    startPoint: string
+  ) {
+    return `${config.ROUTES_FOLDER}/${config.ROUTE_FOLDER[type]}/${startPoint}.json`;
   }
 }
