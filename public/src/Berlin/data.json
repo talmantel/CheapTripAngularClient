@@ -3,7 +3,7 @@
   "@type": "City",
   "name": "Berlin",
   "description": "Berlin, Germany's capital, is a dynamic city that caters to budget travellers seeking history, culture, and entertainment. The city is popular for its fascinating landmarks, such as the iconic Brandenburg Gate and the breath-taking Berlin Wall, which vividly symbolize the city's turbulent past. Visitors can also explore world-class museums and art galleries, such as the Pergamon Museum and the Berlinische Gallery, which boast extensive collections of historical and contemporary artworks. Berlin's vibrant nightlife also makes it a hotspot for budget travelers, with highlights such as the legendary techno club Berghain, as well as eclectic bars and cafes in the vibrant neighborhood of Kreuzberg. When it comes to food, Berlin has a diverse culinary scene, with affordable street food such as the famous Currywurst, as well as hip modern restaurants and ethnic eateries. With its unique blend of history, art, music, and cuisine, Berlin is a must-visit destination for budget travelers.",
-  "touristAttraction": [
+  "containsPlace": [
     {
       "@type": "TouristAttraction",
       "name": "Brandenburg Gate",
@@ -57,7 +57,7 @@
         "photography enthusiast",
         "unique",
         "memorable experience."
-    ]
+      ]
     },
     {
       "@type": "TouristAttraction",
@@ -97,7 +97,7 @@
         "democracy",
         "culture",
         "itinerary."
-    ]
+      ]
     }
   ]
 }
