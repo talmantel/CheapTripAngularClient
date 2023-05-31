@@ -73,6 +73,18 @@ a:focus {
     color: #ff5722;
 }
 
+.budget-btn {
+    padding: 7px;
+    border: #ff5722 solid 1px;
+    border-radius: 15px;
+    background-color: #ff5722;
+    margin: 5px 5px;
+}
+
+.budget-btn a {
+    color: white;
+}
+
 /*==================================================================================================*/
 
 .section-title {
@@ -80,6 +92,13 @@ a:focus {
     margin: 10px;
     font-size: 3rem;
     text-align: center;
+}
+
+.city-details {
+    text-align: center;
+    margin: 32px auto 0;
+    max-width: 60%;
+    font-size: 1.4rem;
 }
 
 /*=================================================================================================*/
@@ -117,6 +136,11 @@ a:focus {
 
 .city-details__text {
     text-align: justify;
+}
+
+.city-details-main {
+    color: #000;
+    text-align: center;
 }
 
 .city-details__title {
@@ -158,12 +182,11 @@ a:focus {
 }
 
 .city-item__image {
-    width: 100%;
-    min-height: 120px;
-    height: 100%;
+    /*width: 100%;*/
+    /*min-height: 120px;*/
+    /*height: 100%;*/
     object-fit: cover;
     overflow: hidden;
-    border-radius: 20px;
 }
 
 .city-item__name {
@@ -181,6 +204,10 @@ a:focus {
 
 .city-item__name:hover {
     background-color: rgba(255, 255, 255, 0.9);
+}
+
+.city-carousel {
+    width: 100%;
 }
 
 /*=============================================MEDIA-960=========================================================*/
@@ -229,6 +256,9 @@ a:focus {
         padding: 5px;
     }
 
+    .section-title {
+        font-size: 2rem;
+    }
 
     .city-img-main {
         width: 100%;

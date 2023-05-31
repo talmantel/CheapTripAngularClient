@@ -22,16 +22,15 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
     <!--        <base href="https://mdisaev-cheap.web.app">-->
     <!--        <link rel="icon" href="../src/assets/favicon-32x32.png" type="image/png">-->
-    <!--        <link rel="stylesheet" href="./src/css/frontpage.css">-->
     <link rel="icon" href="src/assets/favicon-32x32.png">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="src/css/cities.css">
 </head>
 
 <body>
 
 <header class="container-fluid header">
     <div class="headline">
-        <a aria-current="page" href="#">
+        <a aria-current="page" href="index.html">
             <h1 class="headline__logo">CheapTrip</h1>
         </a>
         <div class="headline__slogan">
@@ -40,19 +39,21 @@
     </div>
 </header>
 
-
 <section class="container section">
     <div class="action-btn-container">
-        <a class="find-btn"
-           type="button"
-           aria-label="Find routes"
-           href="https://cheaptrip.guru/en-US/#/search/myPath/logo">
-            Find cheapest routes
-        </a>
-        <button class="action-btn"
-                type="button"
-                aria-label="Budget Travel Tips">
-            Budget Travel Tips
+        <button class="action-btn">
+            <a type="button"
+               aria-label="Find routes"
+               href="https://heartfelt-pothos-d1481c.netlify.app/en-US/#/search/myPath/logo">
+                Find cheapest routes
+            </a>
+        </button>
+        <button class="budget-btn">
+            <a href="index.html"
+               type="button"
+               aria-label="Budget Travel Tips">
+                Budget Travel Tips
+            </a>
         </button>
     </div>
 </section>
@@ -60,7 +61,7 @@
 <section class="container section">
     <h2 class="section-title">The most popular cities</h2>
     <div class="city-details">
-        <p class="city-details__text">
+        <p class="city-details-main">
             Explore the most popular cities around the world and experience their unique charm and attractions
         </p>
         <div class="city-carousel owl-carousel">
