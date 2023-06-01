@@ -129,12 +129,6 @@ export class RoutesDataService {
           data => {
             const result: IRecievedRouts[] = [];
 
-            console.log(
-              '🚀 ~ file: routes-data.service.ts:136 ~ RoutesDataService ~ ).subscribe ~ data:',
-              type,
-              data
-            );
-
             if (!data || data === null) return result;
 
             const directPaths: IRout[] = data.travel_data.map(travelData => ({
@@ -172,30 +166,13 @@ export class RoutesDataService {
     startPoint: number,
     endPoint: number
   ): Promise<IJsonTravelData[]> {
-    const get = this.http
+    return this.http
       .get<IJsonPartlyRoute>(
         `${config.ROUTES_FOLDER}/direct_routes/${startPoint}.json`
       )
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.log('error');
-
-          if (error.status === 404) return Promise.reject();
-
-          return throwError(
-            () => new Error('Something bad happened; please try again later.')
-          );
-        })
-      );
-
-    return get
+      .pipe(catchError(this.errorHandler))
       .toPromise()
       .then((directRoutes: any) => {
-        console.log(
-          '🚀 ~ file: routes-data.service.ts:202 ~ RoutesDataService ~ .then ~ directRoutes:',
-          directRoutes
-        );
-
         if (directRoutes === null) return;
 
         console.time('RoutesDataService ~ getDirectRoutesByPoints');
@@ -209,18 +186,11 @@ export class RoutesDataService {
             return { ...item, from: startPoint };
           });
 
-        console.log(
-          '🚀 ~ file: routes-data.service.ts:212 ~ RoutesDataService ~ .then ~ directRoutesForOutput:',
-          directRoutesForOutput
-        );
-
         console.timeEnd('RoutesDataService ~ getDirectRoutesByPoints');
 
         return directRoutesForOutput;
       })
-      .catch(() => {
-        return null;
-      });
+      .catch(() => null);
   }
 
   private getRouteData({
@@ -236,21 +206,9 @@ export class RoutesDataService {
       `trip-direction/data.service.ts ~ DataService ~ getRouteData ~ ${type}`
     );
 
-    const get = this.http
+    return this.http
       .get<IJsonPartlyRoute>(this.getRouteDataLink(type, startPoint))
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.log('error');
-
-          if (error.status === 404) return Promise.reject();
-
-          return throwError(
-            () => new Error('Something bad happened; please try again later.')
-          );
-        })
-      );
-
-    return get
+      .pipe(catchError(this.errorHandler))
       .toPromise()
       .then(async (routes): Promise<IJsonPartlyRouteItem | undefined> => {
         const route = routes[`${endPoint}`];
@@ -259,49 +217,10 @@ export class RoutesDataService {
 
         const clonedRoute: IJsonPartlyRouteItem = deepObjectClone(route);
 
-        clonedRoute.travel_data = [];
-
-        await Promise.all(
-          clonedRoute.direct_routes.map(item => {
-            const directRouteFileId = getDirectRouteFileById(item);
-
-            return this.http
-              .get<IJsonPartlyRoute>(
-                `${config.ROUTES_FOLDER}/direct_routes/${directRouteFileId}.json`
-              )
-              .pipe(
-                catchError((error: HttpErrorResponse) => {
-                  console.log('error');
-
-                  if (error.status === 404) return Promise.reject();
-
-                  return throwError(
-                    () =>
-                      new Error(
-                        'Something bad happened; please try again later.'
-                      )
-                  );
-                })
-              )
-              .toPromise()
-              .then(directRoutes => {
-                const directRouteInfo = directRoutes[item];
-
-                if (directRouteInfo == undefined) return;
-
-                const directRouteInfoWithFrom = {
-                  ...directRouteInfo,
-                  from: directRouteFileId,
-                };
-
-                clonedRoute.travel_data.push(directRouteInfoWithFrom);
-              });
+        clonedRoute.travel_data = await Promise.all(
+          clonedRoute.direct_routes.map(async directRouteId => {
+            return await this.getDirectRouteById(directRouteId);
           })
-        );
-
-        console.log(
-          '🚀 ~ file: routes-data.service.ts:303 ~ RoutesDataService ~ .then ~ clonedRoute.travel_data:',
-          clonedRoute.travel_data
         );
 
         console.timeEnd(
@@ -310,8 +229,27 @@ export class RoutesDataService {
 
         return clonedRoute;
       })
-      .catch(() => {
-        return null;
+      .catch(() => null);
+  }
+
+  private getDirectRouteById(id: string) {
+    const directRouteFileId = getDirectRouteFileById(id);
+
+    return this.http
+      .get<IJsonPartlyRoute>(
+        `${config.ROUTES_FOLDER}/direct_routes/${directRouteFileId}.json`
+      )
+      .pipe(catchError(this.errorHandler))
+      .toPromise()
+      .then(directRoutes => {
+        const directRouteInfo = directRoutes[id];
+
+        if (directRouteInfo == undefined) return;
+
+        return {
+          ...directRouteInfo,
+          from: directRouteFileId,
+        };
       });
   }
 
@@ -320,5 +258,15 @@ export class RoutesDataService {
     startPoint: string
   ) {
     return `${config.ROUTES_FOLDER}/${config.ROUTE_FOLDER[type]}/${startPoint}.json`;
+  }
+
+  private errorHandler(error: HttpErrorResponse) {
+    console.log('error');
+
+    if (error.status === 404) return Promise.reject();
+
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
   }
 }
