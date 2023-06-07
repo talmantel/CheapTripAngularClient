@@ -20,72 +20,67 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
-    <!--        <base href="https://mdisaev-cheap.web.app">-->
-    <!--        <link rel="icon" href="../src/assets/favicon-32x32.png" type="image/png">-->
-    <!--        <link rel="stylesheet" href="./src/css/frontpage.css">-->
     <link rel="icon" href="src/assets/favicon-32x32.png">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="src/css/index.css">
 </head>
 
 <body>
 
 <header class="container-fluid header">
     <div class="headline">
-        <a aria-current="page" href="#">
+        <a aria-current="page" href="./index.html">
             <h1 class="headline__logo">CheapTrip</h1>
         </a>
-        <div class="headline__slogan">
-            <span>Pay less, visit more!</span>
-        </div>
+        <h6 class="headline__slogan"> Pay less, visit more!</h6>
     </div>
 </header>
 
+<div class="section-btn">
+    <a class="action-btn"
+       href="https://heartfelt-pothos-d1481c.netlify.app/en-US/#/search/myPath/logo">
+        Find cheapest routes
+    </a>
+    <a class="budget-btn"
+       href="./index.html">
+        Budget Travel Tips
+    </a>
+</div>
 
-<section class="container section">
-    <div class="action-btn-container">
-        <a class="find-btn"
-           type="button"
-           aria-label="Find routes"
-           href="https://cheaptrip.guru/en-US/#/search/myPath/logo">
-            Find cheapest routes
-        </a>
-        <button class="action-btn"
-                type="button"
-                aria-label="Budget Travel Tips">
-            Budget Travel Tips
-        </button>
-    </div>
-</section>
-
-<section class="container section">
+<div class="flex-container">
     <h2 class="section-title">The most popular cities</h2>
-    <div class="city-details">
-        <p class="city-details__text">
+    <div>
+        <p class="city-details-main">
             Explore the most popular cities around the world and experience their unique charm and attractions
         </p>
         <div class="city-carousel owl-carousel">
             <div>
-                <a href="./src/London/London.html">
-                    <img src="src/assets/London-fixed.jpg" alt="London" class="city-item__image"/>
+                <a href="src/London/description_london.html">
+                    <img src="src/assets/London-fixed.jpg"
+                         alt="London"
+                         class="city-item__image"/>
                     <span class="city-item__name">London</span>
                 </a>
             </div>
             <div>
-                <a href="./src/Paris/Paris.html">
-                    <img src="src/assets/image_of_Paris.jpg" alt="Paris" class="city-item__image"/>
+                <a href="src/Paris/description_paris.html">
+                    <img src="src/assets/image_of_Paris.jpg"
+                         alt="Paris"
+                         class="city-item__image"/>
                     <span class="city-item__name">Paris</span>
                 </a>
             </div>
             <div>
-                <a href="./src/Berlin/Berlin.html">
-                    <img src="src/assets/image_of_Berlin.jpg" alt="Berlin" class="city-item__image"/>
+                <a href="src/Berlin/description_berlin.html">
+                    <img src="src/assets/image_of_Berlin.jpg"
+                         alt="Berlin"
+                         class="city-item__image"/>
                     <span class="city-item__name">Berlin</span>
                 </a>
             </div>
         </div>
     </div>
-</section>
-
+</div>
+<hr>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
