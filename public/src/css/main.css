@@ -1,0 +1,170 @@
+/*==========================================common====================================================*/
+p {
+    text-align: justify;
+    text-indent: 2em;
+    font-size: 1.1rem;
+    color: black;
+    margin-top: 15px;
+}
+
+img {
+    border-radius: 20px;
+}
+
+/*==========================================header====================================================*/
+
+.header {
+    background-color: #ff5722;
+}
+
+.headline {
+    display: flex;
+    align-items: center;
+    height: 65px;
+}
+
+.headline__logo {
+    font-style: italic;
+    font-weight: bold;
+    color: #fff;
+    font-size: 3.5rem;
+}
+
+.headline__slogan {
+    margin-left: 80px;
+    font-style: italic;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    margin-top: 5px;
+    letter-spacing: 2px;
+    font-family: "Roboto", sans-serif;
+}
+
+/*==========================================main button====================================================*/
+
+.section-btn {
+    text-align: center;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.action-btn {
+    color: #ff5722;
+    padding: 3px;
+    border: #ff5722 solid 1px;
+    border-radius: 15px;
+    margin: 1px 1px;
+    font-size: 1.3rem;
+}
+
+.action-btn:hover {
+    color: white;
+    background-color: #ff5722;
+}
+
+.action-btn-active {
+    color: #ffffff;
+    padding: 3px;
+    border: #ff5722 solid 1px;
+    border-radius: 15px;
+    background-color: #ff5722;
+    font-size: 1.3rem;
+}
+
+.action-btn-active:hover {
+    color: white;
+}
+
+/*==========================================ATTRACTIONS + description====================================================*/
+
+.flex-container {
+    margin: 20px;
+    text-align: center;
+}
+
+.section-title {
+    color: #000;
+    font-size: 3rem;
+}
+
+.city-img-main {
+    margin: 0 15px 15px 0;
+    max-width: 1024px;
+    width: 100%;
+}
+
+.city-details__subtitle {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: black;
+    margin-top: 15px;
+}
+
+.attractions-container {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/*========================================buttons under description=================================================*/
+
+.buttons {
+    text-align: center;
+    margin: 20px auto;
+    display: block;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.buttons div {
+    margin-bottom: 15px;
+}
+
+/*========================================Also check this=================================================*/
+
+.city-details__title {
+    font-weight: bold;
+    color: #000;
+    font-size: 2rem;
+}
+
+.city-item__image {
+    width: 100%;
+}
+
+.city-item__name {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    font-size: 26px;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.city-item__name:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/*=============================================MEDIA-710=========================================================*/
+
+@media screen and (max-width: 710px) {
+    .headline {
+        height: 50px;
+    }
+
+    .headline__logo {
+        font-size: 2rem;
+    }
+
+    .headline__slogan {
+        font-size: 1.2rem;
+        letter-spacing: normal;
+        margin-left: 10px;
+    }
+}
