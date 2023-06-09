@@ -176,10 +176,9 @@ img {
 
 /* Media Query for button size */
 @media screen and (min-width: 768px) {
-  .action-btn,
-  .budget-btn {
+  .action-btn:first-child,
+  .action-btn:nth-child(2) {
     padding: 12px;
     font-size: 18px;
   }
 }
-
