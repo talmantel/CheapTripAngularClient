@@ -133,6 +133,7 @@ img {
 
 .city-item__image {
     width: 100%;
+    height: auto;
 }
 
 .city-item__name {
@@ -152,6 +153,7 @@ img {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
+
 /*=============================================MEDIA-710=========================================================*/
 
 @media screen and (max-width: 710px) {
@@ -168,5 +170,16 @@ img {
         letter-spacing: normal;
         margin-left: 10px;
     }
+}
+
+/*==========================================Updated code=============================================*/
+
+/* Media Query for button size */
+@media screen and (min-width: 768px) {
+  .action-btn,
+  .budget-btn {
+    padding: 12px;
+    font-size: 18px;
+  }
 }
 
