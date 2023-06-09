@@ -96,16 +96,19 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <div>
-<script>
-    $(document).ready(function () {
-        $('.city-carousel').owlCarousel({
+    <script>
+        $(document).ready(function () {
+          $('.city-carousel').owlCarousel({
             items: 1,
             loop: true,
             margin: 0,
-            nav: true
+            nav: true,
+            autoplay: true, 
+            autoplayTimeout: 3000, 
+            autoplaySpeed: 1000
+          });
         });
-    });
-</script>
+      </script>
 </div>
 </body>
 
