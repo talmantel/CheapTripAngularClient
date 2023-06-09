@@ -48,15 +48,16 @@ img {
     margin: 20px auto;
     display: flex;
     justify-content: center;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
 .action-btn {
     color: #ff5722;
-    padding: 3px;
-    border: #ff5722 solid 1px;
+    padding: 7px;
+    border: #ff5722 solid 2px;
     border-radius: 15px;
-    margin: 1px 1px;
-    font-size: 1.3rem;
+    margin: 2px 2px;
 }
 
 .action-btn:hover {
@@ -64,16 +65,16 @@ img {
     background-color: #ff5722;
 }
 
-.action-btn-active {
-    color: #ffffff;
-    padding: 3px;
-    border: #ff5722 solid 1px;
+.budget-btn {
+    padding: 7px;
+    border: #ff5722 solid 2px;
     border-radius: 15px;
     background-color: #ff5722;
-    font-size: 1.3rem;
+    margin: 2px 2px;
+    color: white;
 }
 
-.action-btn-active:hover {
+.budget-btn:hover {
     color: white;
 }
 
@@ -168,3 +169,4 @@ img {
         margin-left: 10px;
     }
 }
+
