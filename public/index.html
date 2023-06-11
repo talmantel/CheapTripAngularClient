@@ -2,29 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="theme-color" content="#536dff"/>
-    <meta name="keywords" content="city, block, game, puzzle, online, math, joker, building"/>
-    <meta property="og:title" content="CheapTrip"/>
-    <meta property="og:locale" content="en"/>
-    <meta property="og:type" content="website"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#536dff" />
+    <meta name="keywords" content="city, block, game, puzzle, online, math, joker, building" />
+    <meta property="og:title" content="CheapTrip | Budget Travel Tips" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:type" content="website" />
     <title>CheapTrip | Budget Travel Tips</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
     <link rel="icon" href="src/assets/favicon-32x32.png">
     <link rel="stylesheet" href="src/css/index.css">
 
-    <script>window.yaContextCb=window.yaContextCb||[]</script> 
-    <script src="https://yandex.ru/ads/system/context.js" async></script> 
-    
-
+    <script>window.yaContextCb = window.yaContextCb || [];</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 
 <body>
@@ -34,82 +30,86 @@
         <a aria-current="page" href="./index.html">
             <h1 class="headline__logo">CheapTrip</h1>
         </a>
-        <h6 class="headline__slogan"> Pay less, visit more!</h6>
+        <h6 class="headline__slogan">Pay less, visit more!</h6>
     </div>
 </header>
 
 <div class="section-btn">
-    <a class="action-btn"
-       href="https://cheaptrip.guru/">
+    <a class="action-btn" href="https://cheaptrip.guru/">
         Find cheapest routes
     </a>
-    <a class="budget-btn"
-       href="./index.html">
+    <a class="budget-btn" href="./index.html">
         Budget Travel Tips
     </a>
 </div>
 
 <div class="flex-container">
+    <div class="city-list">
+        <ul>
+            <li>
+                <a href="src/London/description_london.html">London</a>
+            </li>
+            <li>
+                <a href="src/Paris/description_paris.html">Paris</a>
+            </li>
+            <li>
+                <a href="src/Berlin/description_berlin.html">Berlin</a>
+            </li>
+        </ul>
+    </div>
+
     <h2 class="section-title">The most popular cities</h2>
-    <div>
-        <p class="city-details-main">
-            Explore the most popular cities around the world and experience their unique charm and attractions
-        </p>
-        <div class="city-carousel owl-carousel">
-            <div>
-                <a href="src/London/description_london.html">
-                    <img src="src/assets/London-fixed.jpg"
-                         alt="London"
-                         class="city-item__image"/>
-                    <span class="city-item__name">London</span>
-                </a>
-            </div>
-            <div>
-                <a href="src/Paris/description_paris.html">
-                    <img src="src/assets/image_of_Paris.jpg"
-                         alt="Paris"
-                         class="city-item__image"/>
-                    <span class="city-item__name">Paris</span>
-                </a>
-            </div>
-            <div>
-                <a href="src/Berlin/description_berlin.html">
-                    <img src="src/assets/image_of_Berlin.jpg"
-                         alt="Berlin"
-                         class="city-item__image"/>
-                    <span class="city-item__name">Berlin</span>
-                </a>
-            </div>
+    <p class="city-details-main">
+        Explore the most popular cities around the world and experience their unique charm and attractions
+    </p>
+
+    <div class="city-carousel owl-carousel">
+        <div>
+            <a href="src/London/description_london.html">
+                <img src="src/assets/London-fixed.jpg" alt="London" class="city-item__image" />
+                <span class="city-item__name">London</span>
+            </a>
+        </div>
+        <div>
+            <a href="src/Paris/description_paris.html">
+                <img src="src/assets/image_of_Paris.jpg" alt="Paris" class="city-item__image" />
+                <span class="city-item__name">Paris</span>
+            </a>
+        </div>
+        <div>
+            <a href="src/Berlin/description_berlin.html">
+                <img src="src/assets/image_of_Berlin.jpg" alt="Berlin" class="city-item__image" />
+                <span class="city-item__name">Berlin</span>
+            </a>
         </div>
     </div>
 </div>
 
-<script>window.yaContextCb.push(()=>{ 
-    Ya.Context.AdvManager.render({ 
-     "blockId": "R-A-2154612-1", 
-     "type": "floorAd" 
-    }) 
-   }) 
-   </script>
+<script>
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-2154612-1",
+            "type": "floorAd"
+        })
+    });
+</script>
 
 <hr>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<div>
-    <script>
-        $(document).ready(function () {
-          $('.city-carousel').owlCarousel({
+<script>
+    $(document).ready(function () {
+        $('.city-carousel').owlCarousel({
             items: 1,
             loop: true,
             margin: 0,
             nav: true,
-            autoplay: true, 
-            autoplayTimeout: 3000,  
+            autoplay: true,
+            autoplayTimeout: 3000,
             autoplaySpeed: 1000
-          });
         });
-      </script>
-</div>
+    });
+</script>
 </body>
 
 </html>
