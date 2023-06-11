@@ -52,7 +52,7 @@ img {
 
 .action-btn,
 .budget-btn {
-    padding: 10px 20px; /* Updated padding to make the buttons bigger */
+    padding: 10px 20px; 
     border: #ff5722 solid 2px;
     border-radius: 15px;
     margin: 2px 2px;
@@ -86,6 +86,7 @@ img {
 .section-title {
     color: #000;
     font-size: 3rem;
+    text-align: center;
 }
 
 .city-details-main {
@@ -154,21 +155,22 @@ img {
 /*==========================================city list====================================================*/
 
 .city-list-container {
-    display: flex;
+   
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
 
 .city-list {
-    display: flex;
     list-style: none;
     padding: 0;
-}
+    text-align: center;
+  }
 
-.city-list li {
-    margin: 0 10px;
-}
+  .city-list li {
+    display: inline-block;
+    margin: 2px;
+  }
 
 .city-list li a {
     color: #000;
@@ -253,4 +255,4 @@ img {
 .owl-carousel .owl-dots .owl-dot.active {
     background-color: #ff5722;
 }
- a
+ 
