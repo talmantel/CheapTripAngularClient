@@ -1,0 +1,305 @@
+p {
+  text-align: justify;
+  text-indent: 2em;
+  font-size: 1rem;
+}
+
+img {
+  border-radius: 20px;
+}
+
+.header {
+  background-color: #ff5722;
+}
+
+.headline {
+  display: flex;
+  align-items: center;
+  height: 65px;
+}
+
+.headline__logo {
+  font-style: italic;
+  font-weight: bolder;
+  color: white;
+  font-size: 3.4rem;
+  margin-left: 30px;
+  font-family: "Roboto", sans-serif;
+  width: auto;
+}
+
+.headline__slogan {
+  margin-left: 80px;
+  font-style: italic;
+  font-weight: bolder;
+  color: #fff;
+  font-size: 2.1rem;
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+}
+
+.section {
+  text-align: center;
+}
+
+.action-btn-container {
+  padding-top: 15px;
+  font-size: 0.9rem;
+}
+
+.action-btn {
+  color: #ff5722;
+  padding: 7px;
+  border: #ff5722 solid 1px;
+  border-radius: 15px;
+  margin: 5px 5px;
+  background-color: white;
+}
+
+a {
+  color: #ff5722;
+}
+
+a:hover,
+a:focus {
+  outline: none;
+  color: #ff5722;
+}
+
+.action-btn:hover,
+.action-btn:focus {
+  outline: none;
+  color: #ff5722;
+}
+
+.budget-btn {
+  padding: 7px;
+  border: #ff5722 solid 1px;
+  border-radius: 15px;
+  background-color: #ff5722;
+  margin: 5px 5px;
+}
+
+.budget-btn a {
+  color: white;
+}
+
+/*==================================================================================================*/
+
+.section-title {
+  color: #000;
+  margin: 10px;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.city-details {
+  text-align: center;
+  margin: 32px auto 0;
+  max-width: 60%;
+  font-size: 1.4rem;
+}
+
+/*=================================================================================================*/
+
+.flex-container {
+  margin: 10vh 10vw;
+}
+
+.city-img-main {
+  object-fit: contain;
+  float: left;
+  margin: 0 15px 15px 0;
+  width: 60%;
+}
+
+.city-img-attractions {
+  object-fit: contain;
+  float: right;
+  margin: 0 0 15px 15px;
+  width: 50%;
+}
+
+.city-img-attractions-kids {
+  width: 50%;
+  float: left;
+  margin: 0 15px 15px 0;
+}
+
+.city-img-routes {
+  width: 50%;
+  float: right;
+  margin: 0 0 15px 15px;
+}
+
+.city-details__text {
+  text-align: justify;
+}
+
+.city-details-main {
+  color: #000;
+  text-align: center;
+}
+
+.city-details__title {
+  font-weight: bolder;
+  color: #000;
+}
+
+.city-details__subtitle {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: black;
+}
+
+.city-details__map-view {
+  display: inline-block;
+  color: #ff5722;
+  margin-bottom: 30px;
+  text-decoration: underline;
+}
+
+.attraction-title {
+  color: black;
+}
+
+.attraction-item {
+  margin-bottom: 20px;
+}
+
+.attractions-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.attraction-website {
+  font-size: 14px;
+  color: #ff5722;
+  text-decoration: underline;
+}
+
+.city-item__image {
+  /*width: 100%;*/
+  /*min-height: 120px;*/
+  /*height: 100%;*/
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.city-item__name {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.city-item__name:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.city-carousel {
+  width: 100%;
+}
+
+/*=============================================MEDIA-960=========================================================*/
+
+@media screen and (max-width: 960px) {
+  p {
+    font-size: 0.9rem;
+  }
+  .headline__logo {
+    font-size: 2.5rem;
+    margin-left: 10px;
+  }
+
+  .headline__slogan {
+    margin-left: 70px;
+    font-size: 1.4rem;
+    letter-spacing: 1.4px;
+  }
+}
+
+/*=============================================MEDIA-600=========================================================*/
+
+@media screen and (max-width: 600px) {
+  p {
+    font-size: 0.8rem;
+  }
+  .headline {
+    height: 55px;
+  }
+
+  .headline__logo {
+    font-size: 1.5rem;
+  }
+
+  .headline__slogan {
+    margin-left: 50px;
+    font-size: 1.1rem;
+    letter-spacing: 1.4px;
+  }
+
+  .action-btn-container {
+    font-size: 0.8rem;
+  }
+
+  .action-btn {
+    padding: 5px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .city-img-main {
+    width: 100%;
+  }
+
+  .city-img-attractions {
+    width: 100%;
+  }
+
+  .city-img-attractions-kids {
+    width: 100%;
+  }
+
+  .city-img-routes {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  p {
+    font-size: 0.7rem;
+  }
+  .headline__slogan {
+    margin-left: 15px;
+    font-size: 0.7rem;
+    letter-spacing: normal;
+  }
+}
+
+/* ==============Aalborg================ */
+.aalborg-example {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.aalborg-example__img {
+  width: 16rem;
+  height: 18rem;
+  align-self: start;
+}
+.aalborg-example__title {
+  text-align: center;
+  text-indent: 0;
+  font-size: 1.1rem;
+  color: #000;
+}

@@ -1,0 +1,54 @@
+p {
+  text-indent: 0;
+}
+.section-title {
+  margin: 2.2rem;
+}
+
+.section-title > a {
+  color: var(--mdb-link-color);
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+img {
+  height: 100%;
+  width: 50%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.content {
+  align-self: flex-start;
+  text-align: left;
+  margin-left: 2rem;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.list-link {
+  font-size: 1.4em;
+  color: var(--mdb-link-color);
+}
+
+.list-month {
+  color: #ff5722;
+  font-size: 0.6em;
+}
+
+.list-description {
+  color: #000;
+}
+
+.arrow-back {
+  margin-left: 0;
+}
