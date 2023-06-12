@@ -4,6 +4,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .action-btn-container {
@@ -95,65 +96,49 @@ a:active {
 
 
 .header {
-  min-width: 200px;
   background-color: #ff5722;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2px 0.5rem 2px 1rem;
 }
 
 .headline {
   display: flex;
   align-items: center;
+  height: 65px;
 }
 
 .headline__logo {
   font-style: italic;
-  font-weight: bolder;
-  font-size: 1.6rem;
+  font-weight: bold;
   color: #fff;
-}
-@media (min-width: 350px) {
-  .headline__logo {
-    font-size: 2rem;
-  }
-}
-@media (min-width: 576px) {
-  .headline__logo {
-    font-size: 2.3rem;
-  }
-}
-@media (min-width: 768px) {
-  .headline__logo {
-    font-size: 3.3rem;
-  }
+  font-size: 3.5rem;
 }
 
 .headline__slogan {
-  margin-left: 40px;
-  font-size: 1rem;
+  margin-left: 80px;
   font-style: italic;
-  font-weight: bolder;
+  font-weight: bold;
   color: #fff;
-  display: none;
-}
-@media (min-width: 410px) {
-  .headline__slogan {
-    display: inline;
-  }
-}
-@media (min-width: 576px) {
-  .headline__slogan {
-    font-size: 1.4rem;
-  }
-}
-@media (min-width: 768px) {
-  .headline__slogan {
-    font-size: 2.1rem;
-  }
+  font-size: 2rem;
+  margin-top: 5px;
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
 }
 
+
+@media screen and (max-width: 710px) {
+  .headline {
+      height: 50px;
+  }
+
+  .headline__logo {
+      font-size: 2rem;
+  }
+
+  .headline__slogan {
+      font-size: 1.2rem;
+      letter-spacing: normal;
+      margin-left: 10px;
+  }
+}
 .menu {
   margin-left: 2px;
 }
@@ -169,7 +154,8 @@ a:active {
   justify-content: center;
   align-items: center;
 }
-.menu__btn:hover, .menu__btn:focus {
+.menu__btn:hover,
+.menu__btn:focus {
   outline: none;
   background-color: rgba(0, 0, 0, 0.04);
 }
@@ -196,7 +182,8 @@ a:active {
   display: flex;
   align-items: center;
 }
-.services__item:hover, .services__item:focus {
+.services__item:hover,
+.services__item:focus {
   outline: none;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.04) !important;
@@ -289,7 +276,8 @@ a:active {
   background-color: white;
 }
 
-.action-btn:hover, .action-btn:focus {
+.action-btn:hover,
+.action-btn:focus {
   outline: none;
   border-color: rgba(202, 47, 0, 0.7803921569);
   background-color: rgba(202, 47, 0, 0.7803921569);
@@ -305,7 +293,8 @@ a:active {
   color: #000;
   background-color: #fff;
 }
-.action-btn--additional:hover, .action-btn--additional:focus {
+.action-btn--additional:hover,
+.action-btn--additional:focus {
   border-color: #cecece;
   background-color: rgba(0, 0, 0, 0.04);
 }
@@ -337,13 +326,13 @@ a:active {
   min-height: 120px;
   height: 100%;
   object-fit: cover;
-  overflow: hidden;
+ 
 }
 
 .gallery {
   display: flex;
   background-color: #cecece;
-  overflow: hidden;
+ 
   border-top-left-radius: var(--mdb-card-inner-border-radius);
   border-top-right-radius: var(--mdb-card-inner-border-radius);
   border-bottom: 1px solid #cecece;
@@ -366,10 +355,6 @@ a:active {
   object-position: center;
 }
 
-
-
-
-
 .container {
   display: flex;
   flex-direction: column;
@@ -388,14 +373,13 @@ a:active {
   text-align: justify;
   margin-top: 0px;
   margin-bottom: 10px;
-  border: 2px solid #FF0000;
+  border: 2px solid #ff5722;;
   border-radius: 8px;
   padding: 10px;
   width: 800px;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 5px;
-  
 }
 
 .footer {
@@ -408,7 +392,6 @@ a:active {
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 5px;
-  
 }
 
 .text-container img {
@@ -426,7 +409,7 @@ a:active {
 
 .box {
   width: 400px;
-  border: 3px solid #FF0000;
+  border: 3px solid #ff5722;;
   border-radius: 8px;
   margin-top: 10px;
   display: flex;
@@ -443,25 +426,30 @@ a:active {
 }
 
 .box p:first-child {
-  margin-top: -15px;
+  margin-top: 5px;
 }
 
-.box p:last-child {
-  width: 100%;
-  text-align: center;
-  margin-bottom: -8px;
+.box img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
 }
 
-@media screen and (max-width: 600px) {
-  .action-btn-container {
-    font-size: 0.8rem;
+.box:hover {
+  background-color: #ff5722;
 }
 
-.action-btn {
-  padding: 5px;
+.box:hover p {
+  color: white;
 }
 
+.box:hover img {
+  filter: brightness(0) invert(1);
 }
 
 
-/*# sourceMappingURL=main.css.map */
+@media (max-width: 576px) {
+  body {
+    overflow-x: hidden;
+  }
+}
