@@ -4,6 +4,7 @@ p {
     font-size: 1.1rem;
     color: black;
     margin-top: 15px;
+    overflow-x: hidden;
 }
 
 img {

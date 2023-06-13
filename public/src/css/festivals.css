@@ -1,5 +1,6 @@
 p {
   text-indent: 0;
+  overflow-x: hidden;
 }
 .section-title {
   margin: 2.2rem;
