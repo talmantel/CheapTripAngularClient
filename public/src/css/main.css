@@ -85,6 +85,7 @@ img {
     text-align: center;
 }
 
+
 .section-title {
     color: #000;
     font-size: 3rem;
@@ -92,8 +93,13 @@ img {
 
 .city-img-main {
     margin: 0 15px 15px 0;
-    max-width: 1024px;
     width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+    .city-img-main {
+        width: 30%;
+    }
 }
 
 .city-details__subtitle {
@@ -135,6 +141,19 @@ img {
     width: 100%;
     height: auto;
 }
+
+
+
+
+@media screen and (min-width: 1025px) {
+    .city-item__image {
+        width: 65%;
+        height: auto;
+        margin: 0 5px;
+
+    }
+}
+
 
 .city-item__name {
     position: absolute;
