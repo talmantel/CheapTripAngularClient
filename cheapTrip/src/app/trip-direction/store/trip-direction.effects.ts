@@ -27,7 +27,7 @@ import { SelectService } from '../select-direction/select.service';
 import { LocalizedString } from '@angular/compiler';
 import { HttpService } from 'src/app/service/http.service';
 import { Observable, of } from 'rxjs';
-import { DataService } from '../../route-service/getTravelData';
+import { RoutesDataService } from '../services/routes-data.service';
 
 import { ErrorInterceptor } from '../../error-interceptor';
 
@@ -113,7 +113,7 @@ export class TripDirectionEffects {
   private Locations: string[];
   private LocationsRU: Observable<any>;
   private LocationsEN: Observable<any>;
-  private body: IRecievedRouts;
+  private body: IRecievedRouts[];
   constructor(
     private errorInterceptor: ErrorInterceptor,
     private localeService: LocaleService,
@@ -124,7 +124,7 @@ export class TripDirectionEffects {
     private router: Router,
     private store$: Store<fromApp.AppState>,
     private httpService: HttpService,
-    private dataService: DataService
+    private routesDataService: RoutesDataService
   ) {
     //   this.server = 'tomcat'; //to be fixed
     // this.server = Server.SERVER104;
@@ -378,7 +378,7 @@ export class TripDirectionEffects {
       console.time('Effects');
 
       // Вызываем getTravelData и устанавливаем значение this.body в ответ
-      return this.dataService
+      return this.routesDataService
         .getPathMap(request[1].startPoint.id, request[1].endPoint.id)
         .pipe(
           tap(path => {

@@ -81,3 +81,12 @@ export interface IPathPoint {
   id: number;
   name: string;
 }
+
+export interface IJsonPartlyRouteItem {
+  price: number;
+  duration: number;
+  direct_routes: string[];
+  travel_data?: IJsonTravelData[];
+}
+
+export type IJsonPartlyRoute = Record<number, IJsonPartlyRouteItem>;
