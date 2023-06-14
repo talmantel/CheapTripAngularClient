@@ -127,7 +127,6 @@ img {
 }
 }
 
-
 .city-details-main {
     color: #000;
     text-align: center;
@@ -183,7 +182,6 @@ img {
         margin-left: 10px;
     }
 
-    /* Media Query for button size */
     .section-btn .action-btn:first-child,
     .section-btn .action-btn:nth-child(2) {
         padding: 8px;
