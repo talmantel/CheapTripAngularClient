@@ -22,39 +22,48 @@
   <link rel="icon" href="../assets/favicon-32x32.png" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../css/cities.css" />
-  <link rel="stylesheet" href="../css/festivals.css" />
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <link rel="stylesheet" href="../css/flickity.css">
+
 </head>
 
 <body>
   <header class="container-fluid header">
     <div class="headline">
-        <a aria-current="page" href="../../../index.html">
-            <h1 class="headline__logo">CheapTrip</h1>
-        </a>
-        <h6 class="headline__slogan"> Pay less, visit more!</h6>
+      <a aria-current="page" href="../../../index.html">
+        <h1 class="headline__logo">CheapTrip</h1>
+      </a>
+      <h6 class="headline__slogan"> Pay less, visit more!</h6>
     </div>
   </header>
+  <div class="section-btn">
+    <a class="action-btn" href="https://cheaptrip.guru/">
+      Find cheapest routes
+    </a>
+    <a class="action-btn" href="../../index.html">
+      Budget Travel Tips
+    </a>
+  </div>
   <main>
-    <section class="container section">
-      <div class="action-btn-container">
-        <button class="action-btn">
-          <a type="button" aria-label="Find routes"
-            href="https://heartfelt-pothos-d1481c.netlify.app/en-US/#/search/myPath/logo">
-            Find cheapest routes
-          </a>
-        </button>
-        <button class="budget-btn">
-          <a href="../../index.html" type="button" aria-label="Budget Travel Tips">
-            Budget Travel Tips
-          </a>
-        </button>
-      </div>
-    </section>
     <section class="container section">
       <h2 class="section-title">Aalborg Carnival - Join the Biggest Street Party in Aalborg!</h2>
 
+      <!-- <div class="centered-container aalborg-img"> <img src="../assets/aalborg-festivals.jpg" alt="aalborg-festivals"
+          class="">
+          <img src="../assets/image_of_Aalborg.jpg" alt="">
+          <img src="../assets/image_of_Aalborg_1.jpg" alt="">
+      </div> -->
+      <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
+        <div><img src="../assets/aalborg-festivals.jpg" alt="aalborg-festivals"></div>
+        <div><img src="../assets/image_of_Aalborg.jpg" alt=""></div>
+        <div><img src="../assets/aaborg3.jpg" alt=""></div>
+        <div><img src="../assets/aaborg4.jpg" alt=""></div>
+        <div><img src="../assets/aaborg5.jpg" alt=""></div>
+
+      </div>
+
       <div class="flex-container">
-        <img src="../assets/aalborg-festivals.jpg" alt="Aalborg_Carnival" title="Aalborg Carnival" />
         <div class="content">
           <p>
             Aalborg Carnival is the biggest street party in Aalborg, and it's completely free! The
@@ -62,8 +71,6 @@
             delicious food. It's the perfect event for budget-conscious travelers who want to
             experience the local culture and have a great time. Don't miss out on this amazing
             event!
-          </p>
-          <p>
             The carnival is the largest carnival in Scandinavia. The Aalborg Carnival stands for a
             week and has three main carnival events: The Grand Parade, Battle of Carnival Bands
             and Children’s Carnival. The carnival week is for everyone – both professional
@@ -72,16 +79,61 @@
           </p>
           <p>
             You can find more information
-            <a href="https://www.aalborgkarneval.dk/en/home-2/" title="Official website of event"
-              target="_blank">here</a>.
+            <a href="https://www.aalborgkarneval.dk/en/home-2/" title="Official website of event" target="_blank"
+              class="here-btn">here</a>.
           </p>
-          <button class="action-btn arrow-back">
-            <a href="./fest-list.html" title="Festival list page">&#8592; GO BACK</a>
-          </button>
+          <a href="./fest-list.html" class="action-btn arrow-back" title="Festival list page">&#8592; GO BACK</a>
         </div>
       </div>
     </section>
+    <hr>
   </main>
+  <div class="buttons">
+    <div>
+      <a class="action-btn" href="description_aalborg.html">
+        Aalborg description
+      </a>
+    </div>
+    <div>
+      <a class="action-btn" href="../Aalborg/fest-list.html">
+        Aalborg Festivals
+      </a>
+    </div>
+
+    <div>
+      <a class="action-btn" href="">
+        Aalborg attractions
+      </a>
+    </div>
+    <div>
+      <a class="action-btn" href="">
+        Aalborg attractions for kids
+      </a>
+    </div>
+    <div>
+      <a class="action-btn" href="">
+        Routes from Aalborg
+      </a>
+    </div>
+  </div>
+  <hr>
+  <div class="flex-container-see-also">
+    <h3 class="city-details__title">Also check this</h3>
+    <div class="city-container">
+
+      <a href="../Paris/description_paris.html" class="city-item">
+        <img src="../assets/image_of_landmark_Paris.jpg" class="city-image" alt="Paris" />
+        <span class="city-name">Paris</span>
+      </a>
+      <a href="../Berlin/description_berlin.html" class="city-item">
+        <img src="../assets/image_of_landmark_Berlin.jpg" class="city-image" alt="Berlin" />
+        <span class="city-name">Berlin</span>
+      </a>
+    </div>
+  </div>
+  <hr>
+  </div>
 </body>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
 </html>
