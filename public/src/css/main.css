@@ -81,7 +81,9 @@ img {
 .budget-btn:hover {
   color: white;
 }
-
+.here-btn:hover{
+  color: black;
+}
 /*==========================================ATTRACTIONS + description====================================================*/
 
 .flex-container {
@@ -101,6 +103,14 @@ img {
 .city-img-main {
   margin: 0 15px 15px 0;
   width: 100%;
+}
+.aalborg-img {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+.aalborg-img img {
+  margin: 20px;
 }
 
 @media screen and (min-width: 1024px) {
@@ -130,10 +140,12 @@ img {
   display: block;
   justify-content: center;
   font-size: 1.3rem;
+  
 }
 
 .buttons div {
   margin-bottom: 15px;
+  padding:5px
 }
 
 /*========================================Also check this=================================================*/
