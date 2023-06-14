@@ -96,13 +96,13 @@ img {
 
 @media (max-width: 320px) and (max-height: 568px) {
     .section-title {
-      font-size: 1.5rem; /* Adjust the font size as needed */
+      font-size: 1.5rem; 
     }
   }
 
   @media only screen and (max-width: 375px) and (max-height: 667px) {
     .section-title {
-        font-size: 1.5rem; /* Adjust the font size as needed */
+        font-size: 1.5rem; 
     }
 }
 
@@ -220,7 +220,7 @@ img {
 
 @media screen and (max-width: 320px) {
     .city-carousel .item {
-      width: 55%; /* Adjust the width as needed */
+      width: 55%; 
       height: auto;
       margin: 0 auto;
     }
@@ -228,7 +228,7 @@ img {
   
   @media screen and (min-width: 321px) and (max-width: 375px) {
     .city-carousel .item {
-      width: 55%; /* Adjust the width as needed */
+      width: 55%; 
       height: auto;
       margin: 0 auto;
     }
@@ -236,7 +236,7 @@ img {
 
 @media screen and (max-width: 700px) {
     .city-carousel .item {
-      width: 115%; /* Adjust the width as needed */
+      width: 115%; 
       height: auto;
       margin: 0 auto;
     }
@@ -244,7 +244,7 @@ img {
   
   @media screen and (min-width: 701px) {
     .city-carousel {
-      width: 35%; /* Adjust the width as needed */
+      width: 35%; 
       height: auto;
       margin: 0 auto;
     }
@@ -252,7 +252,7 @@ img {
 
 @media screen and (max-width: 767px) {
     .city-carousel .item {
-      width: 90%; /* Adjust the width as needed */
+      width: 90%; /
       height: auto;
       margin: 0 auto;
     }
@@ -260,7 +260,7 @@ img {
   
   @media screen and (min-width: 768px) and (max-width: 991px) {
     .city-carousel .item {
-      width: 70%; /* Adjust the width as needed */
+      width: 70%; 
       height: auto;
       margin: 0 auto;
     }
@@ -268,7 +268,7 @@ img {
   
   @media screen and (min-width: 992px) and (max-width: 1199px) {
     .city-carousel .item {
-      width: 70%; /* Adjust the width as needed */
+      width: 70%; 
       height: auto;
       margin: 0 auto;
     }
@@ -276,7 +276,7 @@ img {
   
   @media screen and (min-width: 1200px) and (max-width: 1365px) {
     .city-carousel .item {
-      width: 50%; /* Adjust the width as needed */
+      width: 50%; 
       height: auto;
       margin: 0 auto;
     }
@@ -284,7 +284,7 @@ img {
   
   @media screen and (min-width: 1366px) and (max-width: 1440px) {
     .city-carousel .item {
-      width: 55%; /* Adjust the width as needed */
+      width: 55%; 
       height: auto;
       margin: 0 auto;
     }
@@ -292,7 +292,7 @@ img {
   
   @media screen and (min-width: 1441px) and (max-width: 1600px) {
     .city-carousel .item {
-      width: 60%; /* Adjust the width as needed */
+      width: 60%; 
       height: auto;
       margin: 0 auto;
     }
@@ -300,7 +300,7 @@ img {
   
   @media screen and (min-width: 1601px) {
     .city-carousel .item {
-      width: 65%; /* Adjust the width as needed */
+      width: 65%; 
       height: auto;
       margin: 0 auto;
     }
@@ -308,7 +308,7 @@ img {
   
   @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
     .city-carousel .item {
-      width: 80%; /* Adjust the width as needed */
+      width: 80%; 
       height: auto;
       margin: 0 auto;
     }
