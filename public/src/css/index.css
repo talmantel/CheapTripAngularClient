@@ -134,13 +134,10 @@ img {
     text-indent: 0;
 }
 
-.city-carousel {
-    width: 100%;
-}
 
 .city-item__image {
-    width: 100%;
-    max-width: 1024px;
+    width: 20%;
+    max-width: 80%;
     margin: 0 auto;
 }
 
@@ -189,41 +186,6 @@ img {
     }
 }
 
-/*==========================================city list====================================================*/
-
-.city-list-container {
-   
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.city-list {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-  }
-
-  .city-list li {
-    display: inline-block;
-    margin: 2px;
-  }
-
-.city-list li a {
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 5px 10px;
-    border: 2px solid #ff5722;
-    border-radius: 15px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.city-list li a:hover {
-    color: #fff;
-    background-color: #ff5722;
-}
 
 /*==========================================carousel====================================================*/
 
@@ -326,6 +288,7 @@ img {
 
   .owl-carousel .owl-stage-outer {
     padding: 0;
+  
   }
   
   .owl-carousel .owl-stage {
@@ -359,12 +322,7 @@ img {
     cursor: pointer;
     transition: color 0.3s ease;
   }
-  
-  .owl-carousel .owl-nav button.owl-prev:hover,
-  .owl-carousel .owl-nav button.owl-next:hover {
-    color: #ff5722;
-  }
-  
+    
   .owl-carousel .owl-dots {
     position: absolute;
     bottom: 10px;
@@ -417,8 +375,11 @@ img {
         letter-spacing: normal;
         margin-left: 10px;
     }
+}
 
-  /*==========================================city list====================================================*/
+
+
+/*==========================================city list====================================================*/
 
 .alphabet-list {
     margin: 0;
@@ -469,5 +430,4 @@ img {
 
 .dropdown-content li:hover a {
     color: white;
-}
 }
