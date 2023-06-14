@@ -252,7 +252,7 @@ img {
 
 @media screen and (max-width: 767px) {
     .city-carousel .item {
-      width: 90%; /
+      width: 90%; 
       height: auto;
       margin: 0 auto;
     }
