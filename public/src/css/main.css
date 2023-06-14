@@ -161,6 +161,8 @@ img {
   }
 }
 
+
+
 .city-item__name {
   display: flex;
   flex-direction: row-reverse;
@@ -271,9 +273,6 @@ img {
       align-items: center;
     }
   
-    .city-item {
-      margin: 10px 0 20px;
-    }
   
     .city-image {
       max-width: 100%; /* Adjust the size as per your requirements */
@@ -283,6 +282,7 @@ img {
   @media (max-width: 768px) {
     .city-image {
       max-width: 100%; /* Adjust the size as per your requirements */
+      max-width: 250px;
     }
   }
   
