@@ -363,8 +363,9 @@ img {
 
 .content {
   align-self: flex-start;
-  text-align: left;
-  margin-left: 2rem;
+  text-align:center;
+  
+  text-align: center;
   
 }
 
@@ -405,11 +406,14 @@ li {
 
 .flex-container > img {
   max-width: 100%;
-  text-align: justify;
+  text-align: center;
 }
 
 .flex-container > .content {
   max-width: 100%;
   text-align: center;
   margin: 0 auto; /* Add this line to center the content */
+  
 }
+
+

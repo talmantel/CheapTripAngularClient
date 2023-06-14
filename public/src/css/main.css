@@ -82,6 +82,19 @@ img {
   color: white;
 }
 
+.action-btn-active {
+  color: #ffffff;
+  padding: 7px;
+  border: #ff5722 solid 1px;
+  border-radius: 15px;
+  background-color: #ff5722;
+  font-size: 1.3rem;
+}
+
+.action-btn-active:hover {
+  color: white;
+}
+
 /*==========================================ATTRACTIONS + description====================================================*/
 
 .flex-container {
@@ -186,17 +199,24 @@ img {
 
 @media screen and (max-width: 710px) {
   .headline {
-    height: 50px;
+      height: 50px;
   }
 
   .headline__logo {
-    font-size: 2rem;
+      font-size: 2rem;
   }
 
   .headline__slogan {
-    font-size: 1.2rem;
-    letter-spacing: normal;
-    margin-left: 10px;
+      font-size: 1.2rem;
+      letter-spacing: normal;
+      margin-left: 10px;
+  }
+
+  /* Media Query for button size */
+  .section-btn .action-btn:first-child,
+  .section-btn .action-btn:nth-child(2) {
+      padding: 8px;
+      font-size: 14px;
   }
 }
 
@@ -266,7 +286,7 @@ img {
     margin: 0;
   }
   
-  /* Media queries for responsive design */
+
   @media (max-width: 767px) {
     .city-container {
       flex-direction: column;
@@ -296,3 +316,5 @@ img {
     text-align: center;
   }
   
+
+

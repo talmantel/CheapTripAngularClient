@@ -409,7 +409,7 @@ a:active {
 
 .box {
   width: 400px;
-  border: 3px solid #ff5722;;
+  border: 3px solid #ff5722;
   border-radius: 8px;
   margin-top: 10px;
   display: flex;
@@ -447,4 +447,10 @@ a:active {
   filter: brightness(0) invert(1);
 }
 
-
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  
+    width: 100%;
+  }
+}
