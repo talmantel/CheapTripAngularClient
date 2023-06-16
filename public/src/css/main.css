@@ -249,6 +249,9 @@ img {
     width: 100%;
     margin-bottom: 15px;
   }
+  .content p {
+    font-size: 1em;
+  }
 }
 
 
