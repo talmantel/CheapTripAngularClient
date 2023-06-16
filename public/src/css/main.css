@@ -14,7 +14,10 @@ p {
 img {
   border-radius: 20px;
 }
-
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+}
 /*==========================================header====================================================*/
 
 .header {
@@ -288,6 +291,9 @@ img {
   
     .city-image {
       max-width: 100%; 
+    }
+    .content{
+      font-size: 0.8rem;
     }
   }
   
