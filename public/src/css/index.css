@@ -431,3 +431,10 @@ img {
 .dropdown-content li:hover a {
     color: white;
 }
+
+
+.custom-divider {
+  height: 1px;
+  background-color: #000;
+  margin: 20px 0;
+}

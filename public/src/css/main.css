@@ -377,3 +377,8 @@ img {
   
 
 
+  .custom-divider {
+    height: 1px;
+    background-color: #000;
+    margin: 20px 0;
+  }
