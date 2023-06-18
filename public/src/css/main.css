@@ -2,7 +2,6 @@
 
 p {
     text-align: justify;
-  
     padding: 0 20px; 
     font-size: 1.1rem;
     color: black;
@@ -12,6 +11,11 @@ p {
 
 img {
   border-radius: 20px;
+}
+
+.photos {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /*==========================================header====================================================*/
@@ -94,16 +98,32 @@ img {
   color: white;
 }
 
+.here-btn:hover{
+  color: black;
+}
+
+.budget-btn:hover {
+  color: white;
+}
 /*==========================================ATTRACTIONS + description====================================================*/
 
 .flex-container {
-  margin: 20px;
-  text-align: center;
+  margin: 20px auto;
+  text-align: justify;
+  max-width: 800px; 
+  padding: 0 20px; 
+  box-sizing: border-box; 
 }
 
 .section-title {
   color: #000;
   font-size: 3rem;
+}
+
+@media (max-width: 767px) {
+  .section-title {
+    font-size: 1.6rem; 
+  }
 }
 
 .city-img-main {
@@ -125,6 +145,36 @@ img {
   margin: 0;
 }
 
+.aalborg-img {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+.aalborg-img img {
+  margin: 20px;
+}
+
+@media screen and (min-width: 1024px) {
+  .city-img-main {
+    width: 100%;
+  }
+}
+
+.city-details__subtitle {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: black;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.attractions-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
 /*========================================buttons under description=================================================*/
 
 .buttons {
@@ -137,6 +187,7 @@ img {
 
 .buttons div {
   margin-bottom: 15px;
+  padding:5px
 }
 
 /*========================================Also check this=================================================*/
@@ -216,7 +267,6 @@ img {
 
 .image-container {
   display: flex;
-  
   margin-top: 10px;
 }
 
@@ -279,6 +329,10 @@ img {
   
     .city-image {
       max-width: 100%; 
+    }
+
+    .content{
+      font-size: 0.8rem;
     }
   }
   

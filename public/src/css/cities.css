@@ -112,7 +112,7 @@ a:focus {
   object-fit: contain;
   float: left;
   margin: 0 15px 15px 0;
-  width: 60%;
+  width: 100%;
 }
 
 .city-img-attractions {
@@ -346,7 +346,7 @@ p {
 }
 
 .section-title > a {
-  color: var(--mdb-link-color);
+  color: #e9bc17;
 }
 
 .flex-container {
@@ -362,11 +362,19 @@ img {
 }
 
 .content {
+  
   align-self: flex-start;
-  text-align:center;
+  text-align: left;
+  margin-left: 2rem;
   
-  text-align: center;
-  
+}
+
+.content li{
+  border: 2px solid #f44336;;
+  margin: 10px;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
 }
 
 ul {
@@ -379,7 +387,7 @@ li {
 
 .list-link {
   font-size: 1.4em;
-  color: var(--mdb-link-color);
+  color: #c69e0f;
 }
 
 .list-month {
