@@ -137,6 +137,7 @@ img {
   font-size: 1.5rem;
   color: black;
   margin-top: 15px;
+  text-align: center;
 }
 
 .attractions-container {
@@ -156,16 +157,37 @@ img {
 
 @media screen and (min-width: 1024px) {
   .city-img-main {
-    width: 100%;
+    width: 30%;
   }
 }
+
+
+@media screen and (min-width: 1024px) {
+  .city-img-attraction {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .city-img-attraction {
+    width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
 
 .city-details__subtitle {
   font-weight: bold;
   font-size: 1.5rem;
   color: black;
   margin-top: 15px;
-  text-align: center;
+  
 }
 
 .attractions-container {
