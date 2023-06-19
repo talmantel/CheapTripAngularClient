@@ -438,3 +438,18 @@ img {
   background-color: #000;
   margin: 20px 0;
 }
+
+
+
+.dropdown-content {
+  display: none;
+}
+
+.dropdown-content li {
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+
+.alphabet-list-link:hover .dropdown-content {
+  display: block;
+}
