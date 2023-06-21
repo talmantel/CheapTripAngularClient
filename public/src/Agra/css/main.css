@@ -567,3 +567,13 @@ a:active {
 .text-container-city {
   color: #000;
 }
+
+.container .box div a b {
+  display: block;
+  text-align: center;
+  color: black;
+}
+
+.container .box div a p {
+  color: black;
+}
