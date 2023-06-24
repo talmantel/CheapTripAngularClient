@@ -115,6 +115,12 @@ a:focus {
   width: 30%;
 }
 
+.city-img-main-aalborg {
+
+  max-width: 10%;
+}
+
+
 .city-img-attractions {
   object-fit: contain;
   float: right;

@@ -577,3 +577,7 @@ a:active {
 .container .box div a p {
   color: black;
 }
+
+.centered-container {
+  text-align: center;
+}
