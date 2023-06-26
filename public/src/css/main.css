@@ -121,7 +121,7 @@ img {
 }
 
 .city-img-main {
-  margin: 0 15px 15px 0;
+  
   max-width: 1024px;
   width: 100%;
 }
@@ -149,9 +149,9 @@ img {
   margin: 20px;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (max-width: 720px) {
   .city-img-main {
-    width: 30%;
+   max-width: 85%;
   }
 }
 
