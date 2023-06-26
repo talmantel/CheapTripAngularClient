@@ -73,7 +73,7 @@ img {
 }
 
 .budget-btn {
-  padding: 7px;
+  padding: 12px;
   border: #ff5722 solid 2px;
   border-radius: 15px;
   background-color: #ff5722;
@@ -117,13 +117,7 @@ img {
 
 .section-title {
   color: #000;
-  font-size: 3rem;
-}
-
-@media (max-width: 767px) {
-  .section-title {
-    font-size: 1.6rem; 
-  }
+  font-size: 2.5rem;
 }
 
 .city-img-main {
@@ -134,7 +128,7 @@ img {
 
 .city-details__subtitle {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: black;
   margin-top: 15px;
   text-align: center;
@@ -180,20 +174,30 @@ img {
   }
 }
 
-
-
-.city-details__subtitle {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: black;
-  margin-top: 15px;
-  
-}
-
 .attractions-container {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+/*========================================for accommodations=================================================*/
+
+.block {
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  border: #ff5722 solid 2px;
+  border-radius: 15px;
+}
+
+.divImg {
+  width: 130px;
+  height: 130px;
+  margin-right: 10px;
+}
+
+.titleBtn {
+  width: 400px;
 }
 
 
@@ -360,7 +364,7 @@ img {
   
   @media (max-width: 768px) {
     .city-image {
-      max-width: 100%; 
+      /*max-width: 100%;*/
       max-width: 250px;
     }
   }
@@ -374,8 +378,6 @@ img {
   .centered-container {
     text-align: center;
   }
-  
-
 
 .custom-divider {
   height: 1px;

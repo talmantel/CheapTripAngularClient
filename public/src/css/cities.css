@@ -75,7 +75,7 @@ a:focus {
 }
 
 .budget-btn {
-  padding: 7px;
+  padding: 12px;
   border: #ff5722 solid 1px;
   border-radius: 15px;
   background-color: #ff5722;
@@ -114,12 +114,6 @@ a:focus {
   margin: 0 15px 15px 0;
   width: 30%;
 }
-
-.city-img-main-aalborg {
-
-  max-width: 10%;
-}
-
 
 .city-img-attractions {
   object-fit: contain;
