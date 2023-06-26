@@ -647,3 +647,13 @@ a:active {
 .budget-btn:hover {
   color: white;
 }
+
+/* Remove focus outline for all elements */
+*:focus {
+  outline: none;
+}
+
+/* Alternatively, you can remove the focus outline specifically for buttons */
+button:focus {
+  outline: none;
+}
