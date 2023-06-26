@@ -123,7 +123,7 @@ img {
 .city-img-main {
   
   max-width: 1024px;
-  width: 100%;
+  width: 30%;
 }
 
 .city-details__subtitle {
@@ -151,7 +151,7 @@ img {
 
 @media screen and (max-width: 720px) {
   .city-img-main {
-   max-width: 85%;
+   min-width: 85%;
   }
 }
 
@@ -285,15 +285,7 @@ img {
 
 /*==========================================Updated code=============================================*/
 
-/* Media Query for button size */
-@media screen and (min-width: 768px) {
 
-  .action-btn:first-child,
-  .action-btn:nth-child(2) {
-    padding: 12px;
-    font-size: 18px;
-  }
-}
 
 .image-container {
   display: flex;
