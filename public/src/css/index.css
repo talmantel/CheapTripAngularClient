@@ -475,12 +475,3 @@ ul.city-list a:hover{
 }
 
 
-/* Remove focus outline for all elements */
-*:focus {
-  outline: none;
-}
-
-/* Alternatively, you can remove the focus outline specifically for buttons */
-button:focus {
-  outline: none;
-}
