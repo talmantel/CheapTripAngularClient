@@ -68,7 +68,7 @@ img {
 }
 
 .budget-btn {
-    padding: 12px;
+    padding: 7px;
     border: #ff5722 solid 2px;
     border-radius: 15px;
     background-color: #ff5722;
@@ -452,4 +452,21 @@ img {
 
 .alphabet-list-link:hover .dropdown-content {
   display: block;
+}
+
+ul.city-list{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  list-style: none;
+}
+
+ul.city-list a{
+  color: #ff5722;
+  border-bottom: 1px solid transparent;
+  transition: border .3s ease;
+}
+
+ul.city-list a:hover{
+  border-bottom: 1px solid #ff5722;
 }
