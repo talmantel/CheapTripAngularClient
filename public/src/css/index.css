@@ -475,3 +475,6 @@ ul.city-list a:hover{
 }
 
 
+textarea:focus, input:focus{
+  outline: none;
+}
