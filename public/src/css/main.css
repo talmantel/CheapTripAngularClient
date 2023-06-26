@@ -59,27 +59,34 @@ img {
   font-weight: bold;
 }
 
-.action-btn {
-  color: #ff5722;
-  padding: 7px;
+.action-btn, .budget-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px; /* Adjust the height as needed */
+  padding: 0 15px;
   border: #ff5722 solid 2px;
   border-radius: 15px;
   margin: 2px 2px;
 }
+
+
+.action-btn {
+  color: #ff5722;
+}
+
+.budget-btn {
+  background-color: #ff5722;
+  color: white;
+}
+
 
 .action-btn:hover {
   color: white;
   background-color: #ff5722;
 }
 
-.budget-btn {
-  padding: 12px;
-  border: #ff5722 solid 2px;
-  border-radius: 15px;
-  background-color: #ff5722;
-  margin: 2px 2px;
-  color: white;
-}
+
 
 .budget-btn:hover {
   color: white;
