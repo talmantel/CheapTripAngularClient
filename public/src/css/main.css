@@ -110,10 +110,10 @@ img {
 /*==========================================ATTRACTIONS + description====================================================*/
 
 .flex-container {
-  margin: 20px auto;
+  margin: 15px auto;
   text-align: justify;
   max-width: 800px; 
-  padding: 0 20px; 
+  padding: 0 15px; 
   box-sizing: border-box; 
 }
 
