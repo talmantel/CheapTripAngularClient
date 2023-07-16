@@ -1,13 +1,12 @@
 /*==========================================common====================================================*/
 
 p {
-    text-align: justify;
-    padding: 0 20px; 
-    font-size: 1.1rem;
-    color: black;
-    margin-top: 15px;
-  }
-
+  text-align: justify;
+  padding: 0 20px;
+  font-size: 1.1rem;
+  color: black;
+  margin-top: 15px;
+}
 
 img {
   border-radius: 20px;
@@ -49,7 +48,6 @@ img {
 }
 
 /*==========================================main button====================================================*/
-
 
 .section-btn {
   text-align: center;
@@ -99,7 +97,7 @@ img {
   color: white;
 }
 
-.here-btn:hover{
+.here-btn:hover {
   color: black;
 }
 
@@ -112,9 +110,9 @@ img {
 .flex-container {
   margin: 15px auto;
   text-align: justify;
-  max-width: 800px; 
-  padding: 0 15px; 
-  box-sizing: border-box; 
+  max-width: 800px;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
 .section-title {
@@ -124,7 +122,6 @@ img {
 }
 
 .city-img-main {
-  
   max-width: 1024px;
   width: 30%;
 }
@@ -148,32 +145,32 @@ img {
   justify-content: space-around;
   padding: 20px;
 }
+
 .aalborg-img img {
   margin: 20px;
 }
 
 @media screen and (max-width: 720px) {
   .city-img-main {
-   min-width: 85%;
+      min-width: 85%;
   }
 }
 
-
 @media screen and (min-width: 1024px) {
   .city-img-attraction {
-    width: 60%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+      width: 60%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
   }
 }
 
 @media screen and (max-width: 720px) {
   .city-img-attraction {
-    width: 90%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+      width: 90%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
   }
 }
 
@@ -187,25 +184,36 @@ img {
 
 .block {
   display: flex;
-  align-items: center; 
-  justify-content: space-between; 
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin: 10px;
   padding: 10px;
   border: #ff5722 solid 2px;
   border-radius: 15px;
 }
 
-
 .divImg {
   width: 130px;
   height: 130px;
-
 }
 
 .titleBtn {
-  flex: 1; 
+  flex: 1;
+  margin-top: 10px;
+  text-align: center;
 }
 
+@media screen and (max-width: 768px) {
+  .block {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .divImg {
+      margin-top: 10px;
+  }
+}
 
 /*========================================buttons under description=================================================*/
 
@@ -219,7 +227,7 @@ img {
 
 .buttons div {
   margin-bottom: 15px;
-  padding:5px
+  padding: 5px;
 }
 
 /*========================================Also check this=================================================*/
@@ -231,7 +239,6 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 .city-item__image {
@@ -241,13 +248,11 @@ img {
 
 @media screen and (min-width: 1025px) {
   .city-item__image {
-    width: 65%;
-    height: auto;
-    margin: 0 5px;
+      width: 65%;
+      height: auto;
+      margin: 0 5px;
   }
 }
-
-
 
 .city-item__name {
   display: flex;
@@ -288,10 +293,9 @@ img {
 
 /*==========================================Updated code=============================================*/
 
-
-
 .image-container {
   display: flex;
+  flex-direction: column;
   margin-top: 10px;
 }
 
@@ -299,21 +303,7 @@ img {
   position: relative;
   text-decoration: none;
   color: #000;
-  width: 45%;
 }
-
-@media screen and (max-width: 768px) {
-  .image-container {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .image-container a {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-}
-
 
 .city-container {
   display: flex;
@@ -344,27 +334,24 @@ img {
   margin: 0;
 }
 
-
 @media (max-width: 767px) {
   .city-container {
-    flex-direction: column;
-    align-items: center;
+      flex-direction: column;
+      align-items: center;
   }
 
-
   .city-image {
-    max-width: 100%;
+      max-width: 100%;
   }
 
   .content {
-    font-size: 0.8rem;
+      font-size: 0.8rem;
   }
 }
 
 @media (max-width: 768px) {
   .city-image {
-    /*max-width: 100%;*/
-    max-width: 250px;
+      max-width: 250px;
   }
 }
 
@@ -394,17 +381,17 @@ img {
   align-items: center;
 }
 
-.attractions-container__inner{
+.attractions-container__inner {
   text-align: center;
 }
 
-.attractions-container__img{
+.attractions-container__img {
   flex-basis: 130px;
   max-width: 130px;
   max-height: 130px;
 }
 
-
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
   outline: none;
 }
