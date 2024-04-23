@@ -98,10 +98,11 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getPathsSubscription = this.store
       .select('directions')
-      .subscribe((state) => {
+      .subscribe(state => {
         this.paths = state.paths;
         this.isLoading = state.isLoading;
       });
+    console.log('SEARCH RESULT');
   }
 
   ngOnDestroy(): void {
@@ -110,8 +111,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    let el = document.getElementById('map').getBoundingClientRect();
-
+    // let el = document.getElementById('map').getBoundingClientRect();
   }
 
   private getIFrameSize(obs: BreakpointObserver) {
@@ -138,20 +138,17 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
 
-
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.WebLandscape)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebLandscape);
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
 
-
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.WebPortrait)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(VIEWPORTS.WebPortrait);
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.HandsetLandscape)) {
@@ -161,7 +158,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
 
-
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.HandsetPortrait)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(
@@ -169,7 +165,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       );
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-
 
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.TabletLandscape)) {
@@ -179,7 +174,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
 
-
       this.isDesktop = true;
     } else if (obs.isMatched(Breakpoints.TabletPortrait)) {
       const iframeSize: IFrameSize = iframeSizeMap.get(
@@ -188,7 +182,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       this.iframeWidth = iframeSize.width;
       this.iframeHeight = iframeSize.height;
-
 
       this.isDesktop = true;
     }
