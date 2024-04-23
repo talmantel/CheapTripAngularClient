@@ -5,11 +5,8 @@
   "projects": {
     "cheapTrip": {
       "i18n": { 
-        "sourceLocale": "en-US", 
-        "locales": { 
-          "ru": "src/i18n/messages.ru.xlf",
-          "ua": "src/i18n/messages.ua.xlf"
-        } 
+        "sourceLocale": "en-US" 
+        
       },
       "projectType": "application",
       "schematics": {
@@ -24,7 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cheapTrip",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

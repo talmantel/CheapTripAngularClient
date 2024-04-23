@@ -1,0 +1,43 @@
+redirectsOrigin = "config"
+plugins = []
+headers = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "C:\\Angular\\CheapTripAngular-dev-mini\\cheapTrip\\dist"
+publishOrigin = "config"
+base = "C:\\Angular\\CheapTripAngular-dev-mini\\cheapTrip"
+node_version = "16.x"
+npm_version = "8.x"
+command = "npm run build"
+commandOrigin = "heuristics"
+
+[build.environment]
+NODE_VERSION = "16.13.2"
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

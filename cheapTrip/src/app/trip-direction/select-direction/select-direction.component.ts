@@ -1,5 +1,6 @@
 import { trigger, style, transition, animate } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { isDevMode } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,20 +8,18 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import {map, startWith} from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import * as fromApp from '../../store/app.reducer';
 import * as TripDirectionActions from '../store/trip-direction.actions';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { IPathPoint, IPoint, Modes } from '../trip-direction.model';
+import { IPathPoint, IPoint, LocationData, Modes } from '../trip-direction.model';
 import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorInterceptor } from '../../error-interceptor';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from 'src/app/service/http.service';
-import {GlobalService} from '../../global/global.service'
-
-
-
+import { GlobalService } from '../../global/global.service';
+import * as Locations from '../../../assets/new_json/locations.json';
 
 @Component({
   selector: 'app-select-direction',
@@ -43,14 +42,7 @@ import {GlobalService} from '../../global/global.service'
     ]),
   ],
 })
-
-
-
 export class SelectDirectionComponent implements OnInit {
-  
-  
-
-
   @ViewChild('startPointInput', { static: false })
   startPointInputEl: ElementRef;
   @ViewChild('endPointInput', { static: false })
@@ -67,6 +59,8 @@ export class SelectDirectionComponent implements OnInit {
   modes = Modes;
   startSubj = new Subject();
   endSubj = new Subject();
+  locations_data: LocationData = Locations;
+  searchedPoint: any = [];
 
   @ViewChild('nameText', { static: false })
   nameParagraph: ElementRef;
@@ -74,24 +68,15 @@ export class SelectDirectionComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private httpService: HttpService,
-    private errorInterceptor:ErrorInterceptor,
+    private errorInterceptor: ErrorInterceptor,
     private store: Store<fromApp.AppState>,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-
-  
-
-
-  }
+  ) {}
   ngOnDestroy(): void {}
 
   ngOnInit() {
-    
-   
-
-    
-    console.log ("NG ON init start!");
+    console.log('NG ON init start!');
     this.mode = Modes.SEARCH;
     this.startPointAutoComplete = [];
     this.endPointAutoComplete = [];
@@ -102,25 +87,122 @@ export class SelectDirectionComponent implements OnInit {
     this.defineRouterParams();
     this.stateSubscription = this.store
       .select('directions')
-      .subscribe((state) => {
+      .subscribe(state => {
         this.startPointAutoComplete = state.startPointAutoComplete;
         this.endPointAutoComplete = state.endPointAutoComplete;
         this.mode = state.mode;
       });
 
     this.pointsSubscription();
-    this.router.events.subscribe((res) => console.log('rout'));
-    
-    console.log ("NG oninit end!");
-  
+    this.router.events.subscribe(res => console.log('rout'));
+
+    console.log('NG oninit end!');
   }
 
- 
-
-  
   // autocomplete is invoked
+  // onInput(str: string, type: 'from' | 'to'): void {
+  //   const point: IPoint = { name: str, type: type };
+
+  //   const resLoc = Object.keys(this.locations_data.default).map(key => ({
+  //     name: key,
+  //     ...this.locations_data.default[key],
+  //   }));
+  //   this.searchedPoint = [];
+  //   let list = [];
+  //   resLoc.forEach(r => {
+  //     if (
+  //       r.name.toLowerCase().indexOf(point.name.toLowerCase()) === 0 &&
+  //       list.length <= 9
+  //     ) {
+  //       list.push({ id: r.id, name: r.name });
+  //     }
+
+  //     this.searchedPoint = list.sort((a, b) => a.name.localeCompare(b.name));
+  //   });
+  //   if (this.searchedPoint.length <= 9) {
+  //     console.log('this.searchedPoint <= 9', 'yes');
+  //     resLoc.forEach(r => {
+  //       if (
+  //         r.name.toLowerCase().indexOf(point.name.toLowerCase()) > 0 &&
+  //         list.length <= 9
+  //       ) {
+  //         list.push({ id: r.id, name: r.name });
+  //       }
+  //     });
+  //   }
+
+  //   if (
+  //     type === 'from' &&
+  //     this.directionForm.get('startPointControl').valid &&
+  //     str.length > 0
+  //   ) {
+  //     this.startPoint = { id: 0, name: '' };
+  //     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
+  //     this.store.dispatch(
+  //       new TripDirectionActions.SetStartPointAutocomplete(this.searchedPoint)
+  //     );
+  //   } else if (
+  //     type === 'to' &&
+  //     this.directionForm.get('endPointControl').valid &&
+  //     str.length > 0
+  //   ) {
+  //     this.endPoint = { id: 0, name: '' };
+  //     this.store.dispatch(
+  //       new TripDirectionActions.SetEndPointAutocomplete(this.searchedPoint)
+  //     );
+  //     this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
+  //   }
+  // }
+
   onInput(str: string, type: 'from' | 'to'): void {
     const point: IPoint = { name: str, type: type };
+    
+    console.log('Input value:', str);
+    
+    const filteredLocations = Object.keys(this.locations_data.default)
+    // .filter(key => this.locations_data.default[key].name.toLowerCase().includes(str.toLowerCase()))
+    // .map(key => ({
+    //   id: +key,
+    //   name: key,
+    //   ...this.locations_data.default[key],
+    // }));
+      .filter(key => {
+        const location = this.locations_data.default[key];
+        return location.name.toLowerCase().includes(str.toLowerCase());
+      })
+      .map(key => {
+        const location = this.locations_data.default[key];
+        if (location.country_name === null) {
+          return { id: +key, name: location.name };
+        } else {
+          return { id: +key, name: `${location.name}, ${location.country_name}`};
+        }
+      });
+    
+    this.searchedPoint = [];
+    let list = [];
+    filteredLocations.forEach(r => {
+      if (
+        r.name.toLowerCase().indexOf(point.name.toLowerCase()) === 0 &&
+        list.length <= 9
+      ) {
+        list.push({ id: r.id, name: r.name });
+      }
+
+      this.searchedPoint = list.sort((a, b) => a.name.localeCompare(b.name));
+    });
+    if (this.searchedPoint.length <= 9) {
+      console.log('this.searchedPoint <= 9', 'yes');
+      filteredLocations.forEach(r => {
+        if (
+          r.name.toLowerCase().indexOf(point.name.toLowerCase()) > 0 &&
+          list.length <= 9
+        ) {
+          list.push({ id: r.id, name: r.name });
+        }
+      });
+    }
+
     if (
       type === 'from' &&
       this.directionForm.get('startPointControl').valid &&
@@ -128,22 +210,30 @@ export class SelectDirectionComponent implements OnInit {
     ) {
       this.startPoint = { id: 0, name: '' };
       this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
+      this.store.dispatch(
+        new TripDirectionActions.SetStartPointAutocomplete(this.searchedPoint)
+      );
     } else if (
       type === 'to' &&
       this.directionForm.get('endPointControl').valid &&
       str.length > 0
     ) {
       this.endPoint = { id: 0, name: '' };
+      this.store.dispatch(
+        new TripDirectionActions.SetEndPointAutocomplete(this.searchedPoint)
+      );
       this.store.dispatch(new TripDirectionActions.GetAutocomplete(point));
     }
   }
-
+  
   onSubmit(): void {
-    console.log ("SUBMITTED!");
+    console.log('SUBMITTED!');
+    
     this.store.dispatch(new TripDirectionActions.GetRouts());
   }
-
+  
   optionSelected(point: any, type: string) {
+    console.log('Selected point:', point, 'Type:', type);
     if (type == 'from') {
       this.startSubj.next(point);
     } else if (type === 'to') {
@@ -191,42 +281,13 @@ export class SelectDirectionComponent implements OnInit {
       this.endPointInputEl.nativeElement.focus();
     }
   }
-  /*  notInStartListValidator(control: FormControl): { [s: string]: boolean } {
-   if (this.startPointAutoComplete.length > 0) {
-      const arr = this.startPointAutoComplete.map((point) =>
-        point.name.toLocaleLowerCase()
-      );
-      if (arr.indexOf(control.value.toLowerCase()) == -1) {
-        return { notInList: true };
-      }
-    }
-
-    return null;
-  } */
-
-  /*   notInStartListValidatorAsync(
-    control: FormControl
-  ): Promise<any> | Observable<any> {
-    const promise = new Promise<any>((resolve, reset) => {
-      if (this.startPointAutoComplete.length > 0) {
-        const arr = this.startPointAutoComplete.map((point) =>
-          point.name.toLocaleLowerCase()
-        );
-        if (arr.indexOf(control.value.toLowerCase()) == -1) {
-          resolve({ notInList: true });
-        }
-      } else {
-        resolve(null);
-      }
-    });
-    return promise;
-  } */
 
   notInEndListValidator(control: FormControl): { [s: string]: boolean } {
     return null;
   }
 
   onFocusOut(event: any): void {
+    console.log('onFocusOut event:', event);
     if (event.target.attributes.formControlName.value === 'startPointControl') {
       if (this.startPoint.name === '') {
         if (this.startPointAutoComplete.length === 0) {
@@ -250,26 +311,28 @@ export class SelectDirectionComponent implements OnInit {
           return;
         }
         this.endSubj.next(this.endPointAutoComplete[0]);
+      } else {
+        console.log('Unexpected case in onFocusOut:', event);
       }
     }
+    console.log('Finished processing onFocusOut:', event)
   }
 
   private setForm() {
-    
     this.directionForm = new FormGroup({
       startPointControl: new FormControl('', [
         this.patternValid({
-          pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
+          pattern: /[a-zA-Z0-9\-\s]/,
           msg: $localize`:@@onlyRusEng:Sorry,
-          For now, we support only English and Russian input.`,
+          For now, we support only English input.`,
         }),
       ]),
-      
+
       endPointControl: new FormControl('', [
         this.patternValid({
-          pattern: /[a-zA-Zа-яА-Я0-9\-\s]/,
+          pattern: /[a-zA-Z0-9\-\s]/,
           msg: $localize`:@@onlyRusEng:Sorry,
-          For now, we support only English and Russian input.`,
+          For now, we support only English input.`,
         }),
       ]),
     });
@@ -282,7 +345,10 @@ export class SelectDirectionComponent implements OnInit {
       }
 
       if (control.value && !control.value.match(urlRegEx)) {
-        this.errorInterceptor.showError ($localize`:@@oops:Oops`,$localize`:@@onlyRusEng:Sorry, only Latin and Russian characteres are allowed now.`);
+        this.errorInterceptor.showError(
+          $localize`:@@oops:Oops`,
+          $localize`:@@onlyRusEng:Sorry. We are currently working only with Latin characters. But we promise to fix it soon.`
+        );
         return {
           invalidMsg: config.msg,
         };
@@ -334,38 +400,33 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   private pointsSubscription() {
-    console.log ("Points!");
-    this.startSubj.subscribe((res) => {
-      if (typeof res == 'string') {
-        this.startPoint = this.startPointAutoComplete.filter(
-          (p) => p.name === res
-        )[0];
+    console.log('Points!');
+    this.startSubj.subscribe(res => {
+      console.log('Start point selected:', res);
+      if (typeof res === 'string') {
+        this.startPoint = this.startPointAutoComplete.find(p => p.name === res);
       } else {
         this.startPoint = res as IPathPoint;
-
         this.directionForm.patchValue({
           startPointControl: this.startPoint.name,
         });
       }
-      this.store.dispatch(
-        new TripDirectionActions.SetStartPoint({ ...this.startPoint })
-      );
+      console.log('Dispatching start point:', this.startPoint);
+      this.store.dispatch(new TripDirectionActions.SetStartPoint({ ...this.startPoint }));
     });
-
-    this.endSubj.subscribe((res) => {
-      if (typeof res == 'string') {
-        this.endPoint = this.endPointAutoComplete.filter(
-          (p) => p.name === res
-        )[0];
+  
+    this.endSubj.subscribe(res => {
+      console.log('End point selected:', res);
+      if (typeof res === 'string') {
+        this.endPoint = this.endPointAutoComplete.find(p => p.name === res);
       } else {
         this.endPoint = res as IPathPoint;
         this.directionForm.patchValue({
           endPointControl: this.endPoint.name,
         });
       }
-      this.store.dispatch(
-        new TripDirectionActions.SetEndPoint({ ...this.endPoint })
-      );
+      console.log('Dispatching end point:', this.endPoint);
+      this.store.dispatch(new TripDirectionActions.SetEndPoint({ ...this.endPoint }));
     });
   }
 }
