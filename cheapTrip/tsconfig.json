@@ -15,6 +15,7 @@
     }
   ],
   "compilerOptions": {
+    "resolveJsonModule": true,
     "experimentalDecorators": true,
     "allowJs": true
   }

@@ -18,17 +18,17 @@ export class HeaderComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private route: Router, private store: Store<fromApp.AppState>) {}
-isDarkTheme = false;
+  isDarkTheme = false;
+
   ngOnInit(): void {}
 
   toHomePage(): void {
-
     this.store.dispatch(new TripDirectionActions.GoHome());
 
     this.route.navigate(['/']);
   }
 
-  onChangeTheme(){
+  onChangeTheme() {
     this.isDarkTheme = !this.isDarkTheme;
   }
 }
