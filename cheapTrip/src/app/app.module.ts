@@ -32,33 +32,30 @@ import { CurrencySelectorComponent } from './currency-selector/currency-selector
 registerLocaleData(localeRu, 'ru');
 registerLocaleData(localeUa, 'ua');
 @NgModule({
-  
-  declarations: [AppComponent, HeaderComponent,  
-    CurrencySelectorComponent,
-     NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent, 
-     LinksComponent, LogoComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    TripDirectionModule,
-    SearchResultModule,
-    StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([TripDirectionEffects]),
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true
-    }
-
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent]
+    declarations: [AppComponent, HeaderComponent,
+        CurrencySelectorComponent,
+        NoPageComponent, ErrorComponent, LandingComponent, DataTableComponent,
+        LinksComponent, LogoComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        TripDirectionModule,
+        SearchResultModule,
+        StoreModule.forRoot(fromApp.appReducer),
+        EffectsModule.forRoot([TripDirectionEffects]),
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
