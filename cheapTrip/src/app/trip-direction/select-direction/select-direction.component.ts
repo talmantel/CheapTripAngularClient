@@ -1,8 +1,8 @@
 import { trigger, style, transition, animate } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
@@ -48,7 +48,7 @@ export class SelectDirectionComponent implements OnInit {
   endPointInputEl: ElementRef;
 
   stateSubscription: Subscription;
-  directionForm: FormGroup;
+  directionForm: UntypedFormGroup;
   startPointAutoComplete: IPathPoint[];
   endPointAutoComplete: IPathPoint[];
   startPoint: IPathPoint;
@@ -237,7 +237,7 @@ export class SelectDirectionComponent implements OnInit {
     return promise;
   } */
 
-  notInEndListValidator(control: FormControl): { [s: string]: boolean } {
+  notInEndListValidator(control: UntypedFormControl): { [s: string]: boolean } {
     return null;
   }
 
@@ -270,8 +270,8 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   private setForm() {
-    this.directionForm = new FormGroup({
-      startPointControl: new FormControl('', [
+    this.directionForm = new UntypedFormGroup({
+      startPointControl: new UntypedFormControl('', [
         this.patternValid({
           pattern: /[a-zA-Z0-9\-\s]/,
           msg: $localize`:@@onlyRusEng:Sorry,
@@ -279,7 +279,7 @@ export class SelectDirectionComponent implements OnInit {
         }),
       ]),
 
-      endPointControl: new FormControl('', [
+      endPointControl: new UntypedFormControl('', [
         this.patternValid({
           pattern: /[a-zA-Z0-9\-\s]/,
           msg: $localize`:@@onlyRusEng:Sorry,
@@ -290,7 +290,7 @@ export class SelectDirectionComponent implements OnInit {
   }
 
   public patternValid(config: any): ValidatorFn {
-    return (control: FormControl) => {
+    return (control: UntypedFormControl) => {
       let urlRegEx: RegExp = config.pattern;
       if (control.value) {
       }
